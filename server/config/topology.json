@@ -1,0 +1,40 @@
+{
+  "clinics": [
+    {
+      "id": "main_clinic",
+      "name": "Main Clinic",
+      "address": "123 Medical Way",
+      "phone": "+1234567890"
+    }
+  ],
+  "doctors": [
+    {
+      "id": "dr_smith",
+      "name": "Dr. Smith",
+      "specialty": "Cardiology",
+      "clinic_id": "main_clinic",
+      "image": "https://picsum.photos/seed/doctor1/200/200"
+    },
+    {
+      "id": "dr_jones",
+      "name": "Dr. Jones",
+      "specialty": "Dermatology",
+      "clinic_id": "main_clinic",
+      "image": "https://picsum.photos/seed/doctor2/200/200"
+    }
+  ],
+  "services": [
+    {
+      "id": "consultation",
+      "name": "General Consultation",
+      "duration_minutes": 30,
+      "price": 100
+    },
+    {
+      "id": "followup",
+      "name": "Follow-up",
+      "duration_minutes": 15,
+      "price": 50
+    }
+  ]
+}

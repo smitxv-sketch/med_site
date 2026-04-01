@@ -1,0 +1,48 @@
+{
+  "steps": {
+    "service": "Услуга",
+    "doctor": "Врач",
+    "slot": "Время",
+    "details": "Детали",
+    "success": "Готово"
+  },
+  "service": {
+    "title": "Выберите услугу",
+    "price_prefix": "₽"
+  },
+  "doctor": {
+    "title": "Выберите врача",
+    "back": "Назад"
+  },
+  "slot": {
+    "title": "Выберите время",
+    "back": "Назад"
+  },
+  "details": {
+    "title": "Подтверждение записи",
+    "appointment_label": "Запись",
+    "with_label": "Врач",
+    "at_label": "Время",
+    "form": {
+      "name_label": "ФИО",
+      "name_placeholder": "Иванов Иван Иванович",
+      "email_label": "Email",
+      "email_placeholder": "ivanov@example.com",
+      "phone_label": "Телефон",
+      "phone_placeholder": "+7 (999) 000-00-00",
+      "submit_button": "Записаться",
+      "processing": "Обработка...",
+      "terms": "Нажимаю кнопку, вы соглашаетесь с условиями обработки персональных данных",
+      "back": "Назад"
+    }
+  },
+  "success": {
+    "title": "Запись подтверждена!",
+    "message": "Спасибо, {name}. Мы отправили подтверждение на {email}.",
+    "button": "Записаться еще раз"
+  },
+  "errors": {
+    "load_failed": "Не удалось загрузить данные",
+    "booking_failed": "Ошибка при создании записи"
+  }
+}

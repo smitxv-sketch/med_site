@@ -1,0 +1,81 @@
+{
+  "slots": {
+    "start_hour": 9,
+    "end_hour": 17,
+    "interval_minutes": 30,
+    "weekend_available": false
+  },
+  "rules": {
+    "min_advance_hours": 24,
+    "max_advance_days": 30
+  },
+  "recaptcha": {
+    "enabled": false
+  },
+  "caching": {
+    "enabled": true,
+    "ttl_doctors": 86400,
+    "ttl_services": 86400,
+    "ttl_slots": 300
+  },
+  "specialty_groups": {
+    "enabled": true,
+    "rules": {
+      "Диагностика и Исследования": [
+        "^УЗИ", 
+        "^Ультразвук",
+        "^Рентген", 
+        "^Маммограф",
+        "^ФГС", 
+        "^Эндоскоп", 
+        "^Колоноскоп",
+        "^ЭКГ", 
+        "^Холтер", 
+        "^СМАД", 
+        "^Функциональн",
+        "^Томограф"
+      ],
+      "Комплексные программы": [
+        "Check-up", 
+        "Программа",
+        "Диспансеризация",
+        "Комплекс",
+        "Ведение беременности"
+      ],
+      "Консультативный прием": [
+        "^Прием врача",
+        "^Консультация",
+        "^Врач",
+        ".*лог$", 
+        ".*певт$", 
+        ".*атр$", 
+        "ВОП"
+      ],
+      "Вакцинация и Процедуры": [
+        "Вакцин", 
+        "Привив", 
+        "Манту",
+        "Диаскин",
+        "Массаж",
+        "Физиотерап"
+      ]
+    },
+    "others_group": false
+  },
+  "formatting": {
+    "doctor_name": {
+      "remove_prefixes": ["Врач-", "Врач "],
+      "capitalize": true
+    },
+    "specialty": {
+      "remove_prefixes": ["Врач-", "Врач "],
+      "capitalize": true
+    }
+  },
+  "group_styles": {
+    "Диагностика и Исследования": { "icon": "Activity", "color": "var(--color-primary)" },
+    "Комплексные программы": { "icon": "HeartPulse", "color": "var(--color-accent)" },
+    "Консультативный прием": { "icon": "User", "color": "#059669" },
+    "Вакцинация и Процедуры": { "icon": "Syringe", "color": "#9333ea" }
+  }
+}

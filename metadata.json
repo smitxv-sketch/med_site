@@ -1,0 +1,4 @@
+{
+  "name": "Medical Booking  TS",
+  "description": "A platform-agnostic (MODX/WP) React booking component that aggregates data from multiple qMS API endpoints, handling complex multi-branch/multi-database logic for St. Petersburg and Chelyabinsk clinics."
+}

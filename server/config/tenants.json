@@ -1,0 +1,12 @@
+{
+  "chel": {
+    "name": "Челябинск",
+    "apiEnv": "QMS_CHEL_API_KEY",
+    "addressEnv": "QMS_CHEL_ADDRESS"
+  },
+  "spb": {
+    "name": "Санкт-Петербург",
+    "apiEnv": "QMS_SPB_API_KEY",
+    "addressEnv": "QMS_SPB_ADDRESS"
+  }
+}

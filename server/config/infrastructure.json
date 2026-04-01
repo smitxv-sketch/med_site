@@ -1,0 +1,11 @@
+{
+  "server": {
+    "port": 3000,
+    "cors_origins": ["*"]
+  },
+  "api_keys": {
+    "openai": "sk-...",
+    "recaptcha_site": "...",
+    "recaptcha_secret": "..."
+  }
+}

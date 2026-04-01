@@ -1,0 +1,18 @@
+{
+  "colors": {
+    "primary": "#65a30d",
+    "primary-hover": "#4d7c0f",
+    "secondary": "#64748b",
+    "accent": "#ea8025",
+    "background": "#ffffff",
+    "surface": "#f8fafc",
+    "surface-hover": "#f1f5f9",
+    "text-primary": "#0f172a",
+    "text-secondary": "#64748b",
+    "border": "#e2e8f0"
+  },
+  "fonts": {
+    "body": "Inter, sans-serif",
+    "heading": "Inter, sans-serif"
+  }
+}
