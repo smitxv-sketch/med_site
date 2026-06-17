@@ -91,7 +91,7 @@ export const fetchHeroSlides = async (): Promise<HeroSlide[]> => {
       title: 'Конференция',
       subtitle: 'Репродуктивная медицина: краеугольные вопросы',
       description: 'Конференция с международным участием для врачей акушеров-гинекологов, репродуктологов, андрологов-урологов и эмбриологов.',
-      image: '/IMG_5850.JPG',
+      image: '/img/conference.jpg',
       link: '/events/conference-7',
       linkText: 'Подробнее о мероприятии',
       badgeColor: 'bg-white shadow-sm text-brand',

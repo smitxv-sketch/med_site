@@ -7,7 +7,7 @@ export const CONFERENCE_DATA = {
   category: 'Конференция',
   price: 'до 100 человек очно, онлайн трансляция',
   description: 'Целевая аудитория: врачи акушеры-гинекологи, репродуктологи, андрологи-урологи, эмбриологи.',
-  image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=2000&q=80',
+  image: '/img/conference.jpg',
   status: 'upcoming',
   benefits: [
     'Обмен опытом с ведущими специалистами',
