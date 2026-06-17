@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Search, X, ChevronDown, Check, Baby, Clock, Calendar, Stethoscope, Star, User } from 'lucide-react';
+import { Button } from '@/shared/ui/Button';
+import { Card } from '@/shared/ui/Card';
 
 interface DoctorsFilterBarProps {
   searchTerm: string;
@@ -47,7 +49,7 @@ export function DoctorsFilterBar({
     
     const matchedSpecialties = specialties.filter(s => s.toLowerCase().includes(term)).slice(0, 3);
     
-    const matchedDoctors = doctors.filter(d => d.name.toLowerCase().includes(term)).slice(0, 5);
+    const matchedDoctors = doctors.filter(d => (d.name || '').toLowerCase().includes(term)).slice(0, 5);
     
     return { doctors: matchedDoctors, specialties: matchedSpecialties };
   }, [searchTerm, specialties, doctors]);
@@ -57,14 +59,14 @@ export function DoctorsFilterBar({
   return (
     <>
       {/* Unified Search Bar */}
-      <div className="bg-white rounded-3xl md:rounded-[2rem] p-1.5 md:p-2 shadow-sm border border-gray-200 mb-4 md:mb-6 flex flex-col md:flex-row relative z-20">
+      <Card className="p-1.5 md:p-2 mb-4 md:mb-6 flex flex-col md:flex-row relative z-20 rounded-3xl md:rounded-app">
         {/* Search */}
         <div className="relative flex-1 flex items-center px-3 md:px-4 py-1.5 md:py-2" ref={searchContainerRef}>
           <Search className="h-5 w-5 md:h-6 md:w-6 text-gray-400 shrink-0" />
           <input
             type="text"
             className="w-full pl-3 md:pl-4 pr-3 md:pr-4 py-1.5 md:py-2 bg-transparent text-gray-900 placeholder-gray-400 focus:outline-none text-base md:text-lg"
-            placeholder="Врач, заболевание, услуга..."
+            placeholder="Врач, специализация..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => setIsSearchFocused(true)}
@@ -83,7 +85,7 @@ export function DoctorsFilterBar({
 
           {/* Search Suggestions Dropdown */}
           {showSuggestions && (
-            <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50">
+            <Card className="absolute top-full left-0 right-0 mt-2 z-50 p-0 shadow-xl">
               <div className="max-h-[60vh] overflow-y-auto py-2">
                 {searchSuggestions.specialties.length > 0 && (
                   <div className="mb-2">
@@ -97,7 +99,7 @@ export function DoctorsFilterBar({
                           setIsSearchFocused(false);
                         }}
                       >
-                        <Stethoscope className="w-4 h-4 text-brand-green" />
+                        <Stethoscope className="w-4 h-4 text-brand" />
                         <span className="text-gray-700">{spec}</span>
                       </button>
                     ))}
@@ -118,7 +120,7 @@ export function DoctorsFilterBar({
                       >
                         <div className="w-8 h-8 rounded-full bg-gray-100 overflow-hidden shrink-0 relative">
                           {doc.image ? (
-                            <img src={doc.image} alt={doc.name} className="absolute inset-0 w-full h-full object-cover" referrerPolicy="no-referrer" />
+                            <img src={doc.image} alt={doc.name} className="absolute inset-0 w-full h-full object-cover" />
                           ) : (
                             <div className="absolute inset-0 flex items-center justify-center text-gray-400">
                               <User className="w-4 h-4" />
@@ -134,7 +136,7 @@ export function DoctorsFilterBar({
                   </div>
                 )}
               </div>
-            </div>
+            </Card>
           )}
         </div>
 
@@ -148,7 +150,7 @@ export function DoctorsFilterBar({
             className="w-full flex items-center justify-between px-3 md:px-4 py-2.5 md:py-4 bg-transparent hover:bg-gray-50 rounded-2xl transition-colors text-left"
           >
             <div className="flex items-center gap-2.5 md:gap-3 truncate">
-              <Stethoscope className="w-5 h-5 md:w-6 md:h-6 text-brand-green shrink-0" />
+              <Stethoscope className="w-5 h-5 md:w-6 md:h-6 text-brand shrink-0" />
               <span className={`truncate text-base md:text-lg ${selectedSpecialty ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>
                 {selectedSpecialty || 'Все специальности'}
               </span>
@@ -165,8 +167,8 @@ export function DoctorsFilterBar({
               />
               
               {/* Dropdown menu */}
-              <div className="fixed md:absolute z-50 bottom-0 left-0 right-0 md:bottom-auto md:top-full md:mt-3 bg-white md:border border-gray-100 rounded-t-3xl md:rounded-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.1)] md:shadow-xl max-h-[85vh] md:max-h-96 flex flex-col pb-safe">
-                <div className="shrink-0 pt-4 pb-2 bg-white rounded-t-3xl md:hidden sticky top-0 z-10 border-b border-gray-100">
+              <Card className="fixed md:absolute z-50 bottom-0 left-0 right-0 md:bottom-auto md:top-full md:mt-3 rounded-t-3xl md:rounded-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.1)] md:shadow-xl max-h-[85svh] md:max-h-96 flex flex-col pb-safe p-0 border-0 md:border">
+                <Card className="shrink-0 pt-4 pb-2 rounded-t-3xl md:hidden sticky top-0 z-10 border-b border-gray-100 p-0 border-0">
                   <div className="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-4"></div>
                   <div className="px-5 mb-2 flex justify-between items-center">
                     <h3 className="text-xl font-bold text-gray-900">Выберите специальность</h3>
@@ -174,11 +176,11 @@ export function DoctorsFilterBar({
                       <X className="w-6 h-6" />
                     </button>
                   </div>
-                </div>
+                </Card>
                 <div className="overflow-y-auto flex-1 pb-24 md:pb-2">
                   <button
                     onClick={() => { setSelectedSpecialty(null); setIsSpecialtyOpen(false); }}
-                    className={`w-full text-left px-5 md:px-6 py-4 md:py-3.5 hover:bg-gray-50 transition-colors flex items-center justify-between ${!selectedSpecialty ? 'text-brand-green font-bold bg-brand-green/5' : 'text-gray-700'}`}
+                    className={`w-full text-left px-5 md:px-6 py-4 md:py-3.5 hover:bg-gray-50 transition-colors flex items-center justify-between ${!selectedSpecialty ? 'text-brand font-bold bg-brand/5' : 'text-gray-700'}`}
                   >
                     Все специальности
                     {!selectedSpecialty && <Check className="w-5 h-5" />}
@@ -187,66 +189,58 @@ export function DoctorsFilterBar({
                     <button
                       key={spec}
                       onClick={() => { setSelectedSpecialty(spec); setIsSpecialtyOpen(false); }}
-                      className={`w-full text-left px-5 md:px-6 py-4 md:py-3.5 hover:bg-gray-50 transition-colors flex items-center justify-between border-t border-gray-50 ${selectedSpecialty === spec ? 'text-brand-green font-bold bg-brand-green/5' : 'text-gray-700'}`}
+                      className={`w-full text-left px-5 md:px-6 py-4 md:py-3.5 hover:bg-gray-50 transition-colors flex items-center justify-between border-t border-gray-50 ${selectedSpecialty === spec ? 'text-brand font-bold bg-brand/5' : 'text-gray-700'}`}
                     >
                       <span className="truncate pr-4 text-[15px] md:text-base">{spec}</span>
                       {selectedSpecialty === spec && <Check className="w-5 h-5 shrink-0" />}
                     </button>
                   ))}
                 </div>
-              </div>
+              </Card>
             </>
           )}
         </div>
-      </div>
+      </Card>
 
       {/* Quick Filters Row */}
       <div className="flex flex-wrap items-center gap-2.5 md:gap-3 mb-6 md:mb-10">
         {/* Quick Chips */}
-        <button
+        <Button
+          variant={activeQuickFilter === 'children' ? 'primary' : 'outline'}
+          size="sm"
           onClick={() => setActiveQuickFilter(activeQuickFilter === 'children' ? null : 'children')}
-          className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all border ${
-            activeQuickFilter === 'children' 
-              ? 'bg-brand-orange text-white border-brand-orange shadow-md' 
-              : 'bg-white border-gray-200 text-gray-600 hover:border-brand-orange/50 hover:bg-brand-orange/5'
-          }`}
+          className={`rounded-full ${activeQuickFilter === 'children' ? 'bg-brand-orange border-brand-orange hover:bg-brand-orange/90' : 'hover:border-brand-orange/50 hover:bg-brand-orange/5 hover:text-brand-orange'}`}
         >
-          <Baby className="w-4 h-4" />
+          <Baby className="w-4 h-4 mr-2" />
           Детский врач
-        </button>
-        <button
+        </Button>
+        <Button
+          variant={activeQuickFilter === 'today' ? 'primary' : 'outline'}
+          size="sm"
           onClick={() => setActiveQuickFilter(activeQuickFilter === 'today' ? null : 'today')}
-          className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all border ${
-            activeQuickFilter === 'today' 
-              ? 'bg-brand-green text-white border-brand-green shadow-md' 
-              : 'bg-white border-gray-200 text-gray-600 hover:border-brand-green/50 hover:bg-brand-green/5'
-          }`}
+          className={`rounded-full ${activeQuickFilter === 'today' ? 'bg-brand border-brand hover:bg-brand/90' : 'hover:border-brand/50 hover:bg-brand/5 hover:text-brand'}`}
         >
-          <Clock className="w-4 h-4" />
+          <Clock className="w-4 h-4 mr-2" />
           Прием сегодня
-        </button>
-        <button
+        </Button>
+        <Button
+          variant={activeQuickFilter === 'tomorrow' ? 'primary' : 'outline'}
+          size="sm"
           onClick={() => setActiveQuickFilter(activeQuickFilter === 'tomorrow' ? null : 'tomorrow')}
-          className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all border ${
-            activeQuickFilter === 'tomorrow' 
-              ? 'bg-brand-blue text-white border-brand-blue shadow-md' 
-              : 'bg-white border-gray-200 text-gray-600 hover:border-brand-blue/50 hover:bg-brand-blue/5'
-          }`}
+          className={`rounded-full ${activeQuickFilter === 'tomorrow' ? 'bg-brand-blue border-brand-blue hover:bg-brand-blue/90' : 'hover:border-brand-blue/50 hover:bg-brand-blue/5 hover:text-brand-blue'}`}
         >
-          <Calendar className="w-4 h-4" />
+          <Calendar className="w-4 h-4 mr-2" />
           Завтра
-        </button>
-        <button
+        </Button>
+        <Button
+          variant={activeQuickFilter === 'promo' ? 'primary' : 'outline'}
+          size="sm"
           onClick={() => setActiveQuickFilter(activeQuickFilter === 'promo' ? null : 'promo')}
-          className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold transition-all border ${
-            activeQuickFilter === 'promo' 
-              ? 'bg-brand-violet text-white border-brand-violet shadow-md' 
-              : 'bg-white border-gray-200 text-gray-600 hover:border-brand-violet/50 hover:bg-brand-violet/5'
-          }`}
+          className={`rounded-full ${activeQuickFilter === 'promo' ? 'bg-brand-violet border-brand-violet hover:bg-brand-violet/90' : 'hover:border-brand-violet/50 hover:bg-brand-violet/5 hover:text-brand-violet'}`}
         >
-          <Star className="w-4 h-4" />
+          <Star className="w-4 h-4 mr-2" />
           По акции
-        </button>
+        </Button>
       </div>
     </>
   );

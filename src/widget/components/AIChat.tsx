@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { GoogleGenAI } from '@google/genai';
 import { Send, Bot, Loader2, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Card } from '@/shared/ui/Card';
 
 interface AIChatProps {
   contextData: any;
@@ -82,9 +83,10 @@ export default function AIChat({ contextData }: AIChatProps) {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed bottom-20 right-4 w-80 h-96 bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50 border border-gray-200"
+            className="fixed bottom-20 right-4 w-80 h-96 z-50"
           >
-            <div className="p-4 bg-blue-600 text-white font-medium flex justify-between items-center">
+            <Card className="w-full h-full p-0 shadow-2xl flex flex-col overflow-hidden border border-gray-200">
+              <div className="p-4 bg-blue-600 text-white font-medium flex justify-between items-center">
               <span>AI Assistant</span>
               <span className="text-xs opacity-75">Powered by Gemini</span>
             </div>
@@ -139,6 +141,7 @@ export default function AIChat({ contextData }: AIChatProps) {
                 <Send className="w-4 h-4" />
               </button>
             </div>
+            </Card>
           </motion.div>
         )}
       </AnimatePresence>

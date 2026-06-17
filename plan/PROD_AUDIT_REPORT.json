@@ -1,0 +1,29 @@
+{
+  "crossModuleFSDViolations": [],
+  "componentsWithInlineDataFetching": [],
+  "missingErrorBoundaries": [
+    "pages/AboutPage.tsx",
+    "pages/app-prototype/ui/AppLaunchPage.tsx",
+    "pages/category/ui/CategoryPage.tsx",
+    "pages/certificates/ui/CertificatesPage.tsx",
+    "pages/contacts/ui/ContactsPage.tsx",
+    "pages/doctor/ui/DoctorPage.tsx",
+    "pages/doctors/ui/DoctorsPage.tsx",
+    "pages/news/ui/NewsPage.tsx",
+    "pages/prices/ui/PricesPage.tsx",
+    "pages/promotions/ui/PromotionsPage.tsx",
+    "pages/service/ui/ServicePage.tsx",
+    "pages/vacancies/ui/VacanciesPage.tsx"
+  ],
+  "untrackedInteractions": [
+    "pages/certificates/ui/CertificatesPage.tsx",
+    "pages/doctor/ui/DoctorPage.tsx",
+    "pages/doctors/ui/DoctorsPage.tsx",
+    "pages/doctors/ui/components/DoctorCard.tsx",
+    "pages/doctors/ui/components/DoctorsFilterBar.tsx",
+    "pages/home/ui/sections/DirectionsVariants.tsx",
+    "pages/home/ui/sections/HeroImmersive.tsx",
+    "pages/prices/ui/PricesPage.tsx"
+  ],
+  "tightCouplingInHooks": []
+}

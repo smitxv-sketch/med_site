@@ -1,36 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-primary: "Inter", ui-sans-serif, system-ui, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+    /* Theme Engine Defaults */
+    --brand-h: 155;
+    --brand-s: 80%;
+    --brand-l: 40%;
+    --brand-fg: #ffffff;
+
+    --accent-h: 188;
+    --accent-s: 70%;
+    --accent-l: 45%;
+
+    --app-radius: 24px;
+    --app-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    --app-border: 1px solid transparent;
+
+    --app-transition-duration: 0.2s;
+    --app-transition-timing: ease-out;
 
     /* Safe Area Insets */
     --sat: env(safe-area-inset-top);
     --sar: env(safe-area-inset-right);
     --sab: env(safe-area-inset-bottom);
     --sal: env(safe-area-inset-left);
+
+    /* Shadcn UI Variables */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
   }
 
   html, body {
-    @apply bg-gray-50 text-gray-900 font-sans antialiased;
+    @apply bg-gray-50 text-gray-900 antialiased;
+    font-family: var(--font-primary);
   }
+
+  /* Layout Density Tokens */
+  :root {
+    --spacing-base: 1rem;
+    --spacing-gap: 1rem;
+    --spacing-section: 1.5rem;
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(200%);
+    }
+  }
+}
+
+@theme {
+  /* Mapping dynamic HSL vars to Tailwind colors */
+  --color-brand: hsl(var(--brand-h) var(--brand-s) var(--brand-l));
+  --color-brand-light: hsl(var(--brand-h) var(--brand-s) calc(var(--brand-l) + 15%));
+  --color-brand-dark: hsl(var(--brand-h) var(--brand-s) calc(var(--brand-l) - 15%));
+  --color-brand-fg: var(--brand-fg, #FFFFFF);
+  
+  --color-accent: hsl(var(--accent-h) var(--accent-s) var(--accent-l));
+  --color-accent-light: hsl(var(--accent-h) var(--accent-s) calc(var(--accent-l) + 15%));
+  
+  --color-surface-muted: hsl(var(--brand-h) 20% 97%);
+
+  /* Override Tailwind's default Green and Teal to perfectly sync with our dynamic brand hue */
+  --color-green-50: hsl(var(--brand-h) var(--brand-s) 95%);
+  --color-green-100: hsl(var(--brand-h) var(--brand-s) 90%);
+  --color-green-200: hsl(var(--brand-h) var(--brand-s) 80%);
+  --color-green-300: hsl(var(--brand-h) var(--brand-s) 70%);
+  --color-green-400: hsl(var(--brand-h) var(--brand-s) 60%);
+  --color-green-500: hsl(var(--brand-h) var(--brand-s) var(--brand-l));
+  --color-green-600: hsl(var(--brand-h) calc(var(--brand-s) + 10%) calc(var(--brand-l) - 10%));
+  --color-green-700: hsl(var(--brand-h) calc(var(--brand-s) + 15%) calc(var(--brand-l) - 20%));
+  --color-green-800: hsl(var(--brand-h) calc(var(--brand-s) + 20%) calc(var(--brand-l) - 30%));
+  --color-green-900: hsl(var(--brand-h) calc(var(--brand-s) + 20%) calc(var(--brand-l) - 40%));
+  --color-green-950: hsl(var(--brand-h) var(--brand-s) 10%);
+
+  --color-teal-50: hsl(var(--brand-h) var(--brand-s) 95%);
+  --color-teal-100: hsl(var(--brand-h) var(--brand-s) 90%);
+  --color-teal-200: hsl(var(--brand-h) var(--brand-s) 80%);
+  --color-teal-300: hsl(var(--brand-h) var(--brand-s) 70%);
+  --color-teal-400: hsl(var(--brand-h) var(--brand-s) 60%);
+  --color-teal-500: hsl(var(--brand-h) var(--brand-s) var(--brand-l));
+  --color-teal-600: hsl(var(--brand-h) calc(var(--brand-s) + 10%) calc(var(--brand-l) - 10%));
+  --color-teal-700: hsl(var(--brand-h) calc(var(--brand-s) + 15%) calc(var(--brand-l) - 20%));
+  --color-teal-800: hsl(var(--brand-h) calc(var(--brand-s) + 20%) calc(var(--brand-l) - 30%));
+  --color-teal-900: hsl(var(--brand-h) calc(var(--brand-s) + 20%) calc(var(--brand-l) - 40%));
+  --color-teal-950: hsl(var(--brand-h) var(--brand-s) 10%);
+
+  /* Backwards compatibility aliases */
+  --color-brand: var(--color-brand);
+  --color-brand-violet: var(--color-accent);
+  
+  /* Additional Corporate Colors for Promos and Directions */
+  --color-brand-orange: #ea580c;    /* Deeper orange */
+  --color-brand-blue: #2563eb;      /* Professional blue */
+  --color-brand-turquoise: #0d9488; /* Richer turquoise */
+
+  /* Let generic sans class use our dynamic font */
+  --font-sans: var(--font-primary);
+
+  /* Dynamic Border Radius tokens */
+  --radius-xl: calc(var(--app-radius) * 0.75);
+  --radius-2xl: var(--app-radius);
+  --radius-3xl: calc(var(--app-radius) * 1.5);
+  --radius-app: var(--app-radius);
 }
 
 @layer utilities {
   /* Safe Area Padding Utilities */
-  .safe-pt {
+  .pt-safe {
     padding-top: var(--sat);
   }
-  .safe-pb {
+  .pb-safe {
     padding-bottom: var(--sab);
   }
-  .safe-pl {
+  .pl-safe {
     padding-left: var(--sal);
   }
-  .safe-pr {
+  .pr-safe {
     padding-right: var(--sar);
   }
 
@@ -89,4 +239,74 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* Dynamic Animation Tokens */
+  .transition-colors, .transition-opacity, .transition-all, .transition-transform, .transition {
+    transition-duration: var(--app-transition-duration) !important;
+    transition-timing-function: var(--app-transition-timing) !important;
+  }
+
+  .border-app {
+    border: var(--app-border);
+  }
+
+  .transition-theme {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: var(--app-transition-timing);
+    transition-duration: var(--app-transition-duration);
+  }
+  
+  .duration-theme {
+    transition-duration: var(--app-transition-duration);
+  }
+  
+  .ease-theme {
+    transition-timing-function: var(--app-transition-timing);
+  }
+
+  /* Stage 5: Theming Variables */
+  [data-theme="white"] { background-color: #ffffff; }
+  [data-theme="gray"] { background-color: #f9fafb; }
+  [data-theme="brand"] { background-color: color-mix(in srgb, var(--color-brand) 5%, transparent); }
+  [data-theme="dark"] { background-color: #111827; color: #ffffff; }
+
+  [data-spacing-top="none"] { padding-top: 0; }
+  [data-spacing-top="small"] { padding-top: 2rem; }
+  [data-spacing-top="large"] { padding-top: 8rem; }
+
+  [data-spacing-bottom="none"] { padding-bottom: 0; }
+  [data-spacing-bottom="small"] { padding-bottom: 2rem; }
+  [data-spacing-bottom="large"] { padding-bottom: 8rem; }
+}
+
+@layer utilities { .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; } .hide-scrollbar::-webkit-scrollbar { display: none; } }
+
+/* ==============================================================
+   X-Ray Mode (Inspector) Styles
+   ============================================================== */
+.x-ray-mode [data-block-id] {
+  outline: 2px dashed rgba(255, 0, 128, 0.45) !important;
+  outline-offset: -2px;
+  position: relative;
+}
+
+.x-ray-mode [data-block-id]::before {
+  content: attr(data-block-type) " [" attr(data-block-id) "]";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(255, 0, 128, 0.9);
+  color: white;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  padding: 2px 6px;
+  z-index: 9999;
+  font-weight: 700;
+  pointer-events: none;
+  border-bottom-right-radius: 4px;
+}
+
+/* For Standard Elements or wrappers if data-block-id is missing */
+.x-ray-mode section, .x-ray-mode main {
+  outline: 1px dotted rgba(0, 200, 255, 0.3);
 }

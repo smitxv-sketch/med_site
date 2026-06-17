@@ -275,7 +275,7 @@ app.post('/api/book', async (req, res) => {
     if (result.success) {
       res.json({ success: true, message: 'Booking confirmed', booking: result.data });
     } else {
-      res.status(400).json({ error: result.error || 'Booking failed' });
+      res.status(400).json({ error: result.error || 'Booking failed', details: (result as any).details });
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -283,6 +283,28 @@ app.post('/api/book', async (req, res) => {
     }
     console.error('Booking error:', error);
     res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+import { generateText, generateLayoutBlocks } from './services/aiService.js';
+
+app.post('/api/generate', async (req, res) => {
+  try {
+    const text = await generateText(req.body);
+    res.json({ text });
+  } catch (error: any) {
+    console.error('Text generation error:', error);
+    res.status(500).json({ error: error.message || 'Generation failed' });
+  }
+});
+
+app.post('/api/generate-layout', async (req, res) => {
+  try {
+    const result = await generateLayoutBlocks(req.body);
+    res.json(result);
+  } catch (error: any) {
+    console.error('Layout generation error:', error);
+    res.status(500).json({ error: error.message || 'Layout generation failed' });
   }
 });
 

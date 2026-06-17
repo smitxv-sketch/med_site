@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useUISettingsStore } from '../store/uiSettingsStore';
 
 interface VariantSwitcherProps<T extends string> {
   variants: readonly T[];
@@ -17,16 +18,9 @@ export function VariantSwitcher<T extends string>({
   mode = 'pill',
   className = ''
 }: VariantSwitcherProps<T>) {
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const isDevMode = useUISettingsStore(state => state.isDevMode);
 
-  useEffect(() => {
-    const auth = localStorage.getItem('home_authorized');
-    if (auth === 'true') {
-      setIsAuthorized(true);
-    }
-  }, []);
-
-  if (!isAuthorized) return null;
+  if (!isDevMode) return null;
 
   if (mode === 'cycle') {
     const cycleVariant = (e: React.MouseEvent) => {
@@ -63,7 +57,7 @@ export function VariantSwitcher<T extends string>({
             }}
             className={`min-w-[24px] h-6 px-2 rounded-full flex items-center justify-center transition-colors text-[10px] font-medium ${
               isActive 
-                ? 'bg-brand-green text-white shadow-sm' 
+                ? 'bg-brand text-brand-fg shadow-sm' 
                 : 'text-gray-500 hover:bg-gray-100'
             }`}
           >

@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Slot, DaySchedule } from '../types';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Flame, Zap } from 'lucide-react';
 import { Skeleton } from './Skeleton';
+import { useUISettingsStore } from '../../shared/store/uiSettingsStore';
 
 interface DoctorScheduleProps {
   slots: Slot[];
@@ -27,6 +28,7 @@ export const DoctorSchedule: React.FC<DoctorScheduleProps> = ({
   priceElement
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { marketingTriggers, urgencyLevel } = useUISettingsStore();
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
@@ -88,14 +90,26 @@ export const DoctorSchedule: React.FC<DoctorScheduleProps> = ({
               </span>
               {priceElement}
             </div>
+            
+            {urgencyLevel === 'hard' && slots.filter(s => s.isAvailable).length > 0 && slots.filter(s => s.isAvailable).length <= 2 && (
+               <div className="text-xs font-bold text-orange-600 bg-orange-50 px-2 py-1 rounded inline-flex items-center gap-1">
+                 <Flame className="w-3 h-3" /> Осталось мало мест
+               </div>
+            )}
+            
             <div className="flex flex-wrap gap-2">
-              {displaySlots.map((slot) => (
+              {displaySlots.map((slot, index) => {
+                const totalAvailableSlots = slots.filter(s => s.isAvailable).length;
+                const isSmartFastTrack = (urgencyLevel === 'soft' || urgencyLevel === 'hard') && slot.isAvailable && index === displaySlots.findIndex(s => s.isAvailable);
+                const isSmartScarcity = urgencyLevel === 'hard' && slot.isAvailable && totalAvailableSlots > 0 && totalAvailableSlots <= 2;
+                
+                return (
                 <button 
                   key={slot.time} 
                   onClick={(e) => { e.stopPropagation(); onSelectSlot(slot); }} 
                   disabled={!slot.isAvailable} 
                   className={`
-                    py-2 px-3 rounded-lg text-xs font-bold border transition-all duration-200
+                    relative py-2 px-3 rounded-lg text-xs font-bold border transition-all duration-200
                     flex items-center justify-center min-h-[40px] active:scale-95
                     ${slot.isAvailable 
                       ? 'bg-[var(--color-surface)] border-[var(--color-primary)]/30 text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white hover:shadow-sm' 
@@ -103,9 +117,18 @@ export const DoctorSchedule: React.FC<DoctorScheduleProps> = ({
                     }
                   `}
                 >
+                  {isSmartScarcity ? (
+                    <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full shadow-sm z-10 pointer-events-none">
+                      Последнее
+                    </span>
+                  ) : isSmartFastTrack ? (
+                    <span className="absolute -top-2 -right-2 bg-emerald-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full shadow-sm z-10 flex items-center gap-0.5 pointer-events-none">
+                      Ближайшее
+                    </span>
+                  ) : null}
                   {slot.time}
                 </button>
-              ))}
+              )})}
               {hasMore && (
                 <button
                   onClick={(e) => { e.stopPropagation(); onShowMore?.(); }}
@@ -150,23 +173,30 @@ export const DoctorSchedule: React.FC<DoctorScheduleProps> = ({
         >
           {days.map((day) => {
             const isSelected = selectedDate === day.date;
+            
+            // Smart Scarcity algorithm: only show warning if very few slots left (indicated by "count")
+            const isHighDemand = urgencyLevel === 'hard' && day.count > 0 && day.count <= 2;
+            
             return (
               <button
                 key={day.date}
                 onClick={(e) => { e.stopPropagation(); onDateChange(day.date); }}
                 className={`
                   snap-start flex-shrink-0 flex flex-col items-center justify-center 
-                  w-[3.5rem] h-[4rem] rounded-lg border transition-all duration-200 relative overflow-hidden active:scale-95
+                  w-[4rem] h-[4.5rem] rounded-xl border transition-all duration-200 relative overflow-hidden active:scale-95
                   ${isSelected 
-                    ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)] shadow-sm' 
-                    : 'bg-[var(--color-surface)] border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-primary)]'
+                    ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)] shadow-md translate-y-[-2px]' 
+                    : 'bg-gray-50 border-gray-200 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] text-gray-700 hover:border-blue-400 hover:bg-blue-50'
                   }
                 `}
               >
-                <span className={`text-[9px] font-bold uppercase mb-0.5 opacity-80 tracking-wider`}>
+                {isHighDemand && !isSelected && (
+                  <span className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-orange-400 to-red-400 opacity-90" />
+                )}
+                <span className={`text-[10px] font-bold uppercase mb-0.5 opacity-90 tracking-wider ${isSelected ? 'text-white' : 'text-gray-500'}`}>
                   {day.shifts} 
                 </span>
-                <span className={`text-lg font-bold leading-none`}>
+                <span className={`text-base font-bold leading-none tracking-tight ${isSelected ? 'text-white' : 'text-gray-900'}`}>
                   {day.dateLabel.split(' ')[0]}
                 </span>
               </button>
@@ -184,8 +214,12 @@ export const DoctorSchedule: React.FC<DoctorScheduleProps> = ({
         )}
       </div>
 
-      {/* Slots Grid */}
       <div className="min-h-[100px] relative">
+        {urgencyLevel === 'hard' && slots.filter(s => s.isAvailable).length > 0 && slots.filter(s => s.isAvailable).length <= 2 && (
+           <div className="absolute -top-7 left-1 text-xs font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded flex items-center gap-1 animate-pulse">
+             <Flame className="w-3 h-3" /> Осталось мало мест
+           </div>
+        )}
         {loading ? (
           <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
             {Array.from({ length: 8 }).map((_, i) => (
@@ -198,13 +232,18 @@ export const DoctorSchedule: React.FC<DoctorScheduleProps> = ({
           </div>
         ) : (
           <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
-            {slots.map((slot) => (
+            {slots.map((slot, index) => {
+              const totalAvailableSlots = slots.filter(s => s.isAvailable).length;
+              const isSmartFastTrack = (urgencyLevel === 'soft' || urgencyLevel === 'hard') && slot.isAvailable && index === slots.findIndex(s => s.isAvailable);
+              const isSmartScarcity = urgencyLevel === 'hard' && slot.isAvailable && totalAvailableSlots > 0 && totalAvailableSlots <= 2;
+              
+              return (
               <button 
                 key={slot.time} 
                 onClick={(e) => { e.stopPropagation(); onSelectSlot(slot); }} 
                 disabled={!slot.isAvailable} 
                 className={`
-                  py-2 px-1 rounded-lg text-xs font-bold border transition-all duration-200
+                  relative py-2 px-1 rounded-lg text-xs font-bold border transition-all duration-200
                   flex items-center justify-center min-h-[44px] active:scale-95
                   ${slot.isAvailable 
                     ? 'bg-[var(--color-surface)] border-[var(--color-primary)]/30 text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white hover:shadow-sm' 
@@ -212,9 +251,19 @@ export const DoctorSchedule: React.FC<DoctorScheduleProps> = ({
                   }
                 `}
               >
+                {isSmartScarcity ? (
+                  <span className="absolute -top-1.5 -right-1.5 bg-orange-500 text-white text-[8px] font-black px-1.5 py-0.5 rounded-full shadow-sm z-10 pointer-events-none">
+                    Последнее
+                  </span>
+                ) : isSmartFastTrack ? (
+                  <span className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-white text-[8px] font-black px-1.5 py-0.5 rounded-full shadow-sm z-10 flex items-center gap-0.5 pointer-events-none">
+                    <Zap className="w-2 h-2" />
+                    Быстро
+                  </span>
+                ) : null}
                 {slot.time}
               </button>
-            ))}
+            )})}
           </div>
         )}
       </div>

@@ -1,0 +1,133 @@
+{
+  "presets": [
+    {
+      "id": "default",
+      "name": "Источник (По-умолчанию)",
+      "desc": "Базовый дизайн-код. Точка отсчета для всех остальных конфигураций.",
+      "emoji": "🏥",
+      "state": { 
+        "colorTheme": "green", "colorIntensity": "standard", "appRadius": 24, "shadowStyle": "soft", 
+        "fontFamily": "inter", "animationTheme": "default", "homePageConcept": "classic", "heroMobileVariant": "A", "heroDesktopVariant": "A",
+        "promotionsSectionVariant": "A", "doctorsSectionVariant": "A", "bottomNavVariant": "A",
+        "quickActionsVariant": "A",
+        "customHue": 142, "customSaturation": 80, "customLightness": 38
+      }
+    },
+    {
+      "id": "apple",
+      "name": "Экосистема (iOS)",
+      "desc": "Стекло, невероятная плавность, фокус на контенте. Идеально для современных клиник.",
+      "emoji": "📱",
+      "state": { 
+        "colorTheme": "blue", "colorIntensity": "pastel", "appRadius": 28, "shadowStyle": "soft", 
+        "fontFamily": "inter", "animationTheme": "smooth", "homePageConcept": "classic", "heroMobileVariant": "A", 
+        "promotionsSectionVariant": "B", "doctorsSectionVariant": "A", "bottomNavVariant": "B",
+        "quickActionsVariant": "B"
+      }
+    },
+    {
+      "id": "premium",
+      "name": "Премиум / Люкс",
+      "desc": "Журнальная антиква, строгие углы, темное золото. Идеально для косметологии.",
+      "emoji": "✨",
+      "state": { 
+        "colorTheme": "custom", "customHue": 40, "customSaturation": 50, "customLightness": 30, "colorIntensity": "manual", 
+        "appRadius": 0, "shadowStyle": "soft", "fontFamily": "playfair", "animationTheme": "smooth",
+        "homePageConcept": "classic", "heroMobileVariant": "B", "bottomNavVariant": "A", "promotionsSectionVariant": "C", "doctorsSectionVariant": "B",
+        "quickActionsVariant": "C"
+      }
+    },
+    {
+      "id": "kids",
+      "name": "Педиатрия",
+      "desc": "Пузыри, супер-скругления, яркие и сочные леденцовые цвета.",
+      "emoji": "🎈",
+      "state": { 
+        "colorTheme": "rose", "colorIntensity": "vibrant", "appRadius": 36, "shadowStyle": "hard", 
+        "fontFamily": "outfit", "animationTheme": "spring", "homePageConcept": "immersive", "heroMobileVariant": "B", "bottomNavVariant": "C", "promotionsSectionVariant": "A", "doctorsSectionVariant": "A",
+        "quickActionsVariant": "A"
+      }
+    },
+    {
+      "id": "neo",
+      "name": "Neo-Brutalism",
+      "desc": "Фокус для молодежной аудитории. Жесткие рамки, кричащие цвета.",
+      "emoji": "🔲",
+      "state": { 
+        "colorTheme": "custom", "customHue": 55, "customSaturation": 100, "customLightness": 50, "colorIntensity": "manual", 
+        "appRadius": 0, "shadowStyle": "neo", "fontFamily": "inter", "animationTheme": "instant",
+        "homePageConcept": "immersive", "heroMobileVariant": "A", "bottomNavVariant": "A", "promotionsSectionVariant": "C", "doctorsSectionVariant": "B",
+        "quickActionsVariant": "C"
+      }
+    },
+    {
+      "id": "zen",
+      "name": "Дзен / Эко",
+      "desc": "Японский минимализм. Приглушенные тона шалфея, максимум воздуха.",
+      "emoji": "🌿",
+      "state": { 
+        "colorTheme": "custom", "customHue": 140, "customSaturation": 20, "customLightness": 45, "colorIntensity": "manual", 
+        "appRadius": 16, "shadowStyle": "soft", "fontFamily": "inter", "animationTheme": "smooth",
+        "homePageConcept": "classic", "heroMobileVariant": "C", "bottomNavVariant": "D", "promotionsSectionVariant": "B", "doctorsSectionVariant": "A",
+        "quickActionsVariant": "B"
+      }
+    }
+  ],
+  "semanticRules": [
+    {
+      "id": "rule_urgency",
+      "name": "Срочность (Urgency)",
+      "desc": "Агрессивный режим для холодной аудитории или распродаж",
+      "emoji": "🔥",
+      "weight": 100,
+      "metric": "Конверсия (Звонок): 4.2%",
+      "highManipulation": true,
+      "stateOverrides": {
+        "colorTheme": "custom",
+        "customHue": 0,
+        "customSaturation": 80,
+        "customLightness": 45,
+        "appRadius": 0,
+        "shadowStyle": "hard",
+        "fontFamily": "inter",
+        "promotionsSectionVariant": "C",
+        "heroMobileVariant": "B"
+      }
+    },
+    {
+      "id": "rule_trust",
+      "name": "Доверие и Экспертиза",
+      "desc": "Спокойный режим для B2B и чекапов",
+      "emoji": "🛡️",
+      "weight": 80,
+      "metric": "Отказы: -15%",
+      "highManipulation": false,
+      "stateOverrides": {
+        "colorTheme": "blue",
+        "colorIntensity": "pastel",
+        "appRadius": 24,
+        "shadowStyle": "soft",
+        "fontFamily": "inter",
+        "doctorsSectionVariant": "B",
+        "heroMobileVariant": "C"
+      }
+    },
+    {
+      "id": "rule_new_year",
+      "name": "Новогоднее промо",
+      "desc": "Включить новогоднее настроение (Ограничено по времени)",
+      "emoji": "🎄",
+      "weight": 50,
+      "metric": "Конверсия (Акция): 6.8%",
+      "highManipulation": false,
+      "stateOverrides": {
+        "colorTheme": "custom",
+        "customHue": 45,
+        "customSaturation": 100,
+        "customLightness": 40,
+        "appRadius": 16,
+        "fontFamily": "playfair"
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
-import { DaySchedule } from '../types';
+import { DaySchedule, Slot } from '../types';
 
-export const getNextDays = (count: number = 14): DaySchedule[] => {
+export const getNextDays = (count: number = 14, allSlots: Slot[] = []): DaySchedule[] => {
   const nextDays: DaySchedule[] = [];
   const today = new Date();
   
@@ -13,28 +13,33 @@ export const getNextDays = (count: number = 14): DaySchedule[] => {
     const dayNum = date.getDate();
     const month = date.toLocaleDateString('ru-RU', { month: 'long' });
     
+    const slotsForDay = allSlots.filter((s) => s.date === dateStr && s.isAvailable);
+    const slotsCount = slotsForDay.length;
+
     nextDays.push({
       date: dateStr,
       dateLabel: `${dayNum} ${month}`,
       shifts: dayOfWeek,
-      count: 0 
+      count: slotsCount
     });
   }
   return nextDays;
 };
 
-export const getDaysFromDates = (dates: string[]): DaySchedule[] => {
+export const getDaysFromDates = (dates: string[], allSlots: Slot[] = []): DaySchedule[] => {
   return dates.map(dateStr => {
     const date = new Date(dateStr);
     const dayOfWeek = date.toLocaleDateString('ru-RU', { weekday: 'short' });
     const dayNum = date.getDate();
     const month = date.toLocaleDateString('ru-RU', { month: 'long' });
+    const slotsForDay = allSlots.filter((s) => s.date === dateStr && s.isAvailable);
+    const slotsCount = slotsForDay.length;
     
     return {
       date: dateStr,
       dateLabel: `${dayNum} ${month}`,
       shifts: dayOfWeek,
-      count: 0 
+      count: slotsCount
     };
   });
 };

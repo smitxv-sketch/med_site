@@ -44,6 +44,7 @@ export interface MisAppointment {
   success: boolean;
   data?: any;
   error?: string;
+  details?: any;
 }
 
 export interface MisDriver {

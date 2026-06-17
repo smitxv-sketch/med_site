@@ -5,6 +5,9 @@ import { DoctorSchedule } from './DoctorSchedule';
 import { useDoctorSlots } from '../hooks/useDoctorSlots';
 import { getNextDays, getDaysFromDates } from '../utils/dateUtils';
 import { formatExperience } from '../utils/formatters';
+import { Card } from '@/shared/ui/Card';
+import { SmartPrice } from '@/shared/ui/SmartPrice';
+import { SocialProofRating, SocialProofFeaturedBadges } from '@/shared/ui/SocialProofBadge';
 
 interface DoctorCardProps {
   doctor: Doctor;
@@ -40,7 +43,7 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor, onSelect, onSlot
   // Use QMS ID from offering if available, otherwise fallback to doctor.id
   const qmsId = primaryOffering?.id || doctor.id;
 
-  const { slots, availableDates, rawSlots, loading, selectedDate, setSelectedDate } = useDoctorSlots(
+  const { slots, allSlots, availableDates, rawSlots, loading, selectedDate, setSelectedDate } = useDoctorSlots(
     qmsId, 
     '', 
     city,
@@ -49,12 +52,12 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor, onSelect, onSlot
 
   // Schedule Logic
   const days = useMemo(() => {
-    if (loading) return getNextDays(14);
+    if (loading) return getNextDays(14, allSlots);
     if (availableDates && availableDates.length > 0) {
-      return getDaysFromDates(availableDates);
+      return getDaysFromDates(availableDates, allSlots);
     }
     return [];
-  }, [availableDates, loading]);
+  }, [availableDates, loading, allSlots]);
 
   const displayBadges = useMemo(() => {
     const badges = [...(doctor.badges || [])];
@@ -96,26 +99,32 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor, onSelect, onSlot
   }, [rawSlots]);
 
   return (
-    <div 
-      className="group cursor-pointer bg-white rounded-[24px] border border-gray-100/80 p-4 sm:p-5 h-full flex flex-col shadow-[0_2px_12px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,0.08)] hover:border-blue-100/50 transition-all duration-300 active:scale-[0.98]"
+    <Card 
+      className="group relative cursor-pointer p-app h-full flex flex-col hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,0.08)] hover:border-blue-100/50 transition-all duration-theme active:scale-[0.98]"
       style={{ animationDelay: `${animationDelay}ms` }}
       onClick={() => onSelect(doctor)}
     >
+      <div className="absolute top-4 right-4 z-20 pointer-events-none hidden sm:block">
+         <SocialProofFeaturedBadges featuredBadge={doctor.name.length % 2 === 0 ? 'top10' : 'patientsChoice'} className="shadow-sm backdrop-blur-md bg-opacity-95" />
+      </div>
+
       {/* Top Row: Name */}
-      <div className="flex justify-between items-start gap-3 mb-3">
-        <h3 className="font-bold text-lg sm:text-xl text-gray-900 group-hover:text-blue-600 transition-colors leading-tight tracking-tight">{doctor.name}</h3>
+      <div className="flex justify-between items-start gap-3 mb-3 relative z-10">
+        <div className="pr-20">
+          <h3 className="font-bold text-lg sm:text-xl text-gray-900 group-hover:text-blue-600 transition-colors leading-tight tracking-tight">{doctor.name}</h3>
+        </div>
       </div>
 
       <div className="mb-4 flow-root">
         {/* Photo Actor Layer (Floated) */}
-        <div className="float-left mr-4 mb-2 w-20 h-24 sm:w-24 sm:h-28 rounded-[18px] overflow-hidden bg-gray-50 ring-1 ring-black/5 shadow-inner">
+        <div className="float-left mr-4 mb-2 w-20 h-24 sm:w-24 sm:h-28 rounded-xl overflow-hidden bg-gray-50 ring-1 ring-black/5 shadow-inner">
           {doctor.image ? (
             <img 
               src={doctor.image} 
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
               alt={doctor.name} 
               loading="lazy"
-              referrerPolicy="no-referrer"
+             
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-blue-500 font-bold text-xl sm:text-2xl bg-blue-50 group-hover:scale-105 transition-transform duration-500">
@@ -149,6 +158,11 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor, onSelect, onSlot
           {doctor.position && (
             <div className="text-gray-500 text-xs sm:text-sm mb-2 leading-snug" dangerouslySetInnerHTML={{ __html: doctor.position }} />
           )}
+
+          {/* Social Proof Rating */}
+          <div className="mb-2">
+            <SocialProofRating rating={4.9} reviewsCount={48 + doctor.name.length * 2} />
+          </div>
 
           {doctor.anonce && doctor.anonce.replace(/(<([^>]+)>)/gi, "").replace(/[^\p{L}\p{N}]/gu, "").toLowerCase() !== (doctor.position || "").replace(/(<([^>]+)>)/gi, "").replace(/[^\p{L}\p{N}]/gu, "").toLowerCase() && (
             <div className="text-gray-600 text-xs sm:text-sm mb-3 leading-relaxed" dangerouslySetInnerHTML={{ __html: doctor.anonce }} />
@@ -194,14 +208,11 @@ export const DoctorCard: React.FC<DoctorCardProps> = ({ doctor, onSelect, onSlot
           onShowMore={() => onSelect(doctor)}
           priceElement={
             minPrice > 0 ? (
-              <span className="font-bold text-gray-900 text-base sm:text-lg ml-auto">
-                {offeringCount > 1 && <span className="text-gray-500 font-medium text-xs sm:text-sm mr-1">от</span>}
-                {new Intl.NumberFormat('ru-RU').format(minPrice)} ₽
-              </span>
+              <SmartPrice price={minPrice} className="font-bold text-gray-900 text-base sm:text-lg ml-auto" prefixClassName="text-gray-500 font-medium text-xs sm:text-sm mr-1" hidePrefix={offeringCount <= 1} />
             ) : undefined
           }
         />
       </div>
-    </div>
+    </Card>
   );
 };

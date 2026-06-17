@@ -1,0 +1,52 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 0. Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // 1. Helpers
+    function isSignedIn() { return request.auth != null && request.auth.token.email_verified == true; }
+    function isAdmin() { return isSignedIn(); } // Solo founder setup: all authenticated users act as admins for this prototype
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+
+    // 2. Blueprint Validation
+    function isValidInsight(data) {
+      return data.keys().hasAll(['source', 'topic', 'type', 'message', 'timestamp', 'status'])
+        && data.source is string && data.source.size() <= 64
+        && data.topic is string && data.topic.size() <= 128
+        && data.type is string && data.type.size() <= 32
+        && data.message is string && data.message.size() <= 2000
+        && data.timestamp is string && data.timestamp.size() <= 64
+        && data.status is string && data.status.size() <= 32
+        && (data.confidenceScore == null || data.confidenceScore is number);
+    }
+
+    // 3. Collections
+    match /insights/{insightId} {
+      // List/Get: For solo founder UI
+      allow read: if isAdmin();
+      
+      // Create
+      allow create: if isAdmin() 
+        && isValidId(insightId) 
+        && isValidInsight(incoming())
+        && incoming().keys().size() <= 8; // Allowing up to 8 keys (6 required + optional ones)
+        
+      // Update
+      allow update: if isAdmin()
+        && isValidInsight(incoming())
+        && (
+           incoming().diff(existing()).affectedKeys().hasOnly(['status', 'confidenceScore', 'message', 'type'])
+        );
+        
+      // Delete: cleanup
+      allow delete: if isAdmin();
+    }
+  }
+}

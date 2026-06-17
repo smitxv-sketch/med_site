@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Slot } from '../types';
-import { getSlots } from '../services/api';
+import { useWidgetRepository } from '../../shared/di/DIContext';
 
 export const useDoctorSlots = (doctorId: string, initialDate: string, city: string = 'chel', specialty?: string) => {
+  const widgetRepo = useWidgetRepository();
   const [allSlots, setAllSlots] = useState<Slot[]>([]);
   const [rawSlots, setRawSlots] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -18,7 +19,7 @@ export const useDoctorSlots = (doctorId: string, initialDate: string, city: stri
     setLoading(true);
     setError(null);
     try {
-      const response = await getSlots(city, doctorId, '', specialty);
+      const response = await widgetRepo.getSlots(city, doctorId, '', specialty);
       const fetchedSlots = response.slots || [];
       setAllSlots(fetchedSlots);
       setRawSlots(response.rawData || null);
@@ -38,7 +39,7 @@ export const useDoctorSlots = (doctorId: string, initialDate: string, city: stri
     } finally {
       setLoading(false);
     }
-  }, [city, doctorId, specialty]);
+  }, [city, doctorId, specialty, widgetRepo]);
 
   useEffect(() => {
     fetchSlots();
@@ -53,6 +54,7 @@ export const useDoctorSlots = (doctorId: string, initialDate: string, city: stri
 
   return {
     slots: slotsForSelectedDate,
+    allSlots,
     availableDates,
     rawSlots,
     loading,

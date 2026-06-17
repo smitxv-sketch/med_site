@@ -6,7 +6,7 @@ export const SERVICES_DATA = [
     items: [
       'Консультации', 'Криоконсервация', 'Донорство яйцеклеток', 'ДНЕВНОЙ СТАЦИОНАР', 'Программы ЭКО-Клиники', 'Преимплантационное генетическое тестирование (ПГТ)', 'ЭКО по ОМС'
     ],
-    image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1200&h=600',
+    image: 'https://ci74.ru/wp-content/uploads/2019/11/5558_Thumb.jpeg',
     textColor: 'text-violet-900',
     accentBg: 'bg-violet-50',
     isVip: true,
@@ -21,12 +21,12 @@ export const SERVICES_DATA = [
     items: [
       'Сомнология', '«Антиклещ»', 'Аллергология-иммунология', 'Анестезиология', 'Вакцинация', 'Выездные услуги', 'Гастроэнтерология', 'Гемостазиология', 'Гематология', 'Гинекология и акушерство', 'Дерматовенерология', 'Диагностика', 'Диетология', 'Кардиология', 'Колопроктология', 'Массаж', 'Медицинская генетика', 'Наркология', 'Неврология', 'Нефрология', 'Онкология', 'Оториноларингология', 'Офтальмология', 'Процедурные услуги', 'Психиатрия', 'Психотерапия', 'Пульмонология', 'Ревматология', 'Рефлексотерапия', 'Сосудистая хирургия', 'Телемедицина', 'Терапия', 'Травматология-ортопедия', 'Ультразвуковая диагностика', 'Урология', 'Физиотерапия', 'Функциональная диагностика', 'Хирургия', 'Центр амбулаторной хирургии', 'Эндокринология', 'Эндоскопическая диагностика', 'Клуб «Источник здоровья»'
     ],
-    image: 'https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&q=80&w=600&h=400',
-    textColor: 'group-hover:text-brand-green',
-    accentBg: 'bg-brand-green',
-    iconColor: 'text-brand-green',
-    iconBgLight: 'bg-brand-green/10',
-    iconBgSolid: 'bg-brand-green',
+    image: 'https://ci74.ru/wp-content/themes/ci74/pics/clinicpictures/84/3779_Thumb.jpeg',
+    textColor: 'group-hover:text-brand',
+    accentBg: 'bg-brand',
+    iconColor: 'text-brand',
+    iconBgLight: 'bg-brand/10',
+    iconBgSolid: 'bg-brand',
   },
   {
     id: 'kids',
@@ -35,7 +35,7 @@ export const SERVICES_DATA = [
     items: [
       'Аллергология-иммунология', 'Вакцинация', 'Выездные услуги', 'Гастроэнтерология', 'Гинекология', 'Дерматология', 'Диагностика', 'Кардио-ревматология', 'Массаж', 'Медицинская генетика', 'Наркология', 'Неврология', 'Нефрология', 'Оториноларингология', 'Офтальмология', 'Педиатрия', 'Процедурные услуги', 'Психиатрия', 'Травматология-ортопедия', 'Урология-андрология', 'Хирургия', 'Эндокринология'
     ],
-    image: 'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&q=80&w=600&h=400',
+    image: 'https://ci74.ru/wp-content/uploads/2019/11/3825_Thumb.jpeg',
     textColor: 'group-hover:text-brand-orange',
     accentBg: 'bg-brand-orange',
     iconColor: 'text-brand-orange',
@@ -49,7 +49,7 @@ export const SERVICES_DATA = [
     items: [
       'Удаление новообразований', 'Рефлексотерапия', 'Трихология', 'Аппаратная косметология', 'Лазерная косметология', 'Инъекционная косметология', 'Эстетическая косметология', 'Коррекция фигуры'
     ],
-    image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=600&h=400',
+    image: 'https://ci74.ru/wp-content/uploads/2025/02/013-scaled.jpg',
     textColor: 'group-hover:text-brand-blue',
     accentBg: 'bg-brand-blue',
     iconColor: 'text-brand-blue',
@@ -63,7 +63,7 @@ export const SERVICES_DATA = [
     items: [
       'Амбулаторный прием', 'Вызов бригады скорой помощи', 'Вызов врача на дом', 'Дежурство бригады скорой помощи на мероприятиях', 'Перевозка больных и пострадавших', 'Помощь при укусе клеща'
     ],
-    image: 'https://images.unsplash.com/photo-1584516150909-c43483ee7932?auto=format&fit=crop&q=80&w=600&h=400',
+    image: 'https://ci74.ru/wp-content/uploads/2019/11/3817_Thumb.jpeg',
     textColor: 'group-hover:text-red-500',
     accentBg: 'bg-red-500',
     iconColor: 'text-red-500',
@@ -77,7 +77,7 @@ export const SERVICES_DATA = [
     items: [
       'Оториноларингология', 'Терапия', 'ВРТ (ЭКО)', 'Гастроэнтерология', 'Генетика', 'Акушерство и гинекология', 'Кардиология', 'Медицинские чекапы', 'Онкология', 'Педиатрия', 'Травматология и ортопедия', 'Эндокринология', 'Аллергология и иммунология', 'Косметология'
     ],
-    image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=600&h=400',
+    image: 'https://ci74.ru/wp-content/uploads/2019/11/5560_Thumb.jpeg',
     textColor: 'group-hover:text-brand-turquoise',
     accentBg: 'bg-brand-turquoise',
     iconColor: 'text-brand-turquoise',

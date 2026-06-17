@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Loader2, Bug } from 'lucide-react';
+import { Bug } from 'lucide-react';
 import { BookingProvider, useBooking } from './context/BookingContext';
 import { ServiceSelectionStep } from './components/ServiceSelectionStep';
 import { DoctorSelectionStep } from './components/DoctorSelectionStep';
@@ -9,6 +9,8 @@ import { SuccessStep } from './components/SuccessStep';
 import { AuditStep } from './components/AuditStep';
 import { DebugModal } from './components/DebugModal';
 import { DoctorProfileModal } from './components/DoctorProfileModal';
+import { Card } from '@/shared/ui/Card';
+import { AgentBridge } from './engine/AgentBridge';
 
 interface BookingWidgetProps {
   serviceId?: string;
@@ -17,32 +19,41 @@ interface BookingWidgetProps {
 
 function BookingWidgetInner() {
   const { 
-    loading, step, services, theme, text, showDebug, setShowDebug, 
+    step, theme, showDebug, setShowDebug, 
     diagnostics, selectedDoctor, isDoctorModalOpen, setIsDoctorModalOpen, 
     handleSlotSelect 
   } = useBooking();
 
-  if (loading && step === 'service' && services.length === 0) {
-    return <div className="flex justify-center p-8"><Loader2 className="animate-spin w-8 h-8 text-blue-600" /></div>;
-  }
-
   const themeStyles = {
-    '--color-primary': theme?.colors?.primary || '#65a30d',
-    '--color-primary-hover': theme?.colors?.['primary-hover'] || '#4d7c0f',
-    '--color-secondary': theme?.colors?.secondary || '#64748b',
-    '--color-accent': theme?.colors?.accent || '#ea8025',
-    '--color-background': theme?.colors?.background || '#ffffff',
-    '--color-surface': theme?.colors?.surface || '#f8fafc',
-    '--color-surface-hover': theme?.colors?.['surface-hover'] || '#f1f5f9',
-    '--color-text-primary': theme?.colors?.['text-primary'] || '#0f172a',
-    '--color-text-secondary': theme?.colors?.['text-secondary'] || '#64748b',
-    '--color-border': theme?.colors?.border || '#e2e8f0',
+    '--color-primary': 'hsl(var(--brand-h) var(--brand-s) var(--brand-l))',
+    '--color-primary-hover': 'hsl(var(--brand-h) var(--brand-s) calc(var(--brand-l) - 15%))',
+    '--color-secondary': 'hsl(var(--brand-h) 20% 97%)',
+    '--color-accent': 'hsl(var(--accent-h) var(--accent-s) var(--accent-l))',
+    '--color-background': '#ffffff',
+    '--color-surface': '#f8fafc',
+    '--color-surface-hover': '#f1f5f9',
+    '--color-text-primary': '#0f172a',
+    '--color-text-secondary': '#64748b',
+    '--color-border': 'var(--app-border-color, #e2e8f0)',
   } as React.CSSProperties;
 
-  if (!text) return null;
-
   return (
-    <div className="w-full max-w-5xl mx-auto relative font-sans text-[var(--color-text-primary)] min-h-screen flex flex-col safe-pt safe-pb" style={themeStyles}>
+    <div className="w-full max-w-5xl mx-auto relative font-sans text-[var(--color-text-primary)] min-h-screen flex flex-col safe-pt safe-pb bg-gray-50/30" style={themeStyles}>
+      <AgentBridge />
+      
+      {/* Persistent Compact Header for Standalone View */}
+      <div className="sticky top-0 z-40 w-full pt-4 pb-4 sm:pt-6 sm:pb-6 px-4 sm:px-6 bg-gradient-to-b from-white/95 via-white/80 to-transparent mb-2">
+        <div className="flex items-center gap-3 relative z-10 w-full max-w-5xl mx-auto">
+          <div className="w-10 h-10 flex items-center justify-center shrink-0 mix-blend-multiply overflow-hidden rounded">
+             <img src="/logo-icon.png" alt="Источник" className="w-full h-full object-contain" />
+          </div>
+          <div className="flex flex-col justify-center mt-1">
+            <span className="font-black text-gray-900 text-xl leading-none tracking-tight">ИСТОЧНИК</span>
+            <span className="font-bold text-gray-500 text-[9px] uppercase tracking-[0.2em] mt-[3px]">Клиника</span>
+          </div>
+        </div>
+      </div>
+
       {/* Debug Icon - Fixed Position */}
       <button 
         onClick={() => setShowDebug(!showDebug)}
@@ -63,6 +74,7 @@ function BookingWidgetInner() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.2 }}
+          className="pt-6 sm:pt-8 flex-1"
         >
           {step === 'service' && <ServiceSelectionStep />}
           {step === 'doctor' && <DoctorSelectionStep />}
@@ -78,6 +90,10 @@ function BookingWidgetInner() {
         onClose={() => setIsDoctorModalOpen(false)}
         onSlotSelect={handleSlotSelect}
       />
+
+      <div className="mt-8 pb-4 text-center">
+        <a href="/booking/test-doctors-links" className="text-gray-300 hover:text-gray-400 text-xs transition-colors">Врачи (отладка)</a>
+      </div>
     </div>
   );
 }

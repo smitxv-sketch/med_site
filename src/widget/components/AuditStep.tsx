@@ -2,6 +2,13 @@ import React from 'react';
 import { ChevronLeft, User } from 'lucide-react';
 import { useBooking } from '../context/BookingContext';
 import { formatSpecialty, formatExperience } from '../utils/formatters';
+import { Card } from '@/shared/ui/Card';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export function AuditStep() {
   const { handleSetStep, allDoctors, formatDoctorName, config } = useBooking();
@@ -17,12 +24,12 @@ export function AuditStep() {
 
       <div className="space-y-8">
         {allDoctors.map(doctor => (
-          <div key={doctor.id} className="bg-white rounded-[24px] border border-gray-100 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] transition-all hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.08)]">
+          <Card key={doctor.id} className="p-0 overflow-hidden transition-all hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.08)]">
             {/* Header */}
             <div className="p-6 sm:p-8 border-b border-gray-50 flex flex-col sm:flex-row gap-6">
               <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-2xl overflow-hidden bg-gray-50 shrink-0 shadow-inner border border-gray-100">
                 {doctor.image ? (
-                  <img src={doctor.image} className="w-full h-full object-cover" alt={doctor.name} referrerPolicy="no-referrer" />
+                  <img src={doctor.image} className="w-full h-full object-cover" alt={doctor.name} />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-300">
                     <User className="w-12 h-12" />
@@ -95,31 +102,35 @@ export function AuditStep() {
             
             {/* Debug Raw Meta */}
             <div className="p-6 sm:px-8 border-t border-gray-50 bg-gray-50/50">
-              <details className="group">
-                <summary className="cursor-pointer text-xs font-mono text-gray-400 hover:text-gray-600 flex items-center justify-between transition-colors">
-                  <span>Show Raw Meta (Debug)</span>
-                </summary>
-                <div className="relative mt-4">
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigator.clipboard.writeText(JSON.stringify(doctor.rawMeta, null, 2));
-                      const btn = e.currentTarget;
-                      const originalText = btn.innerText;
-                      btn.innerText = 'Copied!';
-                      setTimeout(() => btn.innerText = originalText, 2000);
-                    }}
-                    className="absolute top-2 right-2 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 text-gray-600 transition-colors z-10"
-                  >
-                    Copy JSON
-                  </button>
-                  <pre className="p-4 bg-gray-100 rounded-xl text-[10px] overflow-x-auto font-mono text-gray-500 max-h-60 overflow-y-auto border border-gray-200">
-                    {JSON.stringify(doctor.rawMeta, null, 2)}
-                  </pre>
-                </div>
-              </details>
+              <Accordion className="w-full">
+                <AccordionItem value={`rawMeta-${doctor.id}`} className="border-b-0">
+                  <AccordionTrigger className="text-xs font-mono text-gray-400 hover:text-gray-600 transition-colors py-2 [&[data-state=open]]:text-gray-600">
+                    Show Raw Meta (Debug)
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="relative mt-2">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigator.clipboard.writeText(JSON.stringify(doctor.rawMeta, null, 2));
+                          const btn = e.currentTarget;
+                          const originalText = btn.innerText;
+                          btn.innerText = 'Copied!';
+                          setTimeout(() => btn.innerText = originalText, 2000);
+                        }}
+                        className="absolute top-2 right-2 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 text-gray-600 transition-colors z-10"
+                      >
+                        Copy JSON
+                      </button>
+                      <pre className="p-4 bg-gray-100 rounded-xl text-[10px] pb-4 font-mono text-gray-500 max-h-60 overflow-y-auto border border-gray-200">
+                        {JSON.stringify(doctor.rawMeta, null, 2)}
+                      </pre>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
-          </div>
+          </Card>
         ))}
       </div>
     </div>

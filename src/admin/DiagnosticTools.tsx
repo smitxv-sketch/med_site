@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Play, Clock, AlertCircle, CheckCircle2, Server, Settings2, Users, Search, FileJson, Database, Copy, Loader2, Link as LinkIcon, Wifi, WifiOff, ArrowRight } from 'lucide-react';
+import { Card } from '@/shared/ui/Card';
 
 export default function DiagnosticTools() {
   const [activeTab, setActiveTab] = useState<'api' | 'audit' | 'scenario' | 'deepAudit' | 'linking'>('api');
@@ -386,7 +387,7 @@ export default function DiagnosticTools() {
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-slate-200 bg-white rounded-t-xl px-2 overflow-x-auto no-scrollbar">
+        <Card className="flex border-b border-slate-200 rounded-t-xl px-2 overflow-x-auto no-scrollbar rounded-b-none border-x-0 border-t-0 shadow-none p-0">
           <button
             onClick={() => setActiveTab('api')}
             className={`px-4 md:px-6 py-3 md:py-4 font-medium text-sm flex items-center gap-2 border-b-2 transition-colors whitespace-nowrap ${
@@ -445,12 +446,12 @@ export default function DiagnosticTools() {
             <LinkIcon className="w-4 h-4" />
             Связывание врачей
           </button>
-        </div>
+        </Card>
 
         {activeTab === 'api' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-fade-in">
             {/* Controls Panel */}
-            <div className="lg:col-span-4 bg-white rounded-2xl shadow-sm border border-slate-200 p-4 md:p-6 space-y-5 h-fit">
+            <Card className="lg:col-span-4 p-4 md:p-6 space-y-5 h-fit">
               <h2 className="text-lg font-semibold border-b border-slate-100 pb-3 flex items-center gap-2">
                 <Settings2 className="w-5 h-5 text-slate-400" />
                 Configuration
@@ -586,10 +587,10 @@ export default function DiagnosticTools() {
                 )}
                 {loading ? 'Executing...' : 'Run Request'}
               </button>
-            </div>
+            </Card>
 
             {/* Results Panel */}
-            <div className="lg:col-span-8 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col">
+            <Card className="lg:col-span-8 p-6 flex flex-col">
               <h2 className="text-lg font-semibold border-b border-slate-100 pb-3 mb-4">Response</h2>
               
               {requestUrl && (
@@ -633,12 +634,12 @@ export default function DiagnosticTools() {
                   </div>
                 </div>
               )}
-            </div>
+            </Card>
           </div>
         )}
 
         {activeTab === 'audit' && (
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 animate-fade-in">
+          <Card className="p-6 animate-fade-in">
             <div className="flex flex-col md:flex-row gap-4 mb-6 items-end">
               <div className="flex-1">
                 <label className="block text-sm font-medium text-slate-700 mb-1">City</label>
@@ -758,11 +759,11 @@ export default function DiagnosticTools() {
                 </div>
               )}
             </div>
-          </div>
+          </Card>
         )}
 
         {activeTab === 'scenario' && (
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 md:p-6 animate-fade-in">
+          <Card className="p-4 md:p-6 animate-fade-in">
             <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
               <LinkIcon className="w-6 h-6 text-blue-600" />
               Scenario Chain Test
@@ -869,10 +870,10 @@ export default function DiagnosticTools() {
                 </div>
               </div>
             )}
-          </div>
+          </Card>
         )}
         {activeTab === 'deepAudit' && (
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 animate-fade-in">
+          <Card className="p-6 animate-fade-in">
             <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
               <Database className="w-6 h-6 text-blue-600" />
               Deep WordPress User Meta Audit
@@ -961,12 +962,12 @@ export default function DiagnosticTools() {
                 </div>
               </div>
             )}
-          </div>
+          </Card>
         )}
 
         {activeTab === 'linking' && (
           <div className="space-y-6 animate-fade-in">
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+            <Card className="p-6">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold text-slate-800">Связывание врачей (MIS &harr; WP)</h2>
                 <button
@@ -1059,7 +1060,7 @@ export default function DiagnosticTools() {
                   </div>
                 </div>
               )}
-            </div>
+            </Card>
           </div>
         )}
       </div>

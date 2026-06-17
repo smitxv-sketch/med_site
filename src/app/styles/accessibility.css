@@ -1,0 +1,85 @@
+/* Accessibility Modes */
+
+/* Font Sizes */
+/* Scaling html font-size scales all rem units, creating a perfect native zoom effect */
+html.a11y-font-large { font-size: 20px !important; }
+html.a11y-font-xlarge { font-size: 24px !important; }
+
+/* Images */
+body.a11y-images-grayscale img,
+body.a11y-images-grayscale video,
+body.a11y-images-grayscale [style*="background-image"] {
+  filter: grayscale(100%) !important;
+}
+
+body.a11y-images-hidden img,
+body.a11y-images-hidden video,
+body.a11y-images-hidden [style*="background-image"],
+body.a11y-images-hidden svg:not(.a11y-icon) {
+  display: none !important;
+  background-image: none !important;
+}
+
+/* 
+  ROBUST THEMES (GOST compliance + Defensive UI boundaries)
+  When we flatten backgrounds, we MUST ensure actionable elements and cards 
+  don't become invisible floating text.
+*/
+
+/* Black on White */
+body.a11y-theme-bw,
+body.a11y-theme-bw *:not(.a11y-ignore) {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+/* White on Black */
+body.a11y-theme-wb,
+body.a11y-theme-wb *:not(.a11y-ignore) {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Dark Blue on Light Blue */
+body.a11y-theme-blue,
+body.a11y-theme-blue *:not(.a11y-ignore) {
+  background-color: #9dd1ff !important;
+  color: #063462 !important;
+  border-color: #063462 !important;
+}
+
+/* --- DEFENSIVE UI A11Y SAFEGUARDS --- */
+
+/* 1. Restore Affordance for Interactive Elements */
+body[class*="a11y-theme-"] button,
+body[class*="a11y-theme-"] a,
+body[class*="a11y-theme-"] input,
+body[class*="a11y-theme-"] select,
+body[class*="a11y-theme-"] textarea,
+body[class*="a11y-theme-"] [role="button"] {
+  border-width: 2px !important;
+  border-style: solid !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+}
+
+/* 2. Restore Boundaries for Cards and Containers (replaces shadows) */
+body[class*="a11y-theme-"] [class*="shadow-"],
+body[class*="a11y-theme-"] [class*="border-t"] {
+  border-width: 1px !important;
+  border-style: solid !important;
+  box-shadow: none !important;
+}
+
+/* Protect SVGs from background fills */
+body[class*="a11y-theme-"] svg {
+  background-color: transparent !important;
+}
+
+/* Ensure the panel itself stays readable */
+.a11y-panel {
+  border-bottom: 2px solid currentColor !important;
+}
+

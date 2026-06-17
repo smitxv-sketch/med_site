@@ -8,7 +8,7 @@ export const bookingSchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format (YYYY-MM-DD)"),
   patient: z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
-    email: z.string().email("Invalid email address"),
+    email: z.string().email("Invalid email address").optional().or(z.literal('')),
     phone: z.string().min(10, "Phone number is too short")
   }),
   recaptcha_token: z.string().optional()

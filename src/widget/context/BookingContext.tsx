@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { Doctor, Service, Slot, Branch } from '../types';
-import { getServices, getDoctors, getAllDoctors, bookAppointment, getTheme, getText, getConfig, getDiagnostics, getBranches } from '../services/api';
 import { usePhoneMask } from '../hooks/usePhoneMask';
 import { useRecaptcha } from '../hooks/useRecaptcha';
 import { trackEvent } from '../services/analytics';
 import { getGroupedServices, getFilteredDoctors } from '../utils/filterUtils';
 import { formatSpecialty } from '../utils/formatters';
+import { useWidgetRepository } from '../../shared/di/DIContext';
 
 export type Step = 'service' | 'doctor' | 'details' | 'success' | 'audit';
 
@@ -44,6 +44,10 @@ interface BookingContextType {
   selectedBranchName: string | null;
   debugRawSlots: Record<string, any>;
   setDebugRawSlots: (slots: Record<string, any>) => void;
+  bookingLogs: any[];
+  setBookingLogs: React.Dispatch<React.SetStateAction<any[]>>;
+  bookingError: string | null;
+  setBookingError: (error: string | null) => void;
   selectedDoctor: Doctor | null;
   setSelectedDoctor: (doctor: Doctor | null) => void;
   isDoctorModalOpen: boolean;
@@ -74,9 +78,11 @@ interface BookingContextType {
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
 
 export function BookingProvider({ children, serviceId: propServiceId, doctorId: propDoctorId }: { children: React.ReactNode, serviceId?: string, doctorId?: string }) {
+  const widgetRepo = useWidgetRepository();
   const [step, setStep] = useState<Step>('service');
   
   const handleSetStep = (newStep: Step) => {
+    setBookingError(null);
     setStep(newStep);
     window.scrollTo(0, 0);
   };
@@ -96,6 +102,8 @@ export function BookingProvider({ children, serviceId: propServiceId, doctorId: 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBranchName] = useState<string | null>(null);
   const [debugRawSlots, setDebugRawSlots] = useState<Record<string, any>>({});
+  const [bookingLogs, setBookingLogs] = useState<any[]>([]);
+  const [bookingError, setBookingError] = useState<string | null>(null);
   
   const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null);
   const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false);
@@ -126,14 +134,14 @@ export function BookingProvider({ children, serviceId: propServiceId, doctorId: 
       setLoading(true);
       try {
         const [servicesData, doctorsData, allDoctorsData, themeData, textData, configData, diagnosticsData, branchesData] = await Promise.all([
-          getServices(),
-          getDoctors(),
-          getAllDoctors(),
-          getTheme(),
-          getText(),
-          getConfig(),
-          getDiagnostics(),
-          getBranches()
+          widgetRepo.getServices(),
+          widgetRepo.getDoctors(),
+          widgetRepo.getAllDoctors(),
+          widgetRepo.getTheme(),
+          widgetRepo.getText(),
+          widgetRepo.getConfig(),
+          widgetRepo.getDiagnostics(),
+          widgetRepo.getBranches()
         ]);
         
         let finalServices = servicesData;
@@ -203,7 +211,7 @@ export function BookingProvider({ children, serviceId: propServiceId, doctorId: 
           const formattedName = formatSpecialty(preSelectedService.name, configData);
           const matchingServices = servicesData.filter((s: Service) => formatSpecialty(s.name, configData) === formattedName);
           
-          const promises = matchingServices.map((s: Service) => getDoctors(s.name));
+          const promises = matchingServices.map((s: Service) => widgetRepo.getDoctors(s.name));
           const results = await Promise.all(promises);
           const docsData = results.flat();
           
@@ -293,7 +301,7 @@ export function BookingProvider({ children, serviceId: propServiceId, doctorId: 
       const formattedName = formatSpecialty(service.name, config);
       const matchingServices = services.filter(s => formatSpecialty(s.name, config) === formattedName);
       
-      const promises = matchingServices.map(s => getDoctors(s.name));
+      const promises = matchingServices.map(s => widgetRepo.getDoctors(s.name));
       const results = await Promise.all(promises);
       const doctorsData = results.flat();
       
@@ -347,17 +355,25 @@ export function BookingProvider({ children, serviceId: propServiceId, doctorId: 
 
   const handleSubmit = async () => {
     setLoading(true);
+    setBookingError(null);
+    setBookingLogs([]);
+    const addLog = (tag: string, data?: any) => {
+      setBookingLogs(prev => [...prev, { time: new Date().toISOString(), tag, ...data }]);
+    };
+    
+    addLog('start_submit');
     try {
       let token = '';
       if (config?.recaptcha?.enabled) {
+        addLog('start_recaptcha');
         const t = await recaptcha.execute();
         if (t) token = t;
-        console.log('Recaptcha token:', token);
+        addLog('recaptcha_done', { token });
       } else {
-        console.log('Recaptcha disabled via config');
+        addLog('recaptcha_disabled');
       }
       
-      await bookAppointment({
+      const payload = {
         service_id: formData.service?.id,
         doctor_id: formData.doctor?.id,
         slot: formData.slot?.time,
@@ -368,13 +384,23 @@ export function BookingProvider({ children, serviceId: propServiceId, doctorId: 
           phone: formData.phone
         },
         recaptcha_token: token
-      });
+      };
+      addLog('booking_request', { payload });
+      
+      const result = await widgetRepo.bookAppointment(payload);
+      addLog('booking_success', { result });
+      
       trackEvent('booking_success');
       handleSetStep('success');
-    } catch (error) {
+    } catch (error: any) {
+      addLog('booking_error', { error: error?.response?.data || error?.message || String(error) });
       console.error('Booking failed', error);
       trackEvent('booking_failed', { error });
+      const errorMsg = error?.response?.data?.error || error?.response?.data?.details || error?.message || (typeof error === 'string' ? error : 'Неизвестная ошибка');
+      const displayMsg = typeof errorMsg === 'object' ? JSON.stringify(errorMsg) : String(errorMsg);
+      setBookingError(displayMsg);
     } finally {
+      addLog('booking_finished');
       setLoading(false);
     }
   };
@@ -424,7 +450,8 @@ export function BookingProvider({ children, serviceId: propServiceId, doctorId: 
     <BookingContext.Provider value={{
       step, setStep, handleSetStep, loading, setLoading, services, doctors, setDoctors, allDoctors,
       theme, text, showDebug, setShowDebug, config, diagnostics, connectionTest, setConnectionTest, testingConnection, setTestingConnection,
-      branches, searchQuery, setSearchQuery, selectedBranchName, debugRawSlots, setDebugRawSlots,
+      branches, searchQuery, setSearchQuery, selectedBranchName, debugRawSlots, setDebugRawSlots, bookingLogs, setBookingLogs,
+      bookingError, setBookingError,
       selectedDoctor, setSelectedDoctor, isDoctorModalOpen, setIsDoctorModalOpen, formData, setFormData,
       phoneMask, groupedServices, filteredDoctors, displayedDoctors, handleServiceSelect, handleDoctorSelect,
       handleSlotSelect, handleSubmit, prevStep, copyDebugInfo, formatDoctorName

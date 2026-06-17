@@ -1,16 +1,20 @@
 import React, { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
-import { getAllDoctors } from '../../../widget/services/api';
+import { useDoctorsRepository } from '../../../shared/di/DIContext';
 import { Doctor } from '../../../widget/types';
 import { formatSpecialty } from '../../../widget/utils/formatters';
 import { DoctorCard, ProcessedDoctor } from './components/DoctorCard';
 import { DoctorsFilterBar } from './components/DoctorsFilterBar';
+import { Button } from '@/shared/ui/Button';
+import { Card } from '@/shared/ui/Card';
 
 export function DoctorsPage() {
+  const doctorsRepository = useDoctorsRepository();
+
   const { data: doctors, isLoading, error } = useQuery<Doctor[]>({
     queryKey: ['doctors'],
-    queryFn: getAllDoctors
+    queryFn: () => doctorsRepository.getAllDoctors()
   });
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -35,7 +39,7 @@ export function DoctorsPage() {
       const cleanedSpec = formatSpecialty(d.specialty || '');
       
       // Стабильный псевдорандом на основе ID для демо-фильтров
-      const charCode = d.id.charCodeAt(0) || 0;
+      const charCode = d.id?.charCodeAt(0) || 0;
       const acceptsChildren = cleanedSpec.toLowerCase().includes('педиатр') || charCode % 3 === 0;
       const availableToday = charCode % 2 === 0;
       const availableTomorrow = !availableToday && charCode % 5 === 0;
@@ -65,7 +69,7 @@ export function DoctorsPage() {
 
   const filteredDoctors = useMemo(() => {
     return processedDoctors.filter(d => {
-      const matchesSearch = d.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      const matchesSearch = (d.name || '').toLowerCase().includes(searchTerm.toLowerCase()) || 
                             (d.displaySpecialty && d.displaySpecialty.toLowerCase().includes(searchTerm.toLowerCase()));
       const matchesSpecialty = selectedSpecialty ? d.displaySpecialty === selectedSpecialty : true;
       
@@ -81,47 +85,48 @@ export function DoctorsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-12 h-12 border-4 border-brand-green/30 border-t-brand-green rounded-full animate-spin"></div>
+      <div className="flex-1 flex flex-col items-center justify-center py-20">
+        <div className="w-12 h-12 border-4 border-brand/30 border-t-brand rounded-full animate-spin"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh] text-red-500">
+      <div className="flex-1 flex flex-col items-center justify-center py-20 text-red-500">
         <p>Ошибка загрузки списка врачей. Пожалуйста, попробуйте позже.</p>
       </div>
     );
   }
 
   return (
-    <div className="py-4 md:py-8">
-      <div className="flex flex-col gap-1.5 md:gap-2 mb-5 md:mb-8">
-        <div className="flex items-center gap-3">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">Наши врачи</h1>
-          <span className="inline-flex items-center justify-center px-3 py-1 bg-brand-green/10 text-brand-green rounded-full font-bold text-sm">
-            {filteredDoctors.length}
-          </span>
+    <div className="w-full py-6 md:py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-1.5 md:gap-2 mb-5 md:mb-8">
+          <div className="flex items-center gap-3">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">Наши врачи</h1>
+            <span className="inline-flex items-center justify-center px-3 py-1 bg-brand/10 text-brand rounded-full font-bold text-sm">
+              {filteredDoctors.length}
+            </span>
+          </div>
+          <p className="text-gray-500 text-sm md:text-lg">Найдите своего специалиста и запишитесь на прием</p>
         </div>
-        <p className="text-gray-500 text-sm md:text-lg">Найдите своего специалиста и запишитесь на прием</p>
-      </div>
-      
-      <DoctorsFilterBar 
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        selectedSpecialty={selectedSpecialty}
-        setSelectedSpecialty={setSelectedSpecialty}
-        specialties={specialties}
-        activeQuickFilter={activeQuickFilter}
-        setActiveQuickFilter={setActiveQuickFilter}
-        doctors={processedDoctors}
-      />
+        
+        <DoctorsFilterBar 
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          selectedSpecialty={selectedSpecialty}
+          setSelectedSpecialty={setSelectedSpecialty}
+          specialties={specialties}
+          activeQuickFilter={activeQuickFilter}
+          setActiveQuickFilter={setActiveQuickFilter}
+          doctors={processedDoctors}
+        />
 
-      {/* ========================================== */}
-      {/* DOCTORS LIST                               */}
-      {/* ========================================== */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8">
+        {/* ========================================== */}
+        {/* DOCTORS LIST                               */}
+        {/* ========================================== */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8">
         {filteredDoctors?.map((doctor) => (
           <DoctorCard 
             key={doctor.id}
@@ -132,7 +137,7 @@ export function DoctorsPage() {
         ))}
         
         {filteredDoctors?.length === 0 && (
-          <div className="col-span-full text-center py-20 bg-white rounded-[2rem] border border-gray-100 shadow-sm">
+          <Card className="col-span-full text-center py-20 rounded-app">
             <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
               <Search className="w-10 h-10 text-gray-300" />
             </div>
@@ -140,18 +145,21 @@ export function DoctorsPage() {
             <p className="text-gray-500 max-w-md mx-auto text-lg">
               Попробуйте изменить параметры поиска или сбросить фильтры, чтобы увидеть больше специалистов.
             </p>
-            <button 
+            <Button 
+              variant="primary"
+              size="md"
+              className="mt-8"
               onClick={() => {
                 setSearchTerm('');
                 setSelectedSpecialty(null);
                 setActiveQuickFilter(null);
               }}
-              className="mt-8 px-8 py-3 bg-brand-green text-white font-bold rounded-xl hover:bg-brand-green/90 transition-colors shadow-sm shadow-brand-green/20"
             >
               Сбросить все фильтры
-            </button>
-          </div>
+            </Button>
+          </Card>
         )}
+      </div>
       </div>
     </div>
   );

@@ -1,0 +1,25 @@
+{
+  "entities": {
+    "Insight": {
+      "title": "Слой Самоанализа (Insights & Hypotheses)",
+      "description": "Инсайты и гипотезы системы для суперадминистратора",
+      "type": "object",
+      "properties": {
+        "source": { "type": "string", "description": " metrica | calltouch | strapi | system | self_reflection" },
+        "topic": { "type": "string" },
+        "type": { "type": "string", "description": " opportunity | threat | info | hypothesis" },
+        "message": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "description": "new | reviewed | applied | discarded" },
+        "confidenceScore": { "type": "number", "description": "0-100 score of AI confidence" }
+      },
+      "required": ["source", "topic", "type", "message", "timestamp", "status"]
+    }
+  },
+  "firestore": {
+    "/insights/{insightId}": {
+      "schema": "Insight",
+      "description": "Коллекция инсайтов (АК-47 Воркеры + Самоанализ)"
+    }
+  }
+}

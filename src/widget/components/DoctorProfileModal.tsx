@@ -1,11 +1,15 @@
 import React, { useMemo } from 'react';
 import { Doctor, Slot } from '../types';
-import { X, MapPin, Award, Building2, GraduationCap, Briefcase, User, Clock, BookOpen, Users, FileText, Star } from 'lucide-react';
+import { MapPin, Award, Building2, GraduationCap, Briefcase, User, Clock, BookOpen, Users, FileText, Star, X } from 'lucide-react';
 import { DoctorSchedule } from './DoctorSchedule';
 import { useDoctorSlots } from '../hooks/useDoctorSlots';
 import { getNextDays, getDaysFromDates } from '../utils/dateUtils';
-import { motion, AnimatePresence } from 'framer-motion';
 import { formatExperience } from '../utils/formatters';
+import { Card } from '@/shared/ui/Card';
+import {
+  Sheet,
+  SheetContent,
+} from "@/components/ui/sheet";
 
 interface DoctorProfileModalProps {
   doctor: Doctor | null;
@@ -25,7 +29,7 @@ export const DoctorProfileModal: React.FC<DoctorProfileModalProps> = ({ doctor, 
   const qmsId = primaryOffering?.id || doctor?.id || '';
 
   // We only fetch if doctor is present
-  const { slots, availableDates, loading, selectedDate, setSelectedDate } = useDoctorSlots(
+  const { slots, allSlots, availableDates, loading, selectedDate, setSelectedDate } = useDoctorSlots(
     qmsId, 
     '', 
     city,
@@ -34,12 +38,12 @@ export const DoctorProfileModal: React.FC<DoctorProfileModalProps> = ({ doctor, 
 
   // Schedule Logic
   const days = useMemo(() => {
-    if (loading) return getNextDays(14);
+    if (loading) return getNextDays(14, allSlots);
     if (availableDates && availableDates.length > 0) {
-      return getDaysFromDates(availableDates);
+      return getDaysFromDates(availableDates, allSlots);
     }
     return [];
-  }, [availableDates, loading]);
+  }, [availableDates, loading, allSlots]);
 
   const displayBadges = useMemo(() => {
     if (!doctor) return [];
@@ -72,56 +76,36 @@ export const DoctorProfileModal: React.FC<DoctorProfileModalProps> = ({ doctor, 
 
   const hasEducationTab = doctor && ((doctor.educationHistory && doctor.educationHistory.length > 0) || doctor.educationText || doctor.extraEducation || doctor.conferences || doctor.certificates);
 
-  if (!isOpen || !doctor) return null;
+  if (!doctor) return null;
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-6">
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-          />
-          
-          <motion.div 
-            initial={{ y: '100%', opacity: 0.5 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: '100%', opacity: 0 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] sm:max-h-[85vh] flex flex-col overflow-hidden safe-pb"
-            drag="y"
-            dragConstraints={{ top: 0 }}
-            dragElastic={0.2}
-            onDragEnd={(_, info) => {
-              if (info.offset.y > 100) onClose();
-            }}
-          >
-            {/* Drag Handle for Mobile */}
-            <div className="w-full flex justify-center pt-3 pb-1 sm:hidden cursor-grab active:cursor-grabbing">
-              <div className="w-12 h-1.5 bg-gray-200 rounded-full" />
-            </div>
+    <Sheet open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <SheetContent 
+        side="right" 
+        showCloseButton={false}
+        className="!w-full !max-w-[100vw] sm:!max-w-[600px] md:!max-w-[800px] lg:!max-w-[1000px] xl:!max-w-[1200px] p-0 gap-0 border-0 shadow-2xl safe-pb bg-white"
+      >
+        {/* Render child elements */}
+        <div className="flex flex-col h-full overflow-hidden">
+          {/* Header */}
+          <div className="flex items-center justify-between px-5 pt-14 pb-4 sm:px-6 sm:pt-6 border-b border-gray-100 shrink-0 relative bg-white z-20">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 pr-12 line-clamp-1">{doctor.name}</h2>
+            <button 
+              onClick={onClose}
+              className="absolute right-4 top-4 sm:right-6 sm:top-6 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors z-50 text-gray-600 shadow-sm"
+              aria-label="Close modal"
+            >
+              <X className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+          </div>
 
-            {/* Header */}
-            <div className="flex items-center justify-between px-5 py-3 sm:p-6 border-b border-gray-100 shrink-0">
-              <h2 className="text-lg sm:text-xl font-bold text-gray-900 line-clamp-1">{doctor.name}</h2>
-              <button 
-                onClick={onClose}
-                className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
-              >
-                <X className="w-5 h-5 text-gray-500" />
-              </button>
-            </div>
-
-            <div className="overflow-y-auto flex-1 p-5 sm:p-6 overscroll-contain bg-gray-50/50">
+            <div className="overflow-y-auto flex-1 p-5 sm:p-6 overscroll-contain bg-gray-50/50 relative">
               {/* Header Section */}
               <div className="flex flex-col sm:flex-row gap-6 mb-8">
                 <div className="shrink-0 self-center sm:self-start">
                   <div className="w-32 h-40 sm:w-40 sm:h-48 rounded-2xl overflow-hidden bg-white shadow-sm ring-1 ring-black/5">
                     {doctor.image ? (
-                      <img src={doctor.image} className="w-full h-full object-cover" alt={doctor.name} referrerPolicy="no-referrer" />
+                      <img src={doctor.image} className="w-full h-full object-cover" alt={doctor.name} />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-gray-400">
                         <User className="w-12 h-12" />
@@ -186,49 +170,54 @@ export const DoctorProfileModal: React.FC<DoctorProfileModalProps> = ({ doctor, 
               </div>
 
               {/* Main Content */}
-              <div className="flex flex-col gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
                 
-                {/* 1. Направления деятельности */}
-                {doctor.activities && (
-                  <div className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-100 shadow-sm">
-                    <h4 className="font-bold text-gray-900 mb-4 text-lg sm:text-xl flex items-center gap-2">
-                      <Award className="w-6 h-6 text-blue-500" />
-                      Направления деятельности
-                    </h4>
-                    <div className="prose prose-sm sm:prose-base max-w-none text-gray-600 marker:text-blue-500 leading-relaxed" dangerouslySetInnerHTML={{ __html: doctor.activities }} />
-                  </div>
-                )}
-
-                {/* 2. Записаться на прием */}
-                <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-gray-900/5">
-                  <h3 className="font-bold text-gray-900 mb-5 text-lg flex items-center gap-2">
-                    <Building2 className="w-5 h-5 text-blue-600" />
-                    Записаться на прием
-                  </h3>
-                  <DoctorSchedule 
-                    slots={slots}
-                    loading={loading}
-                    onSelectSlot={(slot) => onSlotSelect(slot, doctor, selectedDate)}
-                    onDateChange={setSelectedDate}
-                    selectedDate={selectedDate}
-                    days={days}
-                  />
+                {/* Запись на прием - Справа на Desktop, Сверху на Mobile */}
+                <div className="lg:col-span-5 xl:col-span-4 lg:order-2 lg:sticky lg:top-8 z-10">
+                  <Card className="p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 bg-white rounded-2xl w-full">
+                    <h3 className="font-bold text-gray-900 mb-5 text-lg flex items-center gap-2">
+                      <Building2 className="w-5 h-5 text-blue-600" />
+                      Записаться на прием
+                    </h3>
+                    <DoctorSchedule 
+                      slots={slots}
+                      loading={loading}
+                      onSelectSlot={(slot) => onSlotSelect(slot, doctor, selectedDate)}
+                      onDateChange={setSelectedDate}
+                      selectedDate={selectedDate}
+                      days={days}
+                    />
+                  </Card>
                 </div>
+
+                {/* Информация о враче - Слева на Desktop, Снизу на Mobile */}
+                <div className="lg:col-span-7 xl:col-span-8 flex flex-col gap-8 lg:order-1">
+                  
+                  {/* 1. Направления деятельности */}
+                  {doctor.activities && (
+                    <Card className="p-6 sm:p-8">
+                      <h4 className="font-bold text-gray-900 mb-4 text-lg sm:text-xl flex items-center gap-2">
+                        <Award className="w-6 h-6 text-blue-500" />
+                        Направления деятельности
+                      </h4>
+                      <div className="prose prose-sm sm:prose-base max-w-none text-gray-600 marker:text-blue-500 leading-relaxed" dangerouslySetInnerHTML={{ __html: doctor.activities }} />
+                    </Card>
+                  )}
 
                 {/* 3. О враче */}
                 {doctor.description && doctor.description.replace(/(<([^>]+)>)/gi, "").replace(/[^\p{L}\p{N}]/gu, "").toLowerCase() !== (doctor.position || "").replace(/(<([^>]+)>)/gi, "").replace(/[^\p{L}\p{N}]/gu, "").toLowerCase() && (
-                  <div className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-100 shadow-sm space-y-6">
+                  <Card className="p-6 sm:p-8 space-y-6">
                     <h4 className="font-bold text-gray-900 mb-2 text-lg sm:text-xl flex items-center gap-2">
                       <User className="w-6 h-6 text-blue-500" />
                       О враче
                     </h4>
                     <div className="prose prose-sm sm:prose-base max-w-none text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: doctor.description }} />
-                  </div>
+                  </Card>
                 )}
 
                 {/* 4. Образование */}
                 {hasEducationTab && (
-                  <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
+                  <Card className="p-6">
                     <h4 className="font-bold text-gray-900 mb-6 flex items-center gap-2 text-lg">
                       <GraduationCap className="w-5 h-5 text-blue-500"/> 
                       Образование
@@ -286,13 +275,13 @@ export const DoctorProfileModal: React.FC<DoctorProfileModalProps> = ({ doctor, 
                         </div>
                       )}
                     </div>
-                  </div>
+                  </Card>
                 )}
+                </div>
               </div>
             </div>
-          </motion.div>
         </div>
-      )}
-    </AnimatePresence>
+      </SheetContent>
+    </Sheet>
   );
 };

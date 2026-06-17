@@ -1,5 +1,6 @@
 import React from 'react';
 import { Copy, Check, Layout, Users, Calendar } from 'lucide-react';
+import { Card } from '@/shared/ui/Card';
 
 const CodeBlock = ({ code, id }: { code: string; id: string }) => {
   const [copied, setCopied] = React.useState<string | null>(null);
@@ -32,15 +33,15 @@ export default function IntegrationPage() {
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto space-y-8">
         
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <Card className="p-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Integration Guide</h1>
           <p className="text-lg text-gray-600">
             How to embed the booking widget into your existing WordPress site or any other platform.
           </p>
-        </div>
+        </Card>
 
         {/* Scenario 1: General Embedding */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <Card className="overflow-hidden p-0">
           <div className="p-6 border-b border-gray-100 bg-gray-50/50 flex items-center gap-3">
             <div className="p-2 bg-blue-100 text-blue-600 rounded-lg">
               <Layout className="w-5 h-5" />
@@ -63,10 +64,10 @@ export default function IntegrationPage() {
 ></iframe>`} 
             />
           </div>
-        </div>
+        </Card>
 
         {/* Scenario 2: Doctor Specific */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <Card className="overflow-hidden p-0">
           <div className="p-6 border-b border-gray-100 bg-gray-50/50 flex items-center gap-3">
             <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg">
               <Users className="w-5 h-5" />
@@ -92,10 +93,10 @@ export default function IntegrationPage() {
 ></iframe>`} 
             />
           </div>
-        </div>
+        </Card>
 
         {/* Scenario 3: Service Specific */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <Card className="overflow-hidden p-0">
           <div className="p-6 border-b border-gray-100 bg-gray-50/50 flex items-center gap-3">
             <div className="p-2 bg-purple-100 text-purple-600 rounded-lg">
               <Calendar className="w-5 h-5" />
@@ -118,7 +119,7 @@ export default function IntegrationPage() {
 ></iframe>`} 
             />
           </div>
-        </div>
+        </Card>
 
       </div>
     </div>

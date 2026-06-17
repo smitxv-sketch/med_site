@@ -1,0 +1,166 @@
+import React, { useState } from 'react';
+import { Settings2, X, AlertTriangle, Fingerprint, Flame, RotateCcw, Lightbulb, Network, AppWindow, Target } from 'lucide-react';
+import { useUISettingsStore, ColorTheme } from '../store/uiSettingsStore';
+
+export function DevModeToggle() {
+  const store = useUISettingsStore();
+  const { isDevMode, setIsDevMode, activeRuleId, applyRule } = store;
+  
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<'director' | 'marketing' | 'integrator' | 'utm' | 'strapi'>('director');
+
+  const THEMES: { id: ColorTheme; name: string; hex: string }[] = [
+    { id: 'green', name: 'Источник (Классика)', hex: '#4CAF50' },
+    { id: 'blue', name: 'Медицина (Доверие)', hex: '#03A9F4' },
+    { id: 'purple', name: 'Премиум (Уверенность)', hex: '#673AB7' },
+    { id: 'rose', name: 'Забота (Теплота)', hex: '#E91E63' },
+  ];
+
+  const BLOCKS: any[] = [
+    { id: 'homePageConcept', label: 'Концепция главной', variants: ['classic', 'immersive'], format: (v: string) => v === 'classic' ? 'Классика' : 'Иммерсивный' },
+    { id: 'heroMobileVariant', label: '📱 Главный баннер / Герой', variants: ['A', 'B', 'C', 'D'], format: (v: string) => v === 'D' ? 'D (AI)' : v },
+    { id: 'quickActionsVariant', label: 'Быстрые ссылки', variants: ['none', 'A', 'B', 'C'], format: (v: string) => v === 'none' ? 'Выкл' : v },
+    { id: 'doctorsSectionVariant', label: 'Карусель врачей', variants: ['A', 'B'], format: (v: string) => v },
+    { id: 'directionsSectionVariant', label: 'Блок направлений', variants: ['A', 'B', 'C'], format: (v: string) => v },
+    { id: 'promotionsSectionVariant', label: 'Блок акций', variants: ['A', 'B', 'C'], format: (v: string) => v },
+    { id: 'bottomNavVariant', label: 'Нижнее меню (App)', variants: ['A', 'B', 'C', 'D'], format: (v: string) => v },
+  ];
+
+  function InsightCard({ title, children, variant = 'amber' }: { title: string, children: React.ReactNode, variant?: 'amber' | 'neutral' | 'purple' }) {
+    const bg = variant === 'amber' ? 'bg-amber-50 border-amber-100' : variant === 'purple' ? 'bg-purple-50 border-purple-100' : 'bg-gray-50 border-gray-200';
+    const textTitle = variant === 'amber' ? 'text-amber-900' : variant === 'purple' ? 'text-purple-900' : 'text-gray-900';
+    const textBody = variant === 'amber' ? 'text-amber-800/90' : variant === 'purple' ? 'text-purple-800/90' : 'text-gray-600';
+    const TitleIcon = variant === 'purple' ? AppWindow : Lightbulb;
+    const iconColor = variant === 'amber' ? 'text-amber-500' : variant === 'purple' ? 'text-purple-600' : 'text-gray-500';
+
+    return (
+      <div className={`${bg} rounded-xl p-4 border flex items-start gap-3 w-full mt-2`}>
+        <TitleIcon className={`w-5 h-5 shrink-0 mt-0.5 ${iconColor}`} />
+        <div className="flex-1">
+          <p className={`text-xs font-bold mb-1 ${textTitle}`}>{title}</p>
+          <div className={`text-[11px] leading-relaxed font-medium ${textBody}`}>
+            {children}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <button
+        onClick={() => {
+          setIsDevMode(!isDevMode);
+          if (!isDevMode) setIsOpen(true);
+        }}
+        className={`fixed bottom-4 left-4 z-[9999] w-12 h-12 flex items-center justify-center shadow-lg transition-all border ${
+          isDevMode 
+            ? 'bg-brand text-brand-fg border-brand shadow-brand/30 ring-4 ring-brand/10' 
+            : 'bg-white text-gray-400 border-gray-200 hover:text-brand hover:border-brand/30 hover:shadow-xl'
+        }`}
+        style={{ borderRadius: store.appRadius > 0 ? Math.max(store.appRadius, 16) + 'px' : '12px' }}
+        title="Command Center"
+      >
+        <Settings2 className={`w-5 h-5 transition-transform duration-500 ${isDevMode ? 'rotate-90' : ''}`} />
+      </button>
+
+      {/* Docked Sidebar Command Center */}
+      {isDevMode && isOpen && (
+        <>
+          <div className="fixed inset-0 bg-black/20 z-[9997] backdrop-blur-sm lg:hidden" onClick={() => setIsOpen(false)} />
+          <div 
+            className="fixed inset-y-0 right-0 z-[9998] w-full max-w-[480px] bg-white shadow-2xl flex flex-col transition-all duration-500 animate-in slide-in-from-right"
+          >
+            {/* Header */}
+            <div className="flex flex-col p-6 border-b border-gray-100 bg-white shrink-0">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="font-extrabold text-gray-900 text-lg tracking-tight">Command Center</h3>
+                  <p className="text-xs font-semibold text-brand uppercase tracking-wider mt-0.5">Marketing UI Engine v5</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button 
+                    onClick={() => store.resetToDefaults()} 
+                    className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 hover:bg-gray-100 text-brand-orange transition-colors"
+                    title="Сбросить всё к заводским настройкам"
+                  >
+                    <RotateCcw className="w-5 h-5" />
+                  </button>
+                  <button onClick={() => setIsOpen(false)} className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 hover:bg-gray-100 text-gray-400 transition-colors">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Role-Based Tabs (Macro Context) */}
+              <div className="flex bg-gray-100/80 p-1.5 shadow-inner mt-2 transition-theme" style={{ borderRadius: 'var(--app-radius)' }}>
+                <button
+                  onClick={() => setActiveTab('director')}
+                  className={`flex-1 py-2 flex flex-col items-center gap-1.5 text-xs font-semibold transition-all ${activeTab === 'director' ? 'bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] text-brand' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200/50'}`}
+                  style={{ borderRadius: 'var(--radius-xl)' }}
+                >
+                  <Network className="w-4 h-4" />
+                  Стратегия
+                </button>
+                <button
+                  onClick={() => setActiveTab('marketing')}
+                  className={`flex-1 py-2 flex flex-col items-center gap-1.5 text-xs font-semibold transition-all ${activeTab === 'marketing' ? 'bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] text-orange-500' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200/50'}`}
+                  style={{ borderRadius: 'var(--radius-xl)' }}
+                >
+                  <Flame className="w-4 h-4" />
+                  Рост
+                </button>
+                <button
+                  onClick={() => setActiveTab('integrator')}
+                  className={`flex-1 py-2 flex flex-col items-center gap-1.5 text-xs font-semibold transition-all ${activeTab === 'integrator' ? 'bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] text-gray-900' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200/50'}`}
+                  style={{ borderRadius: 'var(--radius-xl)' }}
+                >
+                  <Settings2 className="w-4 h-4" />
+                  Настройки
+                </button>
+                <button
+                  onClick={() => setActiveTab('strapi')}
+                  className={`flex-1 py-2 flex flex-col items-center gap-1.5 text-[10px] sm:text-xs font-semibold transition-all ${activeTab === 'strapi' ? 'bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] text-purple-600' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200/50'}`}
+                  title="Быстрые победы (Strapi)"
+                  style={{ borderRadius: 'var(--radius-xl)' }}
+                >
+                  <AppWindow className="w-4 h-4" />
+                  Strapi
+                </button>
+                <button
+                  onClick={() => setActiveTab('utm')}
+                  className={`flex-1 py-2 flex flex-col items-center gap-1.5 text-[10px] sm:text-xs font-semibold transition-all ${activeTab === 'utm' ? 'bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)] text-blue-600' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200/50'}`}
+                  title="Персонализация (UTM)"
+                  style={{ borderRadius: 'var(--radius-xl)' }}
+                >
+                  <Target className="w-4 h-4" />
+                  Context
+                </button>
+              </div>
+            </div>
+
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto w-full custom-scrollbar p-6 bg-gray-50/30 pb-28">
+              
+              {/* === TAB: STRATEGY (DIRECTOR) === */}
+              {activeTab === 'director' && (
+                <div className="space-y-8 w-full animate-in fade-in slide-in-from-bottom-2">
+                  
+                  {/* Semantic Rules Section */}
+                  <section>
+                    <h4 className="text-xs font-black uppercase text-gray-400 tracking-wider mb-4 flex items-center justify-between">
+                      Многомерная Семантика
+                      <span className="bg-brand/10 text-brand px-2 py-0.5 rounded text-[10px]">A/B Ready</span>
+                    </h4>
+                    
+                    <InsightCard title="Сценарии (Journey Alignment)">
+                      При активации сценария система автоматически перестраивает все компоненты сайта.
+                      Это не просто смена цветов — меняются формы кнопок, плотность отступов и акценты блоков. Идеально для проверки гипотез на разный сегмент аудитории.
+                    </InsightCard>
+
+                    <div className="space-y-3 mt-4">
+                      <button
+                        onClick={() => applyRule(null)}
+                        className={`w-full flex items-center gap-4 p-4 rounded-xl border transition-all duration-theme text-left group ${
+                          activeRuleId === null 
+                          

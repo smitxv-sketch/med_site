@@ -66,7 +66,7 @@ export const SlotSelector: React.FC<SlotSelectorProps> = ({ slots, loading, onSe
                 onClick={() => onDateChange(day.date)}
                 className={`
                   snap-start flex-shrink-0 flex flex-col items-center justify-center 
-                  w-[4.5rem] h-[5rem] rounded-xl border transition-all duration-300 relative overflow-hidden
+                  w-[4.5rem] h-[5rem] rounded-xl border transition-all duration-theme relative overflow-hidden
                   ${isSelected 
                     ? 'bg-[var(--color-text-primary)] text-[var(--color-surface)] border-[var(--color-text-primary)] shadow-lg scale-105 ring-2 ring-[var(--color-primary)] ring-offset-2' 
                     : 'bg-[var(--color-surface)] border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]'

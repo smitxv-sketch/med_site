@@ -320,14 +320,20 @@ export class QmsDriver implements MisDriver {
     try {
       const response = await makeRequest(cityCode, 'appointByFIO', payload);
       
-      if (response.result === 'success') {
+      if (response && response.result === 'success') {
         return { success: true, data: response };
       } else {
-        return { success: false, error: response.error || 'Unknown error' };
+        const qmsError = response?.error || response?.result;
+        const fallbackMsg = 'Не удалось записаться. Возможно, выбранное время уже занято, попробуйте выбрать другое.';
+        return { success: false, error: qmsError || fallbackMsg };
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to book appointment:', error);
-      return { success: false, error: 'Failed to communicate with QMS' };
+      return { 
+        success: false, 
+        error: `Ошибка соединения с медицинской системой. Попробуйте еще раз.`, 
+        details: error?.response?.data || error?.message 
+      };
     }
   }
 
