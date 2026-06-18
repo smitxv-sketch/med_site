@@ -71,3 +71,4 @@ https://thumb.cloud.mail.ru/weblink/thumb/xw1/4R8k/YCiDxfxbt?mt=1779340982000
 | 2 | 2026-06-17 | Fix start path dist/index.js + static dir | pushed `c693329` |
 | 3 | 2026-06-17 | Coolify Traefik fqdn https://, redeploy | site 200 OK |
 | 4 | 2026-06-17 | Замена картинки конференции (mail.ru URL) | локально, не pushed |
+| 5 | 2026-06-17 | Локальная картинка `public/img/conference.jpg` | pushed `ff75c44`, deployed |
