@@ -37,21 +37,42 @@ export function Header() {
   );
   const isTransparent = isImmersive && !scrolled;
 
+  const headerSurfaceClass = isTransparent
+    ? "bg-white/10 backdrop-blur-md border border-white/10 shadow-none"
+    : [
+        "bg-white/90 backdrop-blur-lg border border-gray-100/80 shadow-sm",
+        "md:bg-white/45 md:backdrop-blur-2xl md:backdrop-saturate-150",
+        "md:border-white/55 md:shadow-[0_8px_32px_-8px_rgba(15,23,42,0.12)]",
+        "md:ring-1 md:ring-inset md:ring-white/50",
+      ].join(" ");
+
+  const headerIconButtonClass = isTransparent
+    ? "bg-white/10 hover:bg-white/20 text-white border border-white/20"
+    : [
+        "bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-200",
+        "md:bg-white/35 md:hover:bg-white/55 md:text-gray-700 md:border-white/45",
+        "md:backdrop-blur-md md:shadow-sm",
+      ].join(" ");
+
+  const headerGhostButtonClass = isTransparent
+    ? "text-white hover:bg-white/20"
+    : "text-gray-600 hover:bg-gray-100 md:hover:bg-white/45 md:backdrop-blur-sm";
+
   return (
     <>
       {/* Gradient blur backdrop for smooth transition - hide in immersive transparent mode */}
       <div
-        className={`fixed top-0 left-0 right-0 h-20 sm:h-24 z-30 pointer-events-none transition-opacity duration-theme ${isTransparent ? "opacity-0" : "opacity-100 backdrop-blur-md [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)] bg-white/40"}`}
+        className={`fixed top-0 left-0 right-0 h-20 sm:h-24 z-30 pointer-events-none transition-opacity duration-theme ${
+          isTransparent
+            ? "opacity-0"
+            : "opacity-100 backdrop-blur-md [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)] bg-white/40 md:bg-white/25 md:backdrop-blur-2xl md:backdrop-saturate-150"
+        }`}
       />
 
       <div className="fixed top-0 left-0 right-0 z-40 pointer-events-none flex justify-center">
         <Container className="pt-2 sm:pt-3">
           <header
-            className={`w-full transition-all duration-theme pointer-events-auto rounded-2xl ${
-              isTransparent
-                ? "bg-white/10 backdrop-blur-md border border-white/10 shadow-none"
-                : "bg-white/80 backdrop-blur-xl border border-white/20 shadow-sm"
-            }`}
+            className={`w-full transition-all duration-theme pointer-events-auto rounded-2xl ${headerSurfaceClass}`}
           >
             <div className="flex items-center justify-between px-4 py-3 relative">
               {/* Logo */}
@@ -87,11 +108,7 @@ export function Header() {
                   onClick={() =>
                     useUISettingsStore.getState().setIsCitySelectorOpen(true)
                   }
-                  className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors ${
-                    isTransparent
-                      ? "bg-white/10 hover:bg-white/20 text-white border border-white/20"
-                      : "bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-200"
-                  }`}
+                  className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors ${headerIconButtonClass}`}
                   aria-label="Выбрать город"
                 >
                   <MapPin className="w-4 h-4" />
@@ -146,13 +163,13 @@ export function Header() {
 
                 <button
                   onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
-                  className={`p-2 rounded-full transition-colors flex items-center gap-1.5 ${isTransparent ? "text-white hover:bg-white/20" : "text-gray-600 hover:bg-gray-100"}`}
+                  className={`p-2 rounded-full transition-colors flex items-center gap-1.5 ${headerGhostButtonClass}`}
                 >
                   <Search className="w-5 h-5" />
                 </button>
                 <Link
                   to="/profile"
-                  className={`p-2 rounded-full transition-colors hidden sm:block ${isTransparent ? "text-white hover:bg-white/20" : "text-gray-600 hover:bg-gray-100"}`}
+                  className={`p-2 rounded-full transition-colors hidden sm:block ${headerGhostButtonClass}`}
                 >
                   <User className="w-5 h-5" />
                 </Link>

@@ -60,7 +60,7 @@ export function ServicesMegaMenu({ isTransparent = false }: ServicesMegaMenuProp
             className="absolute top-full left-0 right-0 pt-4"
             style={{ width: '100%' }}
           >
-            <Card className="p-0 shadow-xl overflow-hidden flex max-h-[70vh]">
+            <Card className="p-0 shadow-xl overflow-hidden flex max-h-[70vh] md:bg-white/65 md:backdrop-blur-2xl md:backdrop-saturate-150 md:border-white/50 md:shadow-[0_16px_48px_-12px_rgba(15,23,42,0.18)]">
               {/* Left sidebar - Tabs */}
               <div className="w-1/3 lg:w-1/4 bg-gray-50/50 p-4 border-r border-gray-100 flex flex-col gap-1 overflow-y-auto relative">
                 {SERVICES_DATA.map((category) => (
