@@ -1,8 +1,14 @@
-[providers]
-  node = {}
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = ["npm install --legacy-peer-deps"]
 
 [phases.build]
-  cmds = ["npm install --legacy-peer-deps", "npm run build"]
+cmds = ["npm run build"]
 
 [start]
-  cmd = "NODE_ENV=production node dist/index.js"
+cmd = "npm start"
+
+[variables]
+NODE_ENV = "production"
