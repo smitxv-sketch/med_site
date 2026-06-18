@@ -24,7 +24,7 @@ const mockSpecialOffers: SpecialOffer[] = [
   },
   {
     id: 'students',
-    title: 'Учись студент и будь спокоен за свое здоровье, скидка 7% студентам',
+    title: 'Учись, студент, и будь спокоен за своё здоровье. Скидка 7% студентам',
     validUntil: '31 декабря 2026 года',
     image: 'https://vogazeta.ru/uploads/full_size_1663225811-dcc483ce2f009ced264ee0735acd1331.jpg'
   },

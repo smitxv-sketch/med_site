@@ -4,13 +4,14 @@ import { Calendar, ArrowRight, Bell } from 'lucide-react';
 import { Card } from '@/shared/ui/Card';
 import { Button } from '@/components/ui/button';
 import { EventRegistrationModal } from '@/widgets/events/ui/EventRegistrationModal';
+import { IMAGES } from '@/shared/config/images';
 
 const NEXT_EVENT = {
   title: 'VII научно-практическая конференция с международным участием',
   date: '21 мая',
   time: '09:30 - 18:00',
-  description: 'Репродуктивная медицина: краеугольные вопросы. Конференция для врачей акушеров-гинекологов, репродуктологов, андрологов-урологов и эмбриологов.',
-  image: '/img/conference.jpg'
+  description: 'Репродуктивная медицина: краеугольные вопросы. Конференция для акушеров-гинекологов, репродуктологов, андрологов-урологов и эмбриологов.',
+  image: IMAGES.conference
 };
 
 const NEWS = [
@@ -25,7 +26,7 @@ const NEWS = [
   {
     id: 2,
     title: 'Новый аппарат МРТ экспертного класса',
-    excerpt: 'Мы обновили парк диагностического оборудования. Теперь пациентам доступна МРТ диагностика на аппарате 3 Тесла.',
+    excerpt: 'Мы обновили парк диагностического оборудования. Теперь пациентам доступна МРТ-диагностика на аппарате 3 Тесла.',
     date: '10 апреля 2026',
     image: 'https://medsyst.ru/upload/resize_cache/iblock/093/03jlxbml57o28qnlmmisiys35xsxde65/1918_1079_1b1ef77ac61cd9f61e84e651589b06888/7e6abfc7a416e6c16ee90b41f65414bd.jpg',
     category: 'Оборудование'

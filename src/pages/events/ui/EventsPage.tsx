@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Calendar, MapPin, Clock, ArrowRight, Video } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import { IMAGES } from '../../../shared/config/images';
+
 const EVENTS = [
   {
     id: 'conference-7',
@@ -12,8 +14,8 @@ const EVENTS = [
     type: 'offline',
     location: 'Санкт-Петербург, Гранд Отель Европа',
     category: 'Конференция',
-    description: 'Конференция с международным участием для врачей акушеров-гинекологов, репродуктологов, андрологов-урологов и эмбриологов.',
-    image: '/img/conference.jpg',
+    description: 'Конференция с международным участием для акушеров-гинекологов, репродуктологов, андрологов-урологов и эмбриологов.',
+    image: IMAGES.conference,
     status: 'upcoming'
   },
   {

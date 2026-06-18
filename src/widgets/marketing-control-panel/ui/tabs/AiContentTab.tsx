@@ -89,7 +89,7 @@ export function AiContentTab() {
            <textarea
              value={rawPrompt}
              onChange={(e) => setRawPrompt(e.target.value)}
-             placeholder="Например: открываем новую услугу МРТ суставов, цена 4000 руб, врачи работают на томографе 1.5 Тесла. Нужно написать продающе."
+             placeholder="Например: открываем новую услугу МРТ-диагностики суставов, цена 4 000 руб., врачи работают на томографе 1,5 Тесла. Нужно написать продающе."
              className="bg-gray-50 border border-gray-200 text-gray-900 p-4 rounded-xl w-full h-32 resize-none focus:outline-none focus:ring-2 focus:ring-brand/50 transition-all text-sm leading-relaxed"
            />
         </div>

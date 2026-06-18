@@ -53,7 +53,7 @@ const renderTags = (
             key={i}
             className={`inline-flex items-center px-3 py-1.5 ${isDarkBg ? "bg-white/80 backdrop-blur-sm text-gray-800 text-xs rounded-full border-gray-100 font-semibold" : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-brand transition-colors cursor-pointer text-sm rounded-xl border-gray-200 font-medium"} border`}
           >
-            {item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}
+            {item}
           </span>
         ))}
         {!isDarkBg && showAllServicesFor !== dir.id && dir.items.length > 3 && (
@@ -258,8 +258,7 @@ export const DirectionsVariantA = ({
                               key={i}
                               className="inline-flex items-center px-3 py-1.5 bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-brand transition-colors cursor-pointer text-sm rounded-xl border border-gray-200 font-medium"
                             >
-                              {item.charAt(0).toUpperCase() +
-                                item.slice(1).toLowerCase()}
+                              {item}
                             </span>
                           ))}
                           {showAllServicesFor !== dir.id &&

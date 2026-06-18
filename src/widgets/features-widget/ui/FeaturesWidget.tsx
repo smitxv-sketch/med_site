@@ -25,7 +25,7 @@ const MOCK_FEATURES: FeatureItem[] = [
   {
     id: 'f4',
     title: 'Забота и эмпатия',
-    description: 'Индивидуальный подход без спешки. Мы создаем комфортную остановку для каждого пациента.',
+    description: 'Индивидуальный подход без спешки. Мы создаем комфортную обстановку для каждого пациента.',
     iconName: 'Heart'
   },
   {
@@ -52,7 +52,7 @@ interface FeaturesWidgetProps {
 
 export function FeaturesWidget({
   title = 'Наши преимущества',
-  subtitle = 'Почему пациенты доверяют нам свое здоровье',
+  subtitle = 'Почему пациенты доверяют нам своё здоровье',
   desktopVariant = 'bento',
   mobileVariant = 'stack',
   variantOverride = '-',

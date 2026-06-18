@@ -66,7 +66,7 @@ function ExpandableList({ items, initialCount = 4, renderItem, showTimeline = fa
           onClick={() => setIsExpanded(!isExpanded)}
           className="mt-6 text-teal-600 font-medium hover:text-teal-700 transition-colors flex items-center gap-1 text-sm"
         >
-          {isExpanded ? 'Свернуть' : `Показать еще (${items.length - initialCount})`}
+          {isExpanded ? 'Свернуть' : `Показать ещё (${items.length - initialCount})`}
           {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>
       )}
@@ -296,7 +296,7 @@ export function DoctorPage() {
               {doctor.duration && (
                 <div className="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 md:px-4 md:py-2.5 rounded-lg md:rounded-xl border border-gray-100 font-medium text-gray-700 shrink-0">
                   <Clock className="w-4 h-4 text-gray-400 shrink-0" />
-                  <span className="truncate">Прием {doctor.duration}</span>
+                  <span className="truncate">Приём {doctor.duration}</span>
                 </div>
               )}
             </div>
@@ -339,7 +339,7 @@ export function DoctorPage() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
               <h2 className="font-bold text-gray-900 text-xl flex items-center gap-3 break-words min-w-0">
                 <Building2 className="w-6 h-6 text-teal-600 shrink-0" />
-                <span className="truncate">Записаться на прием</span>
+                <span className="truncate">Записаться на приём</span>
               </h2>
               <Button 
                 as={Link}
@@ -518,7 +518,7 @@ export function DoctorPage() {
         <div className="flex flex-col pl-2">
           {doctor.price ? (
             <>
-              <span className="text-[10px] uppercase tracking-wider text-gray-500 font-bold">Прием от</span>
+              <span className="text-[10px] uppercase tracking-wider text-gray-500 font-bold">Приём от</span>
               <span className="text-lg font-black text-gray-900 leading-none mt-1">
                 <SmartPrice price={doctor.price} hidePrefix className="!font-black text-lg" />
               </span>

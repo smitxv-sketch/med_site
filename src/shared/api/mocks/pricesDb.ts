@@ -13,7 +13,7 @@ export type PriceCategory = {
 
 export const PRICING_TABS = [
   { id: 'all', label: 'Все услуги' },
-  { id: 'consultation', label: 'Прием врачей' },
+  { id: 'consultation', label: 'Приём врачей' },
   { id: 'diagnostics', label: 'Диагностика' },
   { id: 'programs', label: 'Комплексные программы' },
   { id: 'treatment', label: 'Лечение' }
@@ -50,8 +50,16 @@ export const pricesDb: PriceCategory[] = [
     name: 'Гастроэнтерология',
     tabId: 'consultation',
     items: [
-      { id: 'g1', name: 'Прием врача-гастроэнтеролога', price: '3 500 ₽' },
-      { id: 'g2', name: 'Повторный прием врача-гастроэнтеролога', price: '3 000 ₽' },
+      { id: 'g1', name: 'Приём врача-гастроэнтеролога', price: '3 500 ₽' },
+      { id: 'g2', name: 'Повторный приём врача-гастроэнтеролога', price: '3 000 ₽' },
+    ]
+  },
+  {
+    id: 'gynecology',
+    name: 'Гинекология',
+    tabId: 'consultation',
+    items: [
+      { id: 'gyn1', name: 'Ожидайте загрузки...', price: '' }
     ]
   },
   {
@@ -59,11 +67,11 @@ export const pricesDb: PriceCategory[] = [
     name: 'Кардиология',
     tabId: 'consultation',
     items: [
-      { id: 'c1', name: 'Прием врача-кардиолога (главного специалиста Клиники) для коррекции терапии', price: '7 500 ₽' },
-      { id: 'c2', name: 'Прием врача-кардиолога (главного специалиста Клиники)', price: '8 800 ₽' },
-      { id: 'c3', name: 'Прием врача-кардиолога (ведущего специалиста Клиники) для коррекции терапии', price: '5 900 ₽' },
-      { id: 'c4', name: 'Прием врача-кардиолога (ведущего специалиста Клиники)', price: '6 700 ₽' },
-      { id: 'c5', name: 'Прием врача-кардиолога', price: '5 800 ₽' }
+      { id: 'c1', name: 'Приём врача-кардиолога (главного специалиста Клиники) для коррекции терапии', price: '7 500 ₽' },
+      { id: 'c2', name: 'Приём врача-кардиолога (главного специалиста Клиники)', price: '8 800 ₽' },
+      { id: 'c3', name: 'Приём врача-кардиолога (ведущего специалиста Клиники) для коррекции терапии', price: '5 900 ₽' },
+      { id: 'c4', name: 'Приём врача-кардиолога (ведущего специалиста Клиники)', price: '6 700 ₽' },
+      { id: 'c5', name: 'Приём врача-кардиолога', price: '5 800 ₽' }
     ]
   },
   {
@@ -79,7 +87,7 @@ export const pricesDb: PriceCategory[] = [
     name: 'Колопроктология',
     tabId: 'consultation',
     items: [
-      { id: 'cp1', name: 'Прием врача-колопроктолога', price: '4 500 ₽' }
+      { id: 'cp1', name: 'Приём врача-колопроктолога', price: '4 500 ₽' }
     ]
   },
   {
@@ -95,7 +103,7 @@ export const pricesDb: PriceCategory[] = [
     name: 'Неврология',
     tabId: 'consultation',
     items: [
-      { id: 'n1', name: 'Прием врача-невролога', price: '4 000 ₽' }
+      { id: 'n1', name: 'Приём врача-невролога', price: '4 000 ₽' }
     ]
   },
   {
@@ -103,7 +111,7 @@ export const pricesDb: PriceCategory[] = [
     name: 'Нефрология',
     tabId: 'consultation',
     items: [
-      { id: 'nph1', name: 'Прием врача-нефролога', price: '4 200 ₽' }
+      { id: 'nph1', name: 'Приём врача-нефролога', price: '4 200 ₽' }
     ]
   },
   {
@@ -111,7 +119,7 @@ export const pricesDb: PriceCategory[] = [
     name: 'Онкология',
     tabId: 'consultation',
     items: [
-      { id: 'o1', name: 'Прием врача-онколога', price: '5 000 ₽' }
+      { id: 'o1', name: 'Приём врача-онколога', price: '5 000 ₽' }
     ]
   },
   {

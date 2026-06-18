@@ -111,7 +111,7 @@ export function Footer() {
               <li><Link to="/about" className="text-gray-600 font-medium hover:text-brand transition-colors">О клинике</Link></li>
               <li><Link to="/doctors" className="text-gray-600 font-medium hover:text-brand transition-colors">Наши врачи</Link></li>
               <li><Link to="/vacancies" className="text-gray-600 font-medium hover:text-brand transition-colors">Вакансии</Link></li>
-              <li><Link to="/demo" className="text-gray-600 font-medium hover:text-brand transition-colors">Демо (Все блоки)</Link></li>
+              <li><Link to="/demo" className="text-gray-600 font-medium hover:text-brand transition-colors">Демо (все блоки)</Link></li>
               <li><Link to="/reviews" className="text-gray-600 font-medium hover:text-brand transition-colors">Отзывы</Link></li>
               <li><Link to="/contacts" className="text-gray-600 font-medium hover:text-brand transition-colors">Контакты</Link></li>
             </ul>

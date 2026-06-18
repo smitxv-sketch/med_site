@@ -162,7 +162,7 @@ export const DoctorProfileModal: React.FC<DoctorProfileModalProps> = ({ doctor, 
                     {doctor.duration && (
                       <div className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-gray-200/60 shadow-sm">
                         <Clock className="w-4 h-4 text-gray-400" />
-                        Прием {doctor.duration}
+                        Приём {doctor.duration}
                       </div>
                     )}
                   </div>
@@ -172,12 +172,12 @@ export const DoctorProfileModal: React.FC<DoctorProfileModalProps> = ({ doctor, 
               {/* Main Content */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
                 
-                {/* Запись на прием - Справа на Desktop, Сверху на Mobile */}
+                {/* Запись на приём - Справа на Desktop, Сверху на Mobile */}
                 <div className="lg:col-span-5 xl:col-span-4 lg:order-2 lg:sticky lg:top-8 z-10">
                   <Card className="p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 bg-white rounded-2xl w-full">
                     <h3 className="font-bold text-gray-900 mb-5 text-lg flex items-center gap-2">
                       <Building2 className="w-5 h-5 text-blue-600" />
-                      Записаться на прием
+                      Записаться на приём
                     </h3>
                     <DoctorSchedule 
                       slots={slots}

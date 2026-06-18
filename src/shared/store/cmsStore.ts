@@ -35,7 +35,7 @@ export const DEFAULT_PAGE_BLOCKS: PageBlock[] = [
   { id: 'offers-1', type: 'SpecialOffersWidget' },
   { id: 'directions-1', type: 'DirectionsWidget' },
   { id: 'doctors-1', type: 'DoctorsWidget' },
-  { id: 'reviews-1', type: 'ReviewsWidget' },
+  { id: 'reviews-1', type: 'ReviewsWidget', content: { limit: 3 } },
 ];
 
 const MOCK_GLOBAL_SERVICE_LAYOUT: PageBlock[] = [
@@ -80,10 +80,10 @@ const MOCK_SERVICES: ServiceEntry[] = [
     id: 'srv-1',
     slug: 'lechenie-kariesa',
     title: 'Лечение кариеса под микроскопом',
-    subtitle: 'Безболезненное удаление пораженных тканей и постановка фотополимерной пломбы.',
+    subtitle: 'Безболезненное удаление поражённых тканей и постановка фотополимерной пломбы.',
     price: 4500,
     featuresTitle: 'Почему выбирают нас для лечения кариеса',
-    faqTitle: 'Вопросы о: Лечение кариеса под микроскопом'
+    faqTitle: 'Частые вопросы о лечении кариеса под микроскопом'
     // customLayout не задан. Будет использоваться ГЛОБАЛЬНЫЙ шаблон!
   },
   {

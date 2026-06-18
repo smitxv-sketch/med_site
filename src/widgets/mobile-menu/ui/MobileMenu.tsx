@@ -288,7 +288,7 @@ export function MobileMenu() {
                 onClick={closeMenu}
                 className="flex items-center justify-center w-full py-3.5 bg-brand text-brand-fg font-bold rounded-xl text-[17px] shadow-sm active:scale-[0.98] transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
               >
-                Записаться на прием
+                Записаться на приём
               </Link>
               <a
                 href="tel:+73517788887"

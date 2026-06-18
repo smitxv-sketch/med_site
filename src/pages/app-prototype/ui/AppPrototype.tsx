@@ -185,7 +185,7 @@ export function AppPrototype() {
           {activeScreen === 'appointments' && (
             <div className="h-full bg-white relative z-0 flex flex-col pt-10">
               <div className="p-4 flex flex-col justify-center sticky top-0 bg-white z-10 shrink-0">
-                <h2 className="text-xl font-bold text-gray-900 pb-2">Запись на прием</h2>
+                <h2 className="text-xl font-bold text-gray-900 pb-2">Запись на приём</h2>
               </div>
               <div className="flex-1 overflow-y-auto w-full px-2 pb-10">
                 <div className="transform-gpu origin-top">

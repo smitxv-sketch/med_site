@@ -12,13 +12,14 @@ interface VariantSelectorProps {
   variants: Variant[];
   currentVariant: string;
   onVariantChange: (id: string) => void;
+  forceShow?: boolean;
 }
 
-export function VariantSelector({ variants, currentVariant, onVariantChange }: VariantSelectorProps) {
+export function VariantSelector({ variants, currentVariant, onVariantChange, forceShow }: VariantSelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
   const isDevMode = useUISettingsStore(state => state.isDevMode);
 
-  if (!isDevMode) return null;
+  if (!isDevMode && !forceShow) return null;
 
   return (
     <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 flex items-center gap-2">

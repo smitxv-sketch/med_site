@@ -57,7 +57,7 @@ export const UtmTab = () => { return (
                     <div className="grid grid-cols-2 gap-2 font-normal">
                        <div className="bg-gray-50 border p-2 rounded text-center">
                          <div className="text-[10px] text-gray-500 font-bold mb-1">День (09:00 - 18:00)</div>
-                         <div className="text-[11px] font-medium text-gray-900 line-clamp-1">Запись на прием</div>
+                         <div className="text-[11px] font-medium text-gray-900 line-clamp-1">Запись на приём</div>
                        </div>
                        <div className="bg-blue-900 border-blue-800 text-white p-2 rounded text-center">
                          <div className="text-[10px] text-blue-300 font-bold mb-1">Ночь (18:00 - 09:00)</div>

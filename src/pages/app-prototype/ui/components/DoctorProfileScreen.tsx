@@ -176,11 +176,11 @@ export function DoctorProfileScreen({ doctor, onBack, onSlotSelect, city = 'chel
         {/* Main Content */}
         <div className="flex flex-col gap-4">
           
-          {/* 1. Записаться на прием */}
+          {/* 1. Записаться на приём */}
           <Card className="p-4 shadow-sm border border-gray-100">
             <h3 className="font-bold text-gray-900 mb-4 text-[15px] flex items-center gap-2">
               <Building2 className="w-4 h-4 text-brand" />
-              Записаться на прием
+              Записаться на приём
             </h3>
             <div className="-mx-2">
             <DoctorSchedule 

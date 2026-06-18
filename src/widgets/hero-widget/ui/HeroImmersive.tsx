@@ -13,7 +13,7 @@ const slides = [
     title: 'Забота о вашем здоровье',
     subtitle: 'Многопрофильная клиника для всей семьи',
     image: 'https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=800&q=80',
-    cta: 'Записаться на прием',
+    cta: 'Записаться на приём',
   },
   {
     id: 2,

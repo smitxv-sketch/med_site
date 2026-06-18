@@ -16,6 +16,7 @@ import { VariantSelector } from "../../../shared/ui/VariantSelector";
 import { useUISettingsStore } from "../../../shared/store/uiSettingsStore";
 import { Button } from "@/shared/ui/Button";
 import { Card } from "@/shared/ui/Card";
+import { DoctorsWidget } from "@/widgets/doctors-widget/ui/DoctorsWidget";
 
 const renderPlatformBadge = (platform?: string) => {
   switch (platform) {
@@ -64,13 +65,15 @@ export function ServicePage() {
   const { serviceId } = useParams<{ serviceId: string }>();
   const isDevMode = useUISettingsStore((state) => state.isDevMode);
 
-  // A = Classic, B = Lebedev Immersive, C = Bento Grid, D = Pro Clinic Layout
-  const [heroMode, setHeroMode] = useState<"A" | "B" | "C" | "D">("D");
+  // D = Pro Clinic (С сайдбаром), E = Упрощенный (Без сайдбара), F = Классический (с отзывами)
+  const [heroMode, setHeroMode] = useState<"D" | "E" | "F">("F");
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [activeSection, setActiveSection] = useState<string>("about");
 
-  // Force 'A' if dev mode is off
-  const activeHeroMode = isDevMode ? heroMode : "D";
+  const activeHeroMode = heroMode;
+
+  // Fetch mock data based on URL parameter
+  const serviceData = serviceId ? servicesDb[serviceId] : null;
 
   // Intersection Observer for sticky nav highlighting
   React.useEffect(() => {
@@ -85,7 +88,7 @@ export function ServicePage() {
       { rootMargin: "-100px 0px -50% 0px" },
     );
 
-    const sections = ["about", "prices", "reviews", "articles", "faq"];
+    const sections = ["about", "prices", "doctors", "reviews", "articles", "faq"];
     sections.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
@@ -101,9 +104,6 @@ export function ServicePage() {
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
-
-  // Fetch mock data based on URL parameter
-  const serviceData = serviceId ? servicesDb[serviceId] : null;
 
   // If service not found in our mock DB, show 404 or redirect
   if (!serviceData) {
@@ -156,369 +156,173 @@ export function ServicePage() {
         >
           <VariantSelector
             variants={[
-              { id: "A", label: "Классический" },
-              { id: "B", label: "Иммерсивный" },
-              { id: "C", label: "Bento Grid" },
-              { id: "D", label: "Pro Clinic" },
+              { id: "D", label: "С сайдбаром" },
+              { id: "E", label: "Одна колонка" },
+              { id: "F", label: "С отзывами вначале" },
             ]}
             currentVariant={heroMode}
-            onVariantChange={(id) => setHeroMode(id as "A" | "B" | "C" | "D")}
+            onVariantChange={(id) => setHeroMode(id as "D" | "E" | "F")}
+            forceShow={true}
           />
 
-          {activeHeroMode === "D" && (
-            // VARIANT D: PRO CLINIC - Inspired by competitor but enhanced. Left sidebar, strong advantages, clear actions.
-            <div
-              className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 xl:gap-12 relative"
-              id="about"
-            >
-              {/* Left Sidebar Layout */}
+          <div
+            className={`grid grid-cols-1 gap-6 relative ${activeHeroMode === "D" ? "lg:grid-cols-4 lg:gap-8 xl:gap-12" : ""}`}
+            id="about"
+          >
+            {/* Left Sidebar Layout */}
+            {activeHeroMode === "D" && (
               <div className="hidden lg:block col-span-1">
                 <div className="sticky top-24 bg-teal-50/30 rounded-2xl p-4 border border-teal-100">
                   <div className="text-sm font-bold text-teal-900 mb-4 px-2 uppercase tracking-wider">
                     Направления
                   </div>
-                  <ul className="space-y-1">
+                  <ul className="space-y-1 mb-8">
                     <li>
                       <button className="w-full text-left px-3 py-2 rounded-lg text-sm bg-white font-semibold text-teal-700 shadow-sm border border-teal-100">
-                        Акушерство и гинекология
+                        {serviceData.title}
                       </button>
                     </li>
-                    <li>
-                      <button className="w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-white hover:text-teal-600 transition-colors">
-                        Детский гинеколог
-                      </button>
-                    </li>
-                    <li>
-                      <button className="w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-white hover:text-teal-600 transition-colors">
-                        Диагностика в гинекологии
-                      </button>
-                    </li>
-                    <li>
-                      <button className="w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-white hover:text-teal-600 transition-colors">
-                        Лечение заболеваний
-                      </button>
-                    </li>
-                    <li>
-                      <button className="w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-white hover:text-teal-600 transition-colors">
-                        Эстетическая гинекология
-                      </button>
-                    </li>
+                    {serviceData.subDirections?.map((dir, idx) => (
+                      <li key={idx}>
+                        <button className="w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-white hover:text-teal-600 transition-colors">
+                          {dir}
+                        </button>
+                      </li>
+                    ))}
                   </ul>
+
+                  {/* Promo Banner inside Sidebar */}
+                  <div className="bg-gradient-to-br from-brand/10 to-brand/5 rounded-xl p-4 border border-brand/20 mb-6">
+                    <div className="text-xs font-bold text-brand uppercase tracking-wider mb-2">Акция</div>
+                    <div className="font-semibold text-gray-900 text-sm mb-2 leading-tight">Скидка 15% на первичный приём при записи онлайн</div>
+                    <Button as={Link} to="/promotions" variant="outline" size="sm" className="w-full text-xs bg-white border-brand/30 text-brand py-1.5 h-8">
+                      Подробнее
+                    </Button>
+                  </div>
+
+                  {/* Quick Helps */}
+                  <div className="px-2">
+                    <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Запись на приём</div>
+                    <a href="tel:+73517788887" className="block text-lg font-bold text-gray-900 hover:text-brand transition-colors mb-1">
+                      +7 (351) 778-88-87
+                    </a>
+                    <div className="text-xs text-gray-500 mb-4">Ежедневно с 8:00 до 20:00</div>
+                    <Button as={Link} to="/booking" variant="primary" className="w-full text-sm py-2 h-10 shadow-sm shadow-brand/20">
+                      Записаться онлайн
+                    </Button>
+                  </div>
                 </div>
               </div>
+            )}
 
-              <div className="lg:col-span-3 flex flex-col min-h-[calc(100svh-80px)] lg:min-h-0">
+            {(activeHeroMode === "D" || activeHeroMode === "E") && (
+              <div className={`${activeHeroMode === "D" ? "lg:col-span-3" : "w-full"} flex flex-col min-h-[calc(100svh-80px)] lg:min-h-0`}>
                 <div className="flex-1 bg-gradient-to-r from-teal-50 to-emerald-50 sm:rounded-app -mx-4 sm:mx-0 overflow-hidden relative sm:shadow-sm sm:border border-teal-100 mb-6 flex flex-col md:block">
-                  <div className="flex-1 flex flex-col md:grid md:grid-cols-2 lg:items-center h-full">
-                    <div className="p-5 sm:p-10 relative z-10 flex flex-col justify-center order-2 md:order-1 flex-1 md:flex-none">
-                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-teal-900 tracking-tight leading-[1.15] mb-4">
-                        {serviceData.title}
-                      </h1>
-                      <p className="text-base md:text-lg text-teal-800/80 leading-relaxed font-medium mb-6 md:mb-8 line-clamp-4 md:line-clamp-none">
+                    <div className="flex-1 flex flex-col md:grid md:grid-cols-2 lg:items-center h-full">
+                      <div className="p-5 sm:p-10 relative z-10 flex flex-col justify-center order-2 md:order-1 flex-1 md:flex-none">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-teal-900 tracking-tight leading-[1.15] mb-4">
+                          {serviceData.title}
+                        </h1>
+                        <p className="text-base md:text-lg text-teal-800/80 leading-relaxed font-medium mb-6 md:mb-8 line-clamp-4 md:line-clamp-none">
+                          {serviceData.description}
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 relative z-20 mt-auto md:mt-0">
+                          <Button
+                            as={Link}
+                            to="/booking"
+                            variant="primary"
+                            size="lg"
+                            className="w-full sm:w-auto shadow-lg shadow-teal-500/25"
+                          >
+                            Записаться онлайн
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="relative aspect-[4/3] md:aspect-auto md:h-full order-1 md:order-2 shrink-0 md:shrink">
+                        {serviceData.heroImage && (
+                          <img
+                            src={serviceData.heroImage}
+                            alt="Врачи"
+                            className="absolute inset-0 w-full h-full object-cover md:rounded-l-[3rem] shadow-2xl"
+                          />
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-emerald-50/90 via-emerald-50/40 md:via-teal-50/20 to-transparent md:bg-none" />
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            )}
+
+            {activeHeroMode === "F" && (
+              <div className="w-full pt-4 sm:pt-6 mb-8">
+                <h1 className="text-3xl sm:text-5xl lg:text-[46px] font-extrabold text-[#1a1a1a] tracking-tight leading-[1.1] mb-6 sm:mb-10">
+                  {serviceData.title}
+                </h1>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+                  {/* Left Column: Text & CTA */}
+                  <div className="lg:col-span-7 flex flex-col">
+                      <p className="text-base sm:text-[17px] text-gray-600 leading-[1.6] mb-5">
                         {serviceData.description}
                       </p>
-                      <div className="flex flex-col sm:flex-row gap-4 relative z-20 mt-auto md:mt-0">
+                      <p className="text-base sm:text-[17px] text-gray-600 leading-[1.6] mb-8">
+                        В нашей клинике любая женщина найдет своего врача гинеколога под любую из своих задач и для любого периода. Прием женщин ведут врачи с детского возраста и до постклиматерического периода. На всем протяжении жизни, на любом ее этапе - наши гинекологи рядом.
+                      </p>
+                      <div className="pt-2">
                         <Button
                           as={Link}
                           to="/booking"
-                          variant="primary"
-                          size="lg"
-                          className="w-full sm:w-auto shadow-lg shadow-teal-500/25"
+                          className="w-full sm:w-auto font-bold uppercase tracking-wide bg-[#3e9f3e] hover:bg-[#348834] active:bg-[#2d762d] text-white border-transparent text-[13px] px-8 py-3 rounded-sm shadow-sm transition-colors duration-200"
                         >
-                          Записаться онлайн
+                          ЗАПИСАТЬСЯ
                         </Button>
                       </div>
-                    </div>
-                    <div className="relative aspect-[4/3] md:aspect-auto md:h-full order-1 md:order-2 shrink-0 md:shrink">
-                      {serviceData.heroImage && (
-                        <img
-                          src={serviceData.heroImage}
-                          alt="Врачи"
-                          className="absolute inset-0 w-full h-full object-cover md:rounded-l-[3rem] shadow-2xl"
-                        />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-emerald-50/90 via-emerald-50/40 md:via-teal-50/20 to-transparent md:bg-none" />
-                    </div>
                   </div>
-                </div>
-
-                {/* Enhanced Advantages Row */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-6">
-                  <div className="bg-white rounded-2xl p-4 md:p-5 shadow-sm border border-gray-100 hover:border-teal-200 transition-colors flex flex-col gap-3">
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-indigo-100 to-indigo-50 flex items-center justify-center shrink-0">
-                      <span className="text-xl md:text-2xl">🔬</span>
-                    </div>
-                    <span className="text-xs md:text-sm font-semibold text-gray-800 leading-tight">
-                      Современное оборудование
-                    </span>
-                  </div>
-                  <div className="bg-white rounded-2xl p-4 md:p-5 shadow-sm border border-gray-100 hover:border-teal-200 transition-colors flex flex-col gap-3">
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center shrink-0">
-                      <span className="text-xl md:text-2xl">🏆</span>
-                    </div>
-                    <span className="text-xs md:text-sm font-semibold text-gray-800 leading-tight">
-                      Опытные врачи высшей категории
-                    </span>
-                  </div>
-                  <div className="bg-white rounded-2xl p-4 md:p-5 shadow-sm border border-gray-100 hover:border-teal-200 transition-colors flex flex-col gap-3">
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-rose-100 to-rose-50 flex items-center justify-center shrink-0">
-                      <span className="text-xl md:text-2xl">⚡️</span>
-                    </div>
-                    <span className="text-xs md:text-sm font-semibold text-gray-800 leading-tight">
-                      Быстрые результаты анализов
-                    </span>
-                  </div>
-                  <div className="bg-white rounded-2xl p-4 md:p-5 shadow-sm border border-gray-100 hover:border-teal-200 transition-colors flex flex-col gap-3">
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-teal-100 to-teal-50 flex items-center justify-center shrink-0">
-                      <span className="text-xl md:text-2xl">📅</span>
-                    </div>
-                    <span className="text-xs md:text-sm font-semibold text-gray-800 leading-tight">
-                      Запись на ближайшее время
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeHeroMode === "A" && (
-            // VARIANT A: CLASSIC - Immersive on mobile to fit 100svh, structured on desktop
-            <div>
-              <div className="flex flex-col lg:grid lg:grid-cols-12 gap-0 lg:gap-12 lg:items-center min-h-[calc(100svh-80px)] lg:min-h-0 relative rounded-2xl lg:rounded-none overflow-hidden lg:overflow-visible">
-                {/* Image (Background on mobile, separate column on desktop) */}
-                <div className="absolute inset-0 lg:relative lg:col-span-5 order-1 lg:order-2 z-0 h-full w-full">
-                  {serviceData.heroImage && (
-                    <div className="w-full h-full lg:aspect-[4/5] lg:rounded-app overflow-hidden shadow-none lg:shadow-sm">
-                      <img
-                        src={serviceData.heroImage}
-                        alt=""
-                        className="w-full h-full object-cover"
-                      />
-                      {/* Gradient overlay for mobile only */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent lg:hidden" />
-                    </div>
-                  )}
-                </div>
-
-                {/* Text Content */}
-                <div className="relative z-10 lg:col-span-7 order-2 lg:order-1 flex flex-col justify-end lg:justify-center flex-1 p-5 sm:p-8 lg:p-0">
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white lg:text-gray-900 tracking-tight mb-4 lg:mb-6 leading-tight">
-                    {serviceData.title}
-                  </h1>
-                  <p className="text-base sm:text-lg text-white/90 lg:text-gray-600 leading-relaxed mb-6 lg:mb-8 line-clamp-3 lg:line-clamp-none">
-                    {serviceData.description}
-                  </p>
-
-                  <div className="flex w-full sm:w-auto mt-auto lg:mt-0 lg:mb-10">
-                    <Button
-                      as={Link}
-                      to="/booking"
-                      variant="primary"
-                      size="lg"
-                      className="w-full sm:w-auto shadow-lg shadow-teal-500/20"
-                    >
-                      Записаться на прием
-                    </Button>
-                  </div>
-
-                  {/* Programs - Hidden on mobile immersive view to save space, shown on desktop */}
-                  {serviceData.programs && serviceData.programs.length > 0 && (
-                    <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
-                      {serviceData.programs.map((prog, idx) => (
-                        <Card
-                          key={idx}
-                          hoverable
-                          className="p-5 cursor-pointer group flex flex-col justify-between"
-                        >
-                          <div>
-                            <h3 className="text-gray-900 font-bold mb-2 group-hover:text-teal-600 transition-colors">
-                              {prog.title}
-                            </h3>
-                            <p className="text-gray-600 text-sm leading-relaxed">
-                              {prog.description}
-                            </p>
+                  
+                  {/* Right Column: Stats & Reviews ratings */}
+                  <div className="lg:col-span-5 flex flex-col lg:pl-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-4 mb-8">
+                        <div className="flex flex-col gap-1 text-center sm:text-left">
+                          <div className="text-[44px] leading-none font-bold text-[#1a1a1a] mb-1">5.0</div>
+                          <div className="text-[15px] sm:text-[13px] text-[#1a1a1a] font-medium leading-[1.3] max-w-[150px] mx-auto sm:mx-0">
+                            На основе более<br/>2534 отзывов
                           </div>
-                          {prog.price && (
-                            <div className="mt-4 text-teal-700 font-bold text-lg">
-                              {prog.price}
-                            </div>
-                          )}
-                        </Card>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Mobile Programs - placed below the immersive hero */}
-              <div className="lg:hidden mt-6 px-4">
-                {serviceData.programs && serviceData.programs.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {serviceData.programs.map((prog, idx) => (
-                      <Card
-                        key={idx}
-                        hoverable
-                        className="p-5 cursor-pointer group flex flex-col justify-between"
-                      >
-                        <div>
-                          <h3 className="text-gray-900 font-bold mb-2 group-hover:text-teal-600 transition-colors">
-                            {prog.title}
-                          </h3>
-                          <p className="text-gray-600 text-sm leading-relaxed">
-                            {prog.description}
-                          </p>
                         </div>
-                        {prog.price && (
-                          <div className="mt-4 text-teal-700 font-bold text-lg">
-                            {prog.price}
+                        <div className="flex flex-col gap-1 text-center sm:text-left">
+                          <div className="text-[44px] leading-none font-bold text-[#1a1a1a] mb-1">5.0</div>
+                          <div className="text-[15px] sm:text-[13px] text-[#1a1a1a] font-medium leading-[1.3] max-w-[150px] mx-auto sm:mx-0">
+                            Средний рейтинг<br/>врачей на <span className="text-[#005bff]">prodoctorov</span>
                           </div>
-                        )}
-                      </Card>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {activeHeroMode === "B" && (
-            // VARIANT B: LEBEDEV IMMERSIVE - Brutalist, clean, true immersive (no floating cards)
-            <div className="w-full flex flex-col gap-6 sm:gap-8">
-              {/* Hero Image with Text Overlay */}
-              <div className="relative w-full aspect-[4/3] sm:aspect-[21/9] rounded-app overflow-hidden shadow-sm flex flex-col">
-                {serviceData.heroImage && (
-                  <img
-                    src={serviceData.heroImage}
-                    alt={serviceData.title}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                )}
-                {/* Dark gradient overlay for text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-10 lg:p-12">
-                  {/* Content directly on the image */}
-                  <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight mb-4 max-w-4xl relative z-10">
-                    {serviceData.title}
-                  </h1>
-                  <p className="text-lg sm:text-xl text-white/90 leading-relaxed mb-8 max-w-2xl font-medium relative z-10">
-                    {serviceData.description}
-                  </p>
-                  <div className="relative z-10">
-                    <Button
-                      as={Link}
-                      to="/booking"
-                      variant="primary"
-                      size="lg"
-                      className="w-full sm:w-auto"
-                    >
-                      Записаться на прием
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Programs - Clean, brutalist grid below */}
-              {serviceData.programs && serviceData.programs.length > 0 && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {serviceData.programs.map((prog, idx) => (
-                    <Card
-                      key={idx}
-                      className="bg-gray-50 p-6 hover:bg-gray-100 transition-colors cursor-pointer flex flex-col justify-between"
-                    >
-                      <div>
-                        <h3 className="text-gray-900 font-bold text-xl mb-2">
-                          {prog.title}
-                        </h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                          {prog.description}
-                        </p>
-                      </div>
-                      {prog.price && (
-                        <div className="mt-6 text-gray-900 font-black text-lg">
-                          {prog.price}
                         </div>
-                      )}
-                    </Card>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
+                    </div>
 
-          {activeHeroMode === "C" && (
-            // VARIANT C: BENTO GRID - Modern, modular, highly structured
-            <div>
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6">
-                {/* Main Title Card */}
-                <Card className="md:col-span-7 lg:col-span-8 bg-teal-50/50 border-teal-100 p-6 sm:p-10 flex flex-col justify-center relative rounded-app">
-                  <div className="relative z-10">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 tracking-tight mb-4">
-                      {serviceData.title}
-                    </h1>
-                    <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-8 max-w-2xl">
-                      {serviceData.description}
-                    </p>
-                    <div>
-                      <Button
-                        as={Link}
-                        to="/booking"
-                        variant="primary"
-                        size="lg"
-                        className="w-full sm:w-auto"
-                      >
-                        Записаться на прием
-                      </Button>
+                    <div className="mt-auto bg-gray-50 rounded-xl p-4 flex flex-wrap lg:flex-nowrap items-center justify-center sm:justify-between gap-4 border border-gray-100">
+                      <div className="flex items-center gap-2 border-r border-gray-200 pr-4 last:border-0 last:pr-0">
+                          {renderPlatformBadge("yandex")} <span className="text-[13px] text-gray-700 font-semibold ml-1">Карты</span> <span className="font-extrabold text-[#1a1a1a] ml-1">5.0</span>
+                      </div>
+                      <div className="flex items-center gap-2 border-r border-gray-200 pr-4 last:border-0 last:pr-0">
+                          {renderPlatformBadge("2gis")} <span className="text-[13px] text-gray-700 font-semibold ml-1">2GIS</span> <span className="font-extrabold text-[#1a1a1a] ml-1">4.8</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                          <span className="text-[#005bff] font-bold text-[13px] ml-1">prodoctorov</span> <span className="font-extrabold text-[#1a1a1a] ml-1">5.0</span>
+                      </div>
                     </div>
                   </div>
-                  {/* Decorative background element */}
-                  <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-teal-200/40 rounded-full blur-3xl pointer-events-none" />
-                </Card>
-
-                {/* Image Card */}
-                <Card className="md:col-span-5 lg:col-span-4 aspect-[4/3] md:aspect-auto md:min-h-[300px] rounded-app relative p-0 border-0 flex flex-col">
-                  {serviceData.heroImage && (
-                    <img
-                      src={serviceData.heroImage}
-                      alt=""
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  )}
-                </Card>
-
-                {/* Programs Cards */}
-                {serviceData.programs?.map((prog, idx) => (
-                  <Card
-                    key={idx}
-                    hoverable
-                    className="md:col-span-6 lg:col-span-4 p-6 sm:p-8 hover:border-teal-100 group flex flex-col justify-between"
-                  >
-                    <div>
-                      <h3 className="text-gray-900 font-bold text-xl mb-3 group-hover:text-teal-600 transition-colors">
-                        {prog.title}
-                      </h3>
-                      <p className="text-gray-500 text-sm leading-relaxed">
-                        {prog.description}
-                      </p>
-                    </div>
-                    {prog.price && (
-                      <div className="mt-6 text-teal-700 font-bold text-xl">
-                        {prog.price}
-                      </div>
-                    )}
-                  </Card>
-                ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </motion.div>
 
-        {/* Sticky In-Page Navigation (Pill Menu) */}
+          {/* Sticky In-Page Navigation (Pill Menu) */}
         <div className="sticky top-16 md:top-20 z-40 bg-white/80 backdrop-blur-md py-3 md:py-4 mb-8 border-b border-gray-100 -mx-4 px-4 md:mx-0 overflow-x-auto hide-scrollbar">
           <div className="flex items-center gap-2 min-w-max md:justify-center md:min-w-0">
-            {["about", "prices", "reviews", "articles", "faq"].map(
+            {["about", "prices", "doctors", "reviews", "articles", "faq"].map(
               (section) => {
                 const labels: Record<string, string> = {
                   about: "Об услуге",
                   prices: "Услуги и цены",
+                  doctors: "Врачи",
                   reviews: "Отзывы",
                   articles: "Статьи",
                   faq: "Подробнее",
@@ -530,8 +334,8 @@ export function ServicePage() {
                     onClick={() => scrollTo(section)}
                     className={`px-4 py-2 md:px-5 md:py-2.5 rounded-full text-sm font-semibold transition-all whitespace-nowrap ${
                       activeSection === section
-                        ? "bg-teal-600 text-white shadow-md"
-                        : "bg-white text-gray-600 hover:bg-gray-50 border border-gray-200"
+                        ? "bg-teal-700 text-white shadow-md shadow-teal-700/20"
+                        : "bg-white text-gray-600 hover:bg-teal-50 hover:text-teal-800 border border-gray-200"
                     }`}
                   >
                     {labels[section]}
@@ -544,30 +348,6 @@ export function ServicePage() {
 
         {/* Rest of the content */}
         <div className={activeHeroMode === "D" ? "lg:pl-[25%]" : ""}>
-          {/* Informational Block */}
-          {serviceData.preparationInfo && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mb-12"
-              id="about-prep"
-            >
-              <Card className="bg-teal-50/50 border-teal-100 p-6 sm:p-8 flex gap-4 sm:gap-6 items-start">
-                <div className="w-12 h-12 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center shrink-0">
-                  <Info className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">
-                    Как подготовиться к приему?
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {serviceData.preparationInfo}
-                  </p>
-                </div>
-              </Card>
-            </motion.div>
-          )}
 
           {/* Price List */}
           <motion.div
@@ -600,8 +380,21 @@ export function ServicePage() {
               </div>
             </div>
 
+            {serviceData.subDirections && (
+              <div className="flex flex-wrap items-center gap-2 mb-8 mt-2">
+                <button className="px-5 py-2.5 rounded-full text-sm font-semibold bg-teal-700 text-white shadow-md shadow-teal-700/20 transition-colors">
+                  {serviceData.title}
+                </button>
+                {serviceData.subDirections.map((dir, idx) => (
+                  <button key={idx} className="px-5 py-2.5 rounded-full text-sm font-medium bg-white text-gray-600 hover:bg-teal-50 hover:text-teal-800 border border-gray-200 transition-colors">
+                     {dir}
+                  </button>
+                ))}
+              </div>
+            )}
+
             <div className="space-y-6">
-              {serviceData.priceCategories.map((category, idx) => (
+              {serviceData.priceCategories?.map((category, idx) => (
                 <ExpandableList
                   key={idx}
                   title={category.title}
@@ -642,6 +435,41 @@ export function ServicePage() {
               ))}
             </div>
           </motion.div>
+
+          {/* Informational Block */}
+          {serviceData.preparationInfo && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mt-12"
+              id="about-prep"
+            >
+              <Card className="bg-amber-50/50 border-amber-100 p-6 sm:p-8 flex gap-4 sm:gap-6 items-start">
+                <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+                  <span className="text-2xl pt-1">⚠️</span>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">
+                    Как подготовиться к приёму?
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {serviceData.preparationInfo}
+                  </p>
+                </div>
+              </Card>
+            </motion.div>
+          )}
+
+          {/* Doctors Section */}
+          <div id="doctors" className="pt-10 mt-10">
+            <DoctorsWidget 
+              directionId={serviceId} 
+              title="Врачи направления"
+              subtitle="Опытные специалисты высшей категории"
+              limit={10} 
+            />
+          </div>
 
           {/* Reviews Section */}
           {serviceData.reviews && serviceData.reviews.length > 0 && (
@@ -735,7 +563,7 @@ export function ServicePage() {
                 </h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {serviceData.articles.map((article) => (
+                {serviceData.articles?.map((article) => (
                   <Card
                     key={article.id}
                     as={Link}
@@ -934,7 +762,7 @@ export function ServicePage() {
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] z-50 md:hidden pb-safe flex items-center justify-between gap-4">
         <div className="flex flex-col pl-2">
           <span className="text-[10px] uppercase tracking-wider text-gray-500 font-bold">
-            Прием от
+            Приём от
           </span>
           <span className="text-lg font-black text-gray-900 leading-none mt-1">
             {serviceData.priceCategories[0]?.items[0]?.price || "1 500 ₽"}

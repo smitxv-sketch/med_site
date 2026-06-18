@@ -108,7 +108,7 @@ ${finalSystemPrompt}
     }
   ]
 }
-Доступные виджеты: HeroWidget, FeaturesWidget, DoctorsWidget, PromotionsWidget, TextWidget. Обязательно наполни их релевантным текстом из запроса. Возвращай только JSON.
+Доступные виджеты: HeroWidget, FeaturesWidget, DoctorsWidget, PromotionsWidget, DirectionsWidget, GalleryWidget, ReviewsWidget. Обязательно наполни их релевантным текстом из запроса. Возвращай только JSON.
 `;
 
   // Попробуем OpenRouter

@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { loadConfig } from './services/configService.js';
 import { qmsDriver } from './drivers/QmsDriver.js';
 import { bookingSchema } from './schemas/booking.js';
@@ -11,12 +10,8 @@ import util from 'util';
 
 const execPromise = util.promisify(exec);
 
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const app = express();
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -309,12 +304,11 @@ app.post('/api/generate-layout', async (req, res) => {
 });
 
 // Serve static files in production (skip on Vercel)
-// Compiled server lands in dist/index.js, so static assets are in __dirname (dist/).
 if (process.env.NODE_ENV === 'production' && !process.env.VERCEL) {
-  const clientDist = path.join(__dirname, '.');
-  app.use(express.static(clientDist));
+  const distPath = path.join(process.cwd(), 'dist');
+  app.use(express.static(distPath));
   app.get('*', (_req, res) => {
-    res.sendFile(path.join(clientDist, 'index.html'));
+    res.sendFile(path.join(distPath, 'index.html'));
   });
 }
 

@@ -53,7 +53,7 @@ export function ExpandableList<T>({
             {isExpanded ? (
               <>Скрыть <ChevronUp className="w-4 h-4" /></>
             ) : (
-              <>Показать еще {items.length - initialCount} <ChevronDown className="w-4 h-4" /></>
+              <>Показать ещё {items.length - initialCount} <ChevronDown className="w-4 h-4" /></>
             )}
           </button>
         </div>

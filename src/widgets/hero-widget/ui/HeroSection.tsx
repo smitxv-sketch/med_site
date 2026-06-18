@@ -143,7 +143,7 @@ export function HeroSection() {
                      </svg>
                    </div>
                    <div className="flex-1">
-                        <h2 className="text-[17px] font-bold text-gray-900 leading-tight">Запись на прием</h2>
+                        <h2 className="text-[17px] font-bold text-gray-900 leading-tight">Запись на приём</h2>
                         <p className="text-[13px] text-gray-500 mt-0.5 leading-tight">В клинику или онлайн</p>
                    </div>
               </div>

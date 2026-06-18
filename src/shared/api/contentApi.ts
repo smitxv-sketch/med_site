@@ -1,4 +1,5 @@
 import { SERVICES_DATA } from '../constants/servicesData';
+import { IMAGES } from '../config/images';
 
 export interface ServiceDirection {
   id: string;
@@ -56,7 +57,7 @@ export const fetchPromotions = async (): Promise<Promotion[]> => {
   return [
     {
       id: 1,
-      title: 'Скидка 20% на первичный прием педиатра',
+      title: 'Скидка 20% на первичный приём педиатра',
       startDate: addDays(today, -10).toISOString(),
       endDate: addDays(today, 5).toISOString(),
       image: 'https://www.medznat.ru/uploads/images/post/9519/17340816929519.jpg',
@@ -90,8 +91,8 @@ export const fetchHeroSlides = async (): Promise<HeroSlide[]> => {
       id: 1,
       title: 'Конференция',
       subtitle: 'Репродуктивная медицина: краеугольные вопросы',
-      description: 'Конференция с международным участием для врачей акушеров-гинекологов, репродуктологов, андрологов-урологов и эмбриологов.',
-      image: '/img/conference.jpg',
+      description: 'Конференция с международным участием для акушеров-гинекологов, репродуктологов, андрологов-урологов и эмбриологов.',
+      image: IMAGES.conference,
       link: '/events/conference-7',
       linkText: 'Подробнее о мероприятии',
       badgeColor: 'bg-white shadow-sm text-brand',
@@ -101,7 +102,7 @@ export const fetchHeroSlides = async (): Promise<HeroSlide[]> => {
       id: 2,
       title: 'Оборудование',
       subtitle: 'Новый аппарат МРТ экспертного класса',
-      description: 'Мы обновили парк диагностического оборудования. Теперь пациентам доступна МРТ диагностика на аппарате 3 Тесла.',
+      description: 'Мы обновили парк диагностического оборудования. Теперь пациентам доступна МРТ-диагностика на аппарате 3 Тесла.',
       image: 'https://medsyst.ru/upload/resize_cache/iblock/093/03jlxbml57o28qnlmmisiys35xsxde65/1918_1079_1b1ef77ac61cd9f61e84e651589b06888/7e6abfc7a416e6c16ee90b41f65414bd.jpg',
       link: '/news',
       linkText: 'Подробнее',

@@ -12,10 +12,10 @@ const BRANCHES = [
       { label: 'Взрослое отделение', number: '+7 (351) 77-88-887' },
       { label: 'Детское отделение', number: '+7 (351) 77-88-887' }
     ],
-    hours: 'ПН - ПТ: 8:00 - 22:00\nСБ - ВС: 9:00 - 18:00',
+    hours: 'ПН — ПТ: 8:00 — 22:00\nСБ — ВС: 9:00 — 18:00',
     email: 'info@clinicaistochnik.ru',
     company: 'Общество с ограниченной ответственностью «ПолиКлиника»',
-    license: 'Лицензия № ЛО-74-01-004408 от 19.01.18г.',
+    license: 'Лицензия № ЛО-74-01-004408 от 19.01.2018 г.',
     images: [
       'https://ci74.ru/wp-content/themes/ci74/pics/clinicpictures/84/3779_Thumb.jpeg',
       'https://ci74.ru/wp-content/themes/ci74/pics/clinicpictures/fe/3777_Thumb.jpeg',
@@ -28,10 +28,10 @@ const BRANCHES = [
     phones: [
       { number: '+7 (351) 77-88-910' }
     ],
-    hours: 'ПН - ПТ: 8:00 - 18:00\nСБ: 8:00 - 15:00',
+    hours: 'ПН — ПТ: 8:00 — 18:00\nСБ: 8:00 — 15:00',
     email: '',
     company: 'Общество с ограниченной ответственностью «ЭкоКлиника»',
-    license: 'Лицензия № ЛО-74-01-005172 от 09.08.19г.',
+    license: 'Лицензия № ЛО-74-01-005172 от 09.08.2019 г.',
     images: [
       'https://ci74.ru/wp-content/uploads/2019/11/5552_Thumb.jpeg',
       'https://ci74.ru/wp-content/uploads/2019/11/5558_Thumb.jpeg',
@@ -45,10 +45,10 @@ const BRANCHES = [
     phones: [
       { number: '+7 (351) 77-88-887' }
     ],
-    hours: 'ПН - ПТ: 8:00 - 22:00\nСБ - ВС: 9:00 - 18:00',
+    hours: 'ПН — ПТ: 8:00 — 22:00\nСБ — ВС: 9:00 — 18:00',
     email: 'info@clinicaistochnik.ru',
     company: 'Общество с ограниченной ответственностью «ПолиКлиника»',
-    license: 'Лицензия № ЛО-74-01-004408 от 19.01.18г.',
+    license: 'Лицензия № ЛО-74-01-004408 от 19.01.2018 г.',
     images: [
       'https://ci74.ru/wp-content/uploads/2019/11/3783_Thumb.jpeg',
       'https://ci74.ru/wp-content/uploads/2019/11/3781_Thumb.jpeg'
@@ -61,10 +61,10 @@ const BRANCHES = [
     phones: [
        { number: '+7 (351) 77-88-911' }
     ],
-    hours: 'Амбулаторный прием в отделении круглосуточно',
+    hours: 'Амбулаторный приём в отделении круглосуточно',
     email: '',
     company: 'Общество с ограниченной ответственностью «ПолиКлиника»',
-    license: 'Лицензия № ЛО-74-01-004408 от 19.01.18г.',
+    license: 'Лицензия № ЛО-74-01-004408 от 19.01.2018 г.',
     images: [
       'https://ci74.ru/wp-content/uploads/2019/11/3821_Thumb.jpeg',
       'https://ci74.ru/wp-content/uploads/2019/11/3817_Thumb.jpeg',
@@ -79,10 +79,10 @@ const BRANCHES = [
     phones: [
       { number: '+7 (351) 77-88-906' }
     ],
-    hours: 'ПН, СР, ЧТ, ПТ: 8:00 - 16:00\nВТ: 12:00 - 20:00\nСБ: 9:00 - 15:00',
+    hours: 'ПН, СР, ЧТ, ПТ: 8:00 — 16:00\nВТ: 12:00 — 20:00\nСБ: 9:00 — 15:00',
     email: '',
     company: 'Общество с ограниченной ответственностью «ПолиКлиника»',
-    license: 'Лицензия № ЛО-74-01-004408 от 19.01.18г.',
+    license: 'Лицензия № ЛО-74-01-004408 от 19.01.2018 г.',
     images: [
       'https://ci74.ru/wp-content/uploads/2019/11/3823_Thumb.jpeg'
     ]
@@ -94,10 +94,10 @@ const BRANCHES = [
     phones: [
       { number: '+7 (351) 77-88-905' }
     ],
-    hours: 'ПН - ПТ: 8:00 - 22:00\nСБ - ВС: 9:00 - 18:00',
+    hours: 'ПН — ПТ: 8:00 — 22:00\nСБ — ВС: 9:00 — 18:00',
     email: '',
     company: 'Общество с ограниченной ответственностью «ПолиКлиника»',
-    license: 'Лицензия № ЛО-74-01-004408 от 19.01.18г.',
+    license: 'Лицензия № ЛО-74-01-004408 от 19.01.2018 г.',
     images: [
       'https://ci74.ru/wp-content/uploads/2025/02/001.jpg',
       'https://ci74.ru/wp-content/uploads/2025/02/20241106-0034-%D0%98%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA-scaled.jpg',

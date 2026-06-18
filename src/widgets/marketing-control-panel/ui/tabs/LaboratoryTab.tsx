@@ -60,7 +60,7 @@ export const LaboratoryTab = () => {
     } catch (e) {
       setMessages(prev => [...prev, {
         role: 'ai',
-        text: 'К сожалению, произошла ошибка при генерации. Попробуйте еще раз или уточните запрос.'
+        text: 'К сожалению, произошла ошибка при генерации. Попробуйте ещё раз или уточните запрос.'
       }]);
     } finally {
       setIsGenerating(false);

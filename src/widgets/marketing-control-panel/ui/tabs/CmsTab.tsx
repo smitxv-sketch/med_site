@@ -35,7 +35,7 @@ export const CmsTab = ({ presetTab, setPresetTab }: Props) => {
                         <button className="text-purple-600 bg-purple-50 px-2 py-1 flex gap-1 items-center rounded-md hover:bg-purple-100 text-xs font-bold transition-colors"><Lightbulb className="w-3 h-3" /> Сгенерировать AI</button>
                       </div>
                       <div className="p-2 border rounded bg-gray-50 text-gray-600 text-xs font-normal">
-                        Профессиональное лечение зубов в Челябинске. Консультация специалиста.
+                        Профессиональное ведение беременности в Челябинске. Консультация специалиста.
                       </div>
                     </div>
                   </InsightCard>
@@ -54,7 +54,7 @@ export const CmsTab = ({ presetTab, setPresetTab }: Props) => {
                         <div className="w-8 h-8 rounded-full bg-orange-100 text-orange-700 flex items-center justify-center flex-shrink-0 font-bold">3.0</div>
                         <div>
                           <div className="text-xs font-semibold text-gray-800">Яндекс Карты (3 дня назад)</div>
-                          <div className="text-[11px] text-gray-500 font-normal line-clamp-2">Долго ждал в приемной, хотя по телефону обещали принять вовремя.</div>
+                          <div className="text-[11px] text-gray-500 font-normal line-clamp-2">Долго ждал в приёмной, хотя по телефону обещали принять вовремя.</div>
                         </div>
                       </div>
                       <button className="text-xs text-brand font-semibold text-center mt-2 decoration-dashed underline">Перейти в Модуль Отзывов</button>

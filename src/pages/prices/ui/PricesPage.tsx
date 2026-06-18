@@ -247,7 +247,11 @@ export function PricesPage() {
                       {categories.map((cat) => (
                         <li key={cat.id}>
                           <button
-                            onClick={() => setSelectedCategory(cat)}
+                            onClick={() => {
+                              if (cat.id === 'gynecology') navigate('/service/gynecology');
+                              else if (cat.id === 'gastroenterology') navigate('/service/gastro');
+                              else setSelectedCategory(cat);
+                            }}
                             className="text-left w-full group relative flex flex-col items-start focus:outline-none"
                           >
                             <span className="text-gray-700 group-hover:text-brand font-medium text-base leading-snug transition-colors pr-8 block underline decoration-dashed decoration-gray-300 group-hover:decoration-brand underline-offset-4">

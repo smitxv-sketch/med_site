@@ -109,7 +109,7 @@ export function DoctorsPage() {
               {filteredDoctors.length}
             </span>
           </div>
-          <p className="text-gray-500 text-sm md:text-lg">Найдите своего специалиста и запишитесь на прием</p>
+          <p className="text-gray-500 text-sm md:text-lg">Найдите своего специалиста и запишитесь на приём</p>
         </div>
         
         <DoctorsFilterBar 
