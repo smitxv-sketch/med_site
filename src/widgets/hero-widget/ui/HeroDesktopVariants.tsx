@@ -215,6 +215,8 @@ export const HeroDesktopVariantD = ({
   slides,
   currentSlide,
   goToSlide,
+  nextSlide,
+  prevSlide,
   pause,
   resume,
 }: HeroDesktopVariantProps & {
@@ -251,102 +253,119 @@ export const HeroDesktopVariantD = ({
 
   return (
     <div
-      className="relative w-full overflow-hidden rounded-2xl group"
-      style={{ borderRadius: HERO_THEME.borderRadius }}
+      className="relative h-[100svh] overflow-hidden w-full group -mt-[5rem] sm:-mt-[6rem] lg:-mt-[8rem] -mx-4 sm:-mx-6 lg:-mx-8 xl:mx-[calc(50%-50vw)] xl:w-[100vw]"
       onMouseEnter={pause}
       onMouseLeave={resume}
     >
-      <div className="relative w-full h-[320px] md:h-[420px] lg:h-[480px]">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentSlide}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: HERO_THEME.slideFadeMs / 1000, ease: 'easeInOut' }}
+          className="absolute inset-0 z-0"
+        >
+          <img
+            src={slide.image}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: HERO_THEME.fullscreenGradient }}
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Бейдж направления */}
+      <div
+        className="absolute top-24 lg:top-28 right-6 lg:right-10 z-20 text-white text-[11px] font-medium tracking-[0.08em] uppercase px-3.5 py-1.5 rounded-[20px]"
+        style={{ backgroundColor: badgeBg }}
+      >
+        {badgeLabel}
+      </div>
+
+      <div className="absolute inset-0 flex flex-col justify-end px-6 sm:px-8 pb-28 sm:pb-36 lg:pb-44 max-w-7xl mx-auto w-full z-10 pointer-events-none">
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: HERO_THEME.slideFadeMs / 1000, ease: 'easeInOut' }}
-            className="absolute inset-0"
+            key={`d-content-${currentSlide}`}
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -16, opacity: 0 }}
+            transition={{ duration: 0.45 }}
+            className="max-w-3xl pointer-events-auto"
           >
-            <img
-              src={slide.image}
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div
-              className="absolute inset-0"
-              style={{ background: HERO_THEME.fullscreenGradient }}
-            />
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Бейдж направления — только desktop */}
-        <div
-          className="hidden md:block absolute top-5 right-5 z-20 text-white text-[11px] font-medium tracking-[0.08em] uppercase px-3.5 py-1.5 rounded-[20px]"
-          style={{ backgroundColor: badgeBg }}
-        >
-          {badgeLabel}
-        </div>
-
-        <div className="absolute inset-0 z-10 flex flex-col justify-end p-6 md:p-8 lg:p-10">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`d-content-${currentSlide}`}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.35 }}
-              className="max-w-[600px]"
-            >
-              <p className="text-[11px] font-medium tracking-[0.1em] uppercase text-white/70 mb-3">
-                {slide.title}
-              </p>
-              <h2 className="text-[22px] md:text-[30px] lg:text-[36px] font-medium text-white leading-[1.2] mb-3 max-w-[600px]">
-                {slide.subtitle}
-              </h2>
-              <p className="text-[15px] text-white/[0.82] leading-relaxed max-w-[500px] mb-7">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-[1.1] tracking-tight drop-shadow-lg">
+              {slide.title}
+            </h1>
+            <p className="text-lg sm:text-xl text-white/90 mb-3 font-medium max-w-2xl text-balance drop-shadow">
+              {slide.subtitle}
+            </p>
+            {slide.description && (
+              <p className="text-[15px] text-white/[0.82] leading-relaxed max-w-xl mb-6 sm:mb-8 drop-shadow-sm">
                 {slide.description}
               </p>
-
-              <div
-                className={cn(
-                  'flex gap-3',
-                  hasSecondary
-                    ? 'flex-col sm:flex-row items-stretch sm:items-center'
-                    : 'justify-start'
-                )}
-              >
-                <Link
-                  to={slide.link}
-                  className="inline-flex items-center justify-center rounded-[30px] px-6 py-[11px] text-sm font-medium bg-white transition-colors hover:bg-gray-100"
-                  style={{ color: ctaTextColor }}
-                >
-                  {slide.linkText}
-                </Link>
-                {hasSecondary && slide.ctaSecondaryUrl && (
-                  <Link
-                    to={slide.ctaSecondaryUrl}
-                    className="inline-flex items-center justify-center rounded-[30px] px-6 py-[11px] text-sm text-white border border-white/60 hover:bg-white/10 transition-colors"
-                  >
-                    {slide.ctaSecondaryText}
-                  </Link>
-                )}
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          <div className="flex items-center justify-between mt-6 md:mt-8">
-            <HeroSlideDots
-              count={slides.length}
-              current={currentSlide}
-              onSelect={goToSlide}
-              variant="light"
-            />
-            {linkedPromo && daysLeft !== null && (
-              <span className="text-xs text-white/70 hidden sm:block">
-                {formatDaysLeft(daysLeft)} до конца акции
-              </span>
             )}
-          </div>
-        </div>
+
+            <div
+              className={cn(
+                'flex flex-wrap gap-3',
+                hasSecondary ? 'items-center' : ''
+              )}
+            >
+              <Link
+                to={slide.link}
+                className="inline-flex items-center justify-center rounded-full px-8 h-14 text-base font-semibold bg-white shadow-xl transition-colors hover:bg-gray-100"
+                style={{ color: ctaTextColor }}
+              >
+                {slide.linkText}
+              </Link>
+              {hasSecondary && slide.ctaSecondaryUrl && (
+                <Link
+                  to={slide.ctaSecondaryUrl}
+                  className="inline-flex items-center justify-center rounded-full px-6 h-14 text-sm text-white border border-white/60 hover:bg-white/10 transition-colors"
+                >
+                  {slide.ctaSecondaryText}
+                </Link>
+              )}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Доты + таймер акции */}
+      <div className="absolute bottom-10 sm:bottom-12 left-0 right-0 z-20 px-6 sm:px-8 max-w-7xl mx-auto flex items-center justify-between gap-4">
+        <HeroSlideDots
+          count={slides.length}
+          current={currentSlide}
+          onSelect={goToSlide}
+          variant="light"
+        />
+        {linkedPromo && daysLeft !== null && (
+          <span className="text-xs text-white/70 shrink-0 hidden sm:block">
+            {formatDaysLeft(daysLeft)} до конца акции
+          </span>
+        )}
+      </div>
+
+      <div className="absolute top-1/2 -translate-y-1/2 left-4 sm:left-8 right-4 sm:right-8 z-20 flex justify-between pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <button
+          type="button"
+          onClick={prevSlide}
+          className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/30 backdrop-blur-md flex items-center justify-center text-white pointer-events-auto transition-colors"
+          aria-label="Предыдущий слайд"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <button
+          type="button"
+          onClick={nextSlide}
+          className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/30 backdrop-blur-md flex items-center justify-center text-white pointer-events-auto transition-colors"
+          aria-label="Следующий слайд"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
       </div>
     </div>
   );

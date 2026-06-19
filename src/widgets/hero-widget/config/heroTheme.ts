@@ -19,6 +19,10 @@ export const HERO_THEME = {
   dotActiveWidth: 24,
   dotInactiveSize: 8,
   overlayDark: 'rgba(0,0,0,0.5)',
+  /** Градиент слайдера C: плотнее снизу для читаемости текста */
+  sliderCardGradient:
+    'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.15) 100%)',
+  tagBadgeOnPhoto: 'rgba(0,0,0,0.35)',
   fullscreenGradient:
     'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.10) 100%)',
   directionBadge: {

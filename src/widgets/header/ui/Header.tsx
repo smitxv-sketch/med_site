@@ -9,7 +9,7 @@ import { Container } from '@/shared/ui/Container';
 
 export function Header() {
   const { openMenu } = useMobileMenuStore();
-  const { homePageConcept, heroMobileVariant } = useUISettingsStore();
+  const { homePageConcept, heroMobileVariant, heroDesktopVariant } = useUISettingsStore();
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
 
@@ -30,8 +30,11 @@ export function Header() {
   }, []);
 
   const isHome = location.pathname === "/";
-  // Прозрачный хедер только для fullscreen mobile (E)
-  const isImmersive = isHome && isMobile && heroMobileVariant === 'E';
+  // Прозрачный хедер: mobile E или desktop D (иммерсивный fullscreen)
+  const isImmersive =
+    isHome &&
+    ((isMobile && heroMobileVariant === 'E') ||
+      (!isMobile && heroDesktopVariant === 'D'));
   const isTransparent = isImmersive && !scrolled;
 
   const headerSurfaceClass = isTransparent

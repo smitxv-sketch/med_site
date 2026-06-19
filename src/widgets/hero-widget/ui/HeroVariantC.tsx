@@ -37,6 +37,7 @@ function HeroCSlider({
   const hasImage = Boolean(slide.image && slide.fullBleedBackground !== false);
   const accentGreen = slide.themeAccent === 'green';
   const accentViolet = slide.themeAccent === 'violet';
+  const isVrtSlide = slide.direction === 'vrt';
 
   return (
     <div
@@ -64,7 +65,7 @@ function HeroCSlider({
               />
               <div
                 className="absolute inset-0"
-                style={{ backgroundColor: HERO_THEME.overlayDark }}
+                style={{ background: HERO_THEME.sliderCardGradient }}
               />
             </>
           ) : (
@@ -94,11 +95,14 @@ function HeroCSlider({
           >
             <span
               className={cn(
-                'inline-flex items-center px-3 py-1 rounded-full text-[10px] font-semibold tracking-[0.08em] uppercase mb-4 w-fit',
-                hasImage
-                  ? 'bg-white/90 text-gray-900 border border-white/60'
-                  : 'bg-white/20 text-white border border-white/30'
+                'inline-flex items-center px-3 py-1 rounded-full text-[10px] font-semibold tracking-[0.08em] uppercase mb-4 w-fit text-white border border-white/20',
+                !hasImage && 'bg-white/20'
               )}
+              style={
+                hasImage
+                  ? { backgroundColor: HERO_THEME.tagBadgeOnPhoto }
+                  : undefined
+              }
             >
               {slide.title}
             </span>
@@ -125,7 +129,14 @@ function HeroCSlider({
               as={Link}
               to={slide.link}
               className="rounded-[30px] text-[13px] font-medium px-6 h-10 shadow-md"
-              style={{ backgroundColor: HERO_THEME.brandGreen }}
+              style={
+                isVrtSlide
+                  ? {
+                      backgroundColor: '#ffffff',
+                      color: HERO_THEME.brandViolet,
+                    }
+                  : { backgroundColor: HERO_THEME.brandGreen, color: '#ffffff' }
+              }
             >
               {slide.linkText}
             </Button>
