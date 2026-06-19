@@ -76,4 +76,5 @@ https://thumb.cloud.mail.ru/weblink/thumb/xw1/4R8k/YCiDxfxbt?mt=1779340982000
 | 7 | 2026-06-18 | **FAIL:** сломан `nixpacks.toml` (`providers` map) | деплой `bh6bt6dx` failed |
 | 8 | 2026-06-18 | **FIX:** восстановлен `nixpacks.toml`, `/img/conference.jpg` в images.ts | `ae8eea7` deployed OK |
 | 9 | 2026-06-18 | Матовое стекло в шапке (desktop) + mega menu | `cd1e56f` deployed OK |
-| 10 | 2026-06-18 | Hero C (default) + Hero D fullscreen по ТЗ | push → deploy |
+| 10 | 2026-06-19 | Hero C (default) + Hero D fullscreen по ТЗ | `4c3f5dd` deployed OK (blank page bug) |
+| 11 | 2026-06-19 | **FIX:** HeroDesktopVariantC registry import | push → deploy |

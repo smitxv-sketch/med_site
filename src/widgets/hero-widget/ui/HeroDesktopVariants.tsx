@@ -12,6 +12,7 @@ import { HeroSlide } from './HeroMobileVariants';
 import { HeroSlideDots } from './HeroSlideDots';
 import { HERO_THEME } from '../config/heroTheme';
 import { formatDaysLeft, getDaysUntilExpiry } from '../lib/heroUtils';
+import { HeroVariantC } from './HeroVariantC';
 
 export interface HeroDesktopVariantProps {
   slides: HeroSlide[];
@@ -207,7 +208,7 @@ export const HeroDesktopVariantB = ({ slides, currentSlide, goToSlide, nextSlide
   );
 };
 
-// Variant C moved to HeroVariantC.tsx — registry placeholder for legacy imports
+// Variant C — см. HeroVariantC.tsx
 export { HeroVariantC as HeroDesktopVariantC } from './HeroVariantC';
 
 export const HeroDesktopVariantD = ({
@@ -354,6 +355,6 @@ export const HeroDesktopVariantD = ({
 export const DesktopHeroRegistry: Record<string, React.FC<HeroDesktopVariantProps>> = {
   A: HeroDesktopVariantA,
   B: HeroDesktopVariantB,
-  C: HeroDesktopVariantC,
+  C: HeroVariantC as React.FC<HeroDesktopVariantProps>,
   D: HeroDesktopVariantD,
 };
