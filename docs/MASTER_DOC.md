@@ -6,7 +6,8 @@
 
 ### 1. Архитектура и Структура
 *   **[Реестр проекта (PROJECT_REGISTRY.md)](./PROJECT_REGISTRY.md)** — Описание структуры папок, где что лежит и за что отвечает. **(Читать в первую очередь)**
-*   **[Дизайн-система (04-ui-ux-design-system.md)](./04-ui-ux-design-system.md)** — Визуальные стандарты, цветовая палитра и требования к компонентам.
+*   **[Дизайн-система (DESIGN_SYSTEM.md)](../DESIGN_SYSTEM.md)** — SSOT токенов и правил UI. Пакет для агентов: [`SSOT_FOR_AGENTS.md`](./SSOT_FOR_AGENTS.md).
+*   **Legacy UX-манифест:** [`docs/legacy/04-ui-ux-design-system.md`](./legacy/04-ui-ux-design-system.md) — устаревшая палитра; только UX-принципы.
 *   **[UI-эксперименты (05-ui-experiments.md)](./05-ui-experiments.md)** — Реестр A/B тестирования и вариантов интерфейса (например, варианты нижнего меню).
 
 ### 2. Правила разработки (AI Rules)

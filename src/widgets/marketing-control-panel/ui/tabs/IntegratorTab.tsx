@@ -175,6 +175,25 @@ Instant: отключение анимаций (для пожилой аудит
                     </div>
                   </section>
 
+                  {/* Bottom Nav Variant */}
+                  <section className="bg-white p-5 transition-theme border-app" style={{ borderRadius: 'var(--app-radius)', boxShadow: 'var(--app-shadow)' }}>
+                    <h4 className="text-[11px] font-black uppercase text-gray-400 mb-3 flex items-center">Вариант нижнего меню<ParameterTooltip title="Bottom Nav Variant" text="Визуальный стиль мобильной навигации. A — классика, B — выделенная кнопка записи, C — центральная кнопка, D — «светофор», E — плоская панель (production)." /></h4>
+                    <div className="grid grid-cols-5 gap-2">
+                      {(['A', 'B', 'C', 'D', 'E'] as const).map((v) => (
+                        <button
+                          key={v}
+                          onClick={() => store.setBottomNavVariant(v)}
+                          className={`flex flex-col items-center justify-center p-2.5 transition-all text-[11px] font-bold rounded-xl border ${store.bottomNavVariant === v ? 'bg-brand/5 border-brand text-brand shadow-sm' : 'bg-gray-50 border-gray-100 text-gray-600 hover:bg-gray-100'}`}
+                        >
+                          <span className="text-base font-black">{v}</span>
+                          <span className="text-[9px] font-medium opacity-70 mt-0.5">
+                            {v === 'E' ? 'Prod' : v === 'A' ? 'Классика' : v === 'B' ? 'CTA' : v === 'C' ? 'Центр' : 'Цвета'}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </section>
+
                   {/* Navigation Action Animation */}
                   <section className="bg-white p-5 transition-theme border-app" style={{ borderRadius: 'var(--app-radius)', boxShadow: 'var(--app-shadow)' }}>
                     <h4 className="text-[11px] font-black uppercase text-gray-400 mb-3 flex items-center">Анимация кнопки целевого действия<ParameterTooltip title="Bottom Nav Action Animation" text="Эффект привлечения внимания на главной кнопке нижнего меню (Запись)." /></h4>

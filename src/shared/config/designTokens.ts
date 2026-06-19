@@ -42,6 +42,11 @@ export const PRIMITIVE = {
     badgeVrt: 'rgba(124,58,237,0.85)',
     badgeCosmo: 'rgba(59,130,246,0.85)',
     promoTrack: 'rgba(124, 58, 237, 0.15)',
+    sliderGradientMobile:
+      'linear-gradient(to top, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.20) 60%, transparent 100%)',
+    textOnPhotoMuted: 'rgba(255,255,255,0.65)',
+    textOnPhotoSoft: 'rgba(255,255,255,0.75)',
+    dotGlowWhite: 'rgba(255,255,255,0.8)',
   },
   platform: {
     vk: '#0077FF',
@@ -338,6 +343,7 @@ export const HERO_TOKENS = {
     warning: PRIMITIVE.status.warning,
     neutral: PRIMITIVE.brand.violet,
   },
+  textOnBrand: PRIMITIVE.semantic.white,
 } as const;
 
 /** Мобильный hero */
@@ -347,6 +353,11 @@ export const MOBILE_HERO_TOKENS = {
     clinic: PRIMITIVE.hero.fallbackBgClinic,
   },
   navZoneBg: PRIMITIVE.semantic.surfaceSecondary,
+  sliderGradient: PRIMITIVE.hero.sliderGradientMobile,
+  textOnPhoto: {
+    muted: PRIMITIVE.hero.textOnPhotoMuted,
+    soft: PRIMITIVE.hero.textOnPhotoSoft,
+  },
   colors: {
     brandGreen: CSS_VAR.brand,
     brandViolet: PRIMITIVE.brand.violet,
@@ -357,18 +368,13 @@ export const MOBILE_HERO_TOKENS = {
     timerUrgent: PRIMITIVE.status.urgent,
     timerWarning: PRIMITIVE.status.warning,
     timerViolet: PRIMITIVE.brand.violet,
-    directionAccent: {
-      vrt: PRIMITIVE.brand.violet,
-      adult: CSS_VAR.brand,
-      kids: PRIMITIVE.brand.orange,
-      default: CSS_VAR.brand,
-    },
   },
   vrtChipStyle: {
     bg: PRIMITIVE.hero.vrtChipBg,
     border: PRIMITIVE.hero.vrtCardBorder,
     color: PRIMITIVE.brand.violet,
   },
+  dotGlowWhite: PRIMITIVE.hero.dotGlowWhite,
 } as const;
 
 /** Bottom nav */
@@ -377,6 +383,8 @@ export const BOTTOM_NAV_TOKENS = {
   inactiveColor: PRIMITIVE.semantic.inactive,
   bg: PRIMITIVE.semantic.surface,
   borderTop: `0.5px solid ${PRIMITIVE.semantic.borderLight}`,
+  centerButtonBg: CSS_VAR.brand,
+  centerButtonFg: PRIMITIVE.semantic.white,
 } as const;
 
 /** Темы интегратора (marketing panel) */

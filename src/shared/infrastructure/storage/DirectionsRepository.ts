@@ -1,11 +1,12 @@
-import { fetchDirections } from '../../api/contentApi';
+import { fetchDirections } from '@/shared/api/contentApi';
+import type { ServiceDirection } from '@/shared/domain/direction/types';
 
 export interface IDirectionsRepository {
-  getDirections(): Promise<any[]>;
+  getDirections(): Promise<ServiceDirection[]>;
 }
 
 export class APIDirectionsRepository implements IDirectionsRepository {
-  async getDirections(): Promise<any[]> {
+  async getDirections(): Promise<ServiceDirection[]> {
     return fetchDirections();
   }
 }

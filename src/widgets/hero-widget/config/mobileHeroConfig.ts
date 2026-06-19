@@ -1,5 +1,6 @@
 /** SSOT для мобильного hero (вариант F) — mobile_hero_TZ.md */
 import { MOBILE_HERO_TOKENS } from '@/shared/config/designTokens';
+import mobileHeroContent from '@/shared/content/mobileHero.json';
 
 export const MOBILE_HERO_CONFIG = {
   slider: {
@@ -7,8 +8,7 @@ export const MOBILE_HERO_CONFIG = {
     borderRadius: 14,
     marginTop: 12,
     marginX: 16,
-    gradient:
-      'linear-gradient(to top, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.20) 60%, transparent 100%)',
+    gradient: MOBILE_HERO_TOKENS.sliderGradient,
     titleSize: 20,
     titleSizeLong: 18,
     titleLongThreshold: 40,
@@ -32,8 +32,7 @@ export const MOBILE_HERO_CONFIG = {
     marginTop: 12,
     marginX: 16,
     gap: 10,
-    phone: '+7 (351) 778-88-87',
-    phoneHref: 'tel:+73517788887',
+    ...mobileHeroContent.cta,
   },
   promoZone: {
     marginTop: 12,
@@ -46,33 +45,10 @@ export const MOBILE_HERO_CONFIG = {
   },
   contentBottomPadding: 70,
   colors: MOBILE_HERO_TOKENS.colors,
+  textOnPhoto: MOBILE_HERO_TOKENS.textOnPhoto,
+  dotGlowWhite: MOBILE_HERO_TOKENS.dotGlowWhite,
   vrtChipStyle: MOBILE_HERO_TOKENS.vrtChipStyle,
-  tabs: {
-    clinic: {
-      key: 'clinic' as const,
-      label: 'Поликлиника',
-      allDirectionsPath: '/services',
-      totalCount: 38,
-      chips: [
-        { label: 'Гинекология', path: '/services/adult' },
-        { label: 'Терапия', path: '/services/adult' },
-        { label: 'Диагностика', path: '/services/adult' },
-        { label: 'УЗИ', path: '/services/adult' },
-      ],
-    },
-    vrt: {
-      key: 'vrt' as const,
-      label: 'ВРТ-клиника',
-      allDirectionsPath: '/services/vrt',
-      totalCount: 12,
-      chips: [
-        { label: 'ЭКО', path: '/services/vrt' },
-        { label: 'Ведение беременности', path: '/services/vrt' },
-        { label: 'Генетика', path: '/services/vrt' },
-        { label: 'Репродуктология', path: '/services/vrt' },
-      ],
-    },
-  },
+  tabs: mobileHeroContent.tabs,
 } as const;
 
 export type MobileHeroTabKey = keyof typeof MOBILE_HERO_CONFIG.tabs;

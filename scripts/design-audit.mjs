@@ -136,8 +136,8 @@ const out = {
   results,
 };
 
-fs.mkdirSync('docs/plan', { recursive: true });
-fs.writeFileSync('docs/plan/design_audit_raw.json', JSON.stringify(out, null, 2));
+fs.mkdirSync('docs/legacy/audits', { recursive: true });
+fs.writeFileSync('docs/legacy/audits/design_audit_raw.json', JSON.stringify(out, null, 2));
 
 console.log('SUMMARY:', JSON.stringify(summary, null, 2));
 console.log('UNIQUE HEX:', uniqHex.length);

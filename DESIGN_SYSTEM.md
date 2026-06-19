@@ -3,9 +3,11 @@
 Этот документ описывает фундаментальные принципы дизайна, структуру компонентов и дорожную карту развития фронтенда для интеграции с CMS (Strapi). Это наша «конституция» фронтенда.
 
 **SSOT код:** [`src/shared/config/designTokens.ts`](src/shared/config/designTokens.ts)  
+**Пакет для агентов:** [`docs/SSOT_FOR_AGENTS.md`](docs/SSOT_FOR_AGENTS.md)  
+**Legacy (не SSOT):** [`docs/legacy/`](docs/legacy/README.md)  
 **CSS-маппинг:** [`src/index.css`](src/index.css) (`@theme`)  
 **Tailwind:** [`tailwind.config.js`](tailwind.config.js)  
-**Lint:** `node scripts/design-lint.mjs`
+**Lint:** `npm run lint:design`
 
 ## 🗺 Дорожная карта (Roadmap)
 

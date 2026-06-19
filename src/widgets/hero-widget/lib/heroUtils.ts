@@ -1,4 +1,4 @@
-import { Promotion } from '@/shared/api/contentApi';
+import { Promotion } from '@/shared/domain/promotion/types';
 import { HERO_THEME } from '../config/heroTheme';
 
 export function getDaysUntilExpiry(endDate: string, now = Date.now()): number {

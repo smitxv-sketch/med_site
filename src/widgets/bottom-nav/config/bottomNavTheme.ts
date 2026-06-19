@@ -13,6 +13,8 @@ export const BOTTOM_NAV_THEME = {
   inactiveColor: BOTTOM_NAV_TOKENS.inactiveColor,
   bg: BOTTOM_NAV_TOKENS.bg,
   borderTop: BOTTOM_NAV_TOKENS.borderTop,
+  centerButtonBg: BOTTOM_NAV_TOKENS.centerButtonBg,
+  centerButtonFg: BOTTOM_NAV_TOKENS.centerButtonFg,
   hideTransitionMs: 200,
   pulseScale: 1.06,
   pulseDurationMs: 2000,

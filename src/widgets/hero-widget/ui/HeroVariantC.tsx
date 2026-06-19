@@ -36,7 +36,6 @@ function HeroCSlider({
   if (!slide) return null;
 
   const hasImage = Boolean(slide.image && slide.fullBleedBackground !== false);
-  const accentGreen = slide.themeAccent === 'green';
   const accentViolet = slide.themeAccent === 'violet';
   const isVrtSlide = slide.direction === 'vrt';
 
@@ -134,7 +133,7 @@ function HeroCSlider({
                       backgroundColor: 'white',
                       color: HERO_THEME.brandViolet,
                     }
-                  : { backgroundColor: HERO_THEME.brandGreen, color: 'white' }
+                  : { backgroundColor: HERO_THEME.brandGreen, color: HERO_THEME.textOnBrand }
               }
             >
               {slide.linkText}

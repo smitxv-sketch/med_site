@@ -1,14 +1,9 @@
-import { fetchPromotions, fetchHeroSlides, Promotion, HeroSlide } from '../../../../src/shared/api/contentApi';
+import { fetchPromotions, fetchHeroSlides } from '@/shared/api/contentApi';
+import type { Promotion } from '@/shared/domain/promotion/types';
+import type { HeroSlide } from '@/shared/domain/hero/types';
 
 export interface IPromotionsRepository {
-  /**
-   * Retrieves active promotions
-   */
   getPromotions: () => Promise<Promotion[]>;
-  
-  /**
-   * Retrieves hero slides (news, updates, etc)
-   */
   getHeroSlides: () => Promise<HeroSlide[]>;
 }
 

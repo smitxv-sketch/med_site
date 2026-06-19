@@ -1,0 +1,32 @@
+{
+  "cta": {
+    "phone": "+7 (351) 778-88-87",
+    "phoneHref": "tel:+73517788887"
+  },
+  "tabs": {
+    "clinic": {
+      "key": "clinic",
+      "label": "Поликлиника",
+      "allDirectionsPath": "/services",
+      "totalCount": 38,
+      "chips": [
+        { "label": "Гинекология", "path": "/services/adult" },
+        { "label": "Терапия", "path": "/services/adult" },
+        { "label": "Диагностика", "path": "/services/adult" },
+        { "label": "УЗИ", "path": "/services/adult" }
+      ]
+    },
+    "vrt": {
+      "key": "vrt",
+      "label": "ВРТ-клиника",
+      "allDirectionsPath": "/services/vrt",
+      "totalCount": 12,
+      "chips": [
+        { "label": "ЭКО", "path": "/services/vrt" },
+        { "label": "Ведение беременности", "path": "/services/vrt" },
+        { "label": "Генетика", "path": "/services/vrt" },
+        { "label": "Репродуктология", "path": "/services/vrt" }
+      ]
+    }
+  }
+}

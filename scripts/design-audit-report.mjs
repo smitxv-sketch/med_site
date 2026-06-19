@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const data = JSON.parse(fs.readFileSync('docs/plan/design_audit_raw.json', 'utf8'));
+const data = JSON.parse(fs.readFileSync('docs/legacy/audits/design_audit_raw.json', 'utf8'));
 
 const PRODUCTION_WIDGETS = [
   'hero-widget', 'header', 'footer', 'promotions-widget', 'directions-widget',
@@ -320,7 +320,7 @@ lines.push('```');
 lines.push('');
 lines.push('---');
 lines.push('');
-lines.push('*Сырые данные: `docs/plan/design_audit_raw.json` · Скрипт: `node scripts/design-audit.mjs`*');
+lines.push('*Сырые данные: `docs/legacy/audits/design_audit_raw.json` · Скрипт: `node scripts/design-audit.mjs`*');
 
-fs.writeFileSync('docs/plan/design_audit.md', lines.join('\n'));
-console.log('Written docs/plan/design_audit.md');
+fs.writeFileSync('docs/legacy/audits/design_audit.md', lines.join('\n'));
+console.log('Written docs/legacy/audits/design_audit.md');

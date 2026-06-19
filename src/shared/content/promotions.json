@@ -1,0 +1,31 @@
+{
+  "promotions": [
+    {
+      "id": 1,
+      "title": "Скидка 20% на первичный приём педиатра",
+      "startDateOffsetDays": -10,
+      "endDateOffsetDays": 5,
+      "image": "https://www.medznat.ru/uploads/images/post/9519/17340816929519.jpg",
+      "variant": "horizontal",
+      "directionId": "kids"
+    },
+    {
+      "id": 2,
+      "title": "Комплексное УЗИ для женщин за 3 500 ₽",
+      "startDateOffsetDays": -5,
+      "endDateOffsetDays": 12,
+      "image": "https://www.aigerim.info/uploads/blog/1607493594KfkYLWkD.jpg",
+      "variant": "circular",
+      "directionId": "adult"
+    },
+    {
+      "id": 3,
+      "title": "Бесплатная консультация репродуктолога",
+      "startDateOffsetDays": -15,
+      "endDateOffsetDays": 2,
+      "image": "https://vmclinic.ru/upload/cssinliner_webp/iblock/778/xdhaqczfzjsyaqf1caozr7s2jmilyp5m.webp",
+      "variant": "horizontal",
+      "directionId": "vrt"
+    }
+  ]
+}

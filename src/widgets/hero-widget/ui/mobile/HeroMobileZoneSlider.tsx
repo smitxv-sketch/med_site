@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { HERO_THEME } from '../../config/heroTheme';
 import { MOBILE_HERO_CONFIG } from '../../config/mobileHeroConfig';
+import { getHeroSlideDirectionTokens } from '../../lib/heroDirectionTokens';
 import type { HeroSlide } from '@/shared/domain/hero/types';
 import { HeroSlideDots } from '../HeroSlideDots';
 
@@ -11,27 +11,6 @@ interface HeroMobileZoneSliderProps {
   slides: HeroSlide[];
   currentSlide: number;
   goToSlide: (index: number) => void;
-}
-
-function getSlideAccent(slide: HeroSlide) {
-  const isVrt = slide.direction === 'vrt';
-  return {
-    badgeBg: isVrt
-      ? HERO_THEME.directionBadge.vrt
-      : HERO_THEME.directionBadge.clinic,
-    badgeLabel:
-      HERO_THEME.directionBadgeLabel[
-        slide.direction === 'vrt'
-          ? 'vrt'
-          : slide.direction === 'cosmo'
-            ? 'cosmo'
-            : 'clinic'
-      ],
-    ctaColor: isVrt ? MOBILE_HERO_CONFIG.colors.brandViolet : MOBILE_HERO_CONFIG.colors.brandGreen,
-    fallbackBg: isVrt
-      ? MOBILE_HERO_CONFIG.fallbackBg.vrt
-      : MOBILE_HERO_CONFIG.fallbackBg.clinic,
-  };
 }
 
 export function HeroMobileZoneSlider({
@@ -43,7 +22,7 @@ export function HeroMobileZoneSlider({
   if (!slide) return null;
 
   const cfg = MOBILE_HERO_CONFIG.slider;
-  const accent = getSlideAccent(slide);
+  const accent = getHeroSlideDirectionTokens(slide);
   const hasImage = Boolean(slide.image && slide.fullBleedBackground !== false);
   const titleLong = slide.subtitle.length > cfg.titleLongThreshold;
 
@@ -111,7 +90,7 @@ export function HeroMobileZoneSlider({
               className="uppercase mb-1 line-clamp-1"
               style={{
                 fontSize: cfg.tagSize,
-                color: 'rgba(255,255,255,0.65)',
+                color: MOBILE_HERO_CONFIG.textOnPhoto.muted,
                 letterSpacing: '0.1em',
               }}
             >
@@ -130,7 +109,7 @@ export function HeroMobileZoneSlider({
                 className="line-clamp-2 mb-2.5"
                 style={{
                   fontSize: cfg.subtitleSize,
-                  color: 'rgba(255,255,255,0.75)',
+                  color: MOBILE_HERO_CONFIG.textOnPhoto.soft,
                 }}
               >
                 {slide.description}

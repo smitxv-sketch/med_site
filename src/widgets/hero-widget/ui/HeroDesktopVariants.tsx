@@ -12,6 +12,7 @@ import type { HeroSlide } from '@/shared/domain/hero/types';
 import { HeroSlideDots } from './HeroSlideDots';
 import { HERO_THEME } from '../config/heroTheme';
 import { formatDaysLeft, getDaysUntilExpiry } from '../lib/heroUtils';
+import { getHeroSlideDirectionTokens } from '../lib/heroDirectionTokens';
 import { HeroVariantC } from './HeroVariantC';
 
 export interface HeroDesktopVariantProps {
@@ -239,15 +240,10 @@ export const HeroDesktopVariantD = ({
     ? getDaysUntilExpiry(linkedPromo.endDate)
     : null;
 
-  const direction = slide.direction ?? 'clinic';
-  const badgeBg = HERO_THEME.directionBadge[direction];
-  const badgeLabel = HERO_THEME.directionBadgeLabel[direction];
-  const ctaTextColor =
-    direction === 'vrt'
-      ? HERO_THEME.brandViolet
-      : direction === 'cosmo'
-        ? HERO_THEME.brandCosmo
-        : HERO_THEME.brandGreen;
+  const slideTokens = getHeroSlideDirectionTokens(slide);
+  const badgeBg = slideTokens.badgeBg;
+  const badgeLabel = slideTokens.badgeLabel;
+  const ctaTextColor = slideTokens.ctaColor;
 
   const hasSecondary = Boolean(slide.ctaSecondaryText?.trim());
 

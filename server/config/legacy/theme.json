@@ -1,4 +1,5 @@
 {
+  "_note": "Legacy BFF/booking theme. NOT synced with site frontend SSOT. Site tokens: src/shared/config/designTokens.ts",
   "colors": {
     "primary": "#65a30d",
     "primary-hover": "#4d7c0f",

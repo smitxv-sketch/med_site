@@ -17,7 +17,8 @@
 Node.js / Express сервер, выступающий в роли BFF (Backend For Frontend) и прокси для внешних МИС.
 
 *   **/server/index.ts** — Точка входа, инициализация Express и маршрутов API.
-*   **/server/config/** — JSON-конфигурации (SSOT для настроек). Включает `theme.json`, `text.json`, `logic.json`, `branches.json`. **Zero Hardcode** на фронтенде обеспечивается этими файлами.
+*   **/server/config/** — JSON-конфигурации BFF (тексты, логика, филиалы). **Цвета сайта:** [`src/shared/config/designTokens.ts`](../src/shared/config/designTokens.ts), не `server/config`.
+*   **/server/config/legacy/** — устаревшие конфиги (например `theme.json` для booking), не синхронизированы с фронтом сайта.
 *   **/server/drivers/** — Драйверы интеграции с медицинскими системами (например, `QmsDriver.ts`).
 *   **/server/services/** — Бизнес-логика бэкенда (работа с базой WordPress `wpService.ts`, гидратация данных `hydratorService.ts`, диагностика).
 *   **/server/schemas/** — Zod-схемы для валидации входящих данных (например, `booking.ts`).
@@ -25,6 +26,8 @@ Node.js / Express сервер, выступающий в роли BFF (Backend 
 ### 📚 Документация (`/docs`)
 Единое хранилище всех проектных документов, схем и планов.
 *   Главный индексный файл: `MASTER_DOC.md`
+*   **`/docs/legacy/`** — устаревшие SSOT и снимки (не для новой разработки).
+*   **`/docs/archive/`** — исторические черновики и планы v1.
 
 ### 🐘 Legacy / PHP (`/php_backend`)
 *Оставлено для обратной совместимости или постепенной миграции.* Старые скрипты интеграции и проксирования.

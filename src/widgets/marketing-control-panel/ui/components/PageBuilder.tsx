@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { Reorder, motion, AnimatePresence, useDragControls } from 'framer-motion';
 import { GripVertical, Plus, Trash2, Settings2, X, FileEdit } from 'lucide-react';
 import { useUISettingsStore, WidgetType } from '@/shared/store/uiSettingsStore';
-import { useCmsStore, PageBlock } from '@/shared/store/cmsStore';
-import { WIDGETS_REGISTRY, WidgetPropSchema } from '@/shared/config/widgetsRegistry';
+import { useCmsStore } from '@/shared/store/cmsStore';
+import { PageBlock } from '@/shared/types/block';
+import {
+  WIDGETS_REGISTRY,
+} from '@/shared/config/widgetManifest';
+import type { WidgetPropSchema } from '@/shared/types/widget';
 
 function DraggableBlock({ block, schema, editingBlock, setEditingBlock, removeBlock }: any) {
   const dragControls = useDragControls();
@@ -260,7 +264,7 @@ export function PageBuilder() {
                 )}
                 
                 <p className="text-[10px] text-gray-400 mt-4 border-t border-gray-200 pt-2">
-                  Динамическая схема берется из config/widgetsRegistry.ts
+                  Динамическая схема берется из widgetManifest.ts
                 </p>
               </div>
             </div>

@@ -10,6 +10,8 @@ import {
   LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import type { BottomNavVariantProps } from './BottomNavRegistry';
+import { isContextualBottomNavPage } from '../lib/isContextualPage';
 import {
   BOTTOM_NAV_ITEMS_E,
   BOTTOM_NAV_THEME,
@@ -23,19 +25,11 @@ const ICON_MAP: Record<string, LucideIcon> = {
   'user-circle': UserCircle,
 };
 
-interface BottomNavVariantEProps {
-  isHidden: boolean;
-}
-
-export function BottomNavVariantE({ isHidden }: BottomNavVariantEProps) {
+export function BottomNavVariantE({ isHidden }: BottomNavVariantProps) {
   const location = useLocation();
   const theme = BOTTOM_NAV_THEME;
 
-  const isContextualPage =
-    /^\/services\/[^/]+\/[^/]+$/.test(location.pathname) ||
-    /^\/doctors\/[^/]+$/.test(location.pathname);
-
-  if (isContextualPage) return null;
+  if (isContextualBottomNavPage(location.pathname)) return null;
 
   return (
     <motion.nav
@@ -51,7 +45,7 @@ export function BottomNavVariantE({ isHidden }: BottomNavVariantEProps) {
         duration: theme.hideTransitionMs / 1000,
         ease: 'ease',
       }}
-      className="fixed bottom-0 left-0 right-0 z-[100] md:hidden bg-white border-t pb-safe"
+      className="fixed bottom-0 left-0 right-0 z-[100] md:hidden pb-safe"
       style={{
         borderTop: theme.borderTop,
         backgroundColor: theme.bg,
@@ -75,12 +69,14 @@ export function BottomNavVariantE({ isHidden }: BottomNavVariantEProps) {
                 style={{ color: theme.activeColor }}
               >
                 <div
-                  className="relative flex items-center justify-center rounded-full bg-brand text-white shadow-md animate-[bottom-nav-pulse_2s_ease-in-out_infinite]"
+                  className="relative flex items-center justify-center rounded-full shadow-md animate-[bottom-nav-pulse_2s_ease-in-out_infinite]"
                   style={{
                     width: theme.centerButtonSize,
                     height: theme.centerButtonSize,
                     marginTop: -theme.centerButtonLift,
                     border: `${theme.centerBorderWidth}px solid ${theme.bg}`,
+                    backgroundColor: theme.centerButtonBg,
+                    color: theme.centerButtonFg,
                   }}
                 >
                   <Icon size={22} strokeWidth={2.5} />

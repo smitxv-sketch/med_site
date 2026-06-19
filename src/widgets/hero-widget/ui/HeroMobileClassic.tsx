@@ -5,6 +5,7 @@ import type { HeroSlide } from '@/shared/domain/hero/types';
 import { Button } from '@/shared/ui/Button';
 import { Card } from '@/shared/ui/Card';
 import { MobileHeroRegistry } from './HeroMobileVariants';
+import { MOBILE_HERO_CONFIG } from '../config/mobileHeroConfig';
 
 export interface HeroMobileClassicProps {
   slides: HeroSlide[];
@@ -192,9 +193,14 @@ export function HeroMobileClassic({
               onClick={() => goToSlide(idx)}
               className={`w-1.5 rounded-full transition-all duration-theme ${
                 idx === currentSlide
-                  ? 'h-6 bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]'
+                  ? 'h-6 bg-white'
                   : 'h-1.5 bg-white/50 hover:bg-white/80'
               }`}
+              style={
+                idx === currentSlide
+                  ? { boxShadow: `0 0 8px ${MOBILE_HERO_CONFIG.dotGlowWhite}` }
+                  : undefined
+              }
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}

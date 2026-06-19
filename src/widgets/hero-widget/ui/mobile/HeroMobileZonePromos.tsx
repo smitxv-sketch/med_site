@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { Clock } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { usePromotionsRepository } from '@/shared/di/DIContext';
-import { Promotion } from '@/shared/api/contentApi';
+import { Promotion } from '@/shared/domain/promotion/types';
 import {
   formatDaysLeft,
   getDaysUntilExpiry,
 } from '../../lib/heroUtils';
+import { resolvePromotionDirectionAccent } from '@/shared/lib/design/resolveDirectionAccent';
 import { MOBILE_HERO_CONFIG } from '../../config/mobileHeroConfig';
 
 function getTimerColor(daysLeft: number): string {
@@ -18,14 +19,6 @@ function getTimerColor(daysLeft: number): string {
   return textSecondary;
 }
 
-function getDirectionBorderColor(directionId?: string): string {
-  const accents = MOBILE_HERO_CONFIG.colors.directionAccent;
-  if (directionId && directionId in accents) {
-    return accents[directionId as keyof typeof accents];
-  }
-  return accents.default;
-}
-
 function PromoMiniCard({
   promo,
   isSingle,
@@ -34,7 +27,7 @@ function PromoMiniCard({
   isSingle: boolean;
 }) {
   const daysLeft = getDaysUntilExpiry(promo.endDate);
-  const borderColor = getDirectionBorderColor(promo.directionId);
+  const borderColor = resolvePromotionDirectionAccent(promo.directionId);
 
   return (
     <Link

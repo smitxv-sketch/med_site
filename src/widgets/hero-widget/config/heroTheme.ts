@@ -1,5 +1,6 @@
 /** Токены hero-блоков — цвета из designTokens, размеры из ТЗ */
 import { HERO_TOKENS } from '@/shared/config/designTokens';
+import heroCardsData from '@/shared/content/heroCards.json';
 
 export const HERO_THEME = {
   brandGreen: HERO_TOKENS.brandGreen,
@@ -27,24 +28,8 @@ export const HERO_THEME = {
   gapToPromotionsDesktop: HERO_TOKENS.gapToPromotionsDesktop,
   discountBadge: HERO_TOKENS.discountBadge,
   promoProgress: HERO_TOKENS.promoProgress,
+  textOnBrand: HERO_TOKENS.textOnBrand,
 } as const;
 
-export const HERO_DOCTOR_CARD = {
-  eyebrow: 'Знакомство с доктором',
-  discount: 'Скидка 30%',
-  ctaText: 'Выбрать врача',
-  ctaLink: '/doctors',
-  doctorName: 'Иванова Анна Сергеевна',
-  specialization: 'Акушер-гинеколог',
-  image:
-    'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=150',
-} as const;
-
-export const HERO_VRT_FALLBACK = {
-  label: 'ВРТ · ЦЕНТР ЭКО',
-  title: 'Центр ЭКО — узнать о программах',
-  ctaText: 'Подробнее',
-  ctaLink: '/services/vrt',
-  programsLink: '/services/vrt',
-  programsText: '→ Все программы ЭКО',
-} as const;
+export const HERO_DOCTOR_CARD = heroCardsData.doctorCard;
+export const HERO_VRT_FALLBACK = heroCardsData.vrtFallback;

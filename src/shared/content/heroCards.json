@@ -1,0 +1,19 @@
+{
+  "doctorCard": {
+    "eyebrow": "Знакомство с доктором",
+    "discount": "Скидка 30%",
+    "ctaText": "Выбрать врача",
+    "ctaLink": "/doctors",
+    "doctorName": "Иванова Анна Сергеевна",
+    "specialization": "Акушер-гинеколог",
+    "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=150"
+  },
+  "vrtFallback": {
+    "label": "ВРТ · ЦЕНТР ЭКО",
+    "title": "Центр ЭКО — узнать о программах",
+    "ctaText": "Подробнее",
+    "ctaLink": "/services/vrt",
+    "programsLink": "/services/vrt",
+    "programsText": "→ Все программы ЭКО"
+  }
+}
