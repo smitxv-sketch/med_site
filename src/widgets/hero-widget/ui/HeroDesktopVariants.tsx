@@ -1,11 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ChevronLeft, PhoneCall, Calendar } from 'lucide-react';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { cn } from '@/lib/utils';
+import { usePromotionsRepository } from '@/shared/di/DIContext';
 import { Button } from '@/shared/ui/Button';
 import { Card } from '@/shared/ui/Card';
 import { GhostTyping } from '@/shared/ui/GhostTyping';
 import { HeroSlide } from './HeroMobileVariants';
+import { HeroSlideDots } from './HeroSlideDots';
+import { HERO_THEME } from '../config/heroTheme';
+import { formatDaysLeft, getDaysUntilExpiry } from '../lib/heroUtils';
 
 export interface HeroDesktopVariantProps {
   slides: HeroSlide[];
@@ -201,186 +207,145 @@ export const HeroDesktopVariantB = ({ slides, currentSlide, goToSlide, nextSlide
   );
 };
 
-// Variant C: Competitor Inspiration (Left Slider + Right Action & Promos)
-export const HeroDesktopVariantC = ({ slides, currentSlide, goToSlide, nextSlide, prevSlide }: HeroDesktopVariantProps) => {
+// Variant C moved to HeroVariantC.tsx — registry placeholder for legacy imports
+export { HeroVariantC as HeroDesktopVariantC } from './HeroVariantC';
+
+export const HeroDesktopVariantD = ({
+  slides,
+  currentSlide,
+  goToSlide,
+  pause,
+  resume,
+}: HeroDesktopVariantProps & {
+  pause?: () => void;
+  resume?: () => void;
+}) => {
   const slide = slides[currentSlide];
+  const promotionsRepository = usePromotionsRepository();
+  const { data: promotions = [] } = useQuery({
+    queryKey: ['heroPromotions'],
+    queryFn: () => promotionsRepository.getPromotions(),
+  });
+
   if (!slide) return null;
 
+  const linkedPromo = slide.promoId
+    ? promotions.find((p) => p.id === slide.promoId) ?? null
+    : null;
+  const daysLeft = linkedPromo
+    ? getDaysUntilExpiry(linkedPromo.endDate)
+    : null;
+
+  const direction = slide.direction ?? 'clinic';
+  const badgeBg = HERO_THEME.directionBadge[direction];
+  const badgeLabel = HERO_THEME.directionBadgeLabel[direction];
+  const ctaTextColor =
+    direction === 'vrt'
+      ? HERO_THEME.brandViolet
+      : direction === 'cosmo'
+        ? HERO_THEME.brandCosmo
+        : HERO_THEME.brandGreen;
+
+  const hasSecondary = Boolean(slide.ctaSecondaryText?.trim());
+
   return (
-    <div className="w-full relative flex gap-6 lg:gap-8 h-[460px]">
-      {/* Left side - Slider taking about 60% */}
-      <Card className="flex-1 overflow-hidden relative p-0 border-0 bg-transparent flex flex-col h-full rounded-[var(--app-radius)] shadow-none">
-        
+    <div
+      className="relative w-full overflow-hidden rounded-2xl group"
+      style={{ borderRadius: HERO_THEME.borderRadius }}
+      onMouseEnter={pause}
+      onMouseLeave={resume}
+    >
+      <div className="relative w-full h-[320px] md:h-[420px] lg:h-[480px]">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            className={`absolute inset-0 ${slide.bgLight} transition-colors duration-1000 z-0 h-full w-full`}
-          />
-        </AnimatePresence>
-
-        <div className="absolute inset-0 z-0 h-full w-full opacity-60">
-            <img src={slide.image} alt="" className="w-full h-full object-cover mix-blend-multiply" />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent z-10" />
-
-        <div className="relative z-20 flex flex-col h-full p-8 lg:p-10 justify-center w-2/3">
-           <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentSlide}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  transition={{ duration: 0.4 }}
-                  className="flex flex-col h-full justify-center"
-                >
-                  <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase w-fit mb-4 bg-white/70 text-gray-900 border border-gray-200/50`}>
-                    {slide.title}
-                  </div>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight tracking-tight max-w-[400px]">
-                    <GhostTyping text={slide.subtitle} startDelay={100} typingSpeed={30} />
-                  </h2>
-                  <div className="mt-auto flex items-center gap-4">
-                     <Button as={Link} to={slide.link} variant="primary">
-                       {slide.linkText}
-                     </Button>
-                  </div>
-                </motion.div>
-           </AnimatePresence>
-        </div>
-
-        {/* Minimal Navigation */}
-        <div className="absolute bottom-6 right-6 z-20 flex items-center gap-3 bg-white/80 backdrop-blur rounded-full px-4 py-2 shadow-sm border border-gray-200/50">
-             <div className="flex items-center gap-2">
-                {slides.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => goToSlide(idx)}
-                    className={`h-1.5 rounded-full transition-all duration-theme ${idx === currentSlide ? 'w-6 bg-brand' : 'w-1.5 bg-gray-400 hover:bg-gray-500'}`}
-                  />
-                ))}
-              </div>
-        </div>
-      </Card>
-
-      {/* Right side - 40% - Grid of small banners / actions */}
-      <div className="w-[340px] xl:w-[400px] shrink-0 flex flex-col gap-4 h-full">
-         <Card className="flex flex-col p-6 shadow-sm border border-gray-100 flex-1 hover:shadow-md transition-shadow">
-            <h3 className="font-bold text-lg mb-2 leading-tight pr-4">Знакомство <br/>с доктором</h3>
-             <p className="text-gray-500 text-sm mb-4">Скидка 30%</p>
-             <div className="mt-auto">
-               <Button as={Link} to="/doctors" variant="primary" size="sm" className="w-fit relative z-20 shadow-md">
-                 Выбрать врача
-               </Button>
-             </div>
-             {/* Decorative image placeholder */}
-             <div className="absolute top-4 right-4 w-24 h-24  opacity-80 mix-blend-multiply flex items-end">
-                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=150" className="object-cover rounded-full w-20 h-20 shadow-sm" alt=""/>
-             </div>
-         </Card>
-         
-         <Card className="flex flex-col p-6 shadow-sm border border-gray-100 flex-1 hover:shadow-md transition-shadow relative overflow-hidden bg-brand/5">
-             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-brand/10 z-0"></div>
-             <div className="relative z-10 flex flex-col h-full">
-               <h3 className="font-bold text-lg mb-2 leading-tight">Подарки <br/>для любимых</h3>
-               <p className="text-gray-600 font-medium text-sm mb-4 bg-white/80 backdrop-blur px-2 py-1 rounded w-fit">Сертификаты на услуги клиники</p>
-               <div className="mt-auto">
-                 <Button as={Link} to="/services" variant="outline" size="sm" className="w-fit bg-white border-brand text-brand hover:bg-brand/10">
-                   Подробности
-                 </Button>
-               </div>
-             </div>
-             
-             {/* Decorative graphic */}
-             <div className="absolute -bottom-4 -right-4 w-32 h-32 opacity-90 z-0">
-               <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=150" alt="" className="object-cover rounded-tl-[64px] rounded-br-[var(--app-radius)] w-full h-full shadow-lg"/>
-             </div>
-         </Card>
-      </div>
-    </div>
-  );
-};
-
-export const HeroDesktopVariantD = ({ slides, currentSlide, goToSlide, nextSlide, prevSlide }: HeroDesktopVariantProps) => {
-  const slide = slides[currentSlide];
-  if (!slide) return null;
-
-  return (
-    <div className="relative h-[100svh] overflow-hidden w-full group -mt-[5rem] sm:-mt-[6rem] lg:-mt-[8rem] -mx-4 sm:-mx-6 lg:-mx-8 xl:mx-[calc(50%-50vw)] xl:w-[100vw]">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentSlide}
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          className="absolute inset-0 z-0"
-        >
-          <img
-            src={slide.image}
-            alt={slide.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
-        </motion.div>
-      </AnimatePresence>
-
-      <div className="absolute inset-0 flex flex-col justify-end px-8 pb-32 sm:pb-40 lg:pb-48 max-w-7xl mx-auto w-full z-10 pointer-events-none">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -20, opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl pointer-events-auto"
+            transition={{ duration: HERO_THEME.slideFadeMs / 1000, ease: 'easeInOut' }}
+            className="absolute inset-0"
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight drop-shadow-lg">
-              {slide.title}
-            </h1>
-            <p className="text-lg sm:text-xl text-white/90 mb-8 font-medium max-w-2xl text-balance drop-shadow">
-              {slide.subtitle}
-            </p>
-
-            <Button 
-              as={Link}
-              to={slide.link}
-              variant="primary" 
-              size="lg" 
-              className="bg-white text-black hover:bg-gray-100 shadow-xl transition-all font-semibold rounded-full px-8 h-14"
-            >
-              {slide.linkText}
-            </Button>
+            <img
+              src={slide.image}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: HERO_THEME.fullscreenGradient }}
+            />
           </motion.div>
         </AnimatePresence>
-      </div>
 
-      <div className="absolute bottom-12 left-0 right-0 z-20 flex justify-center gap-3">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`transition-all duration-300 rounded-full ${
-              currentSlide === index
-                ? 'w-10 h-2 bg-white'
-                : 'w-2 h-2 bg-white/50 hover:bg-white/80'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
-      
-      {/* Navigation Arrows */}
-      <div className="absolute top-1/2 -translate-y-1/2 left-8 right-8 z-20 flex justify-between pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-         <button onClick={prevSlide} className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/30 backdrop-blur-md flex items-center justify-center text-white pointer-events-auto transition-colors">
-            <ChevronLeft className="w-6 h-6" />
-         </button>
-         <button onClick={nextSlide} className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/30 backdrop-blur-md flex items-center justify-center text-white pointer-events-auto transition-colors">
-            <ChevronRight className="w-6 h-6" />
-         </button>
+        {/* Бейдж направления — только desktop */}
+        <div
+          className="hidden md:block absolute top-5 right-5 z-20 text-white text-[11px] font-medium tracking-[0.08em] uppercase px-3.5 py-1.5 rounded-[20px]"
+          style={{ backgroundColor: badgeBg }}
+        >
+          {badgeLabel}
+        </div>
+
+        <div className="absolute inset-0 z-10 flex flex-col justify-end p-6 md:p-8 lg:p-10">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`d-content-${currentSlide}`}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.35 }}
+              className="max-w-[600px]"
+            >
+              <p className="text-[11px] font-medium tracking-[0.1em] uppercase text-white/70 mb-3">
+                {slide.title}
+              </p>
+              <h2 className="text-[22px] md:text-[30px] lg:text-[36px] font-medium text-white leading-[1.2] mb-3 max-w-[600px]">
+                {slide.subtitle}
+              </h2>
+              <p className="text-[15px] text-white/[0.82] leading-relaxed max-w-[500px] mb-7">
+                {slide.description}
+              </p>
+
+              <div
+                className={cn(
+                  'flex gap-3',
+                  hasSecondary
+                    ? 'flex-col sm:flex-row items-stretch sm:items-center'
+                    : 'justify-start'
+                )}
+              >
+                <Link
+                  to={slide.link}
+                  className="inline-flex items-center justify-center rounded-[30px] px-6 py-[11px] text-sm font-medium bg-white transition-colors hover:bg-gray-100"
+                  style={{ color: ctaTextColor }}
+                >
+                  {slide.linkText}
+                </Link>
+                {hasSecondary && slide.ctaSecondaryUrl && (
+                  <Link
+                    to={slide.ctaSecondaryUrl}
+                    className="inline-flex items-center justify-center rounded-[30px] px-6 py-[11px] text-sm text-white border border-white/60 hover:bg-white/10 transition-colors"
+                  >
+                    {slide.ctaSecondaryText}
+                  </Link>
+                )}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="flex items-center justify-between mt-6 md:mt-8">
+            <HeroSlideDots
+              count={slides.length}
+              current={currentSlide}
+              onSelect={goToSlide}
+              variant="light"
+            />
+            {linkedPromo && daysLeft !== null && (
+              <span className="text-xs text-white/70 hidden sm:block">
+                {formatDaysLeft(daysLeft)} до конца акции
+              </span>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

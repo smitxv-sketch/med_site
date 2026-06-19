@@ -75,4 +75,5 @@ https://thumb.cloud.mail.ru/weblink/thumb/xw1/4R8k/YCiDxfxbt?mt=1779340982000
 | 6 | 2026-06-18 | Gemini export: esbuild build, текстовые правки, images.ts | pushed `e564bd8` |
 | 7 | 2026-06-18 | **FAIL:** сломан `nixpacks.toml` (`providers` map) | деплой `bh6bt6dx` failed |
 | 8 | 2026-06-18 | **FIX:** восстановлен `nixpacks.toml`, `/img/conference.jpg` в images.ts | `ae8eea7` deployed OK |
-| 9 | 2026-06-18 | Матовое стекло в шапке (desktop) + mega menu | push → deploy |
+| 9 | 2026-06-18 | Матовое стекло в шапке (desktop) + mega menu | `cd1e56f` deployed OK |
+| 10 | 2026-06-18 | Hero C (default) + Hero D fullscreen по ТЗ | push → deploy |

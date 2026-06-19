@@ -1,8 +1,19 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
-export function useSlider(totalSlides: number, intervalMs: number = 9000) {
+interface UseSliderOptions {
+  pauseOnHover?: boolean;
+}
+
+export function useSlider(
+  totalSlides: number,
+  intervalMs: number = 9000,
+  options: UseSliderOptions = {}
+) {
+  const { pauseOnHover = false } = options;
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
+  const pauseRef = useRef(false);
 
   const nextSlide = useCallback(() => {
     if (totalSlides <= 1) return;
@@ -16,20 +27,40 @@ export function useSlider(totalSlides: number, intervalMs: number = 9000) {
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
   }, [totalSlides]);
 
-  const goToSlide = useCallback((index: number) => {
-    if (totalSlides <= 1 || index === currentSlide) return;
-    setDirection(index > currentSlide ? 1 : -1);
-    setCurrentSlide(index);
-  }, [currentSlide, totalSlides]);
+  const goToSlide = useCallback(
+    (index: number) => {
+      if (totalSlides <= 1 || index === currentSlide) return;
+      setDirection(index > currentSlide ? 1 : -1);
+      setCurrentSlide(index);
+    },
+    [currentSlide, totalSlides]
+  );
 
-  // Автоматическое перелистывание.
-  // Зависимость от currentSlide гарантирует, что таймер сбрасывается 
-  // при любом ручном переключении (свайп, клик по стрелке/точке).
+  const pause = useCallback(() => {
+    pauseRef.current = true;
+    setIsPaused(true);
+  }, []);
+
+  const resume = useCallback(() => {
+    pauseRef.current = false;
+    setIsPaused(false);
+  }, []);
+
   useEffect(() => {
     if (totalSlides <= 1) return;
+    if (pauseOnHover && isPaused) return;
     const timer = setInterval(nextSlide, intervalMs);
     return () => clearInterval(timer);
-  }, [totalSlides, currentSlide, intervalMs, nextSlide]);
+  }, [totalSlides, currentSlide, intervalMs, nextSlide, pauseOnHover, isPaused]);
 
-  return { currentSlide, direction, nextSlide, prevSlide, goToSlide };
+  return {
+    currentSlide,
+    direction,
+    nextSlide,
+    prevSlide,
+    goToSlide,
+    pause,
+    resume,
+    isPaused,
+  };
 }

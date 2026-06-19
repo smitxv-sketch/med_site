@@ -7,7 +7,7 @@
       "emoji": "🏥",
       "state": { 
         "colorTheme": "green", "colorIntensity": "standard", "appRadius": 24, "shadowStyle": "soft", 
-        "fontFamily": "inter", "animationTheme": "default", "homePageConcept": "classic", "heroMobileVariant": "A", "heroDesktopVariant": "A",
+        "fontFamily": "inter", "animationTheme": "default", "homePageConcept": "classic", "heroMobileVariant": "A", "heroDesktopVariant": "C",
         "promotionsSectionVariant": "A", "doctorsSectionVariant": "A", "bottomNavVariant": "A",
         "quickActionsVariant": "A",
         "customHue": 142, "customSaturation": 80, "customLightness": 38

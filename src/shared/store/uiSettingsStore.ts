@@ -128,7 +128,7 @@ export const useUISettingsStore = create<UISettingsState>((set, get) => ({
   // SLICE 3: THEME & TOKENS STATE
   // ==========================================
   homePageConcept: 'classic',
-  heroDesktopVariant: 'A',
+  heroDesktopVariant: 'C',
   heroMobileVariant: 'A',
   bottomNavVariant: 'A',
   bottomNavBehavior: 'hide-on-scroll-down',

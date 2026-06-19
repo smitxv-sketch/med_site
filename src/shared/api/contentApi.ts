@@ -36,6 +36,12 @@ export interface HeroSlide {
   linkText: string;
   badgeColor: string;
   bgLight: string;
+  direction?: 'vrt' | 'clinic' | 'cosmo';
+  fullBleedBackground?: boolean;
+  themeAccent?: 'green' | 'violet';
+  ctaSecondaryText?: string;
+  ctaSecondaryUrl?: string;
+  promoId?: number;
 }
 
 // Helper to generate dates relative to today
@@ -89,36 +95,50 @@ export const fetchHeroSlides = async (): Promise<HeroSlide[]> => {
   return [
     {
       id: 1,
-      title: 'Конференция',
-      subtitle: 'Репродуктивная медицина: краеугольные вопросы',
-      description: 'Конференция с международным участием для акушеров-гинекологов, репродуктологов, андрологов-урологов и эмбриологов.',
-      image: IMAGES.conference,
-      link: '/events/conference-7',
-      linkText: 'Подробнее о мероприятии',
-      badgeColor: 'bg-white shadow-sm text-brand',
-      bgLight: 'bg-brand/5'
+      title: 'ЦЕНТР ЭКО',
+      subtitle: 'Лечение бесплодия и программы ЭКО',
+      description:
+        'Экспертное ведение беременности, генетические исследования',
+      image:
+        'https://vmclinic.ru/upload/cssinliner_webp/iblock/778/xdhaqczfzjsyaqf1caozr7s2jmilyp5m.webp',
+      link: '/booking',
+      linkText: 'Бесплатная консультация',
+      ctaSecondaryText: 'Все программы ЭКО →',
+      ctaSecondaryUrl: '/services/vrt',
+      badgeColor: 'bg-white shadow-sm text-violet-600',
+      bgLight: 'bg-violet-50/50',
+      direction: 'vrt',
+      fullBleedBackground: true,
+      promoId: 3,
     },
     {
       id: 2,
-      title: 'Оборудование',
+      title: 'ОБОРУДОВАНИЕ',
       subtitle: 'Новый аппарат МРТ экспертного класса',
-      description: 'Мы обновили парк диагностического оборудования. Теперь пациентам доступна МРТ-диагностика на аппарате 3 Тесла.',
-      image: 'https://medsyst.ru/upload/resize_cache/iblock/093/03jlxbml57o28qnlmmisiys35xsxde65/1918_1079_1b1ef77ac61cd9f61e84e651589b06888/7e6abfc7a416e6c16ee90b41f65414bd.jpg',
-      link: '/news',
-      linkText: 'Подробнее',
-      badgeColor: 'bg-white shadow-sm text-blue-600',
-      bgLight: 'bg-blue-50/50'
+      description: 'МРТ-диагностика на аппарате 3 Тесла',
+      image:
+        'https://medsyst.ru/upload/resize_cache/iblock/093/03jlxbml57o28qnlmmisiys35xsxde65/1918_1079_1b1ef77ac61cd9f61e84e651589b06888/7e6abfc7a416e6c16ee90b41f65414bd.jpg',
+      link: '/booking',
+      linkText: 'Записаться на МРТ',
+      badgeColor: 'bg-white shadow-sm text-brand',
+      bgLight: 'bg-brand/5',
+      direction: 'clinic',
+      fullBleedBackground: true,
     },
     {
       id: 3,
-      title: 'Полезные статьи',
-      subtitle: 'Как подготовиться к сдаче анализов',
-      description: 'Памятка от наших специалистов лабораторной диагностики: что можно и нельзя делать перед сдачей крови.',
-      image: 'https://static.tildacdn.com/tild6563-3065-4437-b165-393762613063/photo.jpg',
-      link: '/news',
-      linkText: 'Читать статью',
+      title: 'КОНФЕРЕНЦИЯ',
+      subtitle: 'Репродуктивная медицина: краеугольные вопросы',
+      description:
+        'Узнайте о последних достижениях в лечении бесплодия и программах ЭКО',
+      image: IMAGES.conference,
+      link: '/events/conference-7',
+      linkText: 'Подробнее о мероприятии',
       badgeColor: 'bg-white shadow-sm text-violet-600',
-      bgLight: 'bg-violet-50/50'
-    }
+      bgLight: 'bg-violet-50/50',
+      direction: 'vrt',
+      fullBleedBackground: true,
+      promoId: 3,
+    },
   ];
 };

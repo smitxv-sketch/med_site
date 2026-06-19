@@ -12,6 +12,8 @@ import { GhostTyping } from '@/shared/ui/GhostTyping';
 
 import { MobileHeroRegistry } from './HeroMobileVariants';
 import { DesktopHeroRegistry } from './HeroDesktopVariants';
+import { HeroVariantC } from './HeroVariantC';
+import { HERO_THEME } from '../config/heroTheme';
 
 export function HeroSection() {
   const heroRepository = useHeroRepository();
@@ -25,8 +27,12 @@ export function HeroSection() {
   const desktopVariant = useUISettingsStore(state => state.heroDesktopVariant);
 
   const isE = mobileVariant === 'E';
+  const isVariantC = desktopVariant === 'C';
+  const isVariantD = desktopVariant === 'D';
 
-  const { currentSlide, nextSlide, prevSlide, goToSlide } = useSlider(slides.length, 9000);
+  const slideInterval = isVariantD ? HERO_THEME.slideIntervalMs : 9000;
+  const { currentSlide, nextSlide, prevSlide, goToSlide, pause, resume } =
+    useSlider(slides.length, slideInterval, { pauseOnHover: isVariantD });
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isProgrammaticScroll = useRef(false);
@@ -112,20 +118,39 @@ export function HeroSection() {
 
   return (
     <section className="relative group flex flex-col w-full" data-marketing-block="true" data-variant={mobileVariant}>
+      {/* Вариант C: единый адаптивный layout (слайдер + плашки) */}
+      {isVariantC && (
+        <HeroVariantC
+          slides={slides}
+          currentSlide={currentSlide}
+          goToSlide={goToSlide}
+        />
+      )}
+
       {/* ========================================== */}
-      {/* DESKTOP LAYOUT                             */}
+      {/* DESKTOP LAYOUT (A / B / D)                */}
       {/* ========================================== */}
+      {!isVariantC && (
       <div className="hidden lg:flex w-full">
         {DesktopHeroRegistry[desktopVariant] ? (
-          React.createElement(DesktopHeroRegistry[desktopVariant], { slides, currentSlide, goToSlide, nextSlide, prevSlide })
+          React.createElement(DesktopHeroRegistry[desktopVariant], {
+            slides,
+            currentSlide,
+            goToSlide,
+            nextSlide,
+            prevSlide,
+            ...(isVariantD ? { pause, resume } : {}),
+          })
         ) : (
           <DesktopHeroRegistry.A slides={slides} currentSlide={currentSlide} goToSlide={goToSlide} nextSlide={nextSlide} prevSlide={prevSlide} />
         )}
       </div>
+      )}
 
       {/* ========================================== */}
-      {/* MOBILE LAYOUT (A/B/C/D/E Variants)         */}
+      {/* MOBILE LAYOUT (скрыт для варианта C)       */}
       {/* ========================================== */}
+      {!isVariantC && (
       <div className={`flex lg:hidden flex-col relative w-full ${isE ? 'h-[100svh] pb-0 -mt-[80px] sm:-mt-[96px]' : (mobileVariant === 'A' ? 'pb-8 bg-gray-50/50' : 'pb-8')}`}>
         
         {/* Top CTA Block for Variant A (Static outside slider) */}
@@ -201,6 +226,7 @@ export function HeroSection() {
           </div>
         )}
       </div>
+      )}
     </section>
   );
 }

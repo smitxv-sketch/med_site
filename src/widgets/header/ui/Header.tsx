@@ -9,7 +9,7 @@ import { Container } from '@/shared/ui/Container';
 
 export function Header() {
   const { openMenu } = useMobileMenuStore();
-  const { homePageConcept, heroMobileVariant, heroDesktopVariant } = useUISettingsStore();
+  const { homePageConcept, heroMobileVariant } = useUISettingsStore();
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
 
@@ -30,11 +30,8 @@ export function Header() {
   }, []);
 
   const isHome = location.pathname === "/";
-  // The header should be transparent on home page if the mobile variant is the fullscreen variant 'E' (on mobile) OR 'D' (on desktop)
-  const isImmersive = isHome && (
-    (isMobile && heroMobileVariant === 'E') ||
-    (!isMobile && heroDesktopVariant === 'D')
-  );
+  // Прозрачный хедер только для fullscreen mobile (E)
+  const isImmersive = isHome && isMobile && heroMobileVariant === 'E';
   const isTransparent = isImmersive && !scrolled;
 
   const headerSurfaceClass = isTransparent

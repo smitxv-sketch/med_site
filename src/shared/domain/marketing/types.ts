@@ -13,7 +13,7 @@ export type UrgencyLevel = 'none' | 'soft' | 'hard';
 export interface EngineState {
   // Architectural Blocks
   homePageConcept: 'classic' | 'immersive';
-  heroDesktopVariant: 'A' | 'B' | 'C';
+  heroDesktopVariant: 'A' | 'B' | 'C' | 'D';
   heroMobileVariant: 'A' | 'B' | 'C' | 'D' | 'E' | 'F';
   bottomNavVariant: 'A' | 'B' | 'C' | 'D';
   bottomNavBehavior: 'always-visible' | 'hide-on-scroll-down' | 'hidden-on-top';

@@ -4,8 +4,10 @@ import { Button } from '@/shared/ui/Button';
 import { Card } from '@/shared/ui/Card';
 import { GhostTyping } from '@/shared/ui/GhostTyping';
 
-// Define the interface for a Slide (matching what is returned from fetchHeroSlides)
+export type HeroDirection = 'vrt' | 'clinic' | 'cosmo';
+
 export interface HeroSlide {
+  id: number;
   title: string;
   subtitle: string;
   description: string;
@@ -14,6 +16,15 @@ export interface HeroSlide {
   image: string;
   badgeColor: string;
   bgLight: string;
+  /** Направление для бейджа (вариант D) */
+  direction?: HeroDirection;
+  /** Полноэкранный фон на слайде (вариант C) */
+  fullBleedBackground?: boolean;
+  /** Акцент без фото: green | violet */
+  themeAccent?: 'green' | 'violet';
+  ctaSecondaryText?: string;
+  ctaSecondaryUrl?: string;
+  promoId?: number;
 }
 
 export interface HeroMobileVariantProps {
