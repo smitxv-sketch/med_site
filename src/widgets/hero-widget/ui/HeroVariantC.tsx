@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { usePromotionsRepository } from '@/shared/di/DIContext';
 import { Button } from '@/shared/ui/Button';
 import { GhostTyping } from '@/shared/ui/GhostTyping';
-import { HeroSlide } from './HeroMobileVariants';
+import type { HeroSlide } from '@/shared/domain/hero/types';
 import { HeroSlideDots } from './HeroSlideDots';
 import {
   HERO_DOCTOR_CARD,
@@ -18,6 +18,7 @@ import {
   getDaysUntilExpiry,
   pickActiveVrtPromotion,
 } from '../lib/heroUtils';
+import { HeroPromoProgress } from './HeroPromoProgress';
 
 export interface HeroVariantCProps {
   slides: HeroSlide[];
@@ -74,9 +75,7 @@ function HeroCSlider({
               style={{
                 backgroundColor: accentViolet
                   ? HERO_THEME.brandViolet
-                  : accentGreen
-                    ? HERO_THEME.brandGreen
-                    : HERO_THEME.brandGreen,
+                  : HERO_THEME.brandGreen,
               }}
             />
           )}
@@ -132,10 +131,10 @@ function HeroCSlider({
               style={
                 isVrtSlide
                   ? {
-                      backgroundColor: '#ffffff',
+                      backgroundColor: 'white',
                       color: HERO_THEME.brandViolet,
                     }
-                  : { backgroundColor: HERO_THEME.brandGreen, color: '#ffffff' }
+                  : { backgroundColor: HERO_THEME.brandGreen, color: 'white' }
               }
             >
               {slide.linkText}
@@ -175,7 +174,16 @@ function HeroDoctorCard({ className }: { className?: string }) {
       </h3>
       <p className="text-xs text-gray-600 mb-1">{card.doctorName}</p>
       <p className="text-[11px] text-gray-500 mb-2">{card.specialization}</p>
-      <p className="text-sm text-gray-500 mb-3">{card.discount}</p>
+      <span
+        className="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full mt-1 mb-3 w-fit"
+        style={{
+          backgroundColor: HERO_THEME.discountBadge.bg,
+          color: HERO_THEME.discountBadge.color,
+          border: `0.5px solid ${HERO_THEME.discountBadge.border}`,
+        }}
+      >
+        {card.discount}
+      </span>
 
       <div className="absolute top-4 right-4">
         <img
@@ -245,21 +253,28 @@ function HeroVrtCard({ className }: { className?: string }) {
         </>
       ) : (
         <>
-          <h3 className="text-base font-medium text-[var(--color-text-primary,#111827)] leading-snug pr-14 mb-1 flex-1">
+          <h3 className="text-base font-medium text-gray-900 leading-snug pr-14 mb-1 flex-1">
             {vrtPromo.title}
           </h3>
           {daysLeft !== null && (
-            <p
-              className="text-xs mb-3"
-              style={{ color: HERO_THEME.brandViolet }}
-            >
-              {formatDaysLeft(daysLeft)}
-            </p>
+            <>
+              <p
+                className="text-xs mb-0"
+                style={{ color: HERO_THEME.brandViolet }}
+              >
+                {formatDaysLeft(daysLeft)}
+              </p>
+              <HeroPromoProgress
+                startDate={vrtPromo.startDate}
+                endDate={vrtPromo.endDate}
+                daysLeft={daysLeft}
+              />
+            </>
           )}
           <Button
             as={Link}
             to="/booking"
-            className="rounded-[30px] text-[13px] font-medium text-white h-9 px-5 w-fit mb-2"
+            className="rounded-[30px] text-[13px] font-medium text-white h-9 px-5 w-fit mt-3 mb-2"
             style={{ backgroundColor: HERO_THEME.brandViolet }}
           >
             Записаться
@@ -285,17 +300,24 @@ function HeroVrtCard({ className }: { className?: string }) {
   );
 }
 
-/** Вариант C: слайдер слева + две плашки справа (адаптив с md) */
+/** Вариант C: слайдер слева + две плашки справа (только desktop) */
 export function HeroVariantC({
   slides,
   currentSlide,
   goToSlide,
 }: HeroVariantCProps) {
   return (
-    <section className="w-full pt-4" data-variant="C">
-      {/* Desktop / tablet: grid */}
+    <section
+      className="w-full pt-4 mb-[calc(var(--hero-gap-to-promotions)-var(--spacing-section))]"
+      style={
+        {
+          '--hero-gap-to-promotions': `${HERO_THEME.gapToPromotionsDesktop}px`,
+        } as React.CSSProperties
+      }
+      data-variant="C"
+    >
       <div
-        className="hidden md:grid w-full min-h-[380px]"
+        className="grid w-full min-h-[380px]"
         style={{
           gridTemplateColumns: `1fr ${HERO_THEME.rightColumnWidth}px`,
           gap: HERO_THEME.gridGap,
@@ -309,20 +331,6 @@ export function HeroVariantC({
         <div className="flex flex-col min-h-[380px]" style={{ gap: HERO_THEME.gridGap }}>
           <HeroDoctorCard />
           <HeroVrtCard />
-        </div>
-      </div>
-
-      {/* Mobile: слайдер + горизонтальный скролл плашек */}
-      <div className="flex md:hidden flex-col gap-3">
-        <HeroCSlider
-          slides={slides}
-          currentSlide={currentSlide}
-          goToSlide={goToSlide}
-          className="min-h-[260px] h-[260px]"
-        />
-        <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide -mx-1 px-1">
-          <HeroDoctorCard className="min-w-[260px] snap-center shrink-0 min-h-[200px]" />
-          <HeroVrtCard className="min-w-[260px] snap-center shrink-0 min-h-[200px]" />
         </div>
       </div>
     </section>

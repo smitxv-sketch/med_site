@@ -211,11 +211,11 @@ export function DoctorPage() {
           <div className="flex flex-col md:flex-row border-b border-gray-100 w-full min-w-0">
           
           {/* Photo Section */}
-          <div className="w-full md:w-2/5 lg:w-1/3 bg-[#f4f5f7] relative border-b md:border-b-0 md:border-r border-gray-100 shrink-0 min-w-0 flex flex-col justify-end">
+          <div className="w-full md:w-2/5 lg:w-1/3 bg-gray-50 relative border-b md:border-b-0 md:border-r border-gray-100 shrink-0 min-w-0 flex flex-col justify-end">
             <div className="absolute top-4 left-4 z-20 pointer-events-none hidden md:block">
                <SocialProofFeaturedBadges featuredBadge={doctor.name.length % 2 === 0 ? 'top10' : 'expert'} className="shadow-sm backdrop-blur-md bg-opacity-95" />
             </div>
-            <div className="aspect-[4/5] sm:aspect-square md:aspect-[3/4] w-full relative overflow-hidden bg-[#f4f5f7]">
+            <div className="aspect-[4/5] sm:aspect-square md:aspect-[3/4] w-full relative overflow-hidden bg-gray-50">
               {doctor.image ? (
                 <img 
                   src={doctor.image} 
@@ -306,9 +306,9 @@ export function DoctorPage() {
               <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">Рейтинг врача</h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[
-                  { source: 'ПроДокторов', rating: 4.9, count: 128, color: 'bg-[#0083CA]', bg: 'bg-blue-50/50 hover:bg-blue-50', border: 'border-blue-100', letter: 'П' },
-                  { source: '2ГИС', rating: 5.0, count: 45, color: 'bg-[#A4C516]', bg: 'bg-[#A4C516]/5 hover:bg-[#A4C516]/10', border: 'border-[#A4C516]/20', letter: '2' },
-                  { source: 'Яндекс', rating: 4.8, count: 89, color: 'bg-[#FF0000]', bg: 'bg-red-50/50 hover:bg-red-50', border: 'border-red-100', letter: 'Я' }
+                  { source: 'ПроДокторов', rating: 4.9, count: 128, color: 'bg-platform-prodoctorov', bg: 'bg-blue-50/50 hover:bg-blue-50', border: 'border-blue-100', letter: 'П' },
+                  { source: '2ГИС', rating: 5.0, count: 45, color: 'bg-platform-gis2', bg: 'bg-platform-gis2/5 hover:bg-platform-gis2/10', border: 'border-platform-gis2/20', letter: '2' },
+                  { source: 'Яндекс', rating: 4.8, count: 89, color: 'bg-platform-yandex', bg: 'bg-red-50/50 hover:bg-red-50', border: 'border-red-100', letter: 'Я' }
                 ].map((review, idx) => (
                   <Card key={idx} as="a" href="#" hoverable className={`flex items-center justify-between p-3 ${review.bg} ${review.border}`}>
                     <div className="flex items-center gap-3">

@@ -210,7 +210,7 @@ export function WidgetEditorWrapper({
               <div className="flex items-center gap-2 mx-1 scale-[0.9] origin-left">
                 <div className="flex items-center bg-gray-50 rounded-lg p-1 border border-gray-100 shadow-inner">
                   <span className="text-[10px] text-gray-400/80 font-black uppercase mx-2 shrink-0">Моб</span>
-                  {['A', 'B', 'C', 'E'].map((v) => {
+                  {['A', 'B', 'C', 'E', 'F'].map((v) => {
                     const isActive = heroMobileVariant === v;
                     return (
                       <button

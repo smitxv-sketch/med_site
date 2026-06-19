@@ -4,6 +4,7 @@ import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
 import { useCmsStore } from '@/shared/store/cmsStore';
 import { ParameterTooltip, InsightCard } from '../components/SharedComponents';
 import { WIDGETS_REGISTRY } from '@/shared/config/widgetsRegistry';
+import { PRIMITIVE } from '@/shared/config/designTokens';
 
 type Props = { store: any; BLOCKS?: any; THEMES?: any; presetTab?: any; setPresetTab?: any; openMatrix?: () => void };
 
@@ -155,7 +156,8 @@ export const MarketingTab = ({ store, openMatrix }: Props) => {
                             store.setKey('urgencyLevel', s.id as any);
                             store.setKey('marketingTriggers', s.id !== 'none');
                           }}
-                          className={`flex-1 py-2.5 text-xs font-bold transition-all rounded-md flex flex-col items-center gap-1 ${store.urgencyLevel === s.id ? 'bg-white shadow text-[#E91E63]' : 'text-gray-500 hover:text-gray-700'}`}
+                          className={`flex-1 py-2.5 text-xs font-bold transition-all rounded-md flex flex-col items-center gap-1 ${store.urgencyLevel === s.id ? 'bg-white shadow' : 'text-gray-500 hover:text-gray-700'}`}
+                          style={store.urgencyLevel === s.id ? { color: PRIMITIVE.marketing.rose } : undefined}
                         >
                           <span className="text-lg mb-0.5">{s.emoji}</span>
                           {s.label}

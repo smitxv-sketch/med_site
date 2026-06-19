@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useUISettingsStore } from '../../shared/store/uiSettingsStore';
+import { PRIMITIVE } from '../../shared/config/designTokens';
 
 // Approximates perceived luminance to decide if text should be dark or light
 function getLuminance(h: number, s: number, l: number) {
@@ -34,7 +35,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     let hue = customHue; 
     if (colorTheme !== 'custom') {
       switch (colorTheme) {
-        case 'green': hue = 109; break; // Match original site (#429A2E)
+        case 'green': hue = 109; break; // Match original site green hue
         case 'blue': hue = 210; break;
         case 'purple': hue = 265; break;
         case 'rose': hue = 345; break;
@@ -69,7 +70,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // Luminance calculation for a11y contrast
     const luminance = getLuminance(hue, saturation, lightness);
     const isLightBrandColor = luminance > 165; // threshold for perceived brightness (increased to allow white on standard green)
-    root.style.setProperty('--brand-fg', isLightBrandColor ? '#111827' : '#FFFFFF');
+    root.style.setProperty('--brand-fg', isLightBrandColor ? PRIMITIVE.semantic.textPrimary : PRIMITIVE.semantic.white);
 
     // Apply main brand properties
     root.style.setProperty('--brand-h', `${hue}`);

@@ -8,7 +8,7 @@ import { usePromotionsRepository } from '@/shared/di/DIContext';
 import { Button } from '@/shared/ui/Button';
 import { Card } from '@/shared/ui/Card';
 import { GhostTyping } from '@/shared/ui/GhostTyping';
-import { HeroSlide } from './HeroMobileVariants';
+import type { HeroSlide } from '@/shared/domain/hero/types';
 import { HeroSlideDots } from './HeroSlideDots';
 import { HERO_THEME } from '../config/heroTheme';
 import { formatDaysLeft, getDaysUntilExpiry } from '../lib/heroUtils';

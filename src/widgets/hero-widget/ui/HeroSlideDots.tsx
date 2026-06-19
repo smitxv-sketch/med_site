@@ -8,6 +8,8 @@ interface HeroSlideDotsProps {
   onSelect: (index: number) => void;
   variant?: 'light' | 'dark';
   className?: string;
+  activeWidth?: number;
+  inactiveSize?: number;
 }
 
 export function HeroSlideDots({
@@ -16,6 +18,8 @@ export function HeroSlideDots({
   onSelect,
   variant = 'dark',
   className,
+  activeWidth = HERO_THEME.dotActiveWidth,
+  inactiveSize = HERO_THEME.dotInactiveSize,
 }: HeroSlideDotsProps) {
   const inactive =
     variant === 'light' ? 'bg-white/40 hover:bg-white/60' : 'bg-gray-300 hover:bg-gray-400';
@@ -36,9 +40,9 @@ export function HeroSlideDots({
               : cn('rounded-full', inactive)
           )}
           style={{
-            width:
-              idx === current ? HERO_THEME.dotActiveWidth : HERO_THEME.dotInactiveSize,
-            height: HERO_THEME.dotInactiveSize,
+            width: idx === current ? activeWidth : inactiveSize,
+            height: inactiveSize,
+            borderRadius: idx === current ? 3 : undefined,
           }}
         />
       ))}

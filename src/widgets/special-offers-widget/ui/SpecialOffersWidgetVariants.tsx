@@ -11,10 +11,10 @@ import { SpecialOffer } from '@/shared/infrastructure/storage/SpecialOffersRepos
 
 function getBackgroundGradients(index: number) {
   const gradients = [
-    'from-blue-600/90 to-cyan-600/90',
-    'from-rose-600/90 to-orange-600/90',
-    'from-emerald-600/90 to-teal-600/90',
-    'from-violet-600/90 to-purple-600/90',
+    'from-brand-blue/90 to-cyan-600/90',
+    'from-brand-orange/90 to-orange-600/90',
+    'from-brand/90 to-brand-turquoise/90',
+    'from-brand-violet/90 to-purple-600/90',
   ];
   return gradients[index % gradients.length];
 }

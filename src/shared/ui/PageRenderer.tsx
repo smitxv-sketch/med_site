@@ -1,63 +1,15 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
 import { PageBlock } from '@/shared/types/block';
 import { SectionErrorBoundary } from '@/shared/ui/SectionErrorBoundary';
 import { WidgetEditorWrapper } from '@/widgets/marketing-control-panel/ui/components/WidgetEditorWrapper';
-import { WIDGETS_REGISTRY } from '@/shared/config/widgetsRegistry';
+import {
+  WIDGETS_REGISTRY,
+  getWidgetComponent,
+} from '@/shared/config/widgetManifest';
 import { hydrateProps } from '@/shared/lib/dataBinding';
 import { useSEO } from '@/shared/lib/seo/useSEO';
 import { useCmsStore } from '@/shared/store/cmsStore';
-
-import { HeroWidget } from '@/widgets/hero-widget/ui/HeroWidget';
-import { CategoriesWidget } from '@/widgets/categories-widget/ui/CategoriesWidget';
-import { HeaderWidget } from '@/widgets/header-widget';
-
-// Вспомогательная функция для ленивой загрузки именованных экспортов
-const lazyWidget = (importFunc: () => Promise<any>, exportName: string) => 
-  lazy(() => importFunc().then(module => ({ default: module[exportName] })));
-
-// Динамические импорты (Stage 2: Lazy-Loading)
-const PromotionsWidget = lazyWidget(() => import('@/widgets/promotions-widget/ui/PromotionsWidget'), 'PromotionsWidget');
-const SpecialOffersWidget = lazyWidget(() => import('@/widgets/special-offers-widget/ui/SpecialOffersWidget'), 'SpecialOffersWidget');
-const DirectionsWidget = lazyWidget(() => import('@/widgets/directions-widget/ui/DirectionsWidget'), 'DirectionsWidget');
-const DoctorsWidget = lazyWidget(() => import('@/widgets/doctors-widget/ui/DoctorsWidget'), 'DoctorsWidget');
-const LocationsWidget = lazyWidget(() => import('@/widgets/locations-widget/ui/LocationsWidget'), 'LocationsWidget');
-const ReviewsWidget = lazyWidget(() => import('@/widgets/reviews-widget/ui/ReviewsWidget'), 'ReviewsWidget');
-const GalleryWidget = lazyWidget(() => import('@/widgets/gallery-widget/ui/GalleryWidget'), 'GalleryWidget');
-const FeaturesWidget = lazyWidget(() => import('@/widgets/features-widget/ui/FeaturesWidget'), 'FeaturesWidget');
-const TimelineWidget = lazyWidget(() => import('@/widgets/timeline-widget/ui/TimelineWidget'), 'TimelineWidget');
-const FaqWidget = lazyWidget(() => import('@/widgets/faq-widget/ui/FaqWidget'), 'FaqWidget');
-const CalculatorWidget = lazyWidget(() => import('@/widgets/calculator-widget/ui/CalculatorWidget'), 'CalculatorWidget');
-const PortfolioWidget = lazyWidget(() => import('@/widgets/portfolio-widget/ui/PortfolioWidget'), 'PortfolioWidget');
-const ShowcaseWidget = lazyWidget(() => import('@/widgets/showcase-widget'), 'ShowcaseWidget');
-const ProgramWidget = lazyWidget(() => import('@/widgets/program-widget'), 'ProgramWidget');
-const FooterWidget = lazyWidget(() => import('@/widgets/footer-widget'), 'FooterWidget');
-
-const GridContainerWidget = lazyWidget(() => import('@/widgets/container-widget/ui/GridContainerWidget'), 'GridContainerWidget');
-
-const WIDGET_MAP: Record<string, React.FC<any>> = {
-  HeroWidget,
-  CategoriesWidget,
-  PromotionsWidget,
-  SpecialOffersWidget,
-  DirectionsWidget,
-  DoctorsWidget,
-  LocationsWidget,
-  ReviewsWidget,
-  GalleryWidget,
-  FeaturesWidget,
-  TimelineWidget,
-  FaqWidget,
-  CalculatorWidget,
-  PortfolioWidget,
-  GridContainerWidget,
-  showcase: ShowcaseWidget,
-  program: ProgramWidget,
-  header: HeaderWidget,
-  footer: FooterWidget,
-  hero: HeroWidget,
-  features: FeaturesWidget,
-};
 
 interface PageRendererProps {
   blocks: PageBlock[];
@@ -132,7 +84,7 @@ export function PageRenderer({ blocks, onUpdateBlocks, isNested = false, content
           }
         }
 
-        const WidgetComponent = WIDGET_MAP[blockToRender.type];
+        const WidgetComponent = getWidgetComponent(blockToRender.type);
         if (!WidgetComponent) {
           if (isDevMode) {
             return (

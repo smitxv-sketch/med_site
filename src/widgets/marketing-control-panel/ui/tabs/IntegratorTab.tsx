@@ -1,13 +1,9 @@
 import React from 'react';
 import { Settings2 } from 'lucide-react';
 import { ParameterTooltip, InsightCard } from '../components/SharedComponents';
+import { INTEGRATOR_THEME_PRESETS, PRIMITIVE } from '@/shared/config/designTokens';
 
-const THEMES = [
-  { id: 'green', name: 'Источник (Классика)', hex: '#4CAF50' },
-  { id: 'blue', name: 'Медицина (Доверие)', hex: '#03A9F4' },
-  { id: 'purple', name: 'Премиум (Уверенность)', hex: '#673AB7' },
-  { id: 'rose', name: 'Забота (Теплота)', hex: '#E91E63' },
-];
+const THEMES = INTEGRATOR_THEME_PRESETS;
 
 type Props = { store: any };
 
@@ -93,11 +89,11 @@ Neo: грубые черные бордеры и жесткие тени (бру
 None/Bordered: Плоский дизайн." /></h4>
                         <div className="flex flex-wrap gap-2 p-2">
                           {[
-                            { id: 'none', shadow: 'none', border: '1px solid #e5e7eb' },
+                            { id: 'none', shadow: 'none', border: `1px solid ${PRIMITIVE.marketing.borderGray}` },
                             { id: 'soft', shadow: '0 4px 12px rgba(0,0,0,0.05)', border: '1px solid transparent' },
                             { id: 'hard', shadow: '0 10px 15px -3px rgba(0,0,0,0.1)', border: '1px solid transparent' },
-                            { id: 'bordered', shadow: 'none', border: '1px solid #d1d5db' },
-                            { id: 'neo', shadow: '4px 4px 0px 0px rgba(0,0,0,0.9)', border: '2px solid #000' }
+                            { id: 'bordered', shadow: 'none', border: `1px solid ${PRIMITIVE.marketing.borderGrayDark}` },
+                            { id: 'neo', shadow: '4px 4px 0px 0px rgba(0,0,0,0.9)', border: `2px solid ${PRIMITIVE.semantic.black}` }
                           ].map(s => (
                             <button
                               key={s.id}

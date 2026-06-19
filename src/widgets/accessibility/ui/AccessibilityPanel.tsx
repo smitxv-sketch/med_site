@@ -1,6 +1,7 @@
 import React from 'react';
 import { Type, Image as ImageIcon, Palette, X, EyeOff } from 'lucide-react';
 import { useAccessibilityStore } from '@/shared/store/accessibilityStore';
+import { PRIMITIVE } from '@/shared/config/designTokens';
 
 export function AccessibilityPanel() {
   const { isActive, fontSize, theme, images, setFontSize, setTheme, setImages, toggleActive } = useAccessibilityStore();
@@ -48,7 +49,7 @@ export function AccessibilityPanel() {
               <button 
                 onClick={() => setTheme('standard')}
                 className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold ${theme === 'standard' ? 'border-blue-500 ring-2 ring-blue-200' : 'border-gray-300'}`}
-                style={{ background: '#ffffff', color: '#000000' }}
+                style={{ background: PRIMITIVE.a11y.bgLight, color: PRIMITIVE.a11y.fgLight }}
                 title="Стандартная"
               >
                 Ц
@@ -56,7 +57,7 @@ export function AccessibilityPanel() {
               <button 
                 onClick={() => setTheme('bw')}
                 className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold ${theme === 'bw' ? 'border-blue-500 ring-2 ring-blue-200' : 'border-gray-300'}`}
-                style={{ background: '#ffffff', color: '#000000' }}
+                style={{ background: PRIMITIVE.a11y.bgLight, color: PRIMITIVE.a11y.fgLight }}
                 title="Черным по белому"
               >
                 А
@@ -64,7 +65,7 @@ export function AccessibilityPanel() {
               <button 
                 onClick={() => setTheme('wb')}
                 className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold ${theme === 'wb' ? 'border-blue-500 ring-2 ring-blue-200' : 'border-gray-300'}`}
-                style={{ background: '#000000', color: '#ffffff' }}
+                style={{ background: PRIMITIVE.a11y.bgDark, color: PRIMITIVE.a11y.fgDark }}
                 title="Белым по черному"
               >
                 А
@@ -72,7 +73,7 @@ export function AccessibilityPanel() {
               <button 
                 onClick={() => setTheme('blue')}
                 className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold ${theme === 'blue' ? 'border-blue-500 ring-2 ring-blue-200' : 'border-gray-300'}`}
-                style={{ background: '#9dd1ff', color: '#063462' }}
+                style={{ background: PRIMITIVE.a11y.bgBlue, color: PRIMITIVE.a11y.fgBlue }}
                 title="Темно-синим по голубому"
               >
                 А

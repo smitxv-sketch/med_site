@@ -2,6 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
 import { FaqItem, FaqVariantA, FaqVariantB, FaqVariantC } from './FaqWidgetVariants';
+import { resolveWidgetVariants } from '@/shared/lib/widgets/resolveWidgetVariant';
+import {
+  FAQ_VARIANT_ALIASES,
+  FAQ_VALID_VARIANTS,
+} from '@/shared/lib/widgets/variantAliases';
 
 const MOCK_FAQ: FaqItem[] = [
   {
@@ -57,16 +62,26 @@ export function FaqWidget({
 }: FaqWidgetProps) {
   const { layoutDensity } = useUISettingsStore();
 
-  const mapVariant = (v: string | undefined | null, defaultVal: string) => {
-    if (!v || v === '-') return defaultVal;
-    if (v === 'A' || v === 'grid' || v === 'fluid') return 'grid';
-    if (v === 'B' || v === 'accordion' || v === 'stack') return 'accordion';
-    if (v === 'C' || v === 'split') return 'split';
-    return defaultVal;
-  };
-
-  const resolvedDesktopVariant = mapVariant(desktopVariant || layoutPattern || variant || variantOverride, 'accordion');
-  const resolvedMobileVariant = mapVariant(mobileVariant || layoutPattern || variant || variantOverride, 'accordion');
+  const { desktop: resolvedDesktopVariant, mobile: resolvedMobileVariant } =
+    resolveWidgetVariants(
+      {
+        desktopVariant,
+        mobileVariant,
+        layoutPattern,
+        variant,
+        variantOverride,
+      },
+      {
+        defaultValue: 'accordion',
+        aliasMap: FAQ_VARIANT_ALIASES,
+        validValues: FAQ_VALID_VARIANTS,
+      },
+      {
+        defaultValue: 'accordion',
+        aliasMap: FAQ_VARIANT_ALIASES,
+        validValues: FAQ_VALID_VARIANTS,
+      }
+    );
   const dataIntent = intent || 'educational';
   
   const finalLayout = resolvedDesktopVariant;

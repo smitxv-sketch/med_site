@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import marketingConfig from '../api/marketingConfig.json';
 import { useCmsStore } from './cmsStore';
+import { ENGINE_WIDGET_DEFAULTS } from '../domain/marketing/engineDefaults';
 import { 
   EngineState, StrategyPreset, MarketingRule,
   ColorTheme, ColorIntensity, FontFamily, ShadowStyle, AnimationTheme,
@@ -65,7 +66,7 @@ interface UISettingsState extends EngineState {
   setBottomNavBehavior: (behavior: 'always-visible' | 'hide-on-scroll-down' | 'hidden-on-top') => void;
   setHeroDesktopVariant: (variant: 'A' | 'B' | 'C' | 'D') => void;
   setHeroMobileVariant: (variant: 'A' | 'B' | 'C' | 'D' | 'E' | 'F') => void;
-  setBottomNavVariant: (variant: 'A' | 'B' | 'C' | 'D') => void;
+  setBottomNavVariant: (variant: 'A' | 'B' | 'C' | 'D' | 'E') => void;
   setBottomNavActionAnimation: (animation: 'pulse' | 'border-beam' | 'shimmer' | 'neon') => void;
   setHomePageConcept: (concept: 'classic' | 'immersive') => void;
   setDoctorsSectionVariant: (variant: 'A' | 'B') => void;
@@ -128,9 +129,9 @@ export const useUISettingsStore = create<UISettingsState>((set, get) => ({
   // SLICE 3: THEME & TOKENS STATE
   // ==========================================
   homePageConcept: 'classic',
-  heroDesktopVariant: 'C',
-  heroMobileVariant: 'A',
-  bottomNavVariant: 'A',
+  heroDesktopVariant: ENGINE_WIDGET_DEFAULTS.heroDesktopVariant,
+  heroMobileVariant: ENGINE_WIDGET_DEFAULTS.heroMobileVariant,
+  bottomNavVariant: ENGINE_WIDGET_DEFAULTS.bottomNavVariant,
   bottomNavBehavior: 'hide-on-scroll-down',
   bottomNavActionAnimation: 'pulse',
   doctorsSectionVariant: 'A',

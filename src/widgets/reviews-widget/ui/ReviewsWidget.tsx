@@ -4,6 +4,11 @@ import { Review } from '@/entities/review/model/types';
 import { reviewsRepository } from '@/entities/review/api/reviewsRepository';
 import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
 import { ReviewsVariantA, ReviewsVariantB, ReviewsVariantC, ReviewsVariantD } from './ReviewsWidgetVariants';
+import { resolveWidgetVariants } from '@/shared/lib/widgets/resolveWidgetVariant';
+import {
+  REVIEWS_VARIANT_ALIASES,
+  REVIEWS_VALID_VARIANTS,
+} from '@/shared/lib/widgets/variantAliases';
 
 export type WidgetIntent = 'educational' | 'direct-response' | 'immersive';
 export type WidgetLayoutPattern = 'split' | 'grid' | 'stack' | 'fluid';
@@ -51,17 +56,26 @@ export function ReviewsWidget({
   }, [limit]);
 
   // Determine layout maps
-  const mapVariant = (v: string | undefined | null, defaultVal: string) => {
-    if (!v || v === '-') return defaultVal;
-    if (v === 'A' || v === 'grid') return 'grid';
-    if (v === 'B' || v === 'carousel' || v === 'stack') return 'carousel'; // carousel acts as stack on mobile internally
-    if (v === 'C' || v === 'masonry' || v === 'split') return 'masonry';
-    if (v === 'D' || v === 'slider-filtered' || v === 'fluid') return 'slider-filtered';
-    return defaultVal;
-  };
-
-  const resolvedDesktopVariant = mapVariant(desktopVariant || layoutPattern || variant || variantOverride, 'grid');
-  const resolvedMobileVariant = mapVariant(mobileVariant || layoutPattern || variant || variantOverride, 'carousel');
+  const { desktop: resolvedDesktopVariant, mobile: resolvedMobileVariant } =
+    resolveWidgetVariants(
+      {
+        desktopVariant,
+        mobileVariant,
+        layoutPattern,
+        variant,
+        variantOverride,
+      },
+      {
+        defaultValue: 'grid',
+        aliasMap: REVIEWS_VARIANT_ALIASES,
+        validValues: REVIEWS_VALID_VARIANTS,
+      },
+      {
+        defaultValue: 'carousel',
+        aliasMap: REVIEWS_VARIANT_ALIASES,
+        validValues: REVIEWS_VALID_VARIANTS,
+      }
+    );
   const dataIntent = intent || 'educational';
   
   // For now using desktop resolution 

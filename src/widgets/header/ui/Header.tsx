@@ -84,7 +84,7 @@ export function Header() {
                 />
                 <div className="flex flex-col justify-center w-max">
                   <span
-                    className={`font-black text-[19px] leading-none tracking-wide transition-colors ${isTransparent ? "text-white" : "text-[#2C2C2C]"}`}
+                    className={`font-black text-[19px] leading-none tracking-wide transition-colors ${isTransparent ? "text-white" : "text-gray-900"}`}
                   >
                     ИСТОЧНИК
                   </span>
@@ -92,7 +92,7 @@ export function Header() {
                     {"КЛИНИКА".split("").map((letter, i) => (
                       <span
                         key={i}
-                        className={`font-bold text-[7.5px] leading-none transition-colors ${isTransparent ? "text-white/90" : "text-[#2C2C2C]"}`}
+                        className={`font-bold text-[7.5px] leading-none transition-colors ${isTransparent ? "text-white/90" : "text-gray-900"}`}
                         style={{ textShadow: "0px 0px 1px rgba(0,0,0,0.1)" }}
                       >
                         {letter}

@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 
 interface UseSliderOptions {
   pauseOnHover?: boolean;
+  /** Отключить автоплей (например, когда слайдер не используется на текущем viewport) */
+  enabled?: boolean;
 }
 
 export function useSlider(
@@ -9,7 +11,7 @@ export function useSlider(
   intervalMs: number = 9000,
   options: UseSliderOptions = {}
 ) {
-  const { pauseOnHover = false } = options;
+  const { pauseOnHover = false, enabled = true } = options;
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
@@ -47,11 +49,12 @@ export function useSlider(
   }, []);
 
   useEffect(() => {
+    if (!enabled) return;
     if (totalSlides <= 1) return;
     if (pauseOnHover && isPaused) return;
     const timer = setInterval(nextSlide, intervalMs);
     return () => clearInterval(timer);
-  }, [totalSlides, currentSlide, intervalMs, nextSlide, pauseOnHover, isPaused]);
+  }, [totalSlides, currentSlide, intervalMs, nextSlide, pauseOnHover, isPaused, enabled]);
 
   return {
     currentSlide,

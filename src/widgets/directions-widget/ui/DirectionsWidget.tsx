@@ -8,6 +8,11 @@ import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
 import { VariantSwitcher } from '@/shared/ui/VariantSwitcher';
 import { Button } from '@/shared/ui/Button';
 import { DirectionsRegistry } from './DirectionsWidgetVariants';
+import { resolveWidgetVariants } from '@/shared/lib/widgets/resolveWidgetVariant';
+import {
+  DIRECTIONS_VARIANT_ALIASES,
+  DIRECTIONS_VALID_VARIANTS,
+} from '@/shared/lib/widgets/variantAliases';
 
 import { Container } from '@/shared/ui/Container';
 
@@ -41,22 +46,27 @@ export function DirectionsWidget({ limit, variantOverride, variant, desktopVaria
 
   const { directionsSectionVariant, directionsIconVariant } = useUISettingsStore();
   
-  const mapVariant = (v: string | undefined, defaultVal: string) => {
-    if (!v) return defaultVal;
-    if (v === 'grid') return 'A'; // A handles desktop grid and mobile accordion based on internal css, but we will render it explicitly. 
-    // Wait, let's look at `DirectionsRegistry`. A, B, C.
-    // A = grid (desktop) / accordion (mobile)
-    // B = bento
-    // C = list
-    if (v === 'accordion') return 'A';
-    if (v === 'bento') return 'B';
-    if (v === 'list') return 'C';
-    if (['A', 'B', 'C'].includes(v)) return v;
-    return defaultVal;
-  };
-
-  const resolvedDesktopVariant = mapVariant(desktopVariant || layoutPattern || variant || variantOverride || directionsSectionVariant, 'A');
-  const resolvedMobileVariant = mapVariant(mobileVariant || layoutPattern || variant || variantOverride || directionsSectionVariant, 'A');
+  const { desktop: resolvedDesktopVariant, mobile: resolvedMobileVariant } =
+    resolveWidgetVariants(
+      {
+        desktopVariant,
+        mobileVariant,
+        layoutPattern,
+        variant,
+        variantOverride,
+        globalFallback: directionsSectionVariant,
+      },
+      {
+        defaultValue: 'A',
+        aliasMap: DIRECTIONS_VARIANT_ALIASES,
+        validValues: DIRECTIONS_VALID_VARIANTS,
+      },
+      {
+        defaultValue: 'A',
+        aliasMap: DIRECTIONS_VARIANT_ALIASES,
+        validValues: DIRECTIONS_VALID_VARIANTS,
+      }
+    );
 
   const iconVariant = (iconVariantOverride || directionsIconVariant) as 'A' | 'B' | 'C';
 

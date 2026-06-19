@@ -255,7 +255,7 @@ export function ServicePage() {
 
             {activeHeroMode === "F" && (
               <div className="w-full pt-4 sm:pt-6 mb-8">
-                <h1 className="text-3xl sm:text-5xl lg:text-[46px] font-extrabold text-[#1a1a1a] tracking-tight leading-[1.1] mb-6 sm:mb-10">
+                <h1 className="text-3xl sm:text-5xl lg:text-[46px] font-extrabold text-gray-900 tracking-tight leading-[1.1] mb-6 sm:mb-10">
                   {serviceData.title}
                 </h1>
                 
@@ -272,7 +272,7 @@ export function ServicePage() {
                         <Button
                           as={Link}
                           to="/booking"
-                          className="w-full sm:w-auto font-bold uppercase tracking-wide bg-[#3e9f3e] hover:bg-[#348834] active:bg-[#2d762d] text-white border-transparent text-[13px] px-8 py-3 rounded-sm shadow-sm transition-colors duration-200"
+                          className="w-full sm:w-auto font-bold uppercase tracking-wide bg-brand hover:brightness-95 active:brightness-90 text-white border-transparent text-[13px] px-8 py-3 rounded-sm shadow-sm transition-colors duration-200"
                         >
                           ЗАПИСАТЬСЯ
                         </Button>
@@ -283,28 +283,28 @@ export function ServicePage() {
                   <div className="lg:col-span-5 flex flex-col lg:pl-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-4 mb-8">
                         <div className="flex flex-col gap-1 text-center sm:text-left">
-                          <div className="text-[44px] leading-none font-bold text-[#1a1a1a] mb-1">5.0</div>
-                          <div className="text-[15px] sm:text-[13px] text-[#1a1a1a] font-medium leading-[1.3] max-w-[150px] mx-auto sm:mx-0">
+                          <div className="text-[44px] leading-none font-bold text-gray-900 mb-1">5.0</div>
+                          <div className="text-[15px] sm:text-[13px] text-gray-900 font-medium leading-[1.3] max-w-[150px] mx-auto sm:mx-0">
                             На основе более<br/>2534 отзывов
                           </div>
                         </div>
                         <div className="flex flex-col gap-1 text-center sm:text-left">
-                          <div className="text-[44px] leading-none font-bold text-[#1a1a1a] mb-1">5.0</div>
-                          <div className="text-[15px] sm:text-[13px] text-[#1a1a1a] font-medium leading-[1.3] max-w-[150px] mx-auto sm:mx-0">
-                            Средний рейтинг<br/>врачей на <span className="text-[#005bff]">prodoctorov</span>
+                          <div className="text-[44px] leading-none font-bold text-gray-900 mb-1">5.0</div>
+                          <div className="text-[15px] sm:text-[13px] text-gray-900 font-medium leading-[1.3] max-w-[150px] mx-auto sm:mx-0">
+                            Средний рейтинг<br/>врачей на <span className="text-platform-prodoctorov-text">prodoctorov</span>
                           </div>
                         </div>
                     </div>
 
                     <div className="mt-auto bg-gray-50 rounded-xl p-4 flex flex-wrap lg:flex-nowrap items-center justify-center sm:justify-between gap-4 border border-gray-100">
                       <div className="flex items-center gap-2 border-r border-gray-200 pr-4 last:border-0 last:pr-0">
-                          {renderPlatformBadge("yandex")} <span className="text-[13px] text-gray-700 font-semibold ml-1">Карты</span> <span className="font-extrabold text-[#1a1a1a] ml-1">5.0</span>
+                          {renderPlatformBadge("yandex")} <span className="text-[13px] text-gray-700 font-semibold ml-1">Карты</span> <span className="font-extrabold text-gray-900 ml-1">5.0</span>
                       </div>
                       <div className="flex items-center gap-2 border-r border-gray-200 pr-4 last:border-0 last:pr-0">
-                          {renderPlatformBadge("2gis")} <span className="text-[13px] text-gray-700 font-semibold ml-1">2GIS</span> <span className="font-extrabold text-[#1a1a1a] ml-1">4.8</span>
+                          {renderPlatformBadge("2gis")} <span className="text-[13px] text-gray-700 font-semibold ml-1">2GIS</span> <span className="font-extrabold text-gray-900 ml-1">4.8</span>
                       </div>
                       <div className="flex items-center gap-2">
-                          <span className="text-[#005bff] font-bold text-[13px] ml-1">prodoctorov</span> <span className="font-extrabold text-[#1a1a1a] ml-1">5.0</span>
+                          <span className="text-platform-prodoctorov-text font-bold text-[13px] ml-1">prodoctorov</span> <span className="font-extrabold text-gray-900 ml-1">5.0</span>
                       </div>
                     </div>
                   </div>

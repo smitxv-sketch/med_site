@@ -59,7 +59,7 @@ export function LoyaltyCard({ tier }: LoyaltyCardProps) {
         {/* Right Action (QR or VIP button) */}
         <div className="shrink-0 flex items-end h-full">
           {tier.vipBadge ? (
-            <button className="bg-[#D4AF37] text-black px-4 py-2.5 rounded-xl text-xs font-bold shadow-lg flex flex-col items-center justify-center gap-1.5 active:scale-95 transition-transform">
+            <button className="bg-yellow-600 text-black px-4 py-2.5 rounded-xl text-xs font-bold shadow-lg flex flex-col items-center justify-center gap-1.5 active:scale-95 transition-transform">
               <span className="text-lg leading-none">👨‍⚕️</span>
               Врач
             </button>

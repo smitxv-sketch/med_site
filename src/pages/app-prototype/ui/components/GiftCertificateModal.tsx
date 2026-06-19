@@ -37,7 +37,7 @@ export function GiftCertificateModal({ onClose }: GiftCertificateModalProps) {
       <div className="flex-1 overflow-y-auto bg-white p-5 flex flex-col pb-24 relative z-0">
         
         {/* Certificate Card */}
-        <div className="w-full aspect-[1.6] bg-gradient-to-tr from-[#38b2ac] to-[#81e6d9] rounded-3xl shadow-lg relative overflow-hidden mb-6">
+        <div className="w-full aspect-[1.6] bg-gradient-to-tr from-brand-turquoise to-teal-300 rounded-3xl shadow-lg relative overflow-hidden mb-6">
           {/* Abstract ribbon graphics imitation */}
           <div className="absolute inset-0 opacity-40 mix-blend-overlay" style={{
             backgroundImage: 'url("https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=800&q=80")',
@@ -48,10 +48,10 @@ export function GiftCertificateModal({ onClose }: GiftCertificateModalProps) {
           <div className="absolute inset-0 p-5 flex flex-col justify-between">
             <div className="flex items-center gap-2">
               <div className="bg-white/20 p-1.5 rounded-lg flex gap-1">
-                <div className="w-2 h-2 bg-[#ff5252] rounded-full"></div>
-                <div className="w-2 h-2 bg-[#4caf50] rounded-full"></div>
-                <div className="w-2 h-2 bg-[#9c27b0] rounded-full"></div>
-                <div className="w-2 h-2 bg-[#ff9800] rounded-full"></div>
+                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
               </div>
               <span className="text-white font-bold text-xs tracking-widest uppercase">Источник</span>
             </div>

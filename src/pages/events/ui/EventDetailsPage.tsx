@@ -180,7 +180,7 @@ export function EventDetailsPage() {
               </div>
 
               {event.benefits && event.benefits.length > 0 && (
-                <div className="bg-[#F8FAFC] rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-gray-100/80">
+                <div className="bg-slate-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-gray-100/80">
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-5 flex items-center gap-3">
                     <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-brand" />
                     Что вы получите

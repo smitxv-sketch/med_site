@@ -5,6 +5,11 @@ import { Doctor } from '@/widget/types';
 import { formatSpecialty } from '@/widget/utils/formatters';
 import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
 import { DoctorsVariantRegistry } from './DoctorsWidgetVariants';
+import { resolveWidgetVariants } from '@/shared/lib/widgets/resolveWidgetVariant';
+import {
+  DOCTORS_VARIANT_ALIASES,
+  DOCTORS_VALID_VARIANTS,
+} from '@/shared/lib/widgets/variantAliases';
 import { ProcessedDoctor } from '../types';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Container } from '@/shared/ui/Container';
@@ -29,23 +34,27 @@ export function DoctorsWidget({ directionId, limit, variantOverride, variant, de
   const globalVariant = useUISettingsStore(state => state.doctorsSectionVariant);
   const doctorsRepository = useDoctorsRepository();
 
-  const mapVariant = (v: string | undefined, defaultVal: string) => {
-    if (!v) return defaultVal;
-    if (v === 'grid') return 'A'; // or C
-    if (v === 'carousel') return 'A'; 
-    if (v === 'compact') return 'B';
-    if (v === 'stack') return 'C';
-    if (v === 'tabs') return 'D';
-    
-    // Support direct legacy mapping
-    if (v === 'split') return 'A';
-    if (['A', 'B', 'C', 'D'].includes(v)) return v; 
-
-    return defaultVal;
-  };
-
-  const resolvedDesktopVariant = mapVariant(desktopVariant || layoutPattern || variant || variantOverride || globalVariant, 'A');
-  const resolvedMobileVariant = mapVariant(mobileVariant || layoutPattern || variant || variantOverride || globalVariant, 'A');
+  const { desktop: resolvedDesktopVariant, mobile: resolvedMobileVariant } =
+    resolveWidgetVariants(
+      {
+        desktopVariant,
+        mobileVariant,
+        layoutPattern,
+        variant,
+        variantOverride,
+        globalFallback: globalVariant,
+      },
+      {
+        defaultValue: 'A',
+        aliasMap: DOCTORS_VARIANT_ALIASES,
+        validValues: DOCTORS_VALID_VARIANTS,
+      },
+      {
+        defaultValue: 'A',
+        aliasMap: DOCTORS_VARIANT_ALIASES,
+        validValues: DOCTORS_VALID_VARIANTS,
+      }
+    );
 
   const { data: doctors, isLoading } = useQuery<Doctor[]>({
     queryKey: ['doctors', directionId],

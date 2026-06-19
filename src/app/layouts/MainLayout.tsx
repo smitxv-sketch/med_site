@@ -6,7 +6,7 @@ import { MobileMenu } from "../../widgets/mobile-menu/ui/MobileMenu";
 import { Footer } from "../../widgets/footer/ui/Footer";
 import { CitySelectorModal } from "../../widgets/city-selector/ui/CitySelectorModal";
 import { ErrorBoundary } from "../providers/ErrorBoundary";
-import { Container } from '@/shared/ui/Container';
+import { useLayoutBottomInset } from "@/shared/hooks/useLayoutBottomInset";
 
 function PageFallback() {
   return (
@@ -17,13 +17,13 @@ function PageFallback() {
 }
 
 export function MainLayout() {
+  useLayoutBottomInset();
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-900 selection:bg-teal-200 flex flex-col overflow-x-hidden">
       <Header />
 
-      {/* Main Content Area */}
-      {/* Точный отступ для симметрии пространства выше и ниже хедера (меню) */}
-      <main className="flex-1 pt-[80px] sm:pt-[96px] pb-safe w-full flex flex-col">
+      <main className="flex-1 pt-[80px] sm:pt-[96px] pb-[var(--layout-bottom-inset,env(safe-area-inset-bottom))] w-full flex flex-col">
           <ErrorBoundary>
             <Suspense fallback={<PageFallback />}>
               <Outlet />

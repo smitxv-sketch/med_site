@@ -1,4 +1,5 @@
 import { Promotion } from '@/shared/api/contentApi';
+import { HERO_THEME } from '../config/heroTheme';
 
 export function getDaysUntilExpiry(endDate: string, now = Date.now()): number {
   const end = new Date(endDate).getTime();
@@ -32,4 +33,26 @@ export function findPromotionById(
 ): Promotion | null {
   if (id == null) return null;
   return promotions.find((p) => p.id === id) ?? null;
+}
+
+/** Цвет полоски срочности в ВРТ-плашке */
+export function getPromoProgressColor(daysLeft: number): string {
+  if (daysLeft <= 3) return HERO_THEME.promoProgress.urgent;
+  if (daysLeft <= 7) return HERO_THEME.promoProgress.warning;
+  return HERO_THEME.promoProgress.neutral;
+}
+
+/** Ширина полоски: 100% в начале акции, 0% в конце */
+export function getPromoProgressWidth(
+  startDate: string,
+  endDate: string,
+  now = Date.now()
+): number {
+  const createdAt = new Date(startDate).getTime();
+  const expiresAt = new Date(endDate).getTime();
+  const total = expiresAt - createdAt;
+  if (total <= 0) return 0;
+  const elapsed = now - createdAt;
+  const remaining = Math.max(0, 1 - elapsed / total);
+  return Math.round(remaining * 100);
 }

@@ -6,6 +6,7 @@ import { useDoctorSlots } from '../../../../widget/hooks/useDoctorSlots';
 import { getNextDays, getDaysFromDates } from '../../../../widget/utils/dateUtils';
 import { formatExperience } from '../../../../widget/utils/formatters';
 import { Card } from '@/shared/ui/Card';
+import { PLATFORM_COLORS } from '@/shared/config/designTokens';
 
 interface DoctorProfileScreenProps {
   doctor: Doctor;
@@ -89,7 +90,7 @@ export function DoctorProfileScreen({ doctor, onBack, onSlotSelect, city = 'chel
   };
 
   return (
-    <div className="h-full flex flex-col bg-[#F5F7F9] absolute inset-0 z-20">
+    <div className="h-full flex flex-col bg-gray-50 absolute inset-0 z-20">
       {/* Header */}
       <div className="bg-white sticky top-0 pt-10 z-10 border-b border-gray-100 flex items-center justify-between px-2 pb-2">
         <div className="flex items-center min-w-0">
@@ -137,7 +138,7 @@ export function DoctorProfileScreen({ doctor, onBack, onSlotSelect, city = 'chel
                   const isPromo = badge.code === 'promo';
                   const isProdoctors = badge.code === 'prodoctors';
                   return (
-                    <span key={i} className={`text-[11px] px-2.5 py-1 rounded-full flex items-center gap-1 font-medium border ${isPromo ? 'bg-brand-violet text-white border-brand-violet shadow-sm shadow-brand-violet/20' : isProdoctors ? 'bg-[#00BFA5]/10 text-[#00BFA5] border-[#00BFA5]/20 shadow-sm' : isDegree ? 'bg-amber-50 text-amber-700 border-amber-100/50' : 'bg-blue-50 text-blue-700 border-blue-100/50'}`}>
+                    <span key={i} className={`text-[11px] px-2.5 py-1 rounded-full flex items-center gap-1 font-medium border ${isPromo ? 'bg-brand-violet text-white border-brand-violet shadow-sm shadow-brand-violet/20' : isProdoctors ? `${PLATFORM_COLORS.prodoctorsBadge.bgClass} ${PLATFORM_COLORS.prodoctorsBadge.textClass} ${PLATFORM_COLORS.prodoctorsBadge.borderClass} shadow-sm` : isDegree ? 'bg-amber-50 text-amber-700 border-amber-100/50' : 'bg-blue-50 text-blue-700 border-blue-100/50'}`}>
                       {isPromo && <Star className="w-3 h-3 fill-current" />}
                       {isDegree && <Award className="w-3 h-3 text-amber-500" />}
                       {badge.label}

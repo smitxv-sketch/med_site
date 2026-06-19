@@ -2,6 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
 import { TimelineStep, TimelineVariantA, TimelineVariantB } from './TimelineWidgetVariants';
+import { resolveWidgetVariants } from '@/shared/lib/widgets/resolveWidgetVariant';
+import {
+  TIMELINE_VARIANT_ALIASES,
+  TIMELINE_VALID_VARIANTS,
+} from '@/shared/lib/widgets/variantAliases';
 
 const MOCK_STEPS: TimelineStep[] = [
   {
@@ -63,15 +68,26 @@ export function TimelineWidget({
 }: TimelineWidgetProps) {
   const { layoutDensity } = useUISettingsStore();
 
-  const mapVariant = (v: string | undefined | null, defaultVal: string) => {
-    if (!v || v === '-') return defaultVal;
-    if (v === 'A' || v === 'vertical' || v === 'stack') return 'vertical';
-    if (v === 'B' || v === 'carousel' || v === 'horizontal' || v === 'fluid' || v === 'grid') return 'carousel';
-    return defaultVal;
-  };
-
-  const resolvedDesktopVariant = mapVariant(desktopVariant || layoutPattern || variant || variantOverride, 'vertical');
-  const resolvedMobileVariant = mapVariant(mobileVariant || layoutPattern || variant || variantOverride, 'vertical');
+  const { desktop: resolvedDesktopVariant, mobile: resolvedMobileVariant } =
+    resolveWidgetVariants(
+      {
+        desktopVariant,
+        mobileVariant,
+        layoutPattern,
+        variant,
+        variantOverride,
+      },
+      {
+        defaultValue: 'vertical',
+        aliasMap: TIMELINE_VARIANT_ALIASES,
+        validValues: TIMELINE_VALID_VARIANTS,
+      },
+      {
+        defaultValue: 'vertical',
+        aliasMap: TIMELINE_VARIANT_ALIASES,
+        validValues: TIMELINE_VALID_VARIANTS,
+      }
+    );
   const dataIntent = intent || 'educational';
   
   const finalLayout = resolvedDesktopVariant; // Uses same component, usually manages responsiveness internally if needed.

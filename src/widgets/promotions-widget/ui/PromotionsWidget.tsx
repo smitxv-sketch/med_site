@@ -6,6 +6,11 @@ import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
 import { VariantSwitcher } from '@/shared/ui/VariantSwitcher';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/shared/ui/Button';
+import { resolveWidgetVariants } from '@/shared/lib/widgets/resolveWidgetVariant';
+import {
+  PROMOTIONS_VARIANT_ALIASES,
+  PROMOTIONS_VALID_VARIANTS,
+} from '@/shared/lib/widgets/variantAliases';
 import { PromotionsVariantRegistry } from './PromotionsWidgetVariants';
 import { Container } from '@/shared/ui/Container';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -35,19 +40,27 @@ export function PromotionsWidget({ directionId, limit, variantOverride, variant,
   
   const { promotionsSectionVariant } = useUISettingsStore();
   
-  // Resolve legacy/new mappings to existing internal layout types ('A', 'B', 'C', 'D', 'E')
-  const mapVariant = (v: string | undefined, defaultVal: string) => {
-    if (!v) return defaultVal;
-    if (v === 'grid') return 'D';
-    if (v === 'carousel') return 'B';
-    if (v === 'compact') return 'E';
-    if (v === 'classic') return 'A';
-    if (['A', 'B', 'C', 'D', 'E'].includes(v)) return v; // directly passed legacy variant
-    return defaultVal;
-  };
-
-  const resolvedDesktopVariant = mapVariant(desktopVariant || layoutPattern || variant || variantOverride || promotionsSectionVariant, 'D');
-  const resolvedMobileVariant = mapVariant(mobileVariant || layoutPattern || variant || variantOverride || promotionsSectionVariant, 'B');
+  const { desktop: resolvedDesktopVariant, mobile: resolvedMobileVariant } =
+    resolveWidgetVariants(
+      {
+        desktopVariant,
+        mobileVariant,
+        layoutPattern,
+        variant,
+        variantOverride,
+        globalFallback: promotionsSectionVariant,
+      },
+      {
+        defaultValue: 'D',
+        aliasMap: PROMOTIONS_VARIANT_ALIASES,
+        validValues: PROMOTIONS_VALID_VARIANTS,
+      },
+      {
+        defaultValue: 'B',
+        aliasMap: PROMOTIONS_VARIANT_ALIASES,
+        validValues: PROMOTIONS_VALID_VARIANTS,
+      }
+    );
 
   const promotions = React.useMemo(() => {
     let proms = allPromotions;

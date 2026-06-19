@@ -1,42 +1,32 @@
-/** Токены hero-блоков — SSOT для цветов и размеров из ТЗ */
+/** Токены hero-блоков — цвета из designTokens, размеры из ТЗ */
+import { HERO_TOKENS } from '@/shared/config/designTokens';
+
 export const HERO_THEME = {
-  brandGreen: '#2b8a3e',
-  brandViolet: '#7c3aed',
-  brandCosmo: '#b45a8c',
-  vrtCardBg: '#f0ebfa',
-  vrtCardBorder: '#c9b8f0',
-  cardBorder: '#e0e0e0',
-  sliderMinHeightDesktop: 380,
-  sliderMinHeightMobile: 260,
-  fullscreenHeight: {
-    lg: 480,
-    md: 420,
-    sm: 320,
-  },
-  borderRadius: 16,
-  gridGap: 16,
-  rightColumnWidth: 300,
-  dotActiveWidth: 24,
-  dotInactiveSize: 8,
-  overlayDark: 'rgba(0,0,0,0.5)',
-  /** Градиент слайдера C: плотнее снизу для читаемости текста */
-  sliderCardGradient:
-    'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.15) 100%)',
-  tagBadgeOnPhoto: 'rgba(0,0,0,0.35)',
-  fullscreenGradient:
-    'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.10) 100%)',
-  directionBadge: {
-    vrt: 'rgba(124,58,237,0.85)',
-    clinic: 'rgba(43,138,62,0.85)',
-    cosmo: 'rgba(180,90,140,0.85)',
-  },
-  directionBadgeLabel: {
-    vrt: 'ВРТ · ЦЕНТР ЭКО',
-    clinic: 'ПОЛИКЛИНИКА',
-    cosmo: 'КОСМЕТОЛОГИЯ',
-  },
-  slideIntervalMs: 5000,
-  slideFadeMs: 400,
+  brandGreen: HERO_TOKENS.brandGreen,
+  brandViolet: HERO_TOKENS.brandViolet,
+  brandCosmo: HERO_TOKENS.brandCosmo,
+  vrtCardBg: HERO_TOKENS.vrtCardBg,
+  vrtCardBorder: HERO_TOKENS.vrtCardBorder,
+  cardBorder: HERO_TOKENS.cardBorder,
+  sliderMinHeightDesktop: HERO_TOKENS.sliderMinHeightDesktop,
+  sliderMinHeightMobile: HERO_TOKENS.sliderMinHeightMobile,
+  fullscreenHeight: HERO_TOKENS.fullscreenHeight,
+  borderRadius: HERO_TOKENS.borderRadius,
+  gridGap: HERO_TOKENS.gridGap,
+  rightColumnWidth: HERO_TOKENS.rightColumnWidth,
+  dotActiveWidth: HERO_TOKENS.dotActiveWidth,
+  dotInactiveSize: HERO_TOKENS.dotInactiveSize,
+  overlayDark: HERO_TOKENS.overlayDark,
+  sliderCardGradient: HERO_TOKENS.sliderCardGradient,
+  tagBadgeOnPhoto: HERO_TOKENS.tagBadgeOnPhoto,
+  fullscreenGradient: HERO_TOKENS.fullscreenGradient,
+  directionBadge: HERO_TOKENS.directionBadge,
+  directionBadgeLabel: HERO_TOKENS.directionBadgeLabel,
+  slideIntervalMs: HERO_TOKENS.slideIntervalMs,
+  slideFadeMs: HERO_TOKENS.slideFadeMs,
+  gapToPromotionsDesktop: HERO_TOKENS.gapToPromotionsDesktop,
+  discountBadge: HERO_TOKENS.discountBadge,
+  promoProgress: HERO_TOKENS.promoProgress,
 } as const;
 
 export const HERO_DOCTOR_CARD = {

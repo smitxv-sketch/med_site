@@ -124,9 +124,9 @@ export function HeroImmersive() {
                 {socialProofLevel === 'aggressive' && (
                   <div className="flex items-center gap-2 mb-8 bg-white/10 backdrop-blur-md w-fit px-3 py-1.5 rounded-full border border-white/20">
                     <div className="flex -space-x-2">
-                       <img className="w-6 h-6 rounded-full border-2 border-[#121212] object-cover" src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=800&q=80" alt="avatar" />
-                       <img className="w-6 h-6 rounded-full border-2 border-[#121212] object-cover" src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80" alt="avatar" />
-                       <img className="w-6 h-6 rounded-full border-2 border-[#121212] object-cover" src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=800&q=80" alt="avatar" />
+                       <img className="w-6 h-6 rounded-full border-2 border-gray-900 object-cover" src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=800&q=80" alt="avatar" />
+                       <img className="w-6 h-6 rounded-full border-2 border-gray-900 object-cover" src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80" alt="avatar" />
+                       <img className="w-6 h-6 rounded-full border-2 border-gray-900 object-cover" src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=800&q=80" alt="avatar" />
                     </div>
                     <div className="flex items-center gap-1">
                       <Star className="w-4 h-4 fill-amber-400 text-amber-400" />

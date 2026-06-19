@@ -1,3 +1,5 @@
+import { DIRECTION_UI } from '@/shared/config/designTokens';
+
 export const SERVICES_DATA = [
   {
     id: 'vrt',
@@ -7,12 +9,8 @@ export const SERVICES_DATA = [
       'Консультации', 'Криоконсервация', 'Донорство яйцеклеток', 'Дневной стационар', 'Программы ЭКО-Клиники', 'Преимплантационное генетическое тестирование (ПГТ)', 'ЭКО по ОМС'
     ],
     image: 'https://ci74.ru/wp-content/uploads/2019/11/5558_Thumb.jpeg',
-    textColor: 'text-violet-900',
-    accentBg: 'bg-violet-50',
+    ...DIRECTION_UI.vrt,
     isVip: true,
-    iconColor: 'text-violet-600',
-    iconBgLight: 'bg-violet-100',
-    iconBgSolid: 'bg-violet-500',
   },
   {
     id: 'adult',
@@ -22,11 +20,7 @@ export const SERVICES_DATA = [
       'Сомнология', 'Антиклещ', 'Аллергология-иммунология', 'Анестезиология', 'Вакцинация', 'Выездные услуги', 'Гастроэнтерология', 'Гемостазиология', 'Гематология', 'Гинекология и акушерство', 'Дерматовенерология', 'Диагностика', 'Диетология', 'Кардиология', 'Колопроктология', 'Массаж', 'Медицинская генетика', 'Наркология', 'Неврология', 'Нефрология', 'Онкология', 'Оториноларингология', 'Офтальмология', 'Процедурные услуги', 'Психиатрия', 'Психотерапия', 'Пульмонология', 'Ревматология', 'Рефлексотерапия', 'Сосудистая хирургия', 'Телемедицина', 'Терапия', 'Травматология-ортопедия', 'Ультразвуковая диагностика', 'Урология', 'Физиотерапия', 'Функциональная диагностика', 'Хирургия', 'Центр амбулаторной хирургии', 'Эндокринология', 'Эндоскопическая диагностика', 'Клуб «Источник здоровья»'
     ],
     image: 'https://ci74.ru/wp-content/themes/ci74/pics/clinicpictures/84/3779_Thumb.jpeg',
-    textColor: 'group-hover:text-brand',
-    accentBg: 'bg-brand',
-    iconColor: 'text-brand',
-    iconBgLight: 'bg-brand/10',
-    iconBgSolid: 'bg-brand',
+    ...DIRECTION_UI.clinic,
   },
   {
     id: 'kids',
@@ -36,11 +30,7 @@ export const SERVICES_DATA = [
       'Аллергология-иммунология', 'Вакцинация', 'Выездные услуги', 'Гастроэнтерология', 'Гинекология', 'Дерматология', 'Диагностика', 'Кардио-ревматология', 'Массаж', 'Медицинская генетика', 'Наркология', 'Неврология', 'Нефрология', 'Оториноларингология', 'Офтальмология', 'Педиатрия', 'Процедурные услуги', 'Психиатрия', 'Травматология-ортопедия', 'Урология-андрология', 'Хирургия', 'Эндокринология'
     ],
     image: 'https://ci74.ru/wp-content/uploads/2019/11/3825_Thumb.jpeg',
-    textColor: 'group-hover:text-brand-orange',
-    accentBg: 'bg-brand-orange',
-    iconColor: 'text-brand-orange',
-    iconBgLight: 'bg-brand-orange/10',
-    iconBgSolid: 'bg-brand-orange',
+    ...DIRECTION_UI.kids,
   },
   {
     id: 'cosmetology',
@@ -50,11 +40,7 @@ export const SERVICES_DATA = [
       'Удаление новообразований', 'Рефлексотерапия', 'Трихология', 'Аппаратная косметология', 'Лазерная косметология', 'Инъекционная косметология', 'Эстетическая косметология', 'Коррекция фигуры'
     ],
     image: 'https://ci74.ru/wp-content/uploads/2025/02/013-scaled.jpg',
-    textColor: 'group-hover:text-brand-blue',
-    accentBg: 'bg-brand-blue',
-    iconColor: 'text-brand-blue',
-    iconBgLight: 'bg-brand-blue/10',
-    iconBgSolid: 'bg-brand-blue',
+    ...DIRECTION_UI.cosmo,
   },
   {
     id: 'ambulance',
@@ -64,11 +50,7 @@ export const SERVICES_DATA = [
       'Амбулаторный приём', 'Вызов бригады скорой помощи', 'Вызов врача на дом', 'Дежурство бригады скорой помощи на мероприятиях', 'Перевозка больных и пострадавших', 'Помощь при укусе клеща'
     ],
     image: 'https://ci74.ru/wp-content/uploads/2019/11/3817_Thumb.jpeg',
-    textColor: 'group-hover:text-red-500',
-    accentBg: 'bg-red-500',
-    iconColor: 'text-red-500',
-    iconBgLight: 'bg-red-500/10',
-    iconBgSolid: 'bg-red-500',
+    ...DIRECTION_UI.ambulance,
   },
   {
     id: 'programs',
@@ -78,10 +60,6 @@ export const SERVICES_DATA = [
       'Оториноларингология', 'Терапия', 'ВРТ (ЭКО)', 'Гастроэнтерология', 'Генетика', 'Акушерство и гинекология', 'Кардиология', 'Медицинские чек-апы', 'Онкология', 'Педиатрия', 'Травматология и ортопедия', 'Эндокринология', 'Аллергология и иммунология', 'Косметология'
     ],
     image: 'https://ci74.ru/wp-content/uploads/2019/11/5560_Thumb.jpeg',
-    textColor: 'group-hover:text-brand-turquoise',
-    accentBg: 'bg-brand-turquoise',
-    iconColor: 'text-brand-turquoise',
-    iconBgLight: 'bg-brand-turquoise/10',
-    iconBgSolid: 'bg-brand-turquoise',
+    ...DIRECTION_UI.programs,
   }
 ];

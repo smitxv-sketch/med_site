@@ -2,6 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
 import { FeatureItem, FeaturesVariantA, FeaturesVariantB, FeaturesVariantC } from './FeaturesWidgetVariants';
+import { resolveWidgetVariants } from '@/shared/lib/widgets/resolveWidgetVariant';
+import {
+  FEATURES_VARIANT_ALIASES,
+  FEATURES_VALID_VARIANTS,
+} from '@/shared/lib/widgets/variantAliases';
 
 const MOCK_FEATURES: FeatureItem[] = [
   {
@@ -62,16 +67,26 @@ export function FeaturesWidget({
 }: FeaturesWidgetProps) {
   const { layoutDensity } = useUISettingsStore();
 
-  const mapVariant = (v: string | undefined | null, defaultVal: string) => {
-    if (!v || v === '-') return defaultVal;
-    if (v === 'A' || v === 'grid' || v === 'fluid') return 'grid';
-    if (v === 'B' || v === 'list' || v === 'stack') return 'list';
-    if (v === 'C' || v === 'bento' || v === 'split') return 'bento';
-    return defaultVal;
-  };
-
-  const resolvedDesktopVariant = mapVariant(desktopVariant || layoutPattern || variant || variantOverride, 'bento');
-  const resolvedMobileVariant = mapVariant(mobileVariant || layoutPattern || variant || variantOverride, 'stack');
+  const { desktop: resolvedDesktopVariant, mobile: resolvedMobileVariant } =
+    resolveWidgetVariants(
+      {
+        desktopVariant,
+        mobileVariant,
+        layoutPattern,
+        variant,
+        variantOverride,
+      },
+      {
+        defaultValue: 'bento',
+        aliasMap: FEATURES_VARIANT_ALIASES,
+        validValues: FEATURES_VALID_VARIANTS,
+      },
+      {
+        defaultValue: 'stack',
+        aliasMap: FEATURES_VARIANT_ALIASES,
+        validValues: FEATURES_VALID_VARIANTS,
+      }
+    );
   const dataIntent = intent || 'educational';
   
   const finalLayout = resolvedDesktopVariant; 

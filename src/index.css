@@ -104,6 +104,14 @@
     --spacing-base: 1rem;
     --spacing-gap: 1rem;
     --spacing-section: 1.5rem;
+    --bottom-nav-bar-height: 56px;
+    --bottom-nav-content-gap: 8px;
+    --layout-bottom-inset: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+
+  @keyframes bottom-nav-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
   }
 
   @keyframes shimmer {
@@ -154,10 +162,25 @@
   --color-brand: var(--color-brand);
   --color-brand-violet: var(--color-accent);
   
-  /* Additional Corporate Colors for Promos and Directions */
-  --color-brand-orange: #ea580c;    /* Deeper orange */
-  --color-brand-blue: #2563eb;      /* Professional blue */
-  --color-brand-turquoise: #0d9488; /* Richer turquoise */
+  /* Additional Corporate Colors — synced from src/shared/config/designTokens.ts */
+  --color-brand-orange: #f97316;
+  --color-brand-blue: #3b82f6;
+  --color-brand-turquoise: #0d9488;
+
+  /* Platform brand colors */
+  --color-platform-vk: #0077FF;
+  --color-platform-ok: #EE8208;
+  --color-platform-prodoctorov: #0083CA;
+  --color-platform-prodoctorov-text: #005bff;
+  --color-platform-gis2: #A4C516;
+  --color-platform-yandex: #FF0000;
+  --color-platform-whatsapp: #25D366;
+  --color-platform-prodoctors: #00BFA5;
+
+  /* Semantic surfaces */
+  --color-text-primary: #111827;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f9fafb;
 
   /* Let generic sans class use our dynamic font */
   --font-sans: var(--font-primary);
@@ -216,7 +239,7 @@
     margin-bottom: 0;
   }
   .prose a {
-    color: #2563eb;
+    color: var(--color-brand-blue);
     text-decoration: underline;
   }
 

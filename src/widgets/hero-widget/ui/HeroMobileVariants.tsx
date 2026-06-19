@@ -3,29 +3,10 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/shared/ui/Button';
 import { Card } from '@/shared/ui/Card';
 import { GhostTyping } from '@/shared/ui/GhostTyping';
+import { HeroMobileVariantF } from './HeroMobileVariantF';
 
-export type HeroDirection = 'vrt' | 'clinic' | 'cosmo';
-
-export interface HeroSlide {
-  id: number;
-  title: string;
-  subtitle: string;
-  description: string;
-  linkText: string;
-  link: string;
-  image: string;
-  badgeColor: string;
-  bgLight: string;
-  /** Направление для бейджа (вариант D) */
-  direction?: HeroDirection;
-  /** Полноэкранный фон на слайде (вариант C) */
-  fullBleedBackground?: boolean;
-  /** Акцент без фото: green | violet */
-  themeAccent?: 'green' | 'violet';
-  ctaSecondaryText?: string;
-  ctaSecondaryUrl?: string;
-  promoId?: number;
-}
+export type { HeroSlide, HeroDirection } from '@/shared/domain/hero/types';
+import type { HeroSlide } from '@/shared/domain/hero/types';
 
 export interface HeroMobileVariantProps {
   slide: HeroSlide;
@@ -138,10 +119,11 @@ export const HeroMobileVariantE = ({ slide }: HeroMobileVariantProps) => (
   </div>
 );
 
-// --- The Registry --- //
+  // --- The Registry --- //
 export const MobileHeroRegistry: Record<string, React.FC<HeroMobileVariantProps & { slides?: HeroSlide[] }>> = {
   A: HeroMobileVariantA,
   B: HeroMobileVariantB,
   C: HeroMobileVariantC,
   E: HeroMobileVariantE,
+  F: ({ slides }) => (slides ? <HeroMobileVariantF slides={slides} /> : null),
 };

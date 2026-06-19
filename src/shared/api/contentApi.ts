@@ -1,5 +1,6 @@
 import { SERVICES_DATA } from '../constants/servicesData';
 import { IMAGES } from '../config/images';
+import { DIRECTION_UI } from '../config/designTokens';
 
 export interface ServiceDirection {
   id: string;
@@ -26,23 +27,8 @@ export interface Promotion {
   directionId?: string; // Add directionId to map to a specific direction color
 }
 
-export interface HeroSlide {
-  id: number;
-  title: string;
-  subtitle: string;
-  description: string;
-  image: string;
-  link: string;
-  linkText: string;
-  badgeColor: string;
-  bgLight: string;
-  direction?: 'vrt' | 'clinic' | 'cosmo';
-  fullBleedBackground?: boolean;
-  themeAccent?: 'green' | 'violet';
-  ctaSecondaryText?: string;
-  ctaSecondaryUrl?: string;
-  promoId?: number;
-}
+export type { HeroSlide } from '../domain/hero/types';
+import type { HeroSlide } from '../domain/hero/types';
 
 // Helper to generate dates relative to today
 const today = new Date();
@@ -94,6 +80,21 @@ export const fetchPromotions = async (): Promise<Promotion[]> => {
 export const fetchHeroSlides = async (): Promise<HeroSlide[]> => {
   return [
     {
+      id: 3,
+      title: 'КОНФЕРЕНЦИЯ',
+      subtitle: 'Репродуктивная медицина: краеугольные вопросы',
+      description:
+        'Узнайте о последних достижениях в лечении бесплодия и программах ЭКО',
+      image: IMAGES.conference,
+      link: '/events/conference-7',
+      linkText: 'Подробнее о мероприятии',
+      badgeColor: DIRECTION_UI.vrt.badgeColor,
+      bgLight: DIRECTION_UI.vrt.bgLight,
+      direction: 'vrt',
+      fullBleedBackground: true,
+      promoId: 3,
+    },
+    {
       id: 1,
       title: 'ЦЕНТР ЭКО',
       subtitle: 'Лечение бесплодия и программы ЭКО',
@@ -105,9 +106,10 @@ export const fetchHeroSlides = async (): Promise<HeroSlide[]> => {
       linkText: 'Бесплатная консультация',
       ctaSecondaryText: 'Все программы ЭКО →',
       ctaSecondaryUrl: '/services/vrt',
-      badgeColor: 'bg-white shadow-sm text-violet-600',
-      bgLight: 'bg-violet-50/50',
+      badgeColor: DIRECTION_UI.vrt.badgeColor,
+      bgLight: DIRECTION_UI.vrt.bgLight,
       direction: 'vrt',
+      navTarget: 'vrt',
       fullBleedBackground: true,
       promoId: 3,
     },
@@ -120,25 +122,11 @@ export const fetchHeroSlides = async (): Promise<HeroSlide[]> => {
         'https://medsyst.ru/upload/resize_cache/iblock/093/03jlxbml57o28qnlmmisiys35xsxde65/1918_1079_1b1ef77ac61cd9f61e84e651589b06888/7e6abfc7a416e6c16ee90b41f65414bd.jpg',
       link: '/booking',
       linkText: 'Записаться на МРТ',
-      badgeColor: 'bg-white shadow-sm text-brand',
-      bgLight: 'bg-brand/5',
+      badgeColor: DIRECTION_UI.clinic.badgeColor,
+      bgLight: DIRECTION_UI.clinic.bgLight,
       direction: 'clinic',
+      navTarget: 'clinic',
       fullBleedBackground: true,
-    },
-    {
-      id: 3,
-      title: 'КОНФЕРЕНЦИЯ',
-      subtitle: 'Репродуктивная медицина: краеугольные вопросы',
-      description:
-        'Узнайте о последних достижениях в лечении бесплодия и программах ЭКО',
-      image: IMAGES.conference,
-      link: '/events/conference-7',
-      linkText: 'Подробнее о мероприятии',
-      badgeColor: 'bg-white shadow-sm text-violet-600',
-      bgLight: 'bg-violet-50/50',
-      direction: 'vrt',
-      fullBleedBackground: true,
-      promoId: 3,
     },
   ];
 };

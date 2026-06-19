@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
 import { VariantSwitcher } from '@/shared/ui/VariantSwitcher';
+import { BottomNavVariantE } from './BottomNavVariantE';
 
 const ActionAnimation = ({ type, shape, className = '' }: { type: 'pulse' | 'border-beam' | 'shimmer' | 'neon', shape: 'circle' | 'rect' | 'icon', className?: string }) => {
   const roundedClass = shape === 'circle' || shape === 'icon' ? 'rounded-full' : 'rounded-xl';
@@ -81,6 +82,10 @@ export function BottomNavVariants({ isHidden }: BottomNavVariantsProps) {
   const isContextualPage = /^\/services\/[^/]+\/[^/]+$/.test(location.pathname) || /^\/doctors\/[^/]+$/.test(location.pathname);
   if (isContextualPage) {
     return null;
+  }
+
+  if (variant === 'E') {
+    return <BottomNavVariantE isHidden={isHidden} />;
   }
 
   const navItems = [

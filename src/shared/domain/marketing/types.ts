@@ -15,7 +15,7 @@ export interface EngineState {
   homePageConcept: 'classic' | 'immersive';
   heroDesktopVariant: 'A' | 'B' | 'C' | 'D';
   heroMobileVariant: 'A' | 'B' | 'C' | 'D' | 'E' | 'F';
-  bottomNavVariant: 'A' | 'B' | 'C' | 'D';
+  bottomNavVariant: 'A' | 'B' | 'C' | 'D' | 'E';
   bottomNavBehavior: 'always-visible' | 'hide-on-scroll-down' | 'hidden-on-top';
   bottomNavActionAnimation: 'pulse' | 'border-beam' | 'shimmer' | 'neon';
   doctorsSectionVariant: 'A' | 'B';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { LayoutTemplate, Code2, Layers, ExternalLink, ArrowRight, GitBranch, Database, FileText, ChevronRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { PRIMITIVE } from '@/shared/config/designTokens';
 
 interface NodeProps {
   title: string;
@@ -65,17 +66,17 @@ export const SiteNodeMap = () => {
       {/* SVG Background Lines for linking (Visual only, simple vertical/horizontal routing) */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" style={{ minWidth: 800 }}>
         {/* Main Trunk -> Home */}
-        <path d="M 50% 40 L 50% 120" stroke="#CBD5E1" strokeWidth="2" strokeDasharray="4 4" fill="none" />
+        <path d="M 50% 40 L 50% 120" stroke={PRIMITIVE.marketing.nodeStroke} strokeWidth="2" strokeDasharray="4 4" fill="none" />
         
         {/* Horizontal branch from Home to others */}
-        <path d="M 15% 220 L 85% 220" stroke="#CBD5E1" strokeWidth="2" fill="none" />
+        <path d="M 15% 220 L 85% 220" stroke={PRIMITIVE.marketing.nodeStroke} strokeWidth="2" fill="none" />
         
         {/* Vertical drops to 3 main categories */}
-        <path d="M 15% 220 L 15% 260" stroke="#CBD5E1" strokeWidth="2" fill="none" />
-        <path d="M 50% 220 L 50% 260" stroke="#CBD5E1" strokeWidth="2" fill="none" />
-        <path d="M 85% 220 L 85% 260" stroke="#CBD5E1" strokeWidth="2" fill="none" />
+        <path d="M 15% 220 L 15% 260" stroke={PRIMITIVE.marketing.nodeStroke} strokeWidth="2" fill="none" />
+        <path d="M 50% 220 L 50% 260" stroke={PRIMITIVE.marketing.nodeStroke} strokeWidth="2" fill="none" />
+        <path d="M 85% 220 L 85% 260" stroke={PRIMITIVE.marketing.nodeStroke} strokeWidth="2" fill="none" />
         
-        <path d="M 50% 160 L 50% 220" stroke="#CBD5E1" strokeWidth="2" fill="none" />
+        <path d="M 50% 160 L 50% 220" stroke={PRIMITIVE.marketing.nodeStroke} strokeWidth="2" fill="none" />
       </svg>
 
       <div className="flex flex-col items-center w-full min-w-[800px] relative z-10">

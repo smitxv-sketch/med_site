@@ -70,7 +70,7 @@ export function DoctorsScreen() {
   };
 
   return (
-    <div className="h-full flex flex-col bg-[#F5F7F9]">
+    <div className="h-full flex flex-col bg-gray-50">
       <div className="bg-white sticky top-0 z-10 border-b border-gray-100 flex flex-col pt-safe">
         <div className="p-[var(--spacing-base)] flex flex-col gap-4">
           <h2 className="text-xl font-bold text-gray-900">Врачи</h2>

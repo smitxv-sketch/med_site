@@ -625,7 +625,7 @@ export default function DiagnosticTools() {
                     )}
                   </div>
 
-                  <div className="flex-1 bg-[#0f172a] rounded-xl p-4 overflow-auto max-h-[600px] shadow-inner">
+                  <div className="flex-1 bg-slate-900 rounded-xl p-4 overflow-auto max-h-[600px] shadow-inner">
                     <pre className="text-emerald-400 font-mono text-[13px] leading-relaxed whitespace-pre-wrap">
                       {typeof result.data === 'object' 
                         ? JSON.stringify(result.data, null, 2) 
