@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env*
+!.env.example
+.git/
+.github/
+.vscode/
+ai-navigator.md
+COOLIFY_DEPLOYMENT.md
+SYNC_DOCUMENTATION.md

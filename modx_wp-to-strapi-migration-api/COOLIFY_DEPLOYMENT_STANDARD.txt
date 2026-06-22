@@ -1,0 +1,161 @@
+# 🚀 Стандарт развертывания: AI Studio → GitHub → Coolify (Docker)
+
+Этот документ описывает универсальный, масштабируемый и отказоустойчивый пайплайн разработки и деплоя. Он объединяет методологию **GitOps**, манифест **12-Factor App** и практики **Anti-Flap** (защиту от случайных сбоев при сборке контейнеров).
+
+Документ дополнен уроками из post-mortem (Node.js + Coolify), чтобы обойти "детские болезни" (проблемы lock-файла Windows, NODE_ENV quirks в Coolify, ошибки SSR в Next.js и т.д.) без затрат времени.
+
+Сохраните этот файл. В любом новом проекте вы можете просто загрузить его в чат и указать Агенту: *"Примени стандарт деплоя из этого файла"*.
+
+---
+
+## 🏗 Раздел 1. Концептуальная архитектура
+
+### 1. Parity (Паритет окружений)
+Среда в AI Studio (песочница) и среда в Coolify (сервер) работают на одном и том же `server.ts`. 
+Разница между ними определяется **ТОЛЬКО** переменными окружения.
+*   В песочнице `NODE_ENV = development`: запускается сервер с `vite_middleware` для мгновенной пересборки фронтенда (HMR / SSR-режим разработки).
+*   В Coolify `NODE_ENV = production`: сервер раздает статичные, сжатые файлы из папки `/dist`.
+
+### 2. Защита сборки (Anti-Flap Policy)
+Главная боль сложных деплоев (особенно с Prisma, Tailwind v4 / LightningCSS) — это скрытые хуки `postinstall`, которые пытаются скачать бинарники на этапе `npm install` внутри Docker. Любой сетевой таймаут (или отсутствие нужных библиотек для компиляции) валит весь деплой.
+
+**Наше решение (Zero Magic):**
+1. Отключаем хуки: `npm ci --ignore-scripts`.
+2. Выносим генерацию Prisma и другие платформенные скрипты в явные, отдельные шаги `RUN`.
+3. Оборачиваем критичные сетевые вызовы в retry-обертки (если Prisma падает из-за недоступности CDN).
+
+### 3. Защита от Coolify NODE_ENV quirks (Урок Post-Mortem)
+Coolify инжектирует переменные окружения, включая `NODE_ENV=production`, на этапе `docker build`.
+Если `npm ci` видит `NODE_ENV=production`, он не ставит `devDependencies` (Vite, TS-типы, Tailwind).
+**Наше решение:** в Dockerfile принудительно задаём `ENV NODE_ENV=development` перед вызовом `npm ci`.
+
+### 4. Защита от Windows package-lock.json (Урок Post-Mortem)
+`npm install` на Windows не сохраняет linux-only опциональные бинарники (например, `@emnapi/core` для Tailwind/lightningcss).
+**Наше решение:** При изменениях пакетов запускаем `npm run lock:linux` — скрипт `scripts/sync-lockfile-linux.mjs`, который пересоздаёт lock-файл через Docker `node:22-alpine`.
+
+---
+
+## ⚙️ Раздел 2. Текущее техническое решение
+
+Мы используем **Multi-stage Dockerfile**. Он решает сразу две задачи: чистоту сборки и безопасность (итоговый образ весит мало и не содержит исходников/кэшей).
+
+### Обязательные файлы для проекта
+
+#### 1. `.dockerignore`
+Изолирует песочницу от продакшена. Секреты вводятся только через UI Coolify.
+```text
+node_modules/
+dist/
+.env*
+!.env.example
+.git/
+.github/
+.vscode/
+```
+
+#### 2. Эталонный `Dockerfile`
+*(Усилен учетом ошибок post-mortem: добавлен не-root пользователь, добавлен фикс NODE_ENV при билде).*
+```dockerfile
+# СТАДИЯ 1: Сборка (builder)
+FROM node:22-alpine AS builder
+WORKDIR /app
+
+# Coolify может инжектировать NODE_ENV=production на этапе сборки.
+# Принудительно устанавливаем development, чтобы npm ci установил devDependencies (TS, Vite, Tailwind), нужные для билда.
+ENV NODE_ENV=development
+
+# Кэшируем установку зависимостей
+COPY package.json package-lock.json* ./
+# --ignore-scripts защищает от падений при скачивании бинарников платформы и postinstall хуков
+RUN npm ci --ignore-scripts
+
+COPY . .
+
+# При необходимости: Явный шаг генерации Prisma (раскомментировать, если есть БД)
+# RUN npx prisma generate
+
+# Сборка фронтенда (создает папку dist)
+RUN npm run build
+
+# СТАДИЯ 2: Продакшен (runner)
+FROM node:22-alpine AS runner
+WORKDIR /app
+
+# Устанавливаем production-среду для рантайма
+ENV NODE_ENV=production
+ENV PORT=3010
+
+# Создаем не-root пользователя для безопасности (Best Practice)
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 reactjs
+USER reactjs
+
+# Копируем только готовые артефакты
+COPY --from=builder --chown=reactjs:nodejs /app/package.json ./
+COPY --from=builder --chown=reactjs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=reactjs:nodejs /app/dist ./dist
+COPY --from=builder --chown=reactjs:nodejs /app/server ./server
+COPY --from=builder --chown=reactjs:nodejs /app/server.ts ./server.ts
+
+# Если есть специфичные скрипты (Prisma schema), копируем их
+# COPY --from=builder --chown=reactjs:nodejs /app/prisma ./prisma
+
+EXPOSE 3010
+CMD ["npx", "tsx", "server.ts"]
+```
+
+#### 3. Утилита `scripts/sync-lockfile-linux.mjs`
+Скрипт пересоздает `package-lock.json` в среде Linux (Alpine), гарантируя наличие нативных бинарников.
+Вызывается командой: `npm run lock:linux`
+*(Код размещается в `/scripts/sync-lockfile-linux.mjs`)*
+
+#### 4. Гибридный `server.ts`
+Приложение должно само понимать конфигурацию без лишних bash-скриптов старта.
+
+```typescript
+import express from "express";
+import path from "path";
+// Подключение Vite и API роутов...
+
+const app = express();
+const PORT = parseInt(process.env.PORT || '3010');
+
+// Healthcheck API (Обязательно для Coolify!)
+app.get("/api/health", (req, res) => res.status(200).json({ status: "ok" }));
+
+// Vite для разработки, Статика для Продакшена
+if (process.env.NODE_ENV !== "production") {
+    // В песочнице AI Studio работает этот блок
+    const { createServer } = await import("vite");
+    const vite = await createServer({ server: { middlewareMode: true }, appType: "spa" });
+    app.use(vite.middlewares);
+} else {
+    // Внутри Docker (Coolify) работает этот блок
+    const distPath = path.join(process.cwd(), 'dist');
+    app.use(express.static(distPath));
+    app.get('*', (req, res) => res.sendFile(path.join(distPath, 'index.html')));
+}
+
+app.listen(PORT, "0.0.0.0", () => console.log(`🚀 Успешный старт на ${PORT}`));
+```
+
+---
+
+## 🤖 Раздел 3. Операционный промпт "Для Агента"
+
+Чтобы перенести эту инфраструктуру в другой чат/проект без лишних объяснений, просто скопируйте и отправьте Агенту следующий блок текста (вместе с этим файлом, если нужно):
+
+> **ПРОМПТ ДЛЯ АИ-АГЕНТА:**
+> Выступай в роли DevOps + Full-Stack архитектора. В этом проекте мы используем стратегию деплоя через Coolify/Docker по стандарту с учетом уроков Post-Mortem.
+> 
+> Твои обязательные задачи (Definition of Done для инфраструктуры):
+> 1. Убедись, что приложение является Full-Stack (используется `express` и `server.ts` с разделением сред `NODE_ENV !== "production"`).
+> 2. Создай роут `/api/health` для проверок доступности контейнера (Healthchecks).
+> 3. Создай/обнови `Dockerfile` с использованием multi-stage сборки. ОБЯЗАТЕЛЬНО: в стадии сборки укажи `ENV NODE_ENV=development` **ДО** `npm ci`, чтобы избежать пропуска `devDependencies` из-за инжектов среды (урок Post-Mortem).
+> 4. В Dockerfile шаг установки зависимостей должен использовать **ИМЕННО** `RUN npm ci --ignore-scripts`, чтобы исключить флапы бинарников.
+> 5. Создай/обнови скрипт `scripts/sync-lockfile-linux.mjs` и добавь `"lock:linux": "node scripts/sync-lockfile-linux.mjs"` в `package.json` — это защита от проблем с lock-файлами Windows.
+> 6. Создай `.dockerignore`, обязательно исключив `.env`.
+> 7. Произведи рефакторинг `package.json`: для деплоя контейнер должен запускать `npx tsx server.ts` напрямую.
+> 8. Проверь наличие `"use client"` директив: если фронтенд на React Server Components, везде с хуками и эвентами должно быть `"use client"`.
+> 
+> Ничего не объясняй, просто выполни шаги инфраструктуры и доложи о готовности.

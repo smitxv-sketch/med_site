@@ -1,0 +1,53 @@
+# СТАДИЯ 1: Сборка (builder)
+FROM node:22-alpine AS builder
+
+WORKDIR /app
+
+# Шаг 1: Coolify может инжектировать NODE_ENV=production на этапе сборки.
+# Принудительно устанавливаем development, чтобы npm ci установил devDependencies (TS, Vite, Tailwind), нужные для билда.
+ENV NODE_ENV=development
+
+# Шаг 2: Копируем файлы управления зависимостями
+COPY package.json package-lock.json* ./
+
+# Шаг 3: Устанавливаем зависимости. 
+# Используем --ignore-scripts согласно Playbook, чтобы избежать сбоев при сборке (Prisma, Tailwind NAPI).
+RUN npm ci --ignore-scripts
+
+# Шаг 4: Копируем исходный код проекта
+COPY . .
+
+# При необходимости: Явный шаг генерации Prisma (раскомментировать, если есть БД)
+# RUN npx prisma generate
+
+# Шаг 5: Выполняем сборку фронтенда (создаст папку dist/)
+RUN npm run build
+
+# СТАДИЯ 2: Продакшен (runner)
+FROM node:22-alpine AS runner
+
+WORKDIR /app
+
+# Устанавливаем production-среду для рантайма
+ENV NODE_ENV=production
+ENV PORT=3010
+
+# Создаем не-root пользователя для безопасности (Best Practice)
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 reactjs
+USER reactjs
+
+# Копируем только готовые артефакты и зависимости
+COPY --from=builder --chown=reactjs:nodejs /app/package.json ./package.json
+COPY --from=builder --chown=reactjs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=reactjs:nodejs /app/dist ./dist
+COPY --from=builder --chown=reactjs:nodejs /app/server ./server
+COPY --from=builder --chown=reactjs:nodejs /app/server.ts ./server.ts
+
+# Если есть специфичные скрипты для production (например prisma), они также копируются
+
+# Открываем порт, который пробрасывает Coolify
+EXPOSE 3010
+
+# Запускаем полностековое приложение
+CMD ["npx", "tsx", "server.ts"]
