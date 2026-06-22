@@ -66,6 +66,29 @@ Mount: /app/apps/cms/public/uploads
 Шаблон тянет `elestio/strapi-production` с Docker Hub → **TLS handshake timeout** на сервере в РФ.
 Сборка из своего репо (`node:20-alpine` в Dockerfile) обходит эту проблему — базовый образ кэшируется при build на Coolify.
 
+**Используйте Application `strapi-istochnik`**, не Service `strapi-ci` — два Strapi рядом только путают. `strapi-ci` можно остановить/удалить после успешного деплоя `strapi-istochnik`.
+
+### Типичная ошибка деплоя (исправлено в Dockerfile)
+
+```
+npm error path /app/node_modules/better-sqlite3
+gyp ERR! find Python You need to install the latest version of Python.
+```
+
+Причина: `node:20-alpine` без `python3`/`make`/`g++`. В `apps/cms/Dockerfile` добавлен `apk add` в stages `deps` и `build`.
+
+### Coolify env: NODE_ENV
+
+`NODE_ENV=production` должен быть **только Runtime**, не Buildtime — иначе Coolify предупреждает о пропуске devDependencies.
+
+### Адреса
+
+| Что | URL |
+|-----|-----|
+| Coolify UI | `http://192.168.100.44:8000` (порт **8000** — панель, не Strapi) |
+| Strapi admin (целевой) | **https://cms.istochnik.smitx.ru/admin** |
+| MCP (после деплоя) | `https://cms.istochnik.smitx.ru/mcp` |
+
 ## DNS
 
 Добавить A-запись `cms.istochnik.smitx.ru` → `37.79.254.120` (или через Traefik/Coolify domains).

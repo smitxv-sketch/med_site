@@ -61,6 +61,8 @@ npm run develop -w @med-site/cms
 
 Open http://localhost:1337/admin
 
+**Strapi MCP (для агента в Cursor):** [docs/DEV_STRAPI_MCP.md](./DEV_STRAPI_MCP.md)
+
 ## Environment files
 
 | File | Purpose |

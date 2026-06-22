@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "strapi-mcp": {
+      "type": "streamable-http",
+      "url": "http://localhost:1337/mcp",
+      "headers": {
+        "Authorization": "Bearer PASTE_YOUR_STRAPI_ADMIN_TOKEN_HERE"
+      }
+    },
+    "strapi-docs": {
+      "url": "https://strapi-docs.mcp.kapa.ai"
+    }
+  }
+}

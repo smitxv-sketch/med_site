@@ -19,6 +19,8 @@ npm run develop -w @med-site/cms
 
 Admin: http://localhost:1337/admin
 
+**MCP для Cursor:** см. [docs/DEV_STRAPI_MCP.md](../../docs/DEV_STRAPI_MCP.md) — включён в `config/server.ts`, эндпоинт `/mcp`.
+
 Generate secrets:
 
 ```bash
