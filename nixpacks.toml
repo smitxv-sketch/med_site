@@ -1,5 +1,8 @@
 [phases.setup]
-nixPkgs = ["nodejs_20"]
+# NOTE: Coolify / Nixpacks may need native build tools for some dependencies (node-gyp).
+# We include Python + build essentials to avoid flaky deploys when native addons are present.
+# Node is pinned to 22 to match our Coolify env (`NIXPACKS_NODE_VERSION=22`).
+nixPkgs = ["nodejs_22", "python3", "gcc", "gnumake", "pkg-config"]
 
 [phases.install]
 cmds = ["npm install --legacy-peer-deps"]
