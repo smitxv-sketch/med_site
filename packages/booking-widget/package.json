@@ -1,0 +1,15 @@
+{
+  "name": "@med-site/booking-widget",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Black-box packaging boundary for src/widget (logic unchanged until Wave 1 embed).",
+  "type": "module",
+  "main": "../../src/widget/BookingWidget.tsx",
+  "exports": {
+    ".": "../../src/widget/BookingWidget.tsx"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

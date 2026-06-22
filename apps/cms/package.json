@@ -1,0 +1,49 @@
+{
+  "name": "@med-site/cms",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A Strapi application",
+  "scripts": {
+    "build": "strapi build",
+    "console": "strapi console",
+    "deploy": "strapi deploy",
+    "dev": "strapi develop",
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "strapi": "strapi",
+    "upgrade": "npx @strapi/upgrade latest",
+    "upgrade:dry": "npx @strapi/upgrade latest --dry",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:logs": "docker compose logs -f postgres"
+  },
+  "dependencies": {
+    "@strapi/plugin-cloud": "5.48.1",
+    "@strapi/plugin-users-permissions": "5.48.1",
+    "@strapi/strapi": "5.48.1",
+    "ajv": "^8.20.0",
+    "better-sqlite3": "^12.11.1",
+    "pg": "8.20.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "styled-components": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20.0.0 <=26.x.x",
+    "npm": ">=6.0.0"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
+  "strapi": {
+    "uuid": "b4328ae4-3023-4d58-98c6-c3c2dc7d1f13",
+    "installId": "7b8211dd9eebe11275c6f9971418833443082beb0f271d01eb00ca0c59eed267"
+  }
+}

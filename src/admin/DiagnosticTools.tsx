@@ -8,7 +8,7 @@ export default function DiagnosticTools() {
   // API Tab State
   const [baseUrl, setBaseUrl] = useState('https://ci74.ru/booking/php/proxy.php');
   const [method, setMethod] = useState('spec_list');
-  const [apiKey, setApiKey] = useState('vpcM...'); // Default from user's preview
+  const [apiKey, setApiKey] = useState('');
   const [useServerProxy, setUseServerProxy] = useState(true);
   const [chatId, setChatId] = useState('206156880');
   

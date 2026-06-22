@@ -2,11 +2,24 @@
   "name": "medical-booking-widget",
   "version": "1.0.0",
   "description": "Headless CMS-ready medical booking widget with config-based backend",
+  "private": true,
   "type": "module",
   "main": "server/index.ts",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "tsx server/index.ts",
+    "dev:legacy": "tsx server/index.ts",
+    "dev:web": "npm run dev -w @med-site/web",
+    "dev:bff": "npm run dev -w @med-site/bff",
+    "dev:cms": "npm run develop -w @med-site/cms",
+    "dev:legacy-bridge": "npm --prefix \"modx_wp-to-strapi-migration-api\" run dev",
     "build": "vite build && esbuild server/index.ts --bundle --platform=node --format=esm --packages=external --sourcemap --outfile=dist/index.js",
+    "build:web": "npm run build -w @med-site/web",
+    "build:bff": "npm run build -w @med-site/bff",
+    "build:packages": "npm run build -w @med-site/contracts && npm run build -w @med-site/page-engine",
     "start": "NODE_ENV=production node dist/index.js",
     "lint": "eslint src server --ext .ts,.tsx",
     "lint:design": "node scripts/design-lint.mjs",
@@ -21,6 +34,7 @@
     "@types/react-input-mask": "^3.0.6",
     "@upstash/redis": "^1.37.0",
     "axios": "^1.6.2",
+    "ajv": "^8.20.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -69,5 +83,11 @@
     "tsx": "^4.22.4",
     "typescript": "^5.3.2",
     "vite": "^5.0.0"
+  },
+  "overrides": {
+    "ajv": "^8.20.0",
+    "date-fns-tz": {
+      "date-fns": "^2.30.0"
+    }
   }
 }

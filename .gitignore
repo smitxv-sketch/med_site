@@ -3,11 +3,27 @@ node_modules/
 
 # Build output
 dist/
+.next/
+apps/web/.next/
+apps/bff/dist/
+apps/cms/.cache/
+apps/cms/build/
+apps/cms/dist/
+packages/*/dist/
 
 # Environment & secrets
 .env
 .env.local
 .env.*.local
+apps/*/.env
+apps/cms/.env
+
+# PHP / legacy secrets (copy from *.example.*)
+php_backend/config_access.php
+firebase-applet-config.json
+
+# Strapi uploads (local)
+apps/cms/public/uploads/
 
 # Logs
 *.log
@@ -25,3 +41,6 @@ Thumbs.db
 
 # Vite
 *.local
+
+# Docker
+apps/cms/.tmp/
