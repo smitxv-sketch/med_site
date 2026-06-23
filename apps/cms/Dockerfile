@@ -14,8 +14,9 @@ RUN --mount=type=cache,target=/root/.npm \
 RUN npm install --legacy-peer-deps esbuild
 
 FROM node:20-alpine AS build
-# Coolify может прокинуть NODE_ENV=production на buildtime — явно dev для tsc/strapi build
-ENV NODE_ENV=development
+# ВАЖНО: админка Strapi должна собираться в production-режиме.
+# В dev-бандле RTK включает проверку duplicate middleware и Strapi падает на старте admin.
+ENV NODE_ENV=production
 RUN apk add --no-cache python3 make g++
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
