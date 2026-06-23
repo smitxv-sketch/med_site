@@ -64,6 +64,11 @@ export function createAuthMiddleware() {
     !bridgeToken;
 
   return (req: Request, res: Response, next: NextFunction) => {
+    // Docker/Coolify healthcheck без токена
+    if (req.path === '/api/health') {
+      return next();
+    }
+
     if (bridgeToken && readBearerToken(req) === bridgeToken) {
       return next();
     }
