@@ -1,12 +1,15 @@
 # Build from repo root: docker build -f apps/cms/Dockerfile .
+
 FROM node:20-alpine AS deps
-# better-sqlite3 (зависимость Strapi) требует node-gyp → python + компилятор
 RUN apk add --no-cache python3 make g++
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY apps/cms/package.json apps/cms/
 COPY packages/contracts/package.json packages/contracts/
-RUN npm install --legacy-peer-deps --include=dev --workspace=@med-site/cms --workspace=@med-site/contracts
+RUN npm install --legacy-peer-deps --include=dev \
+    --workspace=@med-site/cms \
+    --workspace=@med-site/contracts
+RUN npm install --legacy-peer-deps esbuild
 
 FROM node:20-alpine AS build
 RUN apk add --no-cache python3 make g++
@@ -19,9 +22,6 @@ RUN npm run build -w @med-site/contracts && npm run build -w @med-site/cms
 
 FROM node:20-alpine AS runner
 WORKDIR /app
-ENV NODE_ENV=production
-ENV HOST=0.0.0.0
-ENV PORT=1337
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/apps/cms ./apps/cms
 COPY --from=build /app/packages/contracts ./packages/contracts
