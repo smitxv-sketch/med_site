@@ -1,11 +1,21 @@
+import fs from "fs";
+import path from "path";
 import mysql from "mysql2/promise";
 import Database from "better-sqlite3";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-// Initialize local SQLite database for sync settings
-export const localDb = new Database('sync_settings.db');
+// Локальная SQLite: в Docker пишем в /data (volume), локально — в корень проекта
+const sqlitePath =
+  process.env.SQLITE_DB_PATH ||
+  (process.env.NODE_ENV === "production"
+    ? "/data/sync_settings.db"
+    : "sync_settings.db");
+
+fs.mkdirSync(path.dirname(sqlitePath), { recursive: true });
+
+export const localDb = new Database(sqlitePath);
 
 // Create table if it doesn't exist
 localDb.exec(`
