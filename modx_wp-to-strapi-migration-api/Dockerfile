@@ -6,8 +6,11 @@ WORKDIR /app
 
 ENV NODE_ENV=development
 
+# better-sqlite3 — нативный модуль, нужны build tools
+RUN apk add --no-cache python3 make g++
+
 COPY package.json package-lock.json* ./
-RUN npm ci --ignore-scripts
+RUN npm ci
 
 COPY . .
 RUN npm run build
