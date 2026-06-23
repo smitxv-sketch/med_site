@@ -12,6 +12,8 @@ RUN npm install --legacy-peer-deps --include=dev \
 RUN npm install --legacy-peer-deps esbuild
 
 FROM node:20-alpine AS build
+# Coolify может прокинуть NODE_ENV=production на buildtime — явно включаем dev для tsc/strapi build
+ENV NODE_ENV=development
 RUN apk add --no-cache python3 make g++
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
