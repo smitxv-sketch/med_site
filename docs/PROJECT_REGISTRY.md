@@ -26,6 +26,9 @@ Node.js / Express сервер, выступающий в роли BFF (Backend 
 ### 📚 Документация (`/docs`)
 Единое хранилище всех проектных документов, схем и планов.
 *   Главный индексный файл: `MASTER_DOC.md`
+*   **`/docs/INFRASTRUCTURE_SERVER.md`** — карта Coolify-сервера (приложения, БД, AI-сервисы).
+*   **`/docs/STRAPI_DEPLOY_POSTMORTEM.md`** — опыт деплоя Strapi (ошибки и решения).
+*   **`/docs/COOLIFY_STRAPI.md`** — краткий runbook Strapi на Coolify.
 *   **`/docs/legacy/`** — устаревшие SSOT и снимки (не для новой разработки).
 *   **`/docs/archive/`** — исторические черновики и планы v1.
 
