@@ -17,13 +17,10 @@ RUN rm -rf node_modules/date-fns \
 RUN rm -rf node_modules/react-router node_modules/react-router-dom \
     && npm install react-router-dom@6.30.4 --legacy-peer-deps --no-save
 
-FROM node:20-alpine AS build
+# Переиспользуем deps-слой (apk уже установлен) — меньше RAM при сборке на Coolify
+FROM deps AS build
 # Coolify может прокинуть NODE_ENV=production на buildtime — явно включаем dev для tsc/strapi build
 ENV NODE_ENV=development
-RUN apk add --no-cache python3 make g++
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY package.json package-lock.json ./
 COPY apps/cms ./apps/cms
 COPY packages/contracts ./packages/contracts
 RUN npm run build -w @med-site/contracts && npm run build -w @med-site/cms
