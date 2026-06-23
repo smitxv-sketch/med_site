@@ -1,5 +1,32 @@
 # Strapi on Coolify (Infrastructure → istochnik)
 
+## ⚠️ КРИТИЧНО: какой ресурс использовать
+
+| Ресурс в Coolify | Тип | URL в панели | Использовать? |
+|------------------|-----|--------------|---------------|
+| **`strapi-istochnik`** | **Application** | `.../application/rxb04qg8k7ia718by5829zeh` | **ДА** — клонирует GitHub, собирает Dockerfile |
+| **`strapi-ci`** | **Service** | `.../service/v8dsup1zzj582xl51f438fdj` | **НЕТ** — не клонирует репо |
+
+### Ошибка `strapi-ci` (то, что вы видите сейчас)
+
+```
+lstat /data/coolify/services/v8dsup1zzj582xl51f438fdj/apps: no such file or directory
+```
+
+**Почему:** Service `strapi-ci` хранит только `docker-compose.yml` в  
+`/data/coolify/services/v8dsup1zzj582xl51f438fdj/`.  
+Там **нет** папки `apps/` из monorepo — GitHub не клонируется для Services.
+
+Compose пытается: `dockerfile: apps/cms/Dockerfile` → файла нет → падение.
+
+**Что делать:** деплоить **`strapi-istochnik` (Application)**, не `strapi-ci`.  
+`strapi-ci` можно остановить/удалить в Coolify.
+
+Правильная ссылка в Coolify:
+`http://192.168.100.44:8000/project/l7i7h86pibca64e3ouqkt39z/environment/os4037dvaewugdcle599l4hu/application/rxb04qg8k7ia718by5829zeh`
+
+---
+
 ## Текущая схема
 
 | Ресурс | Coolify | Статус |

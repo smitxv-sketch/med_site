@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY apps/cms/package.json apps/cms/
 COPY packages/contracts/package.json packages/contracts/
-RUN npm install --legacy-peer-deps --workspace=@med-site/cms --workspace=@med-site/contracts
+RUN npm install --legacy-peer-deps --include=dev --workspace=@med-site/cms --workspace=@med-site/contracts
 
 FROM node:20-alpine AS build
 RUN apk add --no-cache python3 make g++
