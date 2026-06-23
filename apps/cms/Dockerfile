@@ -10,12 +10,12 @@ RUN npm install --legacy-peer-deps --include=dev \
     --workspace=@med-site/cms \
     --workspace=@med-site/contracts
 RUN npm install --legacy-peer-deps esbuild
-# Корневой date-fns@4 (зависимость основного сайта) ломает Vite-сборку Strapi admin
-RUN rm -rf node_modules/date-fns \
-    && npm install date-fns@2.30.0 --legacy-peer-deps --no-save
 # Корневой react-router-dom@7 ломает Redux store в Strapi admin (нужен v6)
 RUN rm -rf node_modules/react-router node_modules/react-router-dom \
     && npm install react-router-dom@6.30.4 --legacy-peer-deps --no-save
+# react-router install может снова подтянуть date-fns@4 — фиксируем v2 последним шагом
+RUN find node_modules -type d -name 'date-fns' -exec rm -rf {} + 2>/dev/null || true \
+    && npm install date-fns@2.30.0 --legacy-peer-deps --no-save
 
 # Переиспользуем deps-слой (apk уже установлен) — меньше RAM при сборке на Coolify
 FROM deps AS build
