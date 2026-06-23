@@ -26,6 +26,8 @@ COPY packages/contracts ./packages/contracts
 RUN npm run build -w @med-site/contracts && npm run build -w @med-site/cms
 
 FROM node:20-alpine AS runner
+# Coolify healthcheck использует wget/curl внутри контейнера
+RUN apk add --no-cache wget curl
 WORKDIR /app
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/apps/cms ./apps/cms
