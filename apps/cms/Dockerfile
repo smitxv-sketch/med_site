@@ -13,6 +13,9 @@ RUN npm install --legacy-peer-deps esbuild
 # Корневой date-fns@4 (зависимость основного сайта) ломает Vite-сборку Strapi admin
 RUN rm -rf node_modules/date-fns \
     && npm install date-fns@2.30.0 --legacy-peer-deps --no-save
+# Корневой react-router-dom@7 ломает Redux store в Strapi admin (нужен v6)
+RUN rm -rf node_modules/react-router node_modules/react-router-dom \
+    && npm install react-router-dom@6.30.4 --legacy-peer-deps --no-save
 
 FROM node:20-alpine AS build
 # Coolify может прокинуть NODE_ENV=production на buildtime — явно включаем dev для tsc/strapi build
