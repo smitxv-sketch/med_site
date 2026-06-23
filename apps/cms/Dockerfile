@@ -10,6 +10,9 @@ RUN npm install --legacy-peer-deps --include=dev \
     --workspace=@med-site/cms \
     --workspace=@med-site/contracts
 RUN npm install --legacy-peer-deps esbuild
+# Корневой date-fns@4 (зависимость основного сайта) ломает Vite-сборку Strapi admin
+RUN rm -rf node_modules/date-fns \
+    && npm install date-fns@2.30.0 --legacy-peer-deps --no-save
 
 FROM node:20-alpine AS build
 # Coolify может прокинуть NODE_ENV=production на buildtime — явно включаем dev для tsc/strapi build
