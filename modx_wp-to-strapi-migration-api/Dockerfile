@@ -6,9 +6,6 @@ WORKDIR /app
 
 ENV NODE_ENV=development
 
-# better-sqlite3 — нативный модуль, нужны build tools
-RUN apk add --no-cache python3 make g++
-
 COPY package.json package-lock.json* ./
 RUN npm ci
 
@@ -26,10 +23,7 @@ ENV HOST=0.0.0.0
 RUN apk add --no-cache wget curl
 
 RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 bridge && \
-    mkdir -p /data && chown bridge:nodejs /data
-
-ENV SQLITE_DB_PATH=/data/sync_settings.db
+    adduser --system --uid 1001 bridge
 
 COPY --from=builder --chown=bridge:nodejs /app/package.json ./package.json
 COPY --from=builder --chown=bridge:nodejs /app/node_modules ./node_modules

@@ -3,6 +3,7 @@ import path from "path";
 import dotenv from "dotenv";
 import { createServer as createViteServer } from "vite";
 import apiRouter from "./server/routes/api.js";
+import { initBridgeDb } from "./server/bridgeDb.js";
 import {
   assertProductionAuthConfigured,
   createAuthMiddleware,
@@ -12,6 +13,7 @@ dotenv.config();
 assertProductionAuthConfigured();
 
 async function startServer() {
+  await initBridgeDb();
   const app = express();
   const PORT = parseInt(process.env.PORT || '3010');
   const HOST = process.env.HOST || "0.0.0.0";

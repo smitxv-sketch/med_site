@@ -1,100 +1,18 @@
-import fs from "fs";
-import path from "path";
 import mysql from "mysql2/promise";
-import Database from "better-sqlite3";
-import dotenv from "dotenv";
 
-dotenv.config();
-
-// Локальная SQLite: в Docker пишем в /data (volume), локально — в корень проекта
-const sqlitePath =
-  process.env.SQLITE_DB_PATH ||
-  (process.env.NODE_ENV === "production"
-    ? "/data/sync_settings.db"
-    : "sync_settings.db");
-
-fs.mkdirSync(path.dirname(sqlitePath), { recursive: true });
-
-export const localDb = new Database(sqlitePath);
-
-// Create table if it doesn't exist
-localDb.exec(`
-  CREATE TABLE IF NOT EXISTS excluded_resources (
-    resource_id INTEGER PRIMARY KEY,
-    excluded_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS export_templates (
-    template_id INTEGER PRIMARY KEY,
-    is_exportable BOOLEAN DEFAULT 1,
-    alias TEXT,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS export_fields (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    template_id INTEGER,
-    field_name TEXT,
-    is_exportable BOOLEAN DEFAULT 1,
-    alias TEXT,
-    cast_type TEXT DEFAULT 'string',
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(template_id, field_name)
-  );
-
-  CREATE TABLE IF NOT EXISTS sync_config (
-    key TEXT PRIMARY KEY,
-    value TEXT
-  );
-
-  CREATE TABLE IF NOT EXISTS sync_logs (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    city TEXT,
-    status TEXT,
-    message TEXT,
-    details TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-
-  CREATE TABLE IF NOT EXISTS sync_map (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    city TEXT,
-    entity_type TEXT,
-    original_id TEXT,
-    strapi_id TEXT,
-    data_hash TEXT,
-    last_synced DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(city, entity_type, original_id)
-  );
-`);
-
-// Migration: Add data_hash if it doesn't exist (for existing DBs)
-try {
-  localDb.exec("ALTER TABLE sync_map ADD COLUMN data_hash TEXT;");
-} catch (e) {
-  // Column likely already exists, ignore
-}
-
-// Create MySQL connection pool
+// MySQL MODX (СПб) — чтение старого сайта
 export const pool = mysql.createPool({
-  host: process.env.SPB_DB_HOST || process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.SPB_DB_PORT || process.env.DB_PORT || '3306'),
-  user: process.env.SPB_DB_USER || process.env.DB_USER || 'root',
-  password: process.env.SPB_DB_PASSWORD || process.env.DB_PASSWORD || '',
-  database: process.env.SPB_DB_NAME || process.env.DB_NAME || 'modx_database',
+  host: process.env.SPB_DB_HOST || process.env.DB_HOST || "localhost",
+  port: parseInt(process.env.SPB_DB_PORT || process.env.DB_PORT || "3306"),
+  user: process.env.SPB_DB_USER || process.env.DB_USER || "root",
+  password: process.env.SPB_DB_PASSWORD || process.env.DB_PASSWORD || "",
+  database: process.env.SPB_DB_NAME || process.env.DB_NAME || "modx_database",
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
 });
 
-export const getPrefix = () => process.env.SPB_DB_PREFIX || process.env.DB_PREFIX || 'modx_';
+export const getPrefix = () =>
+  process.env.SPB_DB_PREFIX || process.env.DB_PREFIX || "modx_";
 
-export const getExcludedIds = () => {
-  try {
-    const stmt = localDb.prepare('SELECT resource_id FROM excluded_resources');
-    const rows = stmt.all();
-    return rows.map((r: any) => r.resource_id);
-  } catch (e) {
-    return [];
-  }
-};
+export { getExcludedIds } from "./bridgeDb.js";

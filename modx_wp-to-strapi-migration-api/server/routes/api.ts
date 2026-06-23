@@ -1,5 +1,12 @@
 import { Router } from "express";
-import { pool, localDb, getPrefix, getExcludedIds } from "../db.js";
+import { pool, getPrefix, getExcludedIds } from "../db.js";
+import {
+  getBridgePool,
+  getExportSchema,
+  toggleExcludedResource,
+  upsertExportField,
+  upsertExportTemplate,
+} from "../bridgeDb.js";
 import {
   getChelDoctors,
   getChelServices,
@@ -120,27 +127,27 @@ router.post("/export/run", async (req, res) => {
 
 // --- NEW SYNC ENGINE ENDPOINTS ---
 
-router.get("/sync-engine/config", (req, res) => {
+router.get("/sync-engine/config", async (req, res) => {
   try {
-    const config = getSyncConfig();
+    const config = await getSyncConfig();
     res.json(config);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
 });
 
-router.post("/sync-engine/config", (req, res) => {
+router.post("/sync-engine/config", async (req, res) => {
   try {
-    saveSyncConfig(req.body);
+    await saveSyncConfig(req.body);
     res.json({ success: true });
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
 });
 
-router.get("/sync-engine/logs", (req, res) => {
+router.get("/sync-engine/logs", async (req, res) => {
   try {
-    const logs = getSyncLogs();
+    const logs = await getSyncLogs();
     res.json(logs);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
@@ -175,28 +182,20 @@ router.post("/sync-engine/run", async (req, res) => {
 });
 
 // API Endpoints
-router.get("/sync/settings/excluded", (req, res) => {
+router.get("/sync/settings/excluded", async (req, res) => {
   try {
-    const stmt = localDb.prepare('SELECT resource_id FROM excluded_resources');
-    const rows = stmt.all();
-    res.json(rows.map((r: any) => r.resource_id));
+    res.json(await getExcludedIds());
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch excluded resources" });
   }
 });
 
-router.post("/sync/settings/toggle", (req, res) => {
+router.post("/sync/settings/toggle", async (req, res) => {
   try {
     const { resource_id, exclude } = req.body;
     if (!resource_id) return res.status(400).json({ error: 'resource_id is required' });
-    
-    if (exclude) {
-      const stmt = localDb.prepare('INSERT OR IGNORE INTO excluded_resources (resource_id) VALUES (?)');
-      stmt.run(resource_id);
-    } else {
-      const stmt = localDb.prepare('DELETE FROM excluded_resources WHERE resource_id = ?');
-      stmt.run(resource_id);
-    }
+
+    await toggleExcludedResource(Number(resource_id), Boolean(exclude));
     res.json({ success: true, resource_id, excluded: exclude });
   } catch (error) {
     res.status(500).json({ error: "Failed to toggle resource exclusion" });
@@ -204,31 +203,25 @@ router.post("/sync/settings/toggle", (req, res) => {
 });
 
 // GET export schema
-router.get("/export/schema", (req, res) => {
+router.get("/export/schema", async (req, res) => {
   try {
-    const templates = localDb.prepare('SELECT * FROM export_templates').all();
-    const fields = localDb.prepare('SELECT * FROM export_fields').all();
-    res.json({ templates, fields });
+    res.json(await getExportSchema());
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch export schema" });
   }
 });
 
 // POST update template schema
-router.post("/export/schema/template", (req, res) => {
+router.post("/export/schema/template", async (req, res) => {
   try {
     const { template_id, is_exportable, alias } = req.body;
     if (template_id === undefined) return res.status(400).json({ error: 'template_id is required' });
-    
-    const stmt = localDb.prepare(`
-      INSERT INTO export_templates (template_id, is_exportable, alias, updated_at) 
-      VALUES (?, ?, ?, CURRENT_TIMESTAMP)
-      ON CONFLICT(template_id) DO UPDATE SET 
-        is_exportable = excluded.is_exportable,
-        alias = excluded.alias,
-        updated_at = CURRENT_TIMESTAMP
-    `);
-    stmt.run(template_id, is_exportable ? 1 : 0, alias || null);
+
+    await upsertExportTemplate(
+      Number(template_id),
+      Boolean(is_exportable),
+      alias || null,
+    );
     res.json({ success: true });
   } catch (error) {
     res.status(500).json({ error: "Failed to update template schema" });
@@ -236,21 +229,18 @@ router.post("/export/schema/template", (req, res) => {
 });
 
 // POST update field schema
-router.post("/export/schema/field", (req, res) => {
+router.post("/export/schema/field", async (req, res) => {
   try {
     const { template_id, field_name, is_exportable, alias, cast_type } = req.body;
     if (template_id === undefined || !field_name) return res.status(400).json({ error: 'template_id and field_name are required' });
-    
-    const stmt = localDb.prepare(`
-      INSERT INTO export_fields (template_id, field_name, is_exportable, alias, cast_type, updated_at) 
-      VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
-      ON CONFLICT(template_id, field_name) DO UPDATE SET 
-        is_exportable = excluded.is_exportable,
-        alias = excluded.alias,
-        cast_type = excluded.cast_type,
-        updated_at = CURRENT_TIMESTAMP
-    `);
-    stmt.run(template_id, field_name, is_exportable ? 1 : 0, alias || null, cast_type || 'string');
+
+    await upsertExportField(
+      Number(template_id),
+      field_name,
+      Boolean(is_exportable),
+      alias || null,
+      cast_type || 'string',
+    );
     res.json({ success: true });
   } catch (error) {
     res.status(500).json({ error: "Failed to update field schema" });
@@ -264,7 +254,7 @@ router.get("/sync/logs", async (req, res) => {
 router.get("/doctors", async (req, res) => {
   try {
     const prefix = getPrefix();
-    const excludedIds = getExcludedIds();
+    const excludedIds = await getExcludedIds();
     const excludeCondition = excludedIds.length > 0 ? `AND c.id NOT IN (${excludedIds.join(',')})` : '';
     const [doctors] = await pool.query(`
       SELECT c.id, c.pagetitle, c.alias, c.parent, p.image, p.thumb
@@ -319,7 +309,7 @@ router.get("/doctors", async (req, res) => {
 router.get("/services", async (req, res) => {
   try {
     const prefix = getPrefix();
-    const excludedIds = getExcludedIds();
+    const excludedIds = await getExcludedIds();
     const excludeCondition = excludedIds.length > 0 ? `AND id NOT IN (${excludedIds.join(',')})` : '';
     const [services] = await pool.query(`
       SELECT id, pagetitle, longtitle, description, introtext, content, parent as parent_id, alias 
@@ -396,7 +386,7 @@ router.get("/sync/full-graph", async (req, res) => {
   try {
     const prefix = getPrefix();
     const includeExcluded = req.query.include_excluded === 'true';
-    const excludedIds = getExcludedIds();
+    const excludedIds = await getExcludedIds();
     const excludeCondition = (!includeExcluded && excludedIds.length > 0) ? `AND c.id NOT IN (${excludedIds.join(',')})` : '';
     
     // 1. Fetch Resources (All non-deleted)
@@ -553,13 +543,30 @@ router.get("/sync/full-graph", async (req, res) => {
   }
 });
 
-router.get("/health", async (req, res) => {
+router.get("/health", async (_req, res) => {
+  const checks: Record<string, string> = { bridge: "unknown", modx: "unknown" };
+
   try {
-    await pool.query('SELECT 1');
-    res.json({ status: "ok", modx_connection: "connected" });
+    await getBridgePool().query("SELECT 1");
+    checks.bridge = "connected";
   } catch (error) {
-    res.status(500).json({ status: "error", modx_connection: "failed", details: String(error) });
+    checks.bridge = "failed";
+    return res.status(503).json({
+      status: "error",
+      checks,
+      details: String(error),
+    });
   }
+
+  try {
+    await pool.query("SELECT 1");
+    checks.modx = "connected";
+  } catch {
+    // MODX (СПб) может быть не настроен — это не блокирует healthcheck деплоя
+    checks.modx = "not_configured";
+  }
+
+  res.json({ status: "ok", checks });
 });
 
 router.get("/export/schema/analyze", async (req, res) => {
