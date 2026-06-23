@@ -1,5 +1,10 @@
 {
   "mcpServers": {
+    "legacy-bridge": {
+      "command": "npm",
+      "args": ["run", "mcp"],
+      "cwd": "modx_wp-to-strapi-migration-api"
+    },
     "strapi-mcp": {
       "type": "streamable-http",
       "url": "http://localhost:1337/mcp",

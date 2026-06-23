@@ -37,7 +37,16 @@ OpenAPI спецификация отдается JSON‑ом:
 ## Secrets / безопасность
 
 - Никакие ключи не должны храниться в git. Все значения — через `.env` / Coolify env.
-- **В production без `SITE_PASSWORD` сервис не стартует** — иначе откроются сырые данные двух сайтов.
-- UI и все `/api/*` защищены Basic Auth (логин `SITE_USER`, пароль `SITE_PASSWORD`).
-- Локально без пароля можно только при `LEGACY_BRIDGE_ALLOW_LOCAL_NO_AUTH=true` и `localhost`.
+- **`BRIDGE_API_TOKEN`** — Bearer для ИИ, MCP, скриптов (`Authorization: Bearer …`).
+- **`SITE_PASSWORD`** — Basic Auth для UI в браузере.
+- В production нужен **хотя бы один** из двух секретов выше.
+- Локально рекомендуется `HOST=127.0.0.1` (только ваша машина).
 - `VITE_FIREBASE_*` — клиентская конфигурация (видна в браузере), нужна только для Schema Builder.
+
+## MCP (Cursor)
+
+```bash
+npm run mcp
+```
+
+См. `.cursor/mcp.json.example` и `docs/DEV_LEGACY_BRIDGE.md`.

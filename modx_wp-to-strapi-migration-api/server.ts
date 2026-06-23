@@ -5,8 +5,8 @@ import { createServer as createViteServer } from "vite";
 import apiRouter from "./server/routes/api.js";
 import {
   assertProductionAuthConfigured,
-  createBasicAuthMiddleware,
-} from "./server/middleware/basicAuth.js";
+  createAuthMiddleware,
+} from "./server/middleware/auth.js";
 
 dotenv.config();
 assertProductionAuthConfigured();
@@ -19,7 +19,7 @@ async function startServer() {
   app.use(express.json());
 
   // Защита UI + API (обязательна в production через SITE_PASSWORD)
-  app.use(createBasicAuthMiddleware());
+  app.use(createAuthMiddleware());
 
   // API Routes
   app.use("/api", apiRouter);
