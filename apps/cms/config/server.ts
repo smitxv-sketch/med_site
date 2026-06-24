@@ -4,7 +4,8 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Server =>
   host: env('HOST', '0.0.0.0'),
   port: env.int('PORT', 1337),
   app: {
-    keys: env.array('APP_KEYS=YQq6l1DxtkLPy1oHQRnrRQ==,e/fCcVkt/44DneYQPCkf0w==,5Jzv/N21GQi0DRedan7vbw==,Dqx7c6h+Foua6z8lu3Cyyg=='),	
+    // Читаем из Coolify/.env (comma-separated). Не хардкодим секреты в коде.
+    keys: env.array('APP_KEYS'),
   },
   mcp: {
     enabled: env.bool('STRAPI_MCP_ENABLED', true),

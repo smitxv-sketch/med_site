@@ -7,6 +7,11 @@ const BFF = process.env.BFF_URL ?? 'http://localhost:3001';
 const WEB = process.env.WEB_URL ?? 'http://localhost:3002';
 const STRAPI = process.env.STRAPI_URL ?? 'https://cms.istochnik.smitx.ru';
 
+// BFF на проде слушает только 127.0.0.1:3001 внутри контейнера site-ci
+const skipBff =
+  process.env.SMOKE_SKIP_BFF === '1' ||
+  (Boolean(process.env.WEB_URL) && !process.env.BFF_URL);
+
 async function check(name, url, expectOk = true) {
   try {
     const res = await fetch(url);
@@ -29,9 +34,22 @@ async function run(name, fn) {
   if (await fn()) passed++;
 }
 
-await run('bff-health', () => check('bff-health', `${BFF}/health`));
-await run('bff-page-mock', () => check('bff-page', `${BFF}/api/pages/home?tenant=chel`));
+await run('bff-health', () => {
+  if (skipBff) {
+    console.log('SKIP bff-health (BFF internal only on prod)');
+    return true;
+  }
+  return check('bff-health', `${BFF}/health`);
+});
+await run('bff-page-mock', () => {
+  if (skipBff) {
+    console.log('SKIP bff-page (BFF internal only on prod)');
+    return true;
+  }
+  return check('bff-page', `${BFF}/api/pages/home?tenant=chel`);
+});
 await run('web-health', () => check('web-health', `${WEB}/api/health`));
+await run('web-home', () => check('web-home', `${WEB}/`));
 await run('strapi-admin', () => check('strapi-admin', `${STRAPI}/admin`, true));
 
 console.log(`\nSmoke: ${passed}/${total} passed`);
