@@ -2,7 +2,10 @@
 nixPkgs = ["nodejs_22", "python3", "gcc", "gnumake", "pkg-config"]
 
 [phases.install]
-cmds = ["npm install --legacy-peer-deps"]
+cmds = [
+  "npm install --legacy-peer-deps",
+  "node scripts/dedupe-react.mjs"
+]
 
 [phases.build]
 cmds = [
