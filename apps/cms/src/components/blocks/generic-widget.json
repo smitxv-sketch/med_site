@@ -13,11 +13,6 @@
     },
     "content": { "type": "json" },
     "design": { "type": "json" },
-    "config": { "type": "json" },
-    "children": {
-      "type": "component",
-      "repeatable": true,
-      "component": "blocks.generic-widget"
-    }
+    "config": { "type": "json" }
   }
 }

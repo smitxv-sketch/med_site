@@ -16,11 +16,18 @@ async function ensureLocales(strapi: Core.Strapi) {
   const localeService = strapi.plugin('i18n').service('locales');
   const existing = await localeService.find();
   const codes = new Set(existing.map((l: { code: string }) => l.code));
+  let defaultSet = existing.some((l: { isDefault?: boolean }) => l.isDefault);
 
   for (const loc of TENANT_LOCALES) {
     if (!codes.has(loc.code)) {
-      await localeService.create({ code: loc.code, name: loc.name });
-      strapi.log.info(`[bootstrap] locale created: ${loc.code}`);
+      const isDefault = !defaultSet && loc.code === 'ru-chel';
+      await localeService.create({
+        code: loc.code,
+        name: loc.name,
+        isDefault,
+      });
+      if (isDefault) defaultSet = true;
+      strapi.log.info(`[bootstrap] locale created: ${loc.code}${isDefault ? ' (default)' : ''}`);
     }
   }
 }
@@ -82,7 +89,7 @@ async function seedHomePage(strapi: Core.Strapi) {
         slug: 'home',
         seo: {
           metaTitle: 'Клиника «Источник»',
-          metaDescription: 'Медицинский центр «Источник»',
+          metaDescription: 'Медицинский центр «Источник» — запись к врачу онлайн',
         },
         blocks,
       } as never,
@@ -90,6 +97,64 @@ async function seedHomePage(strapi: Core.Strapi) {
       status: 'published',
     });
     strapi.log.info(`[bootstrap] seeded home page for ${locale.code}`);
+  }
+}
+
+/** Меню сайта — как в BFF mock */
+async function seedNavigation(strapi: Core.Strapi) {
+  const headerMenu = [
+    { label: 'Услуги и цены', url: '/prices' },
+    { label: 'Врачи', url: '/doctors' },
+    { label: 'Акции', url: '/promotions' },
+    { label: 'О клинике', url: '/about' },
+  ];
+
+  const navUid = 'api::navigation.navigation' as never;
+
+  for (const locale of TENANT_LOCALES) {
+    const existing = await strapi.documents(navUid).findFirst({ locale: locale.code });
+    if (existing) continue;
+
+    await strapi.documents(navUid).create({
+      data: { headerMenu, footerColumns: [] } as never,
+      locale: locale.code,
+      status: 'published',
+    });
+    strapi.log.info(`[bootstrap] seeded navigation for ${locale.code}`);
+  }
+}
+
+/** Header/footer блоки для PrototypeShell */
+async function seedGlobalLayout(strapi: Core.Strapi) {
+  const layoutUid = 'api::global-layout.global-layout' as never;
+  const blocks = {
+    headerBlocks: [
+      {
+        __component: 'blocks.generic-widget',
+        widgetType: 'header',
+        content: {},
+      },
+    ],
+    footerBlocks: [
+      {
+        __component: 'blocks.generic-widget',
+        widgetType: 'footer',
+        content: {},
+      },
+    ],
+    mobileNavBlocks: [],
+  };
+
+  for (const locale of TENANT_LOCALES) {
+    const existing = await strapi.documents(layoutUid).findFirst({ locale: locale.code });
+    if (existing) continue;
+
+    await strapi.documents(layoutUid).create({
+      data: blocks as never,
+      locale: locale.code,
+      status: 'published',
+    });
+    strapi.log.info(`[bootstrap] seeded global-layout for ${locale.code}`);
   }
 }
 
@@ -103,6 +168,8 @@ export default {
       await ensureLocales(strapi);
       await ensurePublicPermissions(strapi);
       await seedHomePage(strapi);
+      await seedNavigation(strapi);
+      await seedGlobalLayout(strapi);
     } catch (err) {
       strapi.log.error('[bootstrap] failed:', err);
     }

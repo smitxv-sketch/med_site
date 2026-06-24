@@ -9,9 +9,8 @@
     "label": { "type": "string", "required": true },
     "url": { "type": "string", "required": true },
     "children": {
-      "type": "component",
-      "repeatable": true,
-      "component": "shared.menu-item"
+      "type": "json",
+      "description": "Вложенные пункты меню (массив {label, url}) — JSON вместо component, чтобы Strapi не уходил в бесконечный deep populate"
     }
   }
 }
