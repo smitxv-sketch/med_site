@@ -19,6 +19,8 @@ const nextConfig: NextConfig = {
       '@': path.join(root, 'src'),
       '@med-site/contracts': path.join(root, 'packages/contracts/dist/index.js'),
       '@med-site/page-engine': path.join(root, 'packages/page-engine/dist/index.js'),
+      // Виджеты прототипа ожидают react-router-dom (Vite), в Next — shim
+      'react-router-dom': path.join(__dirname, 'lib/react-router-dom-shim.tsx'),
     };
     return config;
   },
