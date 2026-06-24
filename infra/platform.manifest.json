@@ -23,14 +23,15 @@
     },
     "site-ci": {
       "uuid": "v218flpmvlr8bz62p11l4mk8",
-      "buildPack": "nixpacks",
-      "nixpacksConfig": "nixpacks.toml",
+      "buildPack": "dockerfile",
+      "dockerfile": "/apps/platform/Dockerfile",
       "port": 3000,
       "watchPaths": [
         "apps/web/**",
         "apps/bff/**",
+        "apps/platform/**",
         "packages/**",
-        "nixpacks.toml",
+        "src/**",
         "scripts/start-platform.mjs",
         "scripts/dedupe-react.mjs"
       ]

@@ -45,3 +45,10 @@ Thumbs.db
 
 # Docker
 apps/cms/.tmp/
+
+# Temporary / experiments (should never be deployed)
+.tmp/
+.tmp-ci-test/
+data/
+travel/
+*.zip

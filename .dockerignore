@@ -1,12 +1,17 @@
-# Ускоряет site-ci/nixpacks: не тащим лишнее в build context
+# Ускоряет Docker build: не тащим лишнее в build context
 .git
 .tmp
+.tmp-ci-test
+data
+travel
+*.zip
 **/.next
 **/dist
 **/node_modules
 modx_wp-to-strapi-migration-api
-apps/cms/.cache
-apps/cms/build
-apps/cms/dist
+apps/cms
+apps/studio
+.github
+docs
 *.md
 !apps/cms/README.md
