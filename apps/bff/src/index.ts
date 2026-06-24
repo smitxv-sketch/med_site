@@ -10,6 +10,7 @@ import {
   getDraftHandler,
   getPresetsHandler,
   patchDraftHandler,
+  publishDraftHandler,
 } from './routes/studio.js';
 import { studioAuth } from './middleware/studioAuth.js';
 import { getDataMode } from './config/env.js';
@@ -37,6 +38,7 @@ app.get('/api/global-layout', getGlobalLayoutHandler);
 app.get('/studio/draft', studioAuth, getDraftHandler);
 app.patch('/studio/draft', studioAuth, patchDraftHandler);
 app.get('/studio/presets', studioAuth, getPresetsHandler);
+app.post('/studio/publish', studioAuth, publishDraftHandler);
 
 app.listen(port, () => {
   console.log(`BFF_READY listening on http://localhost:${port}`);

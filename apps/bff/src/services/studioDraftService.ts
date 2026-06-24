@@ -22,7 +22,7 @@ interface StrapiListResponse<T> {
 }
 
 /** Черновики в RAM до полного Strapi draft-write (Wave 1B) */
-const draftOverlay = new Map<string, StudioDraftDto>();
+export const draftOverlay = new Map<string, StudioDraftDto>();
 
 function draftKey(tenantId: string, locale: string, pageSlug: string) {
   return `${tenantId}:${locale}:${pageSlug}`;

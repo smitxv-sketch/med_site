@@ -9,6 +9,7 @@ import {
   getStudioDraft,
   patchStudioDraft,
 } from '../services/studioDraftService.js';
+import { publishStudioDraft } from '../services/studioPublishService.js';
 
 function resolveLocale(tenantId: string): string {
   const tenant = getTenantById(tenantId);
@@ -66,5 +67,22 @@ export async function getPresetsHandler(_req: Request, res: Response) {
   } catch (err) {
     console.error('[bff] getPresets error:', err);
     return res.status(502).json({ error: 'Failed to load presets' });
+  }
+}
+
+export async function publishDraftHandler(req: Request, res: Response) {
+  const tenantId = String(req.query.tenant ?? 'chel');
+  const pageSlug = String(req.query.page ?? 'home');
+  const locale = String(req.query.locale ?? resolveLocale(tenantId));
+
+  try {
+    const published = await publishStudioDraft(tenantId, locale, pageSlug);
+    return res.json({ ok: true, draft: published });
+  } catch (err) {
+    const status = (err as { status?: number }).status ?? 502;
+    console.error('[bff] publish error:', err);
+    return res.status(status).json({
+      error: err instanceof Error ? err.message : 'Publish failed',
+    });
   }
 }

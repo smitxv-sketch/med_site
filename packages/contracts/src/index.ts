@@ -28,6 +28,8 @@ export {
   type StrapiBlockEntry,
 } from './strapi/mapStrapiBlocks.js';
 
+export { mapPageBlocksToStrapi } from './strapi/mapPageBlocksToStrapi.js';
+
 export {
   DEFAULT_HOME_BLOCKS,
   DEFAULT_HOME_SEO,
