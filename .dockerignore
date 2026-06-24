@@ -1,0 +1,12 @@
+# Ускоряет site-ci/nixpacks: не тащим лишнее в build context
+.git
+.tmp
+**/.next
+**/dist
+**/node_modules
+modx_wp-to-strapi-migration-api
+apps/cms/.cache
+apps/cms/build
+apps/cms/dist
+*.md
+!apps/cms/README.md

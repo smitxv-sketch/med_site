@@ -2,8 +2,9 @@
 nixPkgs = ["nodejs_22", "python3", "gcc", "gnumake", "pkg-config"]
 
 [phases.install]
+# Только нужные workspace — без Strapi CMS (~минус 800+ пакетов и минуты сборки)
 cmds = [
-  "npm install --legacy-peer-deps",
+  "npm install --legacy-peer-deps --ignore-scripts --workspace=@med-site/web --workspace=@med-site/bff --workspace=@med-site/contracts --workspace=@med-site/page-engine",
   "node scripts/dedupe-react.mjs"
 ]
 
@@ -19,6 +20,6 @@ cmd = "node scripts/start-platform.mjs"
 
 [variables]
 NODE_ENV = "production"
-DATA_MODE = "live"
+DATA_MODE = "hybrid"
 STRAPI_URL = "https://cms.istochnik.smitx.ru"
 BFF_PORT = "3001"

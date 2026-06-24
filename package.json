@@ -25,8 +25,7 @@
     "lint:design": "node scripts/design-lint.mjs",
     "test:qms:all": "tsx test-qms-all-slots.ts",
     "smoke:platform": "node scripts/smoke-platform.mjs",
-    "build:platform": "npm run build:packages && npm run build -w @med-site/bff && npm run build -w @med-site/web",
-    "postinstall": "node scripts/dedupe-react.mjs"
+    "build:platform": "npm run build:packages && npm run build -w @med-site/bff && npm run build -w @med-site/web"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",

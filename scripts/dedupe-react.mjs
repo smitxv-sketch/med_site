@@ -26,6 +26,5 @@ if (fs.existsSync(rootReact)) {
   const v = JSON.parse(fs.readFileSync(rootReact, 'utf8')).version;
   console.log('[dedupe-react] root react', v);
 } else {
-  console.warn('[dedupe-react] WARN: root react not found');
-  process.exit(1);
+  console.warn('[dedupe-react] WARN: root react not found (skip)');
 }

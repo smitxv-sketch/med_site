@@ -29,7 +29,8 @@ export async function getPageHandler(req: Request, res: Response) {
     const page = await fetchPageFromStrapi(slug, locale);
     if (page) return res.json(page);
 
-    if (mode === 'hybrid') {
+    // Пока Strapi не засеян — отдаём фикстуру (live/hybrid)
+    if (mode === 'hybrid' || mode === 'live') {
       return res.json(getMockPage(slug, locale));
     }
 

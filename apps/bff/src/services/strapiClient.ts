@@ -51,17 +51,30 @@ export async function fetchPageFromStrapi(
   slug: string,
   locale: string,
 ): Promise<PageDto | null> {
+  const base = getStrapiUrl();
+  const token = getStrapiToken();
   const qs = new URLSearchParams({
     'filters[slug][$eq]': slug,
     locale,
     'populate[blocks][populate]': '*',
     'populate[seo]': '*',
+    publicationState: 'live',
   });
 
-  const json = await strapiFetch<StrapiListResponse<StrapiPageAttributes>>(
-    `/pages?${qs}`,
-    locale,
-  );
+  const url = `${base}/api/pages?${qs}`;
+  const headers: Record<string, string> = { Accept: 'application/json' };
+  if (token) headers.Authorization = `Bearer ${token}`;
+
+  const res = await fetch(url, { headers, cache: 'no-store' });
+  // API /pages ещё не задеплоен или пуст — не валим BFF
+  if (res.status === 404) {
+    return null;
+  }
+  if (!res.ok) {
+    throw new Error(`Strapi ${res.status}: ${slug}`);
+  }
+
+  const json = (await res.json()) as StrapiListResponse<StrapiPageAttributes>;
 
   const item = json.data?.[0];
   if (!item) return null;

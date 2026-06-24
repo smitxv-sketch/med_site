@@ -7,11 +7,12 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY apps/cms/package.json apps/cms/
 COPY packages/contracts/package.json packages/contracts/
+# --ignore-scripts: корневой postinstall (dedupe-react) не нужен для CMS-сборки
 RUN --mount=type=cache,target=/root/.npm \
-    npm install --legacy-peer-deps --include=dev \
+    npm install --legacy-peer-deps --ignore-scripts --include=dev \
     --workspace=@med-site/cms \
     --workspace=@med-site/contracts
-RUN npm install --legacy-peer-deps esbuild
+RUN npm install --legacy-peer-deps --ignore-scripts esbuild
 
 FROM node:20-alpine AS build
 # ВАЖНО: админка Strapi должна собираться в production-режиме.

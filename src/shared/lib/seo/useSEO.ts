@@ -5,7 +5,10 @@ import { useEffect, useRef } from 'react';
  * Вызывается на уровне PageRenderer или конкретной страницы.
  */
 export const useSEO = (title?: string, description?: string) => {
-  const defaultTitle = useRef(document.title);
+  // SSR (Next.js): document недоступен на сервере
+  const defaultTitle = useRef(
+    typeof document !== 'undefined' ? document.title : '',
+  );
   
   useEffect(() => {
     if (title) {
