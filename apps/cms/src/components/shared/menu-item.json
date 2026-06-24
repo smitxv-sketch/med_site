@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_shared_menu_items",
+  "info": {
+    "displayName": "MenuItem",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "label": { "type": "string", "required": true },
+    "url": { "type": "string", "required": true },
+    "children": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.menu-item"
+    }
+  }
+}

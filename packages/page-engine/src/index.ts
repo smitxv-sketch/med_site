@@ -1,2 +1,8 @@
-/** Wave 1: PageRenderer, widgetManifest, dataBinding migrate here from src/shared. */
-export const PAGE_ENGINE_VERSION = '0.0.1';
+import type { PageBlock } from '@med-site/contracts';
+
+export interface BlockRendererProps {
+  blocks: PageBlock[];
+  contentContext?: unknown;
+}
+
+export { PAGE_ENGINE_VERSION } from './version.js';

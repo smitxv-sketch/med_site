@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_blocks_doctors",
+  "info": { "displayName": "Doctors", "icon": "user" },
+  "options": {},
+  "attributes": {
+    "widgetType": { "type": "string", "default": "DoctorsWidget" },
+    "content": { "type": "json" },
+    "design": { "type": "json" },
+    "config": { "type": "json" }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_blocks_reviews",
+  "info": { "displayName": "Reviews", "icon": "quote" },
+  "options": {},
+  "attributes": {
+    "widgetType": { "type": "string", "default": "ReviewsWidget" },
+    "content": { "type": "json" },
+    "design": { "type": "json" },
+    "config": { "type": "json" }
+  }
+}

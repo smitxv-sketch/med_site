@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "global_layouts",
+  "info": {
+    "singularName": "global-layout",
+    "pluralName": "global-layouts",
+    "displayName": "GlobalLayout",
+    "description": "Header/footer/mobile nav как блоки виджетов"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "headerBlocks": {
+      "type": "dynamiczone",
+      "components": ["blocks.generic-widget", "blocks.hero"],
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "footerBlocks": {
+      "type": "dynamiczone",
+      "components": ["blocks.generic-widget"],
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "mobileNavBlocks": {
+      "type": "dynamiczone",
+      "components": ["blocks.generic-widget"],
+      "pluginOptions": { "i18n": { "localized": true } }
+    }
+  }
+}

@@ -1,17 +1,21 @@
 [phases.setup]
-# NOTE: Coolify / Nixpacks may need native build tools for some dependencies (node-gyp).
-# We include Python + build essentials to avoid flaky deploys when native addons are present.
-# Node is pinned to 22 to match our Coolify env (`NIXPACKS_NODE_VERSION=22`).
 nixPkgs = ["nodejs_22", "python3", "gcc", "gnumake", "pkg-config"]
 
 [phases.install]
 cmds = ["npm install --legacy-peer-deps"]
 
 [phases.build]
-cmds = ["npm run build"]
+cmds = [
+  "npm run build:packages",
+  "npm run build -w @med-site/bff",
+  "npm run build -w @med-site/web"
+]
 
 [start]
-cmd = "npm start"
+cmd = "node scripts/start-platform.mjs"
 
 [variables]
 NODE_ENV = "production"
+DATA_MODE = "live"
+STRAPI_URL = "https://cms.istochnik.smitx.ru"
+BFF_PORT = "3001"

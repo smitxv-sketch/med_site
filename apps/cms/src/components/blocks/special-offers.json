@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_blocks_special_offers",
+  "info": { "displayName": "SpecialOffers", "icon": "star" },
+  "options": {},
+  "attributes": {
+    "widgetType": { "type": "string", "default": "SpecialOffersWidget" },
+    "content": { "type": "json" },
+    "design": { "type": "json" },
+    "config": { "type": "json" }
+  }
+}

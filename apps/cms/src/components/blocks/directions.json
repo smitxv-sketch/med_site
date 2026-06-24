@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_blocks_directions",
+  "info": { "displayName": "Directions", "icon": "bulletList" },
+  "options": {},
+  "attributes": {
+    "widgetType": { "type": "string", "default": "DirectionsWidget" },
+    "content": { "type": "json" },
+    "design": { "type": "json" },
+    "config": { "type": "json" }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_blocks_generic_widgets",
+  "info": {
+    "displayName": "Widget (Generic)",
+    "description": "Универсальный блок виджета: type + content/design/config JSON",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "widgetType": {
+      "type": "string",
+      "required": true
+    },
+    "content": { "type": "json" },
+    "design": { "type": "json" },
+    "config": { "type": "json" },
+    "children": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.generic-widget"
+    }
+  }
+}

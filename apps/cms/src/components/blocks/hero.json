@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_blocks_heroes",
+  "info": { "displayName": "Hero", "icon": "picture" },
+  "options": {},
+  "attributes": {
+    "widgetType": { "type": "string", "default": "HeroWidget" },
+    "content": { "type": "json" },
+    "design": { "type": "json" },
+    "config": { "type": "json" }
+  }
+}

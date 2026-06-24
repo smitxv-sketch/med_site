@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_blocks_promotions",
+  "info": { "displayName": "Promotions", "icon": "gift" },
+  "options": {},
+  "attributes": {
+    "widgetType": { "type": "string", "default": "PromotionsWidget" },
+    "content": { "type": "json" },
+    "design": { "type": "json" },
+    "config": { "type": "json" }
+  }
+}
