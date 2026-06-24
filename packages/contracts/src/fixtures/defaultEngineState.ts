@@ -1,0 +1,30 @@
+import type { EngineState } from '../types/engine.js';
+
+/** Дефолты Engine — синхронизированы с uiSettingsStore / engineDefaults */
+export const DEFAULT_ENGINE_STATE: EngineState = {
+  homePageConcept: 'classic',
+  heroDesktopVariant: 'C',
+  heroMobileVariant: 'F',
+  bottomNavVariant: 'E',
+  bottomNavBehavior: 'hide-on-scroll-down',
+  bottomNavActionAnimation: 'pulse',
+  doctorsSectionVariant: 'A',
+  promotionsSectionVariant: 'A',
+  quickActionsVariant: 'A',
+  directionsIconVariant: 'A',
+  directionsSectionVariant: 'A',
+  colorTheme: 'green',
+  colorIntensity: 'standard',
+  appRadius: 16,
+  customHue: 153,
+  customSaturation: 70,
+  customLightness: 45,
+  fontFamily: 'inter',
+  shadowStyle: 'soft',
+  animationTheme: 'default',
+  marketingTriggers: true,
+  layoutDensity: 1.0,
+  socialProofLevel: 'balanced',
+  pricingStrategy: 'open',
+  urgencyLevel: 'soft',
+};

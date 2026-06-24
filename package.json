@@ -15,6 +15,7 @@
     "dev:web": "npm run dev -w @med-site/web",
     "dev:bff": "npm run dev -w @med-site/bff",
     "dev:cms": "npm run develop -w @med-site/cms",
+    "dev:studio": "npm run dev -w @med-site/studio",
     "dev:legacy-bridge": "npm --prefix \"modx_wp-to-strapi-migration-api\" run dev",
     "build": "vite build && esbuild server/index.ts --bundle --platform=node --format=esm --packages=external --sourcemap --outfile=dist/index.js",
     "build:web": "npm run build -w @med-site/web",
@@ -27,6 +28,7 @@
     "smoke:platform": "node scripts/smoke-platform.mjs",
     "build:cms": "npm run build -w @med-site/contracts && npm run build -w @med-site/cms",
     "build:platform": "npm run build:packages && npm run build -w @med-site/bff && npm run build -w @med-site/web",
+    "build:studio": "npm run build:packages && npm run build -w @med-site/bff && npm run build -w @med-site/studio",
     "build:all": "npm run build:platform && npm run build:cms"
   },
   "dependencies": {

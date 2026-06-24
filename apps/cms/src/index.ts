@@ -1,4 +1,8 @@
 import type { Core } from '@strapi/strapi';
+import {
+  DEFAULT_ENGINE_STATE,
+  SYSTEM_DESIGN_PRESETS,
+} from '@med-site/contracts';
 
 const TENANT_LOCALES = [
   { code: 'ru-chel', name: 'Челябинск' },
@@ -10,6 +14,8 @@ const PUBLIC_UIDS = [
   'api::global-layout.global-layout',
   'api::navigation.navigation',
   'api::global-setting.global-setting',
+  'api::site-theme.site-theme',
+  'api::design-preset.design-preset',
 ] as const;
 
 async function ensureLocales(strapi: Core.Strapi) {
@@ -158,6 +164,54 @@ async function seedGlobalLayout(strapi: Core.Strapi) {
   }
 }
 
+/** Тема сайта (EngineState) per locale */
+async function seedSiteTheme(strapi: Core.Strapi) {
+  const themeUid = 'api::site-theme.site-theme' as never;
+
+  for (const locale of TENANT_LOCALES) {
+    const existing = await strapi.documents(themeUid).findFirst({ locale: locale.code });
+    if (existing) continue;
+
+    await strapi.documents(themeUid).create({
+      data: {
+        engineState: DEFAULT_ENGINE_STATE,
+        activePresetId: 'default',
+        draftRevision: 0,
+      } as never,
+      locale: locale.code,
+      status: 'published',
+    });
+    strapi.log.info(`[bootstrap] seeded site-theme for ${locale.code}`);
+  }
+}
+
+/** Системные пресеты Command Center (глобальные, не i18n) */
+async function seedDesignPresets(strapi: Core.Strapi) {
+  const presetUid = 'api::design-preset.design-preset' as never;
+
+  for (const preset of SYSTEM_DESIGN_PRESETS) {
+    const existing = await strapi.documents(presetUid).findMany({
+      filters: { slug: { $eq: preset.slug } } as never,
+    });
+    if (existing?.length) continue;
+
+    await strapi.documents(presetUid).create({
+      data: {
+        name: preset.name,
+        slug: preset.slug,
+        emoji: preset.emoji,
+        description: preset.description,
+        engineState: preset.engineState,
+        pageBlocks: preset.pageBlocks ?? null,
+        tenant: preset.tenant,
+        isSystem: preset.isSystem,
+      } as never,
+      status: 'published',
+    });
+    strapi.log.info(`[bootstrap] seeded design-preset: ${preset.slug}`);
+  }
+}
+
 export default {
   register() {},
 
@@ -170,6 +224,8 @@ export default {
       await seedHomePage(strapi);
       await seedNavigation(strapi);
       await seedGlobalLayout(strapi);
+      await seedSiteTheme(strapi);
+      await seedDesignPresets(strapi);
     } catch (err) {
       strapi.log.error('[bootstrap] failed:', err);
     }

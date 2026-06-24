@@ -6,6 +6,12 @@ import {
   getNavigationHandler,
   getPageHandler,
 } from './routes/content.js';
+import {
+  getDraftHandler,
+  getPresetsHandler,
+  patchDraftHandler,
+} from './routes/studio.js';
+import { studioAuth } from './middleware/studioAuth.js';
 import { getDataMode } from './config/env.js';
 
 const app = express();
@@ -26,6 +32,11 @@ app.get('/health', (_req, res) => {
 app.get('/api/pages/:slug', getPageHandler);
 app.get('/api/navigation', getNavigationHandler);
 app.get('/api/global-layout', getGlobalLayoutHandler);
+
+// Studio API (Command Center) — за Bearer STUDIO_API_SECRET
+app.get('/studio/draft', studioAuth, getDraftHandler);
+app.patch('/studio/draft', studioAuth, patchDraftHandler);
+app.get('/studio/presets', studioAuth, getPresetsHandler);
 
 app.listen(port, () => {
   console.log(`BFF_READY listening on http://localhost:${port}`);

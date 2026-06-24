@@ -1,0 +1,34 @@
+{
+  "kind": "singleType",
+  "collectionName": "site_themes",
+  "info": {
+    "singularName": "site-theme",
+    "pluralName": "site-themes",
+    "displayName": "SiteTheme",
+    "description": "Тема и варианты виджетов (EngineState) для tenant/locale"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "engineState": {
+      "type": "json",
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "activePresetId": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "draftRevision": {
+      "type": "integer",
+      "default": 0,
+      "pluginOptions": { "i18n": { "localized": true } }
+    }
+  }
+}

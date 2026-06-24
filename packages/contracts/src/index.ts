@@ -33,4 +33,43 @@ export {
   DEFAULT_HOME_SEO,
 } from './fixtures/defaultHomeBlocks.js';
 
-export const CONTRACTS_SCHEMA_VERSION = '1.0.0';
+export {
+  DEFAULT_ENGINE_STATE,
+} from './fixtures/defaultEngineState.js';
+
+export {
+  SYSTEM_DESIGN_PRESETS,
+} from './fixtures/systemDesignPresets.js';
+
+export type {
+  EngineState,
+  EngineStatePatch,
+  ColorTheme,
+  ColorIntensity,
+  FontFamily,
+  ShadowStyle,
+  AnimationTheme,
+  SocialProofLevel,
+  PricingStrategy,
+  UrgencyLevel,
+} from './types/engine.js';
+
+export type {
+  StudioDraftDto,
+  StudioDraftPatchDto,
+  DesignPresetDto,
+  SiteThemeDto,
+} from './types/studio.js';
+
+export {
+  engineStateSchema,
+  engineStatePatchSchema,
+} from './schemas/engine.js';
+
+export {
+  studioDraftPatchSchema,
+  designPresetSchema,
+  siteThemeSchema,
+} from './schemas/studio.js';
+
+export const CONTRACTS_SCHEMA_VERSION = '1.1.0';

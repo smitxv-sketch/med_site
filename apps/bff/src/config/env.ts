@@ -13,3 +13,15 @@ export function getStrapiUrl(): string {
 export function getStrapiToken(): string | undefined {
   return process.env.STRAPI_API_TOKEN;
 }
+
+export function getStudioApiSecret(): string | undefined {
+  return process.env.STUDIO_API_SECRET;
+}
+
+export function getWebRevalidateUrl(): string | undefined {
+  return process.env.WEB_REVALIDATE_URL;
+}
+
+export function getRevalidateSecret(): string | undefined {
+  return process.env.REVALIDATE_SECRET;
+}
