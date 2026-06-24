@@ -2,10 +2,9 @@
 nixPkgs = ["nodejs_22", "python3", "gcc", "gnumake", "pkg-config"]
 
 [phases.install]
-# Только нужные workspace (без Strapi). React ставим в корень — иначе dedupe удалит единственную копию.
+# Полный install (проверенный путь) + dedupe вложенного React 19
 cmds = [
-  "npm install --legacy-peer-deps --ignore-scripts --workspace=@med-site/web --workspace=@med-site/bff --workspace=@med-site/contracts --workspace=@med-site/page-engine",
-  "npm install --legacy-peer-deps --ignore-scripts react@18.3.1 react-dom@18.3.1",
+  "npm install --legacy-peer-deps --ignore-scripts",
   "node scripts/dedupe-react.mjs"
 ]
 
@@ -20,6 +19,7 @@ cmds = [
 cmd = "node scripts/start-platform.mjs"
 
 [variables]
+NIXPACKS_NODE_VERSION = "22.13.1"
 NODE_ENV = "production"
 DATA_MODE = "hybrid"
 STRAPI_URL = "https://cms.istochnik.smitx.ru"
