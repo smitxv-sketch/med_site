@@ -1,6 +1,6 @@
 # Мастер-план: Command Center → apps/studio (Вариант B)
 
-> **Статус:** Wave 1A в работе — см. [`PROJECT_STATUS.md`](../PROJECT_STATUS.md).  
+> **Статус:** Wave 1A ✅ закрыта — см. [`PROJECT_STATUS.md`](../PROJECT_STATUS.md).  
 > **Следующий этап:** Wave 1B — Studio + persist + publish.  
 > **Горизонт:** 4–6 недель (1 разработчик + агент).
 
