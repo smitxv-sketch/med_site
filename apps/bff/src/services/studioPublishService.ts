@@ -118,7 +118,7 @@ async function triggerRevalidate(): Promise<void> {
       'Content-Type': 'application/json',
       'x-revalidate-token': secret,
     },
-    body: JSON.stringify({ model: 'page' }),
+    body: JSON.stringify({ model: 'page', tags: ['page:home', 'site-theme'] }),
   });
   if (!res.ok) {
     console.warn('[bff] revalidate failed:', res.status);

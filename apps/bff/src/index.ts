@@ -5,6 +5,7 @@ import {
   getGlobalLayoutHandler,
   getNavigationHandler,
   getPageHandler,
+  getSiteThemeHandler,
 } from './routes/content.js';
 import {
   getDraftHandler,
@@ -33,6 +34,7 @@ app.get('/health', (_req, res) => {
 app.get('/api/pages/:slug', getPageHandler);
 app.get('/api/navigation', getNavigationHandler);
 app.get('/api/global-layout', getGlobalLayoutHandler);
+app.get('/api/site-theme', getSiteThemeHandler);
 
 // Studio API (Command Center) — за Bearer STUDIO_API_SECRET
 app.get('/studio/draft', studioAuth, getDraftHandler);

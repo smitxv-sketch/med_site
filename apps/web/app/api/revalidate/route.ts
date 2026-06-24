@@ -10,8 +10,10 @@ export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
   const model = body?.model as string | undefined;
 
-  const tags = ['pages', 'tenant:chel', 'tenant:spb'];
-  if (model === 'page') tags.push('page:home');
+  const tags = ['pages', 'tenant:chel', 'tenant:spb', 'site-theme'];
+  if (model === 'page' || model === 'site-theme') {
+    tags.push('page:home', 'site-theme');
+  }
 
   tags.forEach((tag) => revalidateTag(tag));
   revalidatePath('/');

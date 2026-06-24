@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { getTenantById } from '@med-site/contracts';
+import { DEFAULT_ENGINE_STATE, getTenantById } from '@med-site/contracts';
 import { getDataMode } from '../config/env.js';
 import {
   fetchGlobalLayoutFromStrapi,
@@ -9,6 +9,7 @@ import {
   getMockNavigation,
   getMockPage,
 } from '../services/strapiClient.js';
+import { fetchSiteThemeFromStrapi } from '../services/studioDraftService.js';
 
 function resolveLocale(tenantId: string): string {
   const tenant = getTenantById(tenantId);
@@ -73,5 +74,40 @@ export async function getGlobalLayoutHandler(req: Request, res: Response) {
     return res.json(layout);
   } catch {
     return res.json(getMockGlobalLayout(locale));
+  }
+}
+
+/** Публичная тема сайта (read-only, без Studio auth) */
+export async function getSiteThemeHandler(req: Request, res: Response) {
+  const tenantId = String(req.query.tenant ?? 'chel');
+  const locale = resolveLocale(tenantId);
+  const mode = getDataMode();
+
+  const fallback = {
+    locale,
+    engineState: DEFAULT_ENGINE_STATE,
+    activePresetId: null,
+    draftRevision: 0,
+  };
+
+  try {
+    if (mode === 'mock') {
+      return res.json(fallback);
+    }
+
+    const theme = await fetchSiteThemeFromStrapi(locale);
+    if (theme) return res.json(theme);
+
+    if (mode === 'hybrid' || mode === 'live') {
+      return res.json(fallback);
+    }
+
+    return res.status(404).json({ error: 'Site theme not found' });
+  } catch (err) {
+    if (mode === 'hybrid') {
+      return res.json(fallback);
+    }
+    console.error('[bff] getSiteTheme error:', err);
+    return res.status(502).json({ error: 'Strapi unavailable' });
   }
 }

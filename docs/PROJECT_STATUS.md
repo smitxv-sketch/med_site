@@ -4,28 +4,28 @@
 > **Мастер-план:** [`plan/STUDIO_WAVE_MASTER_PLAN.md`](./plan/STUDIO_WAVE_MASTER_PLAN.md)
 
 **Последнее обновление:** 2026-06-24  
-**Ветка:** `main` (локально — Wave 1B волна 2, коммит перед деплоем)
+**Ветка:** `main` — Wave 1B волна 3 в работе (локально)
 
 ---
 
 ## Wave 1A — ✅ закрыта
 
-## Wave 1B — в работе (2 волны сделаны локально)
+## Wave 1B — в работе
 
 | # | Задача | Статус |
 |---|--------|--------|
 | 1 | contracts: EngineState + Zod | ✅ `3366f3c` |
-| 2 | Strapi SiteTheme + DesignPreset | ✅ в репо |
+| 2 | Strapi SiteTheme + DesignPreset | ✅ |
 | 3 | BFF `/studio/draft`, `/presets` | ✅ |
 | 4 | apps/studio scaffold | ✅ |
-| 5 | **UnifiedWorkspace + live preview** | ✅ split-view |
-| 6 | **Autosave черновика (debounce)** | ✅ Zustand → PATCH |
-| 7 | **POST `/studio/publish` + revalidate** | ✅ BFF |
-| 8 | Studio API proxy (без секрета в браузере) | ✅ `/api/studio/*` |
-| 9 | Деплой Strapi + site-ci + studio | ⏳ **следующий шаг** |
-| 10 | Coolify `studio-istochnik` | ⏳ |
-| 11 | `apps/web` читает SiteTheme с BFF | ⏳ |
-| 12 | Убрать CC с публичного web | ⏳ |
+| 5 | UnifiedWorkspace + live preview | ✅ `a7f45b3` |
+| 6 | Autosave + publish | ✅ |
+| 7 | Studio API proxy + studio-bff | ✅ `cb3e086` |
+| 8 | Деплой strapi + site-ci + studio | ⏳ в очереди Coolify |
+| 9 | CI + deploy manifest | ✅ `ac85714` |
+| 10 | **`apps/web` читает SiteTheme с BFF** | ✅ волна 3 (локально) |
+| 11 | CC отключён на публичном web | ✅ EngineStateHydrator |
+| 12 | Smoke prod + publish E2E | ⏳ после деплоя |
 
 ### Локальный запуск Studio
 
@@ -51,13 +51,13 @@ npm run dev:studio
 
 ---
 
-## Прод (до деплоя Wave 1B)
+## Прод
 
-| Сервис | URL | Коммит на проде |
-|--------|-----|-----------------|
-| Сайт | https://istochnik.smitx.ru | `d316860` (CMS fix) |
-| CMS | cms.istochnik.smitx.ru | `d316860` |
-| Studio | — | не задеплоен |
+| Сервис | URL |
+|--------|-----|
+| Сайт | https://istochnik.smitx.ru |
+| CMS | https://cms.istochnik.smitx.ru |
+| Studio | https://studio.istochnik.smitx.ru |
 
 ---
 
