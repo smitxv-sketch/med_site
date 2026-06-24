@@ -1,0 +1,48 @@
+# Сборка платформы до деплоя — ловит React dedupe и ошибки Next/BFF/Studio.
+name: Platform CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/web/**'
+      - 'apps/bff/**'
+      - 'apps/studio/**'
+      - 'packages/**'
+      - 'src/**'
+      - 'nixpacks.toml'
+      - 'scripts/ci-platform.mjs'
+      - 'scripts/dedupe-react.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+  pull_request:
+    paths:
+      - 'apps/web/**'
+      - 'apps/bff/**'
+      - 'apps/studio/**'
+      - 'packages/**'
+      - 'src/**'
+      - 'nixpacks.toml'
+      - 'scripts/ci-platform.mjs'
+      - 'scripts/dedupe-react.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+
+concurrency:
+  group: platform-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: CI platform + studio
+        run: node scripts/ci-platform.mjs

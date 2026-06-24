@@ -27,6 +27,7 @@
 |-------|------------|
 | `istochnik.smitx.ru` | Основной сайт (Application `site-ci`) |
 | `cms.istochnik.smitx.ru` | Strapi CMS + admin |
+| `studio.istochnik.smitx.ru` | Command Center (Studio) |
 
 Оба указывают на `37.79.254.120` (A-запись).
 
@@ -53,6 +54,7 @@ UUID: `os4037dvaewugdcle599l4hu`
 |-----|------|------|-------|--------|
 | **strapi-istochnik** | `rxb04qg8k7ia718by5829zeh` | `smitxv-sketch/med_site` | https://cms.istochnik.smitx.ru | running:healthy |
 | **site-ci** | `v218flpmvlr8bz62p11l4mk8` | `smitxv-sketch/med_site` | https://istochnik.smitx.ru | running |
+| **studio-istochnik** | `s76jyvhsh62jrmhbvl0pbvc7` | `smitxv-sketch/med_site` | https://studio.istochnik.smitx.ru | Wave 1B |
 | apl1 | `xdj2amzxht6htrp3pbqp3cud` | `smitxv-sketch/apl1` | apl1.ru | running |
 | modx_wp_api | `f104fvbdleu52v2sheznij5t` | `smitxv-sketch/modx_wp_api` | sslip.io | exited |
 
@@ -175,13 +177,31 @@ UUID: `os4037dvaewugdcle599l4hu`
 
 ## Операции для ИИ
 
-### Деплой Strapi
+### Деплой платформы (нормальный поток)
 
-```text
-Coolify MCP: deploy → tag_or_uuid: rxb04qg8k7ia718by5829zeh
+**Не начинать с Coolify MCP deploy.** Сначала CI, потом push, потом smoke.
+
+```bash
+npm run ci:platform      # сборка до push (ловит React dedupe / Next errors)
+git push origin main     # Coolify GitHub App → auto-deploy по watch_paths
+npm run smoke:prod       # проверка снаружи
 ```
 
-Или push в `main` + webhook (если настроен).
+SSOT: `infra/platform.manifest.json` · секреты: `infra/coolify.env.example`
+
+Ручной триггер (если webhook не сработал):
+
+```bash
+COOLIFY_URL=... COOLIFY_API_TOKEN=... npm run deploy:platform
+```
+
+Порядок при полном релизе: `strapi-istochnik` → `site-ci` → `studio-istochnik`.
+
+### Деплой Strapi (только CMS)
+
+```text
+git push (изменения в apps/cms/**) или deploy:platform --only=strapi-istochnik
+```
 
 ### Проверка снаружи
 
@@ -236,4 +256,6 @@ Coolify MCP: `application_logs` → uuid `rxb04qg8k7ia718by5829zeh`
 - [ ] Persistent volume для Strapi uploads: `/app/apps/cms/public/uploads`
 - [ ] Отдельная БД `ai` + схема embeddings
 - [ ] Остановить/удалить неиспользуемый `strapi-ci` Service
-- [ ] Webhook GitHub → auto-deploy `strapi-istochnik` после push
+- [x] GitHub Actions `platform-ci.yml` — сборка до деплоя
+- [x] `infra/platform.manifest.json` — SSOT Coolify apps
+- [ ] Настроить `watch_paths` в Coolify UI по manifest (один раз)

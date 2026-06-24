@@ -52,3 +52,11 @@
 3. Прежде чем редактировать файл, используй `view_file`.
 4. Если видишь, что файл слишком большой — предложи декомпозицию.
 5. Любой новый текст или цвет выноси в конфиги.
+
+## 🚀 ДЕПЛОЙ (без ручного «шоу»)
+- **SSOT инфраструктуры:** `infra/platform.manifest.json` (UUID приложений, порядок, watch_paths).
+- **Перед push:** `npm run ci:platform` — сборка ловит ошибки до Coolify.
+- **Деплой:** `git push origin main` — Coolify GitHub App деплоит по `watch_paths` (не дергать MCP deploy без причины).
+- **Проверка:** `npm run smoke:prod`.
+- **Ручной триггер:** `npm run deploy:platform` (нужны `COOLIFY_URL` + `COOLIFY_API_TOKEN`).
+- Секреты: `infra/coolify.env.example` → только Coolify UI.

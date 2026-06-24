@@ -3,8 +3,10 @@
  * Agent-first smoke: health + BFF page + optional Strapi.
  * Запуск: node scripts/smoke-platform.mjs
  */
+const isProd = process.env.SMOKE_ENV === 'prod' || process.argv.includes('--prod');
 const BFF = process.env.BFF_URL ?? 'http://localhost:3001';
-const WEB = process.env.WEB_URL ?? 'http://localhost:3002';
+const WEB = process.env.WEB_URL ?? (isProd ? 'https://istochnik.smitx.ru' : 'http://localhost:3002');
+const STUDIO = process.env.STUDIO_URL ?? (isProd ? 'https://studio.istochnik.smitx.ru' : null);
 const STRAPI = process.env.STRAPI_URL ?? 'https://cms.istochnik.smitx.ru';
 
 // BFF на проде слушает только 127.0.0.1:3001 внутри контейнера site-ci
@@ -66,6 +68,19 @@ await run('strapi-pages', async () => {
     return false;
   }
 });
+
+if (STUDIO) {
+  await run('studio-home', () => check('studio-home', `${STUDIO}/`));
+  await run('studio-bff-proxy', async () => {
+    const url = `${WEB}/api/studio-bff/draft?tenant=chel&page=home`;
+    const res = await fetch(url);
+  // 401 = секрет не передан, но BFF жив; 503 = STUDIO_API_SECRET не настроен
+    const ok = res.status === 200 || res.status === 401;
+    console.log(ok ? 'PASS' : 'FAIL', 'studio-bff-proxy', res.status, url);
+    if (!ok) console.log('  body:', (await res.text()).slice(0, 200));
+    return ok;
+  });
+}
 
 console.log(`\nSmoke: ${passed}/${total} passed`);
 process.exit(passed === total ? 0 : 1);

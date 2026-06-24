@@ -24,6 +24,8 @@ COPY apps/studio ./apps/studio
 COPY packages/contracts ./packages/contracts
 COPY packages/page-engine ./packages/page-engine
 COPY src ./src
+COPY scripts/dedupe-react.mjs scripts/dedupe-react.mjs
+RUN node scripts/dedupe-react.mjs
 RUN npm run build -w @med-site/contracts && \
     npm run build -w @med-site/page-engine && \
     npm run build -w @med-site/studio

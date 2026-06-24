@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "project": {
+    "name": "istochnik",
+    "coolifyProjectUuid": "l7i7h86pibca64e3ouqkt39z",
+    "environmentUuid": "os4037dvaewugdcle599l4hu",
+    "githubRepo": "smitxv-sketch/med_site",
+    "branch": "main"
+  },
+  "domains": {
+    "site": "https://istochnik.smitx.ru",
+    "cms": "https://cms.istochnik.smitx.ru",
+    "studio": "https://studio.istochnik.smitx.ru"
+  },
+  "deployOrder": ["strapi-istochnik", "site-ci", "studio-istochnik"],
+  "applications": {
+    "strapi-istochnik": {
+      "uuid": "rxb04qg8k7ia718by5829zeh",
+      "buildPack": "dockerfile",
+      "dockerfile": "/apps/cms/Dockerfile",
+      "port": 1337,
+      "watchPaths": ["apps/cms/**", "packages/contracts/**", "package.json", "package-lock.json"]
+    },
+    "site-ci": {
+      "uuid": "v218flpmvlr8bz62p11l4mk8",
+      "buildPack": "nixpacks",
+      "nixpacksConfig": "nixpacks.toml",
+      "port": 3000,
+      "watchPaths": [
+        "apps/web/**",
+        "apps/bff/**",
+        "packages/**",
+        "nixpacks.toml",
+        "scripts/start-platform.mjs",
+        "scripts/dedupe-react.mjs"
+      ]
+    },
+    "studio-istochnik": {
+      "uuid": "s76jyvhsh62jrmhbvl0pbvc7",
+      "buildPack": "dockerfile",
+      "dockerfile": "/apps/studio/Dockerfile",
+      "port": 3003,
+      "dependsOn": ["site-ci"],
+      "watchPaths": ["apps/studio/**", "src/**", "packages/**", "package.json", "package-lock.json"]
+    }
+  },
+  "runtimeEnv": {
+    "site-ci": [
+      { "key": "DATA_MODE", "value": "hybrid", "required": true },
+      { "key": "STRAPI_URL", "value": "https://cms.istochnik.smitx.ru", "required": true },
+      { "key": "BFF_PORT", "value": "3001", "required": true },
+      { "key": "STUDIO_API_SECRET", "secret": true, "required": true },
+      { "key": "STRAPI_API_TOKEN", "secret": true, "required": false, "note": "нужен для publish из Studio" },
+      { "key": "WEB_REVALIDATE_URL", "value": "https://istochnik.smitx.ru/api/revalidate", "required": false },
+      { "key": "REVALIDATE_SECRET", "secret": true, "required": false, "note": "= REVALIDATE_TOKEN на web" }
+    ],
+    "studio-istochnik": [
+      { "key": "STUDIO_API_SECRET", "secret": true, "required": true, "sharedWith": "site-ci" },
+      { "key": "BFF_PROXY_URL", "value": "https://istochnik.smitx.ru/api/studio-bff", "required": true },
+      { "key": "NEXT_PUBLIC_PREVIEW_URL", "value": "https://istochnik.smitx.ru", "required": true }
+    ]
+  }
+}

@@ -26,8 +26,12 @@
     "lint:design": "node scripts/design-lint.mjs",
     "test:qms:all": "tsx test-qms-all-slots.ts",
     "smoke:platform": "node scripts/smoke-platform.mjs",
+    "smoke:prod": "node scripts/smoke-platform.mjs --prod",
+    "ci:platform": "node scripts/ci-platform.mjs",
+    "deploy:platform": "node scripts/deploy-platform.mjs",
+    "deploy:plan": "node scripts/deploy-platform.mjs --dry-run",
     "build:cms": "npm run build -w @med-site/contracts && npm run build -w @med-site/cms",
-    "build:platform": "npm run build:packages && npm run build -w @med-site/bff && npm run build -w @med-site/web",
+    "build:platform": "node scripts/dedupe-react.mjs && npm run build:packages && npm run build -w @med-site/bff && npm run build -w @med-site/web",
     "build:studio": "npm run build:packages && npm run build -w @med-site/bff && npm run build -w @med-site/studio",
     "build:all": "npm run build:platform && npm run build:cms"
   },
