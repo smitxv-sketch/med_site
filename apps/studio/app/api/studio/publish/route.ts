@@ -1,10 +1,6 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-
-const BFF_URL =
-  process.env.BFF_INTERNAL_URL ??
-  process.env.NEXT_PUBLIC_BFF_URL ??
-  'http://localhost:3001';
+import { studioBffUrl } from '../../../../lib/studio-bff';
 
 function bffHeaders(): HeadersInit {
   const secret = process.env.STUDIO_API_SECRET;
@@ -17,13 +13,7 @@ function bffHeaders(): HeadersInit {
 }
 
 export async function POST(req: NextRequest) {
-  const tenant = req.nextUrl.searchParams.get('tenant') ?? 'chel';
-  const page = req.nextUrl.searchParams.get('page') ?? 'home';
-  const locale = req.nextUrl.searchParams.get('locale');
-  const qs = new URLSearchParams({ tenant, page });
-  if (locale) qs.set('locale', locale);
-
-  const res = await fetch(`${BFF_URL}/studio/publish?${qs}`, {
+  const res = await fetch(studioBffUrl('/publish', req), {
     method: 'POST',
     headers: bffHeaders(),
     cache: 'no-store',

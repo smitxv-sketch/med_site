@@ -1,16 +1,12 @@
 import { NextResponse } from 'next/server';
-
-const BFF_URL =
-  process.env.BFF_INTERNAL_URL ??
-  process.env.NEXT_PUBLIC_BFF_URL ??
-  'http://localhost:3001';
+import { resolveStudioBffBase } from '../../../../lib/studio-bff';
 
 export async function GET() {
   const secret = process.env.STUDIO_API_SECRET;
   const headers: Record<string, string> = { Accept: 'application/json' };
   if (secret) headers.Authorization = `Bearer ${secret}`;
 
-  const res = await fetch(`${BFF_URL}/studio/presets`, {
+  const res = await fetch(`${resolveStudioBffBase()}/presets`, {
     headers,
     cache: 'no-store',
   });
