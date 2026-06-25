@@ -1,6 +1,6 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import { resolveStudioBffBase } from '../../../../../lib/studio-bff';
+import { resolveStudioBffBase } from '../../../../../../lib/studio-bff';
 
 function bffHeaders(): HeadersInit {
   const secret = process.env.STUDIO_API_SECRET;

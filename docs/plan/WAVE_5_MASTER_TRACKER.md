@@ -13,7 +13,7 @@
 |------|--------|--------|
 | 0 | Деплой Wave 2–4, UAT 1B, AnalyticsTab | ⏳ частично (код) |
 | 1 | Draft: pageSeo, brandVoice, pageTitle | ✅ код |
-| 2 | Presets → Strapi CRUD | ☐ |
+| 2 | Presets → Strapi CRUD | ✅ код |
 | 3 | Experiments + Lab → Strapi | ☐ |
 | 4 | Единый AI через BFF | ☐ |
 | 5 | Strapi Users auth + роли | ☐ |
@@ -36,6 +36,16 @@
 
 ---
 
+## Фаза 2 — что сделано (2026-06-25)
+
+- `presetStrapiService.ts`: list/create/update/delete → Strapi `DesignPreset`
+- BFF: `GET/POST/PUT/DELETE /studio/presets/:slug`
+- Удалён `presetOverlayService` (RAM overlay)
+- Studio API: `PUT/DELETE /api/studio/presets/[slug]`
+- `uiSettingsStore`: save/update/delete → Strapi через BFF
+
+---
+
 ## DoD (общий)
 
 - `npm run ci:platform` + `npm run smoke:prod`
@@ -47,4 +57,4 @@
 
 ## Следующий шаг
 
-**Фаза 2:** `POST/PUT/DELETE /studio/presets` → Strapi `DesignPreset`, убрать `presetOverlayService` RAM.
+**Фаза 3:** Experiments + Lab → Strapi (убрать in-memory overlay).

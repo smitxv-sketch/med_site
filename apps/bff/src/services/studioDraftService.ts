@@ -1,5 +1,4 @@
 import type {
-  DesignPresetDto,
   EngineState,
   PageBlock,
   SiteThemeDto,
@@ -118,39 +117,6 @@ function buildDraftBase(
     updatedAt: new Date().toISOString(),
   };
 }
-export async function fetchDesignPresetsFromStrapi(): Promise<DesignPresetDto[]> {
-  try {
-    const json = await strapiGet<
-      StrapiListResponse<{
-        id: number;
-        documentId?: string;
-        slug: string;
-        name: string;
-        description?: string;
-        emoji?: string;
-        tenant: DesignPresetDto['tenant'];
-        isSystem?: boolean;
-        engineState: Partial<EngineState>;
-        pageBlocks?: PageBlock[];
-      }>
-    >('/design-presets?pagination[pageSize]=100');
-
-    return (json.data ?? []).map((item) => ({
-      id: item.documentId ?? String(item.id),
-      slug: item.slug,
-      name: item.name,
-      description: item.description ?? '',
-      emoji: item.emoji ?? '🎨',
-      tenant: item.tenant,
-      isSystem: Boolean(item.isSystem),
-      engineState: item.engineState ?? {},
-      pageBlocks: item.pageBlocks,
-    }));
-  } catch {
-    return [];
-  }
-}
-
 export async function getStudioDraft(
   tenantId: string,
   locale: string,

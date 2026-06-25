@@ -57,7 +57,7 @@
 | 1 | Draft: pageSeo, brandVoice, pageTitle | ✅ |
 | 2 | AnalyticsTab в меню CC | ✅ |
 | 3 | Fix onPublish в Studio | ✅ |
-| 4 | Presets Strapi CRUD | ☐ |
+| 4 | Presets Strapi CRUD | ✅ |
 | 5 | Auth Strapi Users | ☐ |
 
 → [`plan/WAVE_5_MASTER_TRACKER.md`](./plan/WAVE_5_MASTER_TRACKER.md)

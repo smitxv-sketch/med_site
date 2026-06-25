@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import type { DesignPresetDto } from '@med-site/contracts';
 import marketingConfig from '../api/marketingConfig.json';
 import { useCmsStore } from './cmsStore';
 import { ENGINE_WIDGET_DEFAULTS } from '../domain/marketing/engineDefaults';
@@ -34,6 +35,42 @@ export type WidgetType =
 
 export const PRESETS: StrategyPreset[] = marketingConfig.presets as StrategyPreset[];
 export const SEMANTIC_RULES: MarketingRule[] = marketingConfig.semanticRules as MarketingRule[];
+
+/** Slug для API: custom_123 → custom-123 (legacy id в Zustand) */
+function presetApiSlug(id: string): string {
+  return id.replace(/^custom_/, 'custom-');
+}
+
+/** Снимок настроек движка — то, что уходит в Strapi DesignPreset */
+function pickEngineStateSnapshot(state: UISettingsState) {
+  return {
+    homePageConcept: state.homePageConcept,
+    heroDesktopVariant: state.heroDesktopVariant,
+    heroMobileVariant: state.heroMobileVariant,
+    bottomNavVariant: state.bottomNavVariant,
+    bottomNavBehavior: state.bottomNavBehavior,
+    bottomNavActionAnimation: state.bottomNavActionAnimation,
+    doctorsSectionVariant: state.doctorsSectionVariant,
+    promotionsSectionVariant: state.promotionsSectionVariant,
+    quickActionsVariant: state.quickActionsVariant,
+    directionsIconVariant: state.directionsIconVariant,
+    directionsSectionVariant: state.directionsSectionVariant,
+    colorTheme: state.colorTheme,
+    colorIntensity: state.colorIntensity,
+    appRadius: state.appRadius,
+    customHue: state.customHue,
+    customSaturation: state.customSaturation,
+    customLightness: state.customLightness,
+    fontFamily: state.fontFamily,
+    shadowStyle: state.shadowStyle,
+    animationTheme: state.animationTheme,
+    marketingTriggers: state.marketingTriggers,
+    layoutDensity: state.layoutDensity,
+    socialProofLevel: state.socialProofLevel,
+    pricingStrategy: state.pricingStrategy,
+    urgencyLevel: state.urgencyLevel,
+  };
+}
 
 // UISettingsState is now an extension of EngineState along with UI controls
 interface UISettingsState extends EngineState {
@@ -235,39 +272,12 @@ export const useUISettingsStore = create<UISettingsState>((set, get) => ({
   },
   saveCustomPreset: (info) => {
     const state = get();
-    const currentStateToSave = {
-      homePageConcept: state.homePageConcept,
-      heroDesktopVariant: state.heroDesktopVariant,
-      heroMobileVariant: state.heroMobileVariant,
-      bottomNavVariant: state.bottomNavVariant,
-      bottomNavBehavior: state.bottomNavBehavior,
-      bottomNavActionAnimation: state.bottomNavActionAnimation,
-      doctorsSectionVariant: state.doctorsSectionVariant,
-      promotionsSectionVariant: state.promotionsSectionVariant,
-      quickActionsVariant: state.quickActionsVariant,
-      directionsIconVariant: state.directionsIconVariant,
-      directionsSectionVariant: state.directionsSectionVariant,
-      colorTheme: state.colorTheme,
-      colorIntensity: state.colorIntensity,
-      appRadius: state.appRadius,
-      customHue: state.customHue,
-      customSaturation: state.customSaturation,
-      customLightness: state.customLightness,
-      fontFamily: state.fontFamily,
-      shadowStyle: state.shadowStyle,
-      animationTheme: state.animationTheme,
-      marketingTriggers: state.marketingTriggers,
-      layoutDensity: state.layoutDensity,
-      socialProofLevel: state.socialProofLevel,
-      pricingStrategy: state.pricingStrategy,
-      urgencyLevel: state.urgencyLevel,
-    };
-    
-    // Save CMS blocks too
+    const currentStateToSave = pickEngineStateSnapshot(state);
     const currentPageBlocks = useCmsStore.getState().pageBlocks;
+    const slug = `custom-${Date.now().toString(36)}`;
 
     const newPreset = {
-      id: 'custom_' + Date.now(),
+      id: slug,
       name: info.name,
       desc: info.desc,
       emoji: info.emoji,
@@ -281,13 +291,13 @@ export const useUISettingsStore = create<UISettingsState>((set, get) => ({
       hasUnsavedChanges: false
     });
 
-    // Wave 4: в Studio сохраняем пресет на BFF (in-memory overlay до Strapi)
+    // Wave 5: сохраняем пресет в Strapi через BFF
     if (isStudioApp()) {
       void fetch('/api/studio/presets', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          slug: newPreset.id.replace(/^custom_/, 'custom-'),
+          slug,
           name: info.name,
           description: info.desc,
           emoji: info.emoji,
@@ -296,48 +306,43 @@ export const useUISettingsStore = create<UISettingsState>((set, get) => ({
           engineState: currentStateToSave,
           pageBlocks: currentPageBlocks,
         }),
-      }).catch(() => {
-        /* локальный пресет уже в Zustand; BFF — best-effort */
-      });
+      })
+        .then(async (res) => {
+          if (!res.ok) return;
+          const saved = (await res.json()) as DesignPresetDto;
+          const latest = get();
+          set({
+            presets: latest.presets.map((p) =>
+              p.id === slug ? { ...p, id: saved.id } : p,
+            ),
+            activePresetId:
+              latest.activePresetId === slug ? saved.id : latest.activePresetId,
+          });
+        })
+        .catch(() => {
+          /* локальный пресет уже в Zustand; Strapi — best-effort */
+        });
     }
   },
   deleteCustomPreset: (id) => {
     const state = get();
+    const preset = state.presets.find((p) => p.id === id);
     set({
       presets: state.presets.filter(p => p.id !== id || !p.isCustom),
       activePresetId: state.activePresetId === id ? 'default' : state.activePresetId
     });
+
+    if (isStudioApp() && preset?.isCustom) {
+      void fetch(`/api/studio/presets/${encodeURIComponent(presetApiSlug(id))}`, {
+        method: 'DELETE',
+      }).catch(() => {
+        /* UI уже обновлён; Strapi — best-effort */
+      });
+    }
   },
   updateCustomPreset: (id, info) => {
     const state = get();
-    const currentStateToSave = {
-      homePageConcept: state.homePageConcept,
-      heroDesktopVariant: state.heroDesktopVariant,
-      heroMobileVariant: state.heroMobileVariant,
-      bottomNavVariant: state.bottomNavVariant,
-      bottomNavBehavior: state.bottomNavBehavior,
-      bottomNavActionAnimation: state.bottomNavActionAnimation,
-      doctorsSectionVariant: state.doctorsSectionVariant,
-      promotionsSectionVariant: state.promotionsSectionVariant,
-      quickActionsVariant: state.quickActionsVariant,
-      directionsIconVariant: state.directionsIconVariant,
-      directionsSectionVariant: state.directionsSectionVariant,
-      colorTheme: state.colorTheme,
-      colorIntensity: state.colorIntensity,
-      appRadius: state.appRadius,
-      customHue: state.customHue,
-      customSaturation: state.customSaturation,
-      customLightness: state.customLightness,
-      fontFamily: state.fontFamily,
-      shadowStyle: state.shadowStyle,
-      animationTheme: state.animationTheme,
-      marketingTriggers: state.marketingTriggers,
-      layoutDensity: state.layoutDensity,
-      socialProofLevel: state.socialProofLevel,
-      pricingStrategy: state.pricingStrategy,
-      urgencyLevel: state.urgencyLevel,
-    };
-    
+    const currentStateToSave = pickEngineStateSnapshot(state);
     const currentPageBlocks = useCmsStore.getState().pageBlocks;
     
     set({
@@ -354,5 +359,24 @@ export const useUISettingsStore = create<UISettingsState>((set, get) => ({
       }),
       hasUnsavedChanges: state.activePresetId === id ? false : state.hasUnsavedChanges
     });
+
+    if (isStudioApp()) {
+      const preset = state.presets.find((p) => p.id === id);
+      if (!preset?.isCustom) return;
+
+      void fetch(`/api/studio/presets/${encodeURIComponent(presetApiSlug(id))}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...(info?.name !== undefined ? { name: info.name } : {}),
+          ...(info?.desc !== undefined ? { description: info.desc } : {}),
+          ...(info?.emoji !== undefined ? { emoji: info.emoji } : {}),
+          engineState: currentStateToSave,
+          pageBlocks: currentPageBlocks,
+        }),
+      }).catch(() => {
+        /* локальное состояние уже сохранено; Strapi — best-effort */
+      });
+    }
   }
 }));

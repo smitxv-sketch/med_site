@@ -14,6 +14,8 @@ import {
   getDraftHandler,
   getPresetsHandler,
   createPresetHandler,
+  updatePresetHandler,
+  deletePresetHandler,
   listLabHandler,
   patchDraftHandler,
   publishDraftHandler,
@@ -55,6 +57,8 @@ app.get('/studio/draft', studioAuth, getDraftHandler);
 app.patch('/studio/draft', studioAuth, patchDraftHandler);
 app.get('/studio/presets', studioAuth, getPresetsHandler);
 app.post('/studio/presets', studioAuth, createPresetHandler);
+app.put('/studio/presets/:slug', studioAuth, updatePresetHandler);
+app.delete('/studio/presets/:slug', studioAuth, deletePresetHandler);
 app.post('/studio/publish', studioAuth, publishDraftHandler);
 app.post('/studio/ai/layout', studioAuth, aiLayoutHandler);
 app.get('/studio/lab', studioAuth, listLabHandler);

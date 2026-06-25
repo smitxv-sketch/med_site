@@ -4,24 +4,26 @@ import {
   studioDraftPatchSchema,
   type StudioDraftPatchDto,
 } from '@med-site/contracts';
-import {
-  fetchDesignPresetsFromStrapi,
-  getStudioDraft,
-  patchStudioDraft,
-} from '../services/studioDraftService.js';
+import { getStudioDraft, patchStudioDraft } from '../services/studioDraftService.js';
 import { publishStudioDraft } from '../services/studioPublishService.js';
 import { generateAiLayout } from '../services/aiLayoutService.js';
 import {
-  createCustomPreset,
-  listCustomPresets,
-  mergePresets,
-} from '../services/presetOverlayService.js';
+  createPresetInStrapi,
+  deletePresetFromStrapi,
+  listPresetsFromStrapi,
+  updatePresetInStrapi,
+} from '../services/presetStrapiService.js';
 import {
   createLabPage,
   listLabPages,
   touchLabPage,
 } from '../services/studioLabService.js';
 import { designPresetSchema } from '@med-site/contracts';
+
+/** Частичное обновление кастомного пресета (slug в URL) */
+const presetUpdateSchema = designPresetSchema
+  .omit({ slug: true, tenant: true, isSystem: true })
+  .partial();
 
 function resolveLocale(tenantId: string): string {
   const tenant = getTenantById(tenantId);
@@ -77,9 +79,8 @@ export async function patchDraftHandler(req: Request, res: Response) {
 
 export async function getPresetsHandler(_req: Request, res: Response) {
   try {
-    const system = await fetchDesignPresetsFromStrapi();
-    const custom = listCustomPresets();
-    return res.json({ presets: mergePresets(system, custom) });
+    const presets = await listPresetsFromStrapi();
+    return res.json({ presets });
   } catch (err) {
     console.error('[bff] getPresets error:', err);
     return res.status(502).json({ error: 'Failed to load presets' });
@@ -96,11 +97,63 @@ export async function createPresetHandler(req: Request, res: Response) {
   }
 
   try {
-    const preset = createCustomPreset(parsed.data);
+    const preset = await createPresetInStrapi(
+      parsed.data as Parameters<typeof createPresetInStrapi>[0],
+    );
     return res.status(201).json(preset);
   } catch (err) {
+    const status = (err as { status?: number }).status ?? 502;
     console.error('[bff] createPreset error:', err);
-    return res.status(502).json({ error: 'Failed to save preset' });
+    return res.status(status).json({
+      error: err instanceof Error ? err.message : 'Failed to save preset',
+    });
+  }
+}
+
+export async function updatePresetHandler(req: Request, res: Response) {
+  const slug = String(req.params.slug ?? '');
+  if (!slug) {
+    return res.status(400).json({ error: 'slug is required' });
+  }
+
+  const parsed = presetUpdateSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({
+      error: 'Invalid preset update',
+      details: parsed.error.flatten(),
+    });
+  }
+
+  try {
+    const preset = await updatePresetInStrapi(
+      slug,
+      parsed.data as Parameters<typeof updatePresetInStrapi>[1],
+    );
+    return res.json(preset);
+  } catch (err) {
+    const status = (err as { status?: number }).status ?? 502;
+    console.error('[bff] updatePreset error:', err);
+    return res.status(status).json({
+      error: err instanceof Error ? err.message : 'Failed to update preset',
+    });
+  }
+}
+
+export async function deletePresetHandler(req: Request, res: Response) {
+  const slug = String(req.params.slug ?? '');
+  if (!slug) {
+    return res.status(400).json({ error: 'slug is required' });
+  }
+
+  try {
+    await deletePresetFromStrapi(slug);
+    return res.status(204).send();
+  } catch (err) {
+    const status = (err as { status?: number }).status ?? 502;
+    console.error('[bff] deletePreset error:', err);
+    return res.status(status).json({
+      error: err instanceof Error ? err.message : 'Failed to delete preset',
+    });
   }
 }
 
