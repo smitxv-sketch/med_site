@@ -16,9 +16,7 @@ RUN npm install --legacy-peer-deps --ignore-scripts esbuild
 
 FROM node:20-alpine AS build
 # ВАЖНО: админка Strapi должна собираться в production-режиме.
-# В dev-бандле RTK включает проверку duplicate middleware и Strapi падает на старте admin.
 ENV NODE_ENV=production
-RUN apk add --no-cache python3 make g++
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json package-lock.json ./

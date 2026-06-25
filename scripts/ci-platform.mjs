@@ -26,6 +26,7 @@ if (!skipInstall) {
 }
 
 run(process.execPath, [path.join(root, 'scripts/dedupe-react.mjs')], 'dedupe-react');
+run(process.execPath, [path.join(root, 'scripts/deploy-preflight.mjs')], 'deploy-preflight');
 run(npm, ['run', 'build:packages'], 'packages');
 run(npm, ['run', 'build', '-w', '@med-site/bff'], 'bff');
 run(npm, ['run', 'build', '-w', '@med-site/web'], 'web');

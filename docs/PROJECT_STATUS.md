@@ -4,7 +4,7 @@
 > **Мастер-план:** [`plan/STUDIO_WAVE_MASTER_PLAN.md`](./plan/STUDIO_WAVE_MASTER_PLAN.md)
 
 **Обновлено:** 2026-06-25  
-**Ветка:** `main` — Wave 1B UAT · Wave 2/3/4 код готов, ждёт деплой
+**Ветка:** `main` — Wave 5 phase 2 ✅ · deploy guardrails ✅
 
 ---
 
@@ -76,7 +76,11 @@
 
 ## Журнал
 
-### 2026-06-25 — Wave 4 (код)
+### 2026-06-25 — Deploy guardrails
+- Классы сбоев A–E: [`DEPLOY_FAILURE_CLASSES.md`](./DEPLOY_FAILURE_CLASSES.md)
+- `deploy-preflight` в `ci:platform`, smoke skip BFF на проде
+- site-ci + studio на `main`; strapi — пересборка после fix `.dockerignore` для cms
+
 - StudioPreview inline-edit, POST presets, hydrate custom presets
 
 ### 2026-06-25 — Wave 3 (код)

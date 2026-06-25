@@ -9,7 +9,11 @@ travel
 **/dist
 **/node_modules
 modx_wp-to-strapi-migration-api
-apps/cms
+# Только артефакты CMS — НЕ весь apps/cms (нужен strapi-istochnik Dockerfile)
+apps/cms/.cache
+apps/cms/build
+apps/cms/dist
+apps/studio/.next
 .github
 docs
 *.md

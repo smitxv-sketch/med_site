@@ -79,3 +79,18 @@ https://thumb.cloud.mail.ru/weblink/thumb/xw1/4R8k/YCiDxfxbt?mt=1779340982000
 | 10 | 2026-06-19 | Hero C (default) + Hero D fullscreen по ТЗ | `4c3f5dd` deployed OK (blank page bug) |
 | 11 | 2026-06-19 | **FIX:** HeroDesktopVariantC registry import | `2153e9b` deployed OK |
 | 12 | 2026-06-19 | Restore immersive D + Hero C slider polish (overlay, badge, VRT CTA) | push → deploy |
+| 13 | 2026-06-25 | Wave 5 phase 2 presets Strapi CRUD | `3436d9d` site-ci OK |
+| 14 | 2026-06-25 | **FAIL studio:** `.dockerignore` блокировал `apps/studio` (класс A) | fix `2442005` |
+| 15 | 2026-06-25 | **FAIL studio:** OOM дубль `apk` в build (класс C) | fix `02868ca`, studio OK |
+| 16 | 2026-06-25 | Deploy guardrails: `deploy-preflight`, smoke skip BFF, cms Dockerfile | см. `DEPLOY_FAILURE_CLASSES.md` |
+
+---
+
+## Защита от повторных сбоев (2026-06-25)
+
+Классы A–E и автопроверки: **[`DEPLOY_FAILURE_CLASSES.md`](./DEPLOY_FAILURE_CLASSES.md)**.
+
+Кратко:
+- `npm run preflight:deploy` — до push
+- `npm run ci:platform` — включает preflight
+- `npm run smoke:prod` — BFF skip на проде (класс D)

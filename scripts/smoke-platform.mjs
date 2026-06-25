@@ -12,6 +12,7 @@ const STRAPI = process.env.STRAPI_URL ?? 'https://cms.istochnik.smitx.ru';
 // BFF на проде слушает только 127.0.0.1:3001 внутри контейнера site-ci
 const skipBff =
   process.env.SMOKE_SKIP_BFF === '1' ||
+  isProd ||
   (Boolean(process.env.WEB_URL) && !process.env.BFF_URL);
 
 async function check(name, url, expectOk = true) {

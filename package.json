@@ -29,6 +29,7 @@
     "smoke:prod": "node scripts/smoke-platform.mjs --prod",
     "uat:focus": "node scripts/uat-focus.mjs",
     "ci:platform": "node scripts/ci-platform.mjs",
+    "preflight:deploy": "node scripts/deploy-preflight.mjs",
     "deploy:platform": "node scripts/deploy-platform.mjs",
     "deploy:plan": "node scripts/deploy-platform.mjs --dry-run",
     "build:cms": "npm run build -w @med-site/contracts && npm run build -w @med-site/cms",

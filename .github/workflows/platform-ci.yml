@@ -12,7 +12,9 @@ on:
       - 'src/**'
       - 'nixpacks.toml'
       - 'scripts/ci-platform.mjs'
+      - 'scripts/deploy-preflight.mjs'
       - 'scripts/dedupe-react.mjs'
+      - '.dockerignore'
       - 'package.json'
       - 'package-lock.json'
   pull_request:
@@ -24,7 +26,9 @@ on:
       - 'src/**'
       - 'nixpacks.toml'
       - 'scripts/ci-platform.mjs'
+      - 'scripts/deploy-preflight.mjs'
       - 'scripts/dedupe-react.mjs'
+      - '.dockerignore'
       - 'package.json'
       - 'package-lock.json'
 
