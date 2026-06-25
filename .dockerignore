@@ -10,7 +10,6 @@ travel
 **/node_modules
 modx_wp-to-strapi-migration-api
 apps/cms
-apps/studio
 .github
 docs
 *.md
