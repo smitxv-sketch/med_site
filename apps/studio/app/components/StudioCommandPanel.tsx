@@ -1,13 +1,15 @@
 'use client';
 
-import { RotateCcw, Settings2 } from 'lucide-react';
-import { useState } from 'react';
+import { ChevronLeft, ChevronRight, RotateCcw, Settings2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
 import { UnifiedWorkspace } from '@/widgets/marketing-control-panel/ui/workspaces/UnifiedWorkspace';
 import { WidgetMatrixModal } from '@/widgets/marketing-control-panel/ui/components/WidgetMatrixModal';
 import { usePanelResizer } from '@/widgets/marketing-control-panel/logic/usePanelResizer';
 
 interface StudioCommandPanelProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   onPublish: () => void;
   publishing: boolean;
   revision: number;
@@ -15,8 +17,13 @@ interface StudioCommandPanelProps {
   isLabPage?: boolean;
 }
 
-/** Command Center без секретного unlock — всегда доступен в Studio */
+/**
+ * Command Center поверх превью (не сжимает контент).
+ * Паттерн как DevModeToggle: fixed справа, сворачивается, Cmd/Ctrl+M.
+ */
 export function StudioCommandPanel({
+  open,
+  onOpenChange,
   onPublish,
   publishing,
   revision,
@@ -25,13 +32,53 @@ export function StudioCommandPanel({
 }: StudioCommandPanelProps) {
   const store = useUISettingsStore();
   const [isMatrixOpen, setIsMatrixOpen] = useState(false);
-  const { panelWidth, startResizing } = usePanelResizer(true);
+  const { panelWidth, startResizing } = usePanelResizer(open);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'm') {
+        e.preventDefault();
+        onOpenChange(!open);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [open, onOpenChange]);
 
   return (
     <>
+      {/* Вкладка «открыть панель», когда свёрнута */}
       <div
-        className="relative flex h-full min-h-0 flex-col border-l border-border bg-background shadow-xl"
-        style={{ width: panelWidth, minWidth: 320, maxWidth: '100%' }}
+        className={`fixed top-1/2 right-0 z-[90] -translate-y-1/2 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          open ? 'translate-x-full' : 'translate-x-0'
+        }`}
+      >
+        <button
+          type="button"
+          onClick={() => onOpenChange(true)}
+          className="group flex h-24 w-10 flex-col items-center justify-center gap-2 rounded-l-xl border border-r-0 border-border bg-background/90 px-2 py-4 text-slate-500 shadow-lg backdrop-blur-md transition-all hover:bg-white hover:text-indigo-600 sm:h-32 sm:w-12"
+          title="Командный Центр (Cmd/Ctrl + M)"
+        >
+          <Settings2 className="h-5 w-5 opacity-80 transition-transform group-hover:rotate-90 sm:h-6 sm:w-6" />
+          <ChevronLeft className="mt-auto h-4 w-4 opacity-50 group-hover:opacity-100" />
+        </button>
+      </div>
+
+      {/* Затемнение на мобильных */}
+      <div
+        className={`fixed inset-0 z-[95] bg-slate-900/10 backdrop-blur-[1px] transition-opacity duration-300 lg:hidden ${
+          open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
+        }`}
+        onClick={() => onOpenChange(false)}
+        aria-hidden={!open}
+      />
+
+      {/* Панель поверх контента */}
+      <div
+        className={`fixed inset-y-0 right-0 z-[96] flex flex-col overflow-hidden border-l border-border bg-background shadow-2xl transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          open ? 'translate-x-0' : 'translate-x-full'
+        }`}
+        style={{ width: panelWidth, maxWidth: '100vw' }}
       >
         <div
           onMouseDown={startResizing}
@@ -73,6 +120,14 @@ export function StudioCommandPanel({
                 className="rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-emerald-500 disabled:opacity-60"
               >
                 {isLabPage ? 'Lab only' : publishing ? 'Публикация…' : 'Опубликовать'}
+              </button>
+              <button
+                type="button"
+                onClick={() => onOpenChange(false)}
+                className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
+                title="Свернуть (Cmd/Ctrl + M)"
+              >
+                <ChevronRight className="h-5 w-5" />
               </button>
             </div>
           </div>

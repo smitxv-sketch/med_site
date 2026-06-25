@@ -1,13 +1,15 @@
 'use client';
 
+import { useState } from 'react';
 import { StudioCommandPanel } from './StudioCommandPanel';
 import { StudioPreview } from './StudioPreview';
 import { useStudioDraftBridge } from '../hooks/useStudioDraftBridge';
 
-/** Split-view: preview слева, Command Center справа */
+/** Превью на весь экран; Command Center — оверлей справа (как DevModeToggle) */
 export function StudioWorkspace() {
   const { loading, error, revision, publishing, publish, hasUnsavedChanges, pageSlug } =
     useStudioDraftBridge();
+  const [panelOpen, setPanelOpen] = useState(true);
 
   if (loading) {
     return (
@@ -18,21 +20,25 @@ export function StudioWorkspace() {
   }
 
   return (
-    <div className="flex min-h-[100svh] w-full overflow-hidden bg-slate-100">
-      <div className="min-w-0 flex-1 overflow-y-auto">
-        {pageSlug.startsWith('lab-') ? (
-          <div className="m-4 rounded-lg border border-purple-500/30 bg-purple-950/40 px-3 py-2 text-xs text-purple-100">
-            Лаборатория: <code className="font-mono">{pageSlug}</code> — не публикуется на сайт напрямую
-          </div>
-        ) : null}
-        {error ? (
-          <div className="m-4 rounded-lg border border-amber-500/40 bg-amber-950/80 p-3 text-sm text-amber-100">
-            {error}
-          </div>
-        ) : null}
+    <div className="relative min-h-[100svh] w-full overflow-x-hidden bg-slate-100">
+      {pageSlug.startsWith('lab-') ? (
+        <div className="absolute left-4 right-4 top-4 z-20 rounded-lg border border-purple-500/30 bg-purple-950/40 px-3 py-2 text-xs text-purple-100">
+          Лаборатория: <code className="font-mono">{pageSlug}</code> — не публикуется на сайт напрямую
+        </div>
+      ) : null}
+      {error ? (
+        <div className="absolute left-4 right-4 top-4 z-20 rounded-lg border border-amber-500/40 bg-amber-950/80 p-3 text-sm text-amber-100">
+          {error}
+        </div>
+      ) : null}
+
+      <div className="min-h-[100svh] w-full overflow-y-auto">
         <StudioPreview />
       </div>
+
       <StudioCommandPanel
+        open={panelOpen}
+        onOpenChange={setPanelOpen}
         revision={revision}
         publishing={publishing}
         onPublish={publish}
