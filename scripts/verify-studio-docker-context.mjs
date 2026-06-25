@@ -57,13 +57,27 @@ agentLog('H3', 'verify-studio-docker-context.mjs:52', 'site-ci needs apps/studio
   siteCiNeedsStudio,
 });
 
-const wouldFailStudioBuild = excludesStudio || !studioPkgExists;
-const summary = wouldFailStudioBuild
-  ? 'BLOCKED: studio Docker build will fail (apps/studio missing from context)'
-  : 'OK: apps/studio should be available in Docker build context';
+// H4: studio Dockerfile не должен дублировать apk g++ в build (как platform)
+const studioDockerfile = fs.readFileSync(path.join(root, 'apps/studio/Dockerfile'), 'utf8');
+const buildStageBody =
+  studioDockerfile.match(/FROM node:22-alpine AS build\n([\s\S]*?)(?=\nFROM )/)?.[1] ?? '';
+const buildStageDuplicatesApk = /RUN apk add/.test(buildStageBody);
 
-agentLog('H1', 'verify-studio-docker-context.mjs:62', 'verdict', { wouldFailStudioBuild, summary });
+agentLog('H4', 'verify-studio-docker-context.mjs:58', 'studio Dockerfile build stage', {
+  buildStageDuplicatesApk,
+  usesNode22: studioDockerfile.includes('FROM node:22-alpine'),
+});
+
+const wouldFailStudioBuild =
+  excludesStudio || !studioPkgExists || buildStageDuplicatesApk;
+const summary = wouldFailStudioBuild
+  ? 'BLOCKED: studio Docker build risk (dockerignore or Dockerfile)'
+  : 'OK: studio Docker build context and Dockerfile checks passed';
+
+agentLog('H1', 'verify-studio-docker-context.mjs:72', 'verdict', { wouldFailStudioBuild, summary });
 
 console.log(summary);
-console.log(`  excludesStudio=${excludesStudio}  studioPkgExists=${studioPkgExists}`);
+console.log(
+  `  excludesStudio=${excludesStudio}  studioPkgExists=${studioPkgExists}  buildStageDuplicatesApk=${buildStageDuplicatesApk}`,
+);
 process.exit(wouldFailStudioBuild ? 1 : 0);

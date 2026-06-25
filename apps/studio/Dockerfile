@@ -1,6 +1,7 @@
 # Build from repo root: docker build -f apps/studio/Dockerfile .
+# Паттерн как site-ci (apps/platform/Dockerfile): g++ только в deps, не дублировать в build
 
-FROM node:20-alpine AS deps
+FROM node:22-alpine AS deps
 RUN apk add --no-cache python3 make g++
 WORKDIR /app
 COPY package.json package-lock.json ./
@@ -14,9 +15,8 @@ RUN --mount=type=cache,target=/root/.npm \
     --workspace=@med-site/page-engine
 RUN npm install --legacy-peer-deps --ignore-scripts esbuild
 
-FROM node:20-alpine AS build
+FROM node:22-alpine AS build
 ENV NODE_ENV=production
-RUN apk add --no-cache python3 make g++
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json package-lock.json ./
@@ -30,7 +30,7 @@ RUN npm run build -w @med-site/contracts && \
     npm run build -w @med-site/page-engine && \
     npm run build -w @med-site/studio
 
-FROM node:20-alpine AS runner
+FROM node:22-alpine AS runner
 RUN apk add --no-cache wget curl
 WORKDIR /app
 COPY --from=build /app/node_modules ./node_modules
