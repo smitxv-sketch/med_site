@@ -1,20 +1,36 @@
 # Статус миграции: Источник → Strapi + BFF + Next
 
-> **UAT:** [`UAT_MASTER_PLAN.md`](./UAT_MASTER_PLAN.md)  
+> **Приёмка:** [`plan/PLAN_CLOSURE.md`](./plan/PLAN_CLOSURE.md) · **UAT:** [`UAT_MASTER_PLAN.md`](./UAT_MASTER_PLAN.md)  
 > **Мастер-план:** [`plan/STUDIO_WAVE_MASTER_PLAN.md`](./plan/STUDIO_WAVE_MASTER_PLAN.md)
 
 **Обновлено:** 2026-06-25  
-**Ветка:** `main` — Wave 5 phase 2 ✅ · deploy guardrails ✅
+**Ветка:** `main` — **разработка закрыта**, фаза **приёмки (UAT)**
+
+---
+
+## Сводка
+
+| Волна | Код | Деплой | UAT |
+|-------|-----|--------|-----|
+| 1A | ✅ | ✅ | ✅ |
+| 1B | ✅ | ✅ | 🔍 ваша проверка |
+| 2 | ✅ | ✅ | 🔍 |
+| 3 | ✅ | ✅ | 🔍 |
+| 4 | ✅ | ✅ | 🔍 |
+| 5 (фазы 0–2, 4) | ✅ | ✅ | 🔍 |
+| 5 (фазы 3, 5–9) | ⏸ backlog | — | — |
+
+**Smoke:** `npm run smoke:prod` → 8/8
 
 ---
 
 ## Wave 1A — ✅ закрыта
 
-## Wave 1B — UAT (копим)
+## Wave 1B — 🔍 UAT
 
-См. [`UAT_MASTER_PLAN.md`](./UAT_MASTER_PLAN.md) часть 1. Smoke и инфра ✓, E2E Studio — в процессе.
+См. [`UAT_MASTER_PLAN.md`](./UAT_MASTER_PLAN.md) часть 1. Smoke и инфра ✓, E2E Studio — **ваша проверка**.
 
-## Wave 2 — код ✅, UAT ⏳
+## Wave 2 — код ✅, UAT 🔍
 
 | # | Задача | Статус |
 |---|--------|--------|
@@ -23,11 +39,11 @@
 | 3 | Analytics EventDelegator | ✅ |
 | 4 | AI layout | ✅ |
 | 5 | Block A/B | ✅ |
-| 6 | Деплой + UAT | ⏳ |
+| 6 | Деплой + UAT | 🔍 деплой ✅ |
 
 → [`plan/WAVE_2_TRACKER.md`](./plan/WAVE_2_TRACKER.md)
 
-## Wave 3 — код ✅, UAT ⏳
+## Wave 3 — код ✅, UAT 🔍
 
 | # | Задача | Статус |
 |---|--------|--------|
@@ -36,21 +52,21 @@
 | 3 | suggest (rules + AI) | ✅ |
 | 4 | apply → draft only | ✅ |
 | 5 | EvolutionTab UI | ✅ |
-| 6 | Деплой + UAT | ⏳ |
+| 6 | Деплой + UAT | 🔍 деплой ✅ |
 
 → [`plan/WAVE_3_TRACKER.md`](./plan/WAVE_3_TRACKER.md)
 
-## Wave 4 — код ✅, UAT ⏳
+## Wave 4 — код ✅, UAT 🔍
 
 | # | Задача | Статус |
 |---|--------|--------|
 | 1 | Inline-edit в `StudioPreview` | ✅ |
-| 2 | `POST /studio/presets` + hydrate | ✅ |
+| 2 | Presets Strapi CRUD | ✅ |
 | 3 | `saveCustomPreset` → BFF | ✅ |
-| 4 | UAT часть 5 | ✅ |
-| 5 | Деплой + UAT | ⏳ |
+| 4 | UAT часть 5 (чеклист) | ✅ |
+| 5 | Деплой + UAT | 🔍 деплой ✅ |
 
-## Wave 5 — фаза 1 ✅ код, UAT ⏳
+## Wave 5 — фазы 0–2, 4 ✅ · 3, 5–9 backlog
 
 | # | Задача | Статус |
 |---|--------|--------|
@@ -58,7 +74,8 @@
 | 2 | AnalyticsTab в меню CC | ✅ |
 | 3 | Fix onPublish в Studio | ✅ |
 | 4 | Presets Strapi CRUD | ✅ |
-| 5 | Auth Strapi Users | ☐ |
+| 5 | AI через BFF в Studio | ✅ |
+| 6 | Auth Strapi Users | ⏸ |
 
 → [`plan/WAVE_5_MASTER_TRACKER.md`](./plan/WAVE_5_MASTER_TRACKER.md)
 
@@ -74,28 +91,9 @@
 
 ---
 
-## Журнал
-
-### 2026-06-25 — Deploy guardrails
-- Классы сбоев A–E: [`DEPLOY_FAILURE_CLASSES.md`](./DEPLOY_FAILURE_CLASSES.md)
-- `deploy-preflight` в `ci:platform`, smoke skip BFF на проде
-- site-ci + studio на `main`; strapi — пересборка после fix `.dockerignore` для cms
-
-- StudioPreview inline-edit, POST presets, hydrate custom presets
-
-### 2026-06-25 — Wave 3 (код)
-- BFF experiments API, EvolutionTab в Studio, human-in-the-loop apply
-
-### 2026-06-25 — Wave 2 (код)
-- UTM, lab, AI layout, Analytics, block A/B
-
-### 2026-06-25 — Инфра Wave 1B
-- Dockerfile, DNS, SSL, env runtime-only, UAT plan
-
----
-
 ## Правила
 
 - Не трогать `/src/widget/` и booking backend  
 - Publish → Strapi + revalidate, не redeploy site-ci ради контента  
 - Wave 3: apply эксперимента **не** публикует — только draft  
+- Деплой: [`DEPLOY_FAILURE_CLASSES.md`](./DEPLOY_FAILURE_CLASSES.md)

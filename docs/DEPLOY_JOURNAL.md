@@ -82,7 +82,9 @@ https://thumb.cloud.mail.ru/weblink/thumb/xw1/4R8k/YCiDxfxbt?mt=1779340982000
 | 13 | 2026-06-25 | Wave 5 phase 2 presets Strapi CRUD | `3436d9d` site-ci OK |
 | 14 | 2026-06-25 | **FAIL studio:** `.dockerignore` блокировал `apps/studio` (класс A) | fix `2442005` |
 | 15 | 2026-06-25 | **FAIL studio:** OOM дубль `apk` в build (класс C) | fix `02868ca`, studio OK |
-| 16 | 2026-06-25 | Deploy guardrails: `deploy-preflight`, smoke skip BFF, cms Dockerfile | см. `DEPLOY_FAILURE_CLASSES.md` |
+| 16 | 2026-06-25 | Deploy guardrails: `deploy-preflight`, smoke skip BFF, cms Dockerfile | `9df53f7` push OK |
+| 17 | 2026-06-25 | FAIL: параллельный redeploy 3 apps (класс F, не OOM) | прод 8/8 на старых образах |
+| 18 | 2026-06-25 | План разработки закрыт → UAT владельцу | [`PLAN_CLOSURE.md`](./plan/PLAN_CLOSURE.md) |
 
 ---
 

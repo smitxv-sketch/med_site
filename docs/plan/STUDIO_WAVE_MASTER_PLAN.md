@@ -1,6 +1,6 @@
 # Мастер-план: Command Center → apps/studio (Вариант B)
 
-> **Статус:** Wave 1A ✅ · Wave 1B UAT · Wave 2–3 код на `main`.  
+> **Статус:** Wave 1A ✅ · Waves 1B–4 код ✅ · Wave 5 фазы 0–2 ✅ · **UAT — владелец** ([`PLAN_CLOSURE.md`](./plan/PLAN_CLOSURE.md))
 > **UAT:** [`UAT_MASTER_PLAN.md`](../UAT_MASTER_PLAN.md)  
 > **Горизонт:** 4–6 недель (1 разработчик + агент).
 

@@ -3,8 +3,7 @@
 > **UAT:** [`UAT_MASTER_PLAN.md`](../UAT_MASTER_PLAN.md) часть 3  
 > **Мастер-план:** [`STUDIO_WAVE_MASTER_PLAN.md`](./STUDIO_WAVE_MASTER_PLAN.md) §7 недели 5–6
 
-**Старт:** 2026-06-25  
-**Статус:** в разработке на `main` (до деплоя UAT = ⊘)
+**Статус:** код ✅ · деплой ✅ · UAT 🔍 **готово к вашей проверке** ([`PLAN_CLOSURE.md`](./PLAN_CLOSURE.md))
 
 ---
 
@@ -12,11 +11,11 @@
 
 | # | Фича | Код | Деплой | UAT |
 |---|------|-----|--------|-----|
-| 2-1 | **UTM rules в BFF** | ✅ `marketingRules.json` + `/api/site-theme?utm_*` | ⏳ | 2-UAT-1 |
-| 2-2 | **Лаборатория → draft** | ✅ `POST/GET /studio/lab`, slug `lab-*` | ⏳ | 2-UAT-2 |
-| 2-3 | **AnalyticsTab** | ✅ `EventDelegator` в StudioShell | ⏳ | 2-UAT-3 |
-| 2-4 | **AI layout** | ✅ `POST /studio/ai/layout` (OpenRouter или mock) | ⏳ | 2-UAT-4 |
-| 2-5 | **Block-level A/B** | ✅ `abVariants` + `applyBlockAbTests` на GET page | ⏳ | 2-UAT-5 |
+| 2-1 | **UTM rules в BFF** | ✅ `marketingRules.json` + `/api/site-theme?utm_*` | ✅ | 2-UAT-1 |
+| 2-2 | **Лаборатория → draft** | ✅ `POST/GET /studio/lab`, slug `lab-*` | ✅ | 2-UAT-2 |
+| 2-3 | **AnalyticsTab** | ✅ `EventDelegator` в StudioShell | ✅ | 2-UAT-3 |
+| 2-4 | **AI layout** | ✅ `POST /studio/ai/layout` (OpenRouter или mock) | ✅ | 2-UAT-4 |
+| 2-5 | **Block-level A/B** | ✅ `abVariants` + `applyBlockAbTests` на GET page | ✅ | 2-UAT-5 |
 
 ---
 
@@ -51,8 +50,8 @@
 
 ## После деплоя
 
-1. `npm run smoke:prod` — 8/8  
-2. Пройти UAT часть 3 по порядку 2-1 → 2-5  
+1. ~~`npm run smoke:prod` — 8/8~~ ✅  
+2. **Пройти UAT часть 3** по порядку 2-1 → 2-5 — **владелец**  
 3. Регрессия 1B-F (booking) после каждого релиза  
 
 ---

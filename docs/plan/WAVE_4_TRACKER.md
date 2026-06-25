@@ -3,7 +3,7 @@
 > **Мастер-план:** [`STUDIO_WAVE_MASTER_PLAN.md`](./STUDIO_WAVE_MASTER_PLAN.md) неделя 4  
 > **UAT:** [`UAT_MASTER_PLAN.md`](../UAT_MASTER_PLAN.md) часть 5
 
-**Статус:** код ✅ на `main` · UAT ⏳ после деплоя
+**Статус:** код ✅ · деплой ✅ · UAT 🔍 **готово к вашей проверке** ([`PLAN_CLOSURE.md`](./PLAN_CLOSURE.md))
 
 ---
 
@@ -20,21 +20,21 @@
 | 4.1 | `StudioPreview` → `onUpdateBlocks` + `forceDevMode` | ✅ | `apps/studio/app/components/StudioPreview.tsx` |
 | 4.2 | Inline-edit через `PageRenderer` / `WidgetEditorWrapper` | ✅ | `src/shared/ui/PageRenderer.tsx` |
 | 4.3 | Autosave блоков через draft bridge | ✅ | `useStudioDraftBridge.ts` (уже было) |
-| 4.4 | `POST /studio/presets` на BFF | ✅ | `presetOverlayService.ts`, `routes/studio.ts` |
-| 4.5 | Studio API `POST /api/studio/presets` | ✅ | `apps/studio/app/api/studio/presets/route.ts` |
-| 4.6 | `saveCustomPreset` → POST в Studio | ✅ | `uiSettingsStore.ts` |
+| 4.4 | `POST /studio/presets` → Strapi | ✅ | `presetStrapiService.ts`, `routes/studio.ts` |
+| 4.5 | Studio API presets CRUD | ✅ | `apps/studio/app/api/studio/presets/` |
+| 4.6 | `saveCustomPreset` → BFF/Strapi | ✅ | `uiSettingsStore.ts` |
 | 4.7 | Hydrate кастомных пресетов при старте | ✅ | `useStudioDraftBridge.ts` + `presetMapper.ts` |
-| 4.8 | `GET /studio/presets` merge system + custom | ✅ | `mergePresets()` |
-| 4.9 | UAT часть 5 | ✅ | `UAT_MASTER_PLAN.md` |
-| 4.10 | Деплой + ручной UAT | ⏳ | push → Coolify |
+| 4.8 | `GET /studio/presets` system + custom | ✅ | `presetStrapiService.ts` |
+| 4.9 | UAT часть 5 (чеклист) | ✅ | `UAT_MASTER_PLAN.md` |
+| 4.10 | Деплой + ручной UAT | ✅ деплой · 🔍 UAT | push → Coolify |
 
 ---
 
 ## Не в этой волне (Wave 5+)
 
-- `PUT /studio/presets/:id` — обновление существующего пресета
-- Persist кастомных пресетов в Strapi `DesignPreset` (сейчас in-memory overlay на BFF)
-- iframe preview на прод с `draftToken` (сейчас встроенный `PageRenderer`)
+- ~~`PUT /studio/presets/:id`~~ — ✅ Wave 5 фаза 2  
+- ~~Persist пресетов в Strapi~~ — ✅ Wave 5 фаза 2  
+- iframe preview на прод с `draftToken` (сейчас встроенный `PageRenderer`) — фаза 9
 
 ---
 
@@ -66,6 +66,6 @@ npm run smoke:prod -- --wave2
 
 | Риск | Митигация |
 |------|-----------|
-| Кастомные пресеты теряются при рестарте BFF | Документировано; Strapi persist — следующая волна |
+| Кастомные пресеты при рестарте BFF | ✅ в Strapi с Wave 5 фаза 2 |
 | Inline-edit ломает вёрстку | `PageRenderer` только opacity/transform; тест 5-UAT-2 |
 | Дубли id пресетов | slug из timestamp, merge по slug |

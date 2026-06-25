@@ -1,3 +1,5 @@
+import { isStudioApp } from '@/shared/config/appTarget';
+
 export interface GenerationParams {
   prompt: string;
   minLength?: number;
@@ -42,13 +44,23 @@ export const aiService = {
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 45000); // 45 seconds timeout for dev
-      
-      const response = await fetch('/api/generate-layout', {
+
+      // Studio: единый BFF-маршрут (Wave 5 фаза 4); legacy sandbox — /api/generate-layout
+      const inStudio = isStudioApp();
+      const url = inStudio ? '/api/studio/ai/layout' : '/api/generate-layout';
+      const body = inStudio
+        ? {
+            prompt: params.prompt,
+            instruction: [params.instruction, params.systemPrompt].filter(Boolean).join('\n\n'),
+          }
+        : params;
+
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(params),
+        body: JSON.stringify(body),
         signal: controller.signal
       });
       clearTimeout(timeoutId);

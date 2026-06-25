@@ -3,8 +3,7 @@
 > **UAT:** [`UAT_MASTER_PLAN.md`](../UAT_MASTER_PLAN.md) часть 4  
 > **Мастер-план:** [`STUDIO_WAVE_MASTER_PLAN.md`](./STUDIO_WAVE_MASTER_PLAN.md) §4.4, Wave 3
 
-**Старт:** 2026-06-25  
-**Статус:** код на `main`, UAT после деплоя
+**Статус:** код ✅ · деплой ✅ · UAT 🔍 **готово к вашей проверке** ([`PLAN_CLOSURE.md`](./PLAN_CLOSURE.md))
 
 ---
 
@@ -46,6 +45,6 @@
 
 ## После деплоя
 
-1. Smoke 8/8  
-2. UAT часть 4 (Wave 3)  
+1. Smoke 8/8 ✅  
+2. **UAT часть 4 (Wave 3)** — владелец  
 3. Регрессия 1B-F + Wave 2 P0  
