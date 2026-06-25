@@ -18,15 +18,17 @@ type Ctx = { params: Promise<{ slug: string }> };
 export async function PUT(req: NextRequest, ctx: Ctx) {
   const { slug } = await ctx.params;
   const payload = await req.text();
-  const res = await fetch(
+  const url = new URL(
     `${resolveStudioBffBase()}/presets/${encodeURIComponent(slug)}`,
-    {
+  );
+  const tenant = req.nextUrl.searchParams.get('tenant');
+  if (tenant) url.searchParams.set('tenant', tenant);
+  const res = await fetch(url.toString(), {
       method: 'PUT',
       headers: bffHeaders(),
       body: payload,
       cache: 'no-store',
-    },
-  );
+    });
   const body = await res.text();
   return new NextResponse(body, {
     status: res.status,
@@ -35,16 +37,18 @@ export async function PUT(req: NextRequest, ctx: Ctx) {
 }
 
 /** Удаление кастомного пресета из Strapi через BFF */
-export async function DELETE(_req: NextRequest, ctx: Ctx) {
+export async function DELETE(req: NextRequest, ctx: Ctx) {
   const { slug } = await ctx.params;
-  const res = await fetch(
+  const url = new URL(
     `${resolveStudioBffBase()}/presets/${encodeURIComponent(slug)}`,
-    {
-      method: 'DELETE',
-      headers: bffHeaders(),
-      cache: 'no-store',
-    },
   );
+  const tenant = req.nextUrl.searchParams.get('tenant');
+  if (tenant) url.searchParams.set('tenant', tenant);
+  const res = await fetch(url.toString(), {
+    method: 'DELETE',
+    headers: bffHeaders(),
+    cache: 'no-store',
+  });
   if (res.status === 204) {
     return new NextResponse(null, { status: 204 });
   }

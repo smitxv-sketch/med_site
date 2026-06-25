@@ -3,6 +3,7 @@ import cors from 'cors';
 import express from 'express';
 import {
   getGlobalLayoutHandler,
+  getGlobalSettingHandler,
   getMarketingContextHandler,
   getNavigationHandler,
   getPageHandler,
@@ -49,6 +50,7 @@ app.get('/health', (_req, res) => {
 app.get('/api/pages/:slug', getPageHandler);
 app.get('/api/navigation', getNavigationHandler);
 app.get('/api/global-layout', getGlobalLayoutHandler);
+app.get('/api/global-setting', getGlobalSettingHandler);
 app.get('/api/site-theme', getSiteThemeHandler);
 app.get('/api/marketing-context', getMarketingContextHandler);
 

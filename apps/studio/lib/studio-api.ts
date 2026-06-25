@@ -1,4 +1,5 @@
 import type { DesignPresetDto, StudioDraftDto } from '@med-site/contracts';
+import { DEFAULT_TENANT_ID } from '@med-site/contracts';
 
 const BFF_URL =
   process.env.BFF_INTERNAL_URL ??
@@ -13,7 +14,7 @@ function studioHeaders(): HeadersInit {
 }
 
 export async function fetchStudioDraft(
-  tenant = 'chel',
+  tenant = DEFAULT_TENANT_ID,
   page = 'home',
 ): Promise<StudioDraftDto> {
   const url = `${BFF_URL}/studio/draft?tenant=${tenant}&page=${page}`;
@@ -25,8 +26,10 @@ export async function fetchStudioDraft(
   return res.json() as Promise<StudioDraftDto>;
 }
 
-export async function fetchStudioPresets(): Promise<DesignPresetDto[]> {
-  const url = `${BFF_URL}/studio/presets`;
+export async function fetchStudioPresets(
+  tenant = DEFAULT_TENANT_ID,
+): Promise<DesignPresetDto[]> {
+  const url = `${BFF_URL}/studio/presets?tenant=${encodeURIComponent(tenant)}`;
   const res = await fetch(url, {
     headers: studioHeaders(),
     cache: 'no-store',

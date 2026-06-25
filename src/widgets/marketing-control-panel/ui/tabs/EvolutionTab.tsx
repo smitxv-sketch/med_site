@@ -7,6 +7,7 @@ import type {
 import { Dna, Loader2, Play, Sparkles, Trophy } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { isStudioApp } from '@/shared/config/appTarget';
+import { useTenant } from '@/shared/tenant/TenantContext';
 import { InsightCard } from '../components/SharedComponents';
 
 interface SuggestResponse {
@@ -14,8 +15,10 @@ interface SuggestResponse {
   insights: { summary: string; suggestions: string[]; source: string };
 }
 
-async function fetchExperiments(): Promise<ExperimentDto[]> {
-  const res = await fetch('/api/studio/experiments?tenant=chel', { cache: 'no-store' });
+async function fetchExperiments(tenantId: string): Promise<ExperimentDto[]> {
+  const res = await fetch(`/api/studio/experiments?tenant=${encodeURIComponent(tenantId)}`, {
+    cache: 'no-store',
+  });
   if (!res.ok) throw new Error(String(res.status));
   const json = (await res.json()) as { experiments: ExperimentDto[] };
   return json.experiments;
@@ -24,6 +27,7 @@ async function fetchExperiments(): Promise<ExperimentDto[]> {
 /** Wave 3: A/B эксперименты и AI-эволюция (Studio → BFF) */
 export const EvolutionTab = () => {
   const inStudio = isStudioApp();
+  const { tenantId } = useTenant();
   const [items, setItems] = useState<ExperimentDto[]>([]);
   const [loading, setLoading] = useState(inStudio);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -35,13 +39,13 @@ export const EvolutionTab = () => {
     setLoading(true);
     setError(null);
     try {
-      setItems(await fetchExperiments());
+      setItems(await fetchExperiments(tenantId));
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Ошибка загрузки');
     } finally {
       setLoading(false);
     }
-  }, [inStudio]);
+  }, [inStudio, tenantId]);
 
   useEffect(() => {
     reload();
@@ -50,7 +54,7 @@ export const EvolutionTab = () => {
   const createDemo = async () => {
     setBusyId('new');
     try {
-      const res = await fetch('/api/studio/experiments?tenant=chel', {
+      const res = await fetch(`/api/studio/experiments?tenant=${encodeURIComponent(tenantId)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -84,9 +88,12 @@ export const EvolutionTab = () => {
   const startExp = async (id: string) => {
     setBusyId(id);
     try {
-      const res = await fetch(`/api/studio/experiments/${id}/start?tenant=chel`, {
+      const res = await fetch(
+        `/api/studio/experiments/${id}/start?tenant=${encodeURIComponent(tenantId)}`,
+        {
         method: 'POST',
-      });
+        },
+      );
       if (!res.ok) throw new Error(String(res.status));
       await reload();
     } finally {
@@ -97,7 +104,9 @@ export const EvolutionTab = () => {
   const suggestExp = async (id: string) => {
     setBusyId(id);
     try {
-      const res = await fetch(`/api/studio/experiments/${id}/suggest?tenant=chel`);
+      const res = await fetch(
+        `/api/studio/experiments/${id}/suggest?tenant=${encodeURIComponent(tenantId)}`,
+      );
       if (!res.ok) throw new Error(String(res.status));
       const json = (await res.json()) as SuggestResponse;
       setSuggest((s) => ({ ...s, [id]: json }));
@@ -109,7 +118,7 @@ export const EvolutionTab = () => {
   const applyWinner = async (id: string, variantId: string) => {
     setBusyId(id);
     try {
-      const res = await fetch(`/api/studio/experiments/${id}/apply?tenant=chel`, {
+      const res = await fetch(`/api/studio/experiments/${id}/apply?tenant=${encodeURIComponent(tenantId)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

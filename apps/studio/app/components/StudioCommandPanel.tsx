@@ -3,6 +3,8 @@
 import { ChevronLeft, ChevronRight, RotateCcw, Settings2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
+import { useTenant } from '@/shared/tenant/TenantContext';
+import { TenantSwitcher } from '@/shared/tenant/TenantSwitcher';
 import { UnifiedWorkspace } from '@/widgets/marketing-control-panel/ui/workspaces/UnifiedWorkspace';
 import { WidgetMatrixModal } from '@/widgets/marketing-control-panel/ui/components/WidgetMatrixModal';
 import { usePanelResizer } from '@/widgets/marketing-control-panel/logic/usePanelResizer';
@@ -31,6 +33,7 @@ export function StudioCommandPanel({
   isLabPage = false,
 }: StudioCommandPanelProps) {
   const store = useUISettingsStore();
+  const { tenant } = useTenant();
   const [isMatrixOpen, setIsMatrixOpen] = useState(false);
   const { panelWidth, startResizing } = usePanelResizer(open);
 
@@ -98,12 +101,13 @@ export function StudioCommandPanel({
                   Командный Центр
                 </h1>
                 <p className="mt-1 text-[10px] font-medium uppercase tracking-wider text-slate-500">
-                  Studio · rev {revision}
+                  Studio · {tenant.displayName} · rev {revision}
                   {hasUnsavedChanges ? ' · несохранено' : ''}
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-1.5">
+              <TenantSwitcher />
               <button
                 type="button"
                 onClick={() => store.resetToDefaults()}

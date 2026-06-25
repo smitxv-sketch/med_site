@@ -7,6 +7,8 @@ import { useDoctorsRepository } from "@/shared/di/DIContext";
 import { Doctor } from "@/widget/types";
 import { Link } from "react-router-dom";
 import { useMobileMenuStore } from "../model/useMobileMenuStore";
+import { useSiteStore } from "@/shared/store/siteStore";
+import { formatTelHref } from "@/shared/lib/formatTelHref";
 import {
   Sheet,
   SheetContent,
@@ -14,7 +16,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 
-const menuItems = [
+const fallbackMenuItems = [
   {
     title: "Услуги и цены",
     path: "/prices",
@@ -39,15 +41,33 @@ const menuItems = [
       { title: "Контакты", path: "/contacts" },
     ],
   },
-];
+] as const;
 
 export function MobileMenu() {
   const { isOpen, closeMenu, openMenu } = useMobileMenuStore();
+  const navigation = useSiteStore((s) => s.navigation);
+  const globalSetting = useSiteStore((s) => s.globalSetting);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const doctorsRepository = useDoctorsRepository();
+
+  const menuItems =
+    navigation?.headerMenu?.length
+      ? navigation.headerMenu.map((item) => ({
+          title: item.label,
+          path: item.url,
+          children: item.children?.map((c) => ({ title: c.label, path: c.url })),
+        }))
+      : (fallbackMenuItems as unknown as Array<{
+          title: string;
+          path: string;
+          children?: Array<{ title: string; path: string }>;
+        }>);
+
+  const phoneLabel = globalSetting?.contactPhone ?? "+7 (351) 778-88-87";
+  const phoneHref = formatTelHref(phoneLabel);
 
   const { data: doctors, isLoading } = useQuery<Doctor[]>({
     queryKey: ['doctors'],
@@ -291,14 +311,14 @@ export function MobileMenu() {
                 Записаться на приём
               </Link>
               <a
-                href="tel:+73517788887"
+                href={phoneHref}
                 className="flex items-center justify-center gap-3 w-full p-4 bg-gray-50 border border-gray-100 rounded-xl hover:border-brand/30 hover:bg-brand/5 active:bg-gray-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
               >
                 <div className="w-10 h-10 bg-white shadow-sm text-brand rounded-full flex items-center justify-center shrink-0">
                   <Phone className="w-4 h-4" />
                 </div>
                 <span className="text-gray-900 font-extrabold text-[19px] tracking-tight whitespace-nowrap">
-                  +7 (351) 778-88-87
+                  {phoneLabel}
                 </span>
               </a>
             </div>

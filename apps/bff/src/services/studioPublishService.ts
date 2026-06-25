@@ -1,4 +1,5 @@
 import {
+  getTenantById,
   mapPageBlocksToStrapi,
   type EngineState,
   type StudioDraftDto,
@@ -116,10 +117,17 @@ async function pushDraftToStrapi(draft: StudioDraftDto): Promise<void> {
   }
 }
 
-async function triggerRevalidate(): Promise<void> {
+async function triggerRevalidate(input: {
+  tenantId: string;
+  pageSlug: string;
+}): Promise<void> {
   const secret = getRevalidateSecret();
-  const url =
-    getWebRevalidateUrl() ?? 'https://istochnik.smitx.ru/api/revalidate';
+  const tenant = getTenantById(input.tenantId);
+  const base =
+    getWebRevalidateUrl() ??
+    tenant?.publicBaseUrl ??
+    'https://istochnik.smitx.ru';
+  const url = `${base.replace(/\/$/, '')}/api/revalidate`;
   if (!secret) {
     console.warn('[bff] REVALIDATE_SECRET not set — skip revalidate');
     return;
@@ -131,7 +139,18 @@ async function triggerRevalidate(): Promise<void> {
       'Content-Type': 'application/json',
       'x-revalidate-token': secret,
     },
-    body: JSON.stringify({ model: 'page', tags: ['page:home', 'site-theme'] }),
+    body: JSON.stringify({
+      model: 'page',
+      pageSlug: input.pageSlug,
+      tags: [
+        `tenant:${input.tenantId}`,
+        `page:${input.pageSlug}`,
+        'pages',
+        'site-theme',
+        'global-setting',
+        'navigation',
+      ],
+    }),
   });
   if (!res.ok) {
     console.warn('[bff] revalidate failed:', res.status);
@@ -148,7 +167,7 @@ export async function publishStudioDraft(
   if (getStrapiToken()) {
     await pushDraftToStrapi(draft);
     draftOverlay.delete(`${tenantId}:${locale}:${pageSlug}`);
-    await triggerRevalidate();
+    await triggerRevalidate({ tenantId, pageSlug });
   }
 
   return {

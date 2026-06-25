@@ -1,6 +1,6 @@
 # Статус миграции: Источник → Strapi + BFF + Next
 
-> **Приёмка:** [`plan/PLAN_CLOSURE.md`](./plan/PLAN_CLOSURE.md) · **UAT:** [`UAT_MASTER_PLAN.md`](./UAT_MASTER_PLAN.md)  
+> **Приёмка:** [`plan/PLAN_CLOSURE.md`](./plan/PLAN_CLOSURE.md) · **UAT:** [`UAT_PROSTOY_PLAN.md`](./UAT_PROSTOY_PLAN.md)  
 > **Мастер-план:** [`plan/STUDIO_WAVE_MASTER_PLAN.md`](./plan/STUDIO_WAVE_MASTER_PLAN.md)
 
 **Обновлено:** 2026-06-25  

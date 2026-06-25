@@ -20,16 +20,17 @@ export const TENANTS: readonly TenantConfig[] = [
     id: 'chel',
     displayName: 'Челябинск',
     strapiLocale: 'ru-chel',
-    publicBaseUrl: 'https://chel.example.ru',
+    publicBaseUrl: 'https://istochnik.smitx.ru',
     routing: {
       mode: 'multi-host',
-      domains: ['chel.example.ru', 'localhost'],
+      domains: ['istochnik.smitx.ru', 'studio.istochnik.smitx.ru', 'localhost'],
     },
   },
   {
     id: 'spb',
     displayName: 'Санкт-Петербург',
     strapiLocale: 'ru-spb',
+    // Dormant: зарезервировано под будущий домен/маршрутинг
     publicBaseUrl: 'https://spb.example.ru',
     routing: {
       mode: 'path-prefix',

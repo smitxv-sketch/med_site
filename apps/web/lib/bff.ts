@@ -1,5 +1,11 @@
-import type { EngineState, PageDto, SiteThemeDto } from '@med-site/contracts';
-import { DEFAULT_ENGINE_STATE } from '@med-site/contracts';
+import type {
+  EngineState,
+  GlobalSettingDto,
+  NavigationDto,
+  PageDto,
+  SiteThemeDto,
+} from '@med-site/contracts';
+import { DEFAULT_ENGINE_STATE, DEFAULT_TENANT_ID } from '@med-site/contracts';
 
 const BFF_URL = process.env.BFF_INTERNAL_URL ?? process.env.NEXT_PUBLIC_BFF_URL ?? 'http://localhost:3001';
 
@@ -22,7 +28,7 @@ function utmSearchParams(utm?: UtmQuery): string {
 
 export async function fetchPage(
   slug: string,
-  tenant = 'chel',
+  tenant = DEFAULT_TENANT_ID,
   opts?: { abSeed?: string },
 ): Promise<PageDto> {
   const ab = opts?.abSeed ? `&ab_seed=${encodeURIComponent(opts.abSeed)}` : '';
@@ -40,7 +46,7 @@ export async function fetchPage(
 
 /** Тема с BFF — после publish из Studio + UTM rules (Wave 2) */
 export async function fetchSiteTheme(
-  tenant = 'chel',
+  tenant = DEFAULT_TENANT_ID,
   utm?: UtmQuery,
 ): Promise<SiteThemeDto> {
   const url = `${BFF_URL}/api/site-theme?tenant=${tenant}${utmSearchParams(utm)}`;
@@ -53,6 +59,36 @@ export async function fetchSiteTheme(
   }
 
   return res.json() as Promise<SiteThemeDto>;
+}
+
+export async function fetchNavigation(
+  tenant = DEFAULT_TENANT_ID,
+): Promise<NavigationDto> {
+  const url = `${BFF_URL}/api/navigation?tenant=${tenant}`;
+  const res = await fetch(url, {
+    next: { tags: ['navigation', `tenant:${tenant}`] },
+  });
+
+  if (!res.ok) {
+    throw new Error(`BFF navigation fetch failed: ${res.status}`);
+  }
+
+  return res.json() as Promise<NavigationDto>;
+}
+
+export async function fetchGlobalSetting(
+  tenant = DEFAULT_TENANT_ID,
+): Promise<GlobalSettingDto> {
+  const url = `${BFF_URL}/api/global-setting?tenant=${tenant}`;
+  const res = await fetch(url, {
+    next: { tags: ['global-setting', `tenant:${tenant}`] },
+  });
+
+  if (!res.ok) {
+    throw new Error(`BFF global-setting fetch failed: ${res.status}`);
+  }
+
+  return res.json() as Promise<GlobalSettingDto>;
 }
 
 export function themeEngineState(theme: SiteThemeDto | null): EngineState {

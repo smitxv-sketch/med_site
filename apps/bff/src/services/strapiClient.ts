@@ -3,6 +3,7 @@ import {
   DEFAULT_HOME_SEO,
   mapStrapiBlocks,
   type GlobalLayoutDto,
+  type GlobalSettingDto,
   type NavigationDto,
   type PageDto,
   type StrapiBlockEntry,
@@ -144,6 +145,37 @@ export async function fetchGlobalLayoutFromStrapi(
   }
 }
 
+export async function fetchGlobalSettingFromStrapi(
+  locale: string,
+): Promise<GlobalSettingDto> {
+  try {
+    // Компоненты в Strapi лучше populate явно (targeted) — не используем populate=*.
+    const qs = 'populate[defaultSeo]=*';
+    const json = await strapiFetch<
+      StrapiSingleResponse<{
+        brandVoice?: string;
+        siteName?: string;
+        contactPhone?: string;
+        contactEmail?: string;
+        contactAddress?: string;
+        locale?: string;
+      }>
+    >(`/global-setting?${qs}`, locale);
+
+    const data = json.data;
+    return {
+      locale: data?.locale ?? locale,
+      brandVoice: data?.brandVoice,
+      siteName: data?.siteName,
+      contactPhone: data?.contactPhone,
+      contactEmail: data?.contactEmail,
+      contactAddress: data?.contactAddress,
+    };
+  } catch {
+    return { locale };
+  }
+}
+
 export function getMockPage(slug: string, locale: string): PageDto {
   return {
     slug,
@@ -162,8 +194,41 @@ export function getMockNavigation(locale: string): NavigationDto {
       { label: 'Врачи', url: '/doctors' },
       { label: 'Акции', url: '/promotions' },
       { label: 'О клинике', url: '/about' },
+      { label: 'Контакты', url: '/contacts' },
     ],
-    footerColumns: [],
+    footerColumns: [
+      {
+        title: 'О компании',
+        links: [
+          { label: 'О клинике', url: '/about' },
+          { label: 'Наши врачи', url: '/doctors' },
+          { label: 'Вакансии', url: '/vacancies' },
+          { label: 'Отзывы', url: '/reviews' },
+          { label: 'Контакты', url: '/contacts' },
+        ],
+      },
+      {
+        title: 'Пациентам',
+        links: [
+          { label: 'Услуги и цены', url: '/prices' },
+          { label: 'Акции', url: '/promotions' },
+          { label: 'Программы', url: '/programs' },
+          { label: 'Подготовка к анализам', url: '/preparation' },
+          { label: 'Вопрос-ответ', url: '/faq' },
+        ],
+      },
+    ],
+  };
+}
+
+export function getMockGlobalSetting(locale: string): GlobalSettingDto {
+  return {
+    locale,
+    siteName: 'Сеть клиник «Источник»',
+    contactPhone: '+7 (351) 778-88-87',
+    contactEmail: 'info@ci74.ru',
+    contactAddress: 'г. Челябинск, ул. 40-летия Победы, 11',
+    brandVoice: undefined,
   };
 }
 

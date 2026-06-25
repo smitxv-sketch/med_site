@@ -4,10 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { aiService } from '@/shared/lib/ai/aiService';
 import { useCmsStore } from '@/shared/store/cmsStore';
 import { isStudioApp } from '@/shared/config/appTarget';
+import { useTenant } from '@/shared/tenant/TenantContext';
 
 export const LaboratoryTab = () => {
   const navigate = useNavigate();
   const inStudio = isStudioApp();
+  const { tenantId } = useTenant();
 
   React.useEffect(() => {
     // В legacy-прототипе — переход в /sandbox; в Studio остаёмся в split-view
@@ -48,7 +50,7 @@ export const LaboratoryTab = () => {
         if (!layoutRes.ok) throw new Error(String(layoutRes.status));
         result = await layoutRes.json();
 
-        const labRes = await fetch('/api/studio/lab?tenant=chel', {
+        const labRes = await fetch(`/api/studio/lab?tenant=${encodeURIComponent(tenantId)}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ title: result.seo?.title ?? 'Лаборатория' }),
@@ -56,11 +58,14 @@ export const LaboratoryTab = () => {
         if (!labRes.ok) throw new Error(String(labRes.status));
         const lab = (await labRes.json()) as { pageSlug: string };
 
-        await fetch(`/api/studio/draft?tenant=chel&page=${encodeURIComponent(lab.pageSlug)}`, {
+        await fetch(
+          `/api/studio/draft?tenant=${encodeURIComponent(tenantId)}&page=${encodeURIComponent(lab.pageSlug)}`,
+          {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ pageBlocks: result.blocks }),
-        });
+          },
+        );
 
         if (result.blocks) {
           useCmsStore.getState().setPageBlocks(result.blocks as never);

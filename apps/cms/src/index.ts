@@ -113,6 +113,30 @@ async function seedNavigation(strapi: Core.Strapi) {
     { label: 'Врачи', url: '/doctors' },
     { label: 'Акции', url: '/promotions' },
     { label: 'О клинике', url: '/about' },
+    { label: 'Контакты', url: '/contacts' },
+  ];
+
+  const footerColumns = [
+    {
+      title: 'О компании',
+      links: [
+        { label: 'О клинике', url: '/about' },
+        { label: 'Наши врачи', url: '/doctors' },
+        { label: 'Вакансии', url: '/vacancies' },
+        { label: 'Отзывы', url: '/reviews' },
+        { label: 'Контакты', url: '/contacts' },
+      ],
+    },
+    {
+      title: 'Пациентам',
+      links: [
+        { label: 'Услуги и цены', url: '/prices' },
+        { label: 'Акции', url: '/promotions' },
+        { label: 'Программы', url: '/programs' },
+        { label: 'Подготовка к анализам', url: '/preparation' },
+        { label: 'Вопрос-ответ', url: '/faq' },
+      ],
+    },
   ];
 
   const navUid = 'api::navigation.navigation' as never;
@@ -122,11 +146,46 @@ async function seedNavigation(strapi: Core.Strapi) {
     if (existing) continue;
 
     await strapi.documents(navUid).create({
-      data: { headerMenu, footerColumns: [] } as never,
+      data: { headerMenu, footerColumns } as never,
       locale: locale.code,
       status: 'published',
     });
     strapi.log.info(`[bootstrap] seeded navigation for ${locale.code}`);
+  }
+}
+
+/** Контакты и бренд per locale */
+async function seedGlobalSetting(strapi: Core.Strapi) {
+  const settingUid = 'api::global-setting.global-setting' as never;
+
+  const byLocale: Record<string, Record<string, string>> = {
+    'ru-chel': {
+      siteName: 'Сеть клиник «Источник»',
+      contactPhone: '+7 (351) 778-88-87',
+      contactEmail: 'info@ci74.ru',
+      contactAddress: 'г. Челябинск, ул. 40-летия Победы, 11',
+      brandVoice:
+        'Профессиональный, экспертный, вызывающий доверие. Избегать клише.',
+    },
+    'ru-spb': {
+      siteName: 'Клиника «Источник» — СПб',
+      contactPhone: '+7 (812) 000-00-00',
+      contactEmail: 'spb@example.com',
+      contactAddress: 'г. Санкт-Петербург',
+      brandVoice: 'Профессиональный тон, без маркетинговой воды.',
+    },
+  };
+
+  for (const locale of TENANT_LOCALES) {
+    const existing = await strapi.documents(settingUid).findFirst({ locale: locale.code });
+    if (existing) continue;
+
+    await strapi.documents(settingUid).create({
+      data: byLocale[locale.code] ?? byLocale['ru-chel'],
+      locale: locale.code,
+      status: 'published',
+    });
+    strapi.log.info(`[bootstrap] seeded global-setting for ${locale.code}`);
   }
 }
 
@@ -223,6 +282,7 @@ export default {
       await ensurePublicPermissions(strapi);
       await seedHomePage(strapi);
       await seedNavigation(strapi);
+      await seedGlobalSetting(strapi);
       await seedGlobalLayout(strapi);
       await seedSiteTheme(strapi);
       await seedDesignPresets(strapi);

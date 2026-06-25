@@ -12,12 +12,16 @@ function bffHeaders(): HeadersInit {
   return headers;
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   const secret = process.env.STUDIO_API_SECRET;
   const headers: Record<string, string> = { Accept: 'application/json' };
   if (secret) headers.Authorization = `Bearer ${secret}`;
 
-  const res = await fetch(`${resolveStudioBffBase()}/presets`, {
+  const url = new URL(`${resolveStudioBffBase()}/presets`);
+  const tenant = req.nextUrl.searchParams.get('tenant');
+  if (tenant) url.searchParams.set('tenant', tenant);
+
+  const res = await fetch(url.toString(), {
     headers,
     cache: 'no-store',
   });
@@ -30,7 +34,10 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const payload = await req.text();
-  const res = await fetch(`${resolveStudioBffBase()}/presets`, {
+  const url = new URL(`${resolveStudioBffBase()}/presets`);
+  const tenant = req.nextUrl.searchParams.get('tenant');
+  if (tenant) url.searchParams.set('tenant', tenant);
+  const res = await fetch(url.toString(), {
     method: 'POST',
     headers: bffHeaders(),
     body: payload,

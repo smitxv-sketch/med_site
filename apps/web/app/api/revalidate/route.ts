@@ -9,14 +9,25 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json().catch(() => ({}));
   const model = body?.model as string | undefined;
+  const pageSlug = body?.pageSlug as string | undefined;
+  const tagsFromBody = Array.isArray(body?.tags) ? (body.tags as string[]) : [];
+  const pathsFromBody = Array.isArray(body?.paths) ? (body.paths as string[]) : [];
 
-  const tags = ['pages', 'tenant:chel', 'tenant:spb', 'site-theme'];
-  if (model === 'page' || model === 'site-theme') {
-    tags.push('page:home', 'site-theme');
+  const tags = new Set<string>(tagsFromBody);
+
+  // Safe fallbacks if a webhook/tool calls without tags
+  if (tags.size === 0) {
+    tags.add('pages');
+    tags.add('site-theme');
+    if (model === 'page' && pageSlug) tags.add(`page:${pageSlug}`);
   }
 
   tags.forEach((tag) => revalidateTag(tag));
-  revalidatePath('/');
+  if (pathsFromBody.length) {
+    pathsFromBody.forEach((p) => revalidatePath(p));
+  } else if (model === 'page' && pageSlug === 'home') {
+    revalidatePath('/');
+  }
 
-  return NextResponse.json({ revalidated: true, tags });
+  return NextResponse.json({ revalidated: true, tags: Array.from(tags) });
 }

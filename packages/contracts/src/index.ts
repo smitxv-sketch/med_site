@@ -25,6 +25,10 @@ export type {
 } from './types/page.js';
 
 export type {
+  GlobalSettingDto,
+} from './types/globalSetting.js';
+
+export type {
   MarketingCondition,
   MarketingRuleDto,
   MarketingContextDto,

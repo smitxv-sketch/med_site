@@ -5,10 +5,53 @@ import { useAccessibilityStore } from '@/shared/store/accessibilityStore';
 import { Card } from '@/shared/ui/Card';
 import { MedicalDisclaimer } from '@/shared/ui/MedicalDisclaimer';
 import { PLATFORM_COLORS } from '@/shared/config/designTokens';
+import { useSiteStore } from '@/shared/store/siteStore';
+import { formatTelHref } from '@/shared/lib/formatTelHref';
+import { useTenant } from '@/shared/tenant/TenantContext';
+import type { NavigationDto } from '@med-site/contracts';
+
+const FALLBACK_FOOTER_COLUMNS: NavigationDto['footerColumns'] = [
+  {
+    title: 'О компании',
+    links: [
+      { label: 'О клинике', url: '/about' },
+      { label: 'Наши врачи', url: '/doctors' },
+      { label: 'Вакансии', url: '/vacancies' },
+      { label: 'Отзывы', url: '/reviews' },
+      { label: 'Контакты', url: '/contacts' },
+    ],
+  },
+  {
+    title: 'Пациентам',
+    links: [
+      { label: 'Услуги и цены', url: '/prices' },
+      { label: 'Акции', url: '/promotions' },
+      { label: 'Программы', url: '/programs' },
+      { label: 'Подготовка к анализам', url: '/preparation' },
+      { label: 'Вопрос-ответ', url: '/faq' },
+    ],
+  },
+];
 
 export function Footer() {
   const [openSection, setOpenSection] = useState<string | null>(null);
   const { toggleActive } = useAccessibilityStore();
+  const navigation = useSiteStore((s) => s.navigation);
+  const globalSetting = useSiteStore((s) => s.globalSetting);
+  const { tenant } = useTenant();
+
+  const phoneLabel = globalSetting?.contactPhone ?? '+7 (351) 778-88-87';
+  const phoneHref = formatTelHref(phoneLabel);
+  const emailLabel = globalSetting?.contactEmail ?? 'info@ci74.ru';
+  const emailHref = `mailto:${emailLabel}`;
+  const addressLabel =
+    globalSetting?.contactAddress ?? 'г. Челябинск, ул. 40-летия Победы, 11';
+  const siteName = globalSetting?.siteName ?? `Сеть клиник «Источник»`;
+
+  const footerColumns =
+    navigation?.footerColumns?.length
+      ? navigation.footerColumns
+      : FALLBACK_FOOTER_COLUMNS;
 
   const toggleSection = (section: string) => {
     setOpenSection(openSection === section ? null : section);
@@ -63,7 +106,7 @@ export function Footer() {
               >
                 <div className="flex items-center gap-2">
                   <MapPin className="w-5 h-5 md:w-4 md:h-4 text-brand" />
-                  <span className="font-medium">Челябинск</span>
+                  <span className="font-medium">{tenant.displayName}</span>
                 </div>
                 <ChevronDown className={`w-5 h-5 md:w-4 md:h-4 transition-transform ${openSection === 'city' ? 'rotate-180 text-brand' : 'text-gray-400'}`} />
               </button>
@@ -97,58 +140,55 @@ export function Footer() {
             </button>
           </div>
 
-          {/* Section 2: О компании */}
-          <div className="border-b border-gray-100 md:border-none pb-4 md:pb-0">
-            <button 
-              onClick={() => toggleSection('about')}
-              className="flex items-center justify-between w-full md:cursor-default"
-            >
-              <h3 className="text-gray-900 font-bold text-lg">О компании</h3>
-              <div className="md:hidden">
-                {openSection === 'about' ? <ChevronUp className="w-5 h-5 text-brand" /> : <ChevronDown className="w-5 h-5 text-gray-400" />}
+          {footerColumns.map((column, colIndex) => {
+            const sectionKey = `col-${colIndex}`;
+            return (
+              <div
+                key={sectionKey}
+                className="border-b border-gray-100 md:border-none pb-4 md:pb-0"
+              >
+                <button
+                  type="button"
+                  onClick={() => toggleSection(sectionKey)}
+                  className="flex items-center justify-between w-full md:cursor-default"
+                >
+                  <h3 className="text-gray-900 font-bold text-lg">{column.title}</h3>
+                  <div className="md:hidden">
+                    {openSection === sectionKey ? (
+                      <ChevronUp className="w-5 h-5 text-brand" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                    )}
+                  </div>
+                </button>
+                <ul
+                  className={`mt-4 space-y-3 ${openSection === sectionKey ? 'block' : 'hidden md:block'}`}
+                >
+                  {column.links.map((link) => (
+                    <li key={link.url}>
+                      <Link
+                        to={link.url}
+                        className="text-gray-600 font-medium hover:text-brand transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </button>
-            <ul className={`mt-4 space-y-3 ${openSection === 'about' ? 'block' : 'hidden md:block'}`}>
-              <li><Link to="/about" className="text-gray-600 font-medium hover:text-brand transition-colors">О клинике</Link></li>
-              <li><Link to="/doctors" className="text-gray-600 font-medium hover:text-brand transition-colors">Наши врачи</Link></li>
-              <li><Link to="/vacancies" className="text-gray-600 font-medium hover:text-brand transition-colors">Вакансии</Link></li>
-              <li><Link to="/demo" className="text-gray-600 font-medium hover:text-brand transition-colors">Демо (все блоки)</Link></li>
-              <li><Link to="/reviews" className="text-gray-600 font-medium hover:text-brand transition-colors">Отзывы</Link></li>
-              <li><Link to="/contacts" className="text-gray-600 font-medium hover:text-brand transition-colors">Контакты</Link></li>
-            </ul>
-          </div>
-
-          {/* Section 3: Пациентам */}
-          <div className="border-b border-gray-100 md:border-none pb-4 md:pb-0">
-            <button 
-              onClick={() => toggleSection('patients')}
-              className="flex items-center justify-between w-full md:cursor-default"
-            >
-              <h3 className="text-gray-900 font-bold text-lg">Пациентам</h3>
-              <div className="md:hidden">
-                {openSection === 'patients' ? <ChevronUp className="w-5 h-5 text-brand" /> : <ChevronDown className="w-5 h-5 text-gray-400" />}
-              </div>
-            </button>
-            <ul className={`mt-4 space-y-3 ${openSection === 'patients' ? 'block' : 'hidden md:block'}`}>
-              <li><Link to="/services" className="text-gray-600 font-medium hover:text-brand transition-colors">Услуги и цены</Link></li>
-              <li><Link to="/promotions" className="text-gray-600 font-medium hover:text-brand transition-colors">Акции</Link></li>
-              <li><Link to="/programs" className="text-gray-600 font-medium hover:text-brand transition-colors">Программы</Link></li>
-              <li><Link to="/preparation" className="text-gray-600 font-medium hover:text-brand transition-colors">Подготовка к анализам</Link></li>
-              <li><Link to="/faq" className="text-gray-600 font-medium hover:text-brand transition-colors">Вопрос-ответ</Link></li>
-              <li><Link to="/certificates" className="text-gray-600 font-medium hover:text-brand transition-colors">Сертификаты</Link></li>
-            </ul>
-          </div>
+            );
+          })}
 
           {/* Section 4: Контакты */}
           <div className="md:col-span-1 border-b border-gray-100 md:border-none pb-4 md:pb-0">
             <h3 className="text-gray-900 font-bold text-lg mb-4">Контакты</h3>
             <div className="space-y-4">
-              <a href="tel:+73517788887" className="flex items-center gap-3 hover:text-brand transition-colors group">
+              <a href={phoneHref} className="flex items-center gap-3 hover:text-brand transition-colors group">
                 <div className="w-10 h-10 rounded-full bg-brand/5 group-hover:bg-brand/10 transition-colors flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5 text-brand" />
                 </div>
                 <div>
-                  <div className="text-gray-900 font-bold text-xl">+7 (351) 778-88-87</div>
+                  <div className="text-gray-900 font-bold text-xl">{phoneLabel}</div>
                   <div className="text-sm text-gray-500 font-medium">Ежедневно с 8:00 до 20:00</div>
                 </div>
               </a>
@@ -156,13 +196,13 @@ export function Footer() {
                 <div className="w-10 h-10 rounded-full bg-brand/5 flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5 text-brand" />
                 </div>
-                <span className="text-sm text-gray-600 font-medium">г. Челябинск, ул. 40-летия Победы, 11</span>
+                <span className="text-sm text-gray-600 font-medium">{addressLabel}</span>
               </div>
-              <a href="mailto:info@ci74.ru" className="flex items-center gap-3 hover:text-brand transition-colors group">
+              <a href={emailHref} className="flex items-center gap-3 hover:text-brand transition-colors group">
                 <div className="w-10 h-10 rounded-full bg-brand/5 group-hover:bg-brand/10 transition-colors flex items-center justify-center shrink-0">
                   <Mail className="w-5 h-5 text-brand" />
                 </div>
-                <span className="text-sm text-gray-600 font-medium">info@ci74.ru</span>
+                <span className="text-sm text-gray-600 font-medium">{emailLabel}</span>
               </a>
             </div>
           </div>
@@ -209,7 +249,7 @@ export function Footer() {
         {/* Legal Info */}
         <div className="pt-8 border-t border-gray-100 text-xs text-gray-500 font-medium space-y-4">
           <p>
-            © {new Date().getFullYear()} Сеть клиник «Источник». Все права защищены.
+            © {new Date().getFullYear()} {siteName}. Все права защищены.
           </p>
           <p>
             Лицензия № ЛО-74-01-000000 от 01.01.2020 г. выдана Министерством здравоохранения Челябинской области.

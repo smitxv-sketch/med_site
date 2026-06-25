@@ -1,6 +1,7 @@
 'use client';
 
 import type { DesignPresetDto, StudioDraftDto } from '@med-site/contracts';
+import { DEFAULT_TENANT_ID } from '@med-site/contracts';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useCmsStore } from '@/shared/store/cmsStore';
@@ -11,9 +12,9 @@ import {
   pickDraftPatchBody,
 } from '../lib/draftPickers';
 
-async function fetchDraft(pageSlug: string): Promise<StudioDraftDto> {
+async function fetchDraft(tenantId: string, pageSlug: string): Promise<StudioDraftDto> {
   const res = await fetch(
-    `/api/studio/draft?tenant=chel&page=${encodeURIComponent(pageSlug)}`,
+    `/api/studio/draft?tenant=${encodeURIComponent(tenantId)}&page=${encodeURIComponent(pageSlug)}`,
     { cache: 'no-store' },
   );
   if (!res.ok) throw new Error(`Draft load failed: ${res.status}`);
@@ -21,9 +22,11 @@ async function fetchDraft(pageSlug: string): Promise<StudioDraftDto> {
 }
 
 /** Подгружает кастомные пресеты с BFF */
-async function hydratePresetsFromBff() {
+async function hydratePresetsFromBff(tenantId: string) {
   try {
-    const res = await fetch('/api/studio/presets', { cache: 'no-store' });
+    const res = await fetch(`/api/studio/presets?tenant=${encodeURIComponent(tenantId)}`, {
+      cache: 'no-store',
+    });
     if (!res.ok) return;
     const json = (await res.json()) as { presets: DesignPresetDto[] };
     const base = PRESETS.filter((p) => !p.isCustom);
@@ -39,6 +42,7 @@ async function hydratePresetsFromBff() {
 /** Синхронизация Zustand ↔ BFF draft (autosave + publish) */
 export function useStudioDraftBridge() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const tenantId = searchParams.get('tenant') ?? DEFAULT_TENANT_ID;
   const pageSlug = searchParams.get('page') ?? 'home';
   const [revision, setRevision] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -55,26 +59,26 @@ export function useStudioDraftBridge() {
   }, []);
 
   useEffect(() => {
-    void hydratePresetsFromBff();
-  }, []);
+    void hydratePresetsFromBff(tenantId);
+  }, [tenantId]);
 
   useEffect(() => {
     setLoading(true);
-    fetchDraft(pageSlug)
+    fetchDraft(tenantId, pageSlug)
       .then(hydrateFromDraft)
       .catch((e) => setError(e instanceof Error ? e.message : 'Load error'))
       .finally(() => setLoading(false));
-  }, [hydrateFromDraft, pageSlug]);
+  }, [hydrateFromDraft, pageSlug, tenantId]);
 
   useEffect(() => {
     const onSwitch = (e: Event) => {
       const slug = (e as CustomEvent<{ pageSlug: string }>).detail?.pageSlug;
       if (!slug) return;
-      setSearchParams({ page: slug });
+      setSearchParams({ tenant: tenantId, page: slug });
     };
     window.addEventListener('studio:switch-page', onSwitch);
     return () => window.removeEventListener('studio:switch-page', onSwitch);
-  }, [setSearchParams]);
+  }, [setSearchParams, tenantId]);
 
   const scheduleSave = useCallback(() => {
     if (hydrating.current) return;
@@ -84,7 +88,7 @@ export function useStudioDraftBridge() {
       const body = pickDraftPatchBody(revision);
       try {
         const res = await fetch(
-          `/api/studio/draft?tenant=chel&page=${encodeURIComponent(pageSlug)}`,
+          `/api/studio/draft?tenant=${encodeURIComponent(tenantId)}&page=${encodeURIComponent(pageSlug)}`,
           {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -104,7 +108,7 @@ export function useStudioDraftBridge() {
         useUISettingsStore.setState({ hasUnsavedChanges: true });
       }
     }, 800);
-  }, [revision, pageSlug]);
+  }, [revision, pageSlug, tenantId]);
 
   useEffect(() => {
     const unsubUi = useUISettingsStore.subscribe(scheduleSave);
@@ -120,13 +124,16 @@ export function useStudioDraftBridge() {
     setPublishing(true);
     setError(null);
     try {
-      await fetch(`/api/studio/draft?tenant=chel&page=${encodeURIComponent(pageSlug)}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(pickDraftPatchBody(revision)),
-      });
+      await fetch(
+        `/api/studio/draft?tenant=${encodeURIComponent(tenantId)}&page=${encodeURIComponent(pageSlug)}`,
+        {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(pickDraftPatchBody(revision)),
+        },
+      );
       const res = await fetch(
-        `/api/studio/publish?tenant=chel&page=${encodeURIComponent(pageSlug)}`,
+        `/api/studio/publish?tenant=${encodeURIComponent(tenantId)}&page=${encodeURIComponent(pageSlug)}`,
         { method: 'POST' },
       );
       if (!res.ok) throw new Error(`Publish failed: ${res.status}`);
@@ -137,7 +144,7 @@ export function useStudioDraftBridge() {
     } finally {
       setPublishing(false);
     }
-  }, [revision, hydrateFromDraft, pageSlug]);
+  }, [revision, hydrateFromDraft, pageSlug, tenantId]);
 
   return {
     loading,
@@ -145,6 +152,7 @@ export function useStudioDraftBridge() {
     revision,
     publishing,
     publish,
+    tenantId,
     pageSlug,
     hasUnsavedChanges: useUISettingsStore((s) => s.hasUnsavedChanges),
   };

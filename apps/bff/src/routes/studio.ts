@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express';
 import {
+  DEFAULT_TENANT_ID,
   getTenantById,
   studioDraftPatchSchema,
   type StudioDraftPatchDto,
@@ -31,7 +32,7 @@ function resolveLocale(tenantId: string): string {
 }
 
 export async function getDraftHandler(req: Request, res: Response) {
-  const tenantId = String(req.query.tenant ?? 'chel');
+  const tenantId = String(req.query.tenant ?? DEFAULT_TENANT_ID);
   const pageSlug = String(req.query.page ?? 'home');
   const locale = String(req.query.locale ?? resolveLocale(tenantId));
 
@@ -45,7 +46,7 @@ export async function getDraftHandler(req: Request, res: Response) {
 }
 
 export async function patchDraftHandler(req: Request, res: Response) {
-  const tenantId = String(req.query.tenant ?? 'chel');
+  const tenantId = String(req.query.tenant ?? DEFAULT_TENANT_ID);
   const pageSlug = String(req.query.page ?? 'home');
   const locale = String(req.query.locale ?? resolveLocale(tenantId));
 
@@ -77,10 +78,14 @@ export async function patchDraftHandler(req: Request, res: Response) {
   }
 }
 
-export async function getPresetsHandler(_req: Request, res: Response) {
+export async function getPresetsHandler(req: Request, res: Response) {
+  const tenantId = String(req.query.tenant ?? DEFAULT_TENANT_ID);
   try {
     const presets = await listPresetsFromStrapi();
-    return res.json({ presets });
+    const filtered = presets.filter(
+      (p) => p.tenant === 'all' || p.tenant === tenantId,
+    );
+    return res.json({ presets: filtered });
   } catch (err) {
     console.error('[bff] getPresets error:', err);
     return res.status(502).json({ error: 'Failed to load presets' });
@@ -158,7 +163,7 @@ export async function deletePresetHandler(req: Request, res: Response) {
 }
 
 export async function publishDraftHandler(req: Request, res: Response) {
-  const tenantId = String(req.query.tenant ?? 'chel');
+  const tenantId = String(req.query.tenant ?? DEFAULT_TENANT_ID);
   const pageSlug = String(req.query.page ?? 'home');
   const locale = String(req.query.locale ?? resolveLocale(tenantId));
 
@@ -200,13 +205,13 @@ export async function aiLayoutHandler(req: Request, res: Response) {
 }
 
 export async function listLabHandler(req: Request, res: Response) {
-  const tenantId = String(req.query.tenant ?? 'chel');
+  const tenantId = String(req.query.tenant ?? DEFAULT_TENANT_ID);
   const locale = String(req.query.locale ?? resolveLocale(tenantId));
   return res.json(listLabPages(tenantId, locale));
 }
 
 export async function createLabHandler(req: Request, res: Response) {
-  const tenantId = String(req.query.tenant ?? 'chel');
+  const tenantId = String(req.query.tenant ?? DEFAULT_TENANT_ID);
   const locale = String(req.query.locale ?? resolveLocale(tenantId));
   const title = String(req.body?.title ?? 'Лаборатория');
 

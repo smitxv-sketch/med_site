@@ -4,6 +4,7 @@ import marketingConfig from '../api/marketingConfig.json';
 import { useCmsStore } from './cmsStore';
 import { ENGINE_WIDGET_DEFAULTS } from '../domain/marketing/engineDefaults';
 import { isStudioApp } from '../config/appTarget';
+import { getStudioTenantFromUrl } from '../tenant/getStudioTenantFromUrl';
 import { 
   EngineState, StrategyPreset, MarketingRule,
   ColorTheme, ColorIntensity, FontFamily, ShadowStyle, AnimationTheme,
@@ -293,7 +294,8 @@ export const useUISettingsStore = create<UISettingsState>((set, get) => ({
 
     // Wave 5: сохраняем пресет в Strapi через BFF
     if (isStudioApp()) {
-      void fetch('/api/studio/presets', {
+      const tenantId = getStudioTenantFromUrl();
+      void fetch(`/api/studio/presets?tenant=${encodeURIComponent(tenantId)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -301,7 +303,7 @@ export const useUISettingsStore = create<UISettingsState>((set, get) => ({
           name: info.name,
           description: info.desc,
           emoji: info.emoji,
-          tenant: 'chel',
+          tenant: tenantId,
           isSystem: false,
           engineState: currentStateToSave,
           pageBlocks: currentPageBlocks,
@@ -333,9 +335,13 @@ export const useUISettingsStore = create<UISettingsState>((set, get) => ({
     });
 
     if (isStudioApp() && preset?.isCustom) {
-      void fetch(`/api/studio/presets/${encodeURIComponent(presetApiSlug(id))}`, {
+      const tenantId = getStudioTenantFromUrl();
+      void fetch(
+        `/api/studio/presets/${encodeURIComponent(presetApiSlug(id))}?tenant=${encodeURIComponent(tenantId)}`,
+        {
         method: 'DELETE',
-      }).catch(() => {
+        },
+      ).catch(() => {
         /* UI уже обновлён; Strapi — best-effort */
       });
     }
@@ -363,8 +369,11 @@ export const useUISettingsStore = create<UISettingsState>((set, get) => ({
     if (isStudioApp()) {
       const preset = state.presets.find((p) => p.id === id);
       if (!preset?.isCustom) return;
+      const tenantId = getStudioTenantFromUrl();
 
-      void fetch(`/api/studio/presets/${encodeURIComponent(presetApiSlug(id))}`, {
+      void fetch(
+        `/api/studio/presets/${encodeURIComponent(presetApiSlug(id))}?tenant=${encodeURIComponent(tenantId)}`,
+        {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

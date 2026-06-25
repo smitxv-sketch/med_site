@@ -1,5 +1,8 @@
 import { HomePageClient } from './components/HomePageClient';
-import { fetchPage, fetchSiteTheme, themeEngineState, type UtmQuery } from '../lib/bff';
+import { fetchPage, themeEngineState, type UtmQuery } from '../lib/bff';
+import { fetchPageShell } from '../lib/pageShell';
+import { getWebTenantId } from '../lib/tenant';
+import type { GlobalSettingDto, NavigationDto } from '@med-site/contracts';
 import { DEFAULT_HOME_BLOCKS, DEFAULT_HOME_SEO } from '@med-site/contracts';
 
 export const dynamic = 'force-dynamic';
@@ -23,22 +26,36 @@ export default async function HomePage({
 }) {
   const sp = await searchParams;
   const utm = pickUtm(sp);
+  const tenantId = await getWebTenantId();
 
   let blocks = DEFAULT_HOME_BLOCKS;
   let title = DEFAULT_HOME_SEO.metaTitle ?? 'Клиника «Источник»';
   let engineState = themeEngineState(null);
+  let navigation: NavigationDto | null = null;
+  let globalSetting: GlobalSettingDto | null = null;
 
   try {
-    const [page, theme] = await Promise.all([
-      fetchPage('home', 'chel'),
-      fetchSiteTheme('chel', utm),
+    const [page, shell] = await Promise.all([
+      fetchPage('home', tenantId),
+      fetchPageShell(tenantId, utm),
     ]);
     blocks = page.blocks;
     title = page.title ?? title;
-    engineState = themeEngineState(theme);
+    engineState = shell.engineState;
+    navigation = shell.navigation;
+    globalSetting = shell.globalSetting;
   } catch (err) {
     console.error('[web] home fetch fallback to mock:', err);
   }
 
-  return <HomePageClient blocks={blocks} title={title} engineState={engineState} />;
+  return (
+    <HomePageClient
+      blocks={blocks}
+      title={title}
+      engineState={engineState}
+      navigation={navigation}
+      globalSetting={globalSetting}
+      tenantId={tenantId}
+    />
+  );
 }

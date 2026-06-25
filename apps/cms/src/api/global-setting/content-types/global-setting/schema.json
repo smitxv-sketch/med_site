@@ -25,6 +25,10 @@
     },
     "contactPhone": { "type": "string" },
     "contactEmail": { "type": "string" },
+    "contactAddress": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
     "defaultSeo": {
       "type": "component",
       "repeatable": false,

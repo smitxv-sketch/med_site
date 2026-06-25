@@ -4,12 +4,16 @@ import { useMobileMenuStore } from "../../mobile-menu/model/useMobileMenuStore";
 import { Link, useLocation } from "react-router-dom";
 import { ServicesMegaMenu } from "./ServicesMegaMenu";
 import { useUISettingsStore } from "@/shared/store/uiSettingsStore";
+import { useSiteStore } from "@/shared/store/siteStore";
+import { formatTelHref } from "@/shared/lib/formatTelHref";
 import { Button } from "@/shared/ui/Button";
 import { Container } from '@/shared/ui/Container';
 
 export function Header() {
   const { openMenu } = useMobileMenuStore();
   const { homePageConcept, heroMobileVariant, heroDesktopVariant } = useUISettingsStore();
+  const navigation = useSiteStore((s) => s.navigation);
+  const globalSetting = useSiteStore((s) => s.globalSetting);
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
 
@@ -57,6 +61,9 @@ export function Header() {
   const headerGhostButtonClass = isTransparent
     ? "text-white hover:bg-white/20"
     : "text-gray-600 hover:bg-gray-100 md:hover:bg-white/45 md:backdrop-blur-sm";
+
+  const phoneLabel = globalSetting?.contactPhone ?? "+7 (351) 778-88-87";
+  const phoneHref = formatTelHref(phoneLabel);
 
   return (
     <>
@@ -116,39 +123,55 @@ export function Header() {
               </div>
               <nav className="hidden md:flex items-center gap-6 h-full">
                 <ServicesMegaMenu isTransparent={isTransparent} />
-                <Link
-                  to="/doctors"
-                  className={`text-[16px] font-medium transition-colors hover:text-brand ${isTransparent ? "text-white/90" : "text-gray-600"}`}
-                >
-                  Врачи
-                </Link>
-                <Link
-                  to="/promotions"
-                  className={`text-[16px] font-medium transition-colors hover:text-brand ${isTransparent ? "text-white/90" : "text-gray-600"}`}
-                >
-                  Акции
-                </Link>
-                <Link
-                  to="/about"
-                  className={`text-[16px] font-medium transition-colors hover:text-brand ${isTransparent ? "text-white/90" : "text-gray-600"}`}
-                >
-                  О клинике
-                </Link>
-                <Link
-                  to="/contacts"
-                  className={`text-[16px] font-medium transition-colors hover:text-brand ${isTransparent ? "text-white/90" : "text-gray-600"}`}
-                >
-                  Контакты
-                </Link>
+                {navigation?.headerMenu?.length
+                  ? navigation.headerMenu
+                      .filter((i) => i.url !== "/prices")
+                      .map((item) => (
+                        <Link
+                          key={item.url}
+                          to={item.url}
+                          className={`text-[16px] font-medium transition-colors hover:text-brand ${isTransparent ? "text-white/90" : "text-gray-600"}`}
+                        >
+                          {item.label}
+                        </Link>
+                      ))
+                  : (
+                    <>
+                      <Link
+                        to="/doctors"
+                        className={`text-[16px] font-medium transition-colors hover:text-brand ${isTransparent ? "text-white/90" : "text-gray-600"}`}
+                      >
+                        Врачи
+                      </Link>
+                      <Link
+                        to="/promotions"
+                        className={`text-[16px] font-medium transition-colors hover:text-brand ${isTransparent ? "text-white/90" : "text-gray-600"}`}
+                      >
+                        Акции
+                      </Link>
+                      <Link
+                        to="/about"
+                        className={`text-[16px] font-medium transition-colors hover:text-brand ${isTransparent ? "text-white/90" : "text-gray-600"}`}
+                      >
+                        О клинике
+                      </Link>
+                      <Link
+                        to="/contacts"
+                        className={`text-[16px] font-medium transition-colors hover:text-brand ${isTransparent ? "text-white/90" : "text-gray-600"}`}
+                      >
+                        Контакты
+                      </Link>
+                    </>
+                  )}
               </nav>
 
               {/* Actions */}
               <div className="flex items-center gap-2 sm:gap-3">
                 <a
-                  href="tel:+73517788887"
+                  href={phoneHref}
                   className={`text-[16px] font-bold transition-colors hidden lg:block mr-2 hover:text-brand ${isTransparent ? "text-white" : "text-gray-700"}`}
                 >
-                  +7 (351) 778-88-87
+                  {phoneLabel}
                 </a>
 
                 <Button
@@ -174,7 +197,7 @@ export function Header() {
                   <User className="w-5 h-5" />
                 </Link>
                 <a
-                  href="tel:+73517788887"
+                  href={phoneHref}
                   className={`p-2 rounded-full transition-colors lg:hidden ${isTransparent ? "text-white bg-white/20 hover:bg-white/30" : "text-brand bg-brand/10 hover:bg-brand/20"}`}
                 >
                   <Phone className="w-5 h-5" />

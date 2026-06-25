@@ -1,15 +1,18 @@
 import type { Request, Response } from 'express';
 import {
   DEFAULT_ENGINE_STATE,
-  getTenantById,
+  DEFAULT_TENANT_ID,
   SYSTEM_DESIGN_PRESETS,
+  getTenantById,
 } from '@med-site/contracts';
 import { getDataMode } from '../config/env.js';
 import {
   fetchGlobalLayoutFromStrapi,
+  fetchGlobalSettingFromStrapi,
   fetchNavigationFromStrapi,
   fetchPageFromStrapi,
   getMockGlobalLayout,
+  getMockGlobalSetting,
   getMockNavigation,
   getMockPage,
 } from '../services/strapiClient.js';
@@ -32,7 +35,7 @@ function resolveLocale(tenantId: string): string {
 
 export async function getPageHandler(req: Request, res: Response) {
   const slug = String(req.params.slug ?? 'home');
-  const tenantId = String(req.query.tenant ?? 'chel');
+  const tenantId = String(req.query.tenant ?? DEFAULT_TENANT_ID);
   const locale = resolveLocale(tenantId);
   const mode = getDataMode();
 
@@ -74,7 +77,7 @@ export async function getPageHandler(req: Request, res: Response) {
 }
 
 export async function getNavigationHandler(req: Request, res: Response) {
-  const tenantId = String(req.query.tenant ?? 'chel');
+  const tenantId = String(req.query.tenant ?? DEFAULT_TENANT_ID);
   const locale = resolveLocale(tenantId);
   const mode = getDataMode();
 
@@ -90,7 +93,7 @@ export async function getNavigationHandler(req: Request, res: Response) {
 }
 
 export async function getGlobalLayoutHandler(req: Request, res: Response) {
-  const tenantId = String(req.query.tenant ?? 'chel');
+  const tenantId = String(req.query.tenant ?? DEFAULT_TENANT_ID);
   const locale = resolveLocale(tenantId);
   const mode = getDataMode();
 
@@ -105,9 +108,25 @@ export async function getGlobalLayoutHandler(req: Request, res: Response) {
   }
 }
 
+export async function getGlobalSettingHandler(req: Request, res: Response) {
+  const tenantId = String(req.query.tenant ?? DEFAULT_TENANT_ID);
+  const locale = resolveLocale(tenantId);
+  const mode = getDataMode();
+
+  try {
+    if (mode === 'mock') {
+      return res.json(getMockGlobalSetting(locale));
+    }
+    const setting = await fetchGlobalSettingFromStrapi(locale);
+    return res.json(setting);
+  } catch {
+    return res.json(getMockGlobalSetting(locale));
+  }
+}
+
 /** Публичная тема сайта (read-only) + UTM rules (Wave 2) */
 export async function getSiteThemeHandler(req: Request, res: Response) {
-  const tenantId = String(req.query.tenant ?? 'chel');
+  const tenantId = String(req.query.tenant ?? DEFAULT_TENANT_ID);
   const locale = resolveLocale(tenantId);
   const mode = getDataMode();
 
