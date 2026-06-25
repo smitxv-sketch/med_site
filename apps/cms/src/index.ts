@@ -2,6 +2,7 @@ import type { Core } from '@strapi/strapi';
 import {
   DEFAULT_CHEL_SOCIAL_LINKS,
   DEFAULT_ENGINE_STATE,
+  DEFAULT_FOOTER_CONTENT,
   SYSTEM_DESIGN_PRESETS,
 } from '@med-site/contracts';
 
@@ -168,6 +169,12 @@ async function seedGlobalSetting(strapi: Core.Strapi) {
       contactAddress: string;
       brandVoice: string;
       socialLinks?: typeof DEFAULT_CHEL_SOCIAL_LINKS;
+      footerSocialTitle?: string;
+      footerSocialDescription?: string;
+      workingHours?: string;
+      legalNotice?: string;
+      medicalDisclaimer?: string;
+      citySelectorHint?: string;
     }
   > = {
     'ru-chel': {
@@ -178,6 +185,7 @@ async function seedGlobalSetting(strapi: Core.Strapi) {
       brandVoice:
         'Профессиональный, экспертный, вызывающий доверие. Избегать клише.',
       socialLinks: DEFAULT_CHEL_SOCIAL_LINKS,
+      ...DEFAULT_FOOTER_CONTENT,
     },
     'ru-spb': {
       siteName: 'Клиника «Источник» — СПб',
@@ -186,6 +194,12 @@ async function seedGlobalSetting(strapi: Core.Strapi) {
       contactAddress: 'г. Санкт-Петербург',
       brandVoice: 'Профессиональный тон, без маркетинговой воды.',
       socialLinks: [],
+      footerSocialTitle: DEFAULT_FOOTER_CONTENT.footerSocialTitle,
+      footerSocialDescription: DEFAULT_FOOTER_CONTENT.footerSocialDescription,
+      workingHours: 'Ежедневно с 9:00 до 21:00',
+      legalNotice: 'Реквизиты и лицензия — уточняются для филиала СПб.',
+      medicalDisclaimer: DEFAULT_FOOTER_CONTENT.medicalDisclaimer,
+      citySelectorHint: DEFAULT_FOOTER_CONTENT.citySelectorHint,
     },
   };
 
@@ -228,6 +242,53 @@ async function ensureGlobalSettingSocialLinks(strapi: Core.Strapi) {
       status: 'published',
     });
     strapi.log.info(`[bootstrap] patched socialLinks for ${locale.code}`);
+  }
+}
+
+/** Дописываем тексты футера в существующий global-setting после миграции схемы */
+async function ensureGlobalSettingFooterFields(strapi: Core.Strapi) {
+  const settingUid = 'api::global-setting.global-setting' as never;
+  const patchFields = [
+    'footerSocialTitle',
+    'footerSocialDescription',
+    'workingHours',
+    'legalNotice',
+    'medicalDisclaimer',
+    'citySelectorHint',
+  ] as const;
+
+  for (const locale of TENANT_LOCALES) {
+    const existing = await strapi.documents(settingUid).findFirst({
+      locale: locale.code,
+    });
+    if (!existing) continue;
+
+    const doc = existing as Record<string, unknown> & { documentId?: string };
+    const defaults =
+      locale.code === 'ru-chel'
+        ? DEFAULT_FOOTER_CONTENT
+        : {
+            footerSocialTitle: DEFAULT_FOOTER_CONTENT.footerSocialTitle,
+            footerSocialDescription: DEFAULT_FOOTER_CONTENT.footerSocialDescription,
+            workingHours: 'Ежедневно с 9:00 до 21:00',
+            legalNotice: 'Реквизиты и лицензия — уточняются для филиала СПб.',
+            medicalDisclaimer: DEFAULT_FOOTER_CONTENT.medicalDisclaimer,
+            citySelectorHint: DEFAULT_FOOTER_CONTENT.citySelectorHint,
+          };
+
+    const data: Record<string, string> = {};
+    for (const key of patchFields) {
+      if (!doc[key]) data[key] = defaults[key];
+    }
+    if (!Object.keys(data).length) continue;
+
+    await strapi.documents(settingUid).update({
+      documentId: doc.documentId!,
+      data: data as never,
+      locale: locale.code,
+      status: 'published',
+    });
+    strapi.log.info(`[bootstrap] patched footer fields for ${locale.code}`);
   }
 }
 
@@ -326,6 +387,7 @@ export default {
       await seedNavigation(strapi);
       await seedGlobalSetting(strapi);
       await ensureGlobalSettingSocialLinks(strapi);
+      await ensureGlobalSettingFooterFields(strapi);
       await seedGlobalLayout(strapi);
       await seedSiteTheme(strapi);
       await seedDesignPresets(strapi);

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, MapPin, Phone, Mail, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { DEFAULT_FOOTER_CONTENT } from '@med-site/contracts';
 import { useAccessibilityStore } from '@/shared/store/accessibilityStore';
-import { Card } from '@/shared/ui/Card';
-import { MedicalDisclaimer } from '@/shared/ui/MedicalDisclaimer';
 import { useSiteStore } from '@/shared/store/siteStore';
 import { formatTelHref } from '@/shared/lib/formatTelHref';
 import { useTenant } from '@/shared/tenant/TenantContext';
 import { FooterSocialLinks } from './FooterSocialLinks';
+import { FooterCityPicker } from './FooterCityPicker';
 import type { NavigationDto } from '@med-site/contracts';
 
 const FALLBACK_FOOTER_COLUMNS: NavigationDto['footerColumns'] = [
@@ -47,6 +47,17 @@ export function Footer() {
   const addressLabel =
     globalSetting?.contactAddress ?? 'г. Челябинск, ул. 40-летия Победы, 11';
   const siteName = globalSetting?.siteName ?? `Сеть клиник «Источник»`;
+  const footerSocialTitle =
+    globalSetting?.footerSocialTitle ?? DEFAULT_FOOTER_CONTENT.footerSocialTitle;
+  const footerSocialDescription =
+    globalSetting?.footerSocialDescription ??
+    DEFAULT_FOOTER_CONTENT.footerSocialDescription;
+  const workingHours =
+    globalSetting?.workingHours ?? DEFAULT_FOOTER_CONTENT.workingHours;
+  const legalNotice =
+    globalSetting?.legalNotice ?? DEFAULT_FOOTER_CONTENT.legalNotice;
+  const medicalDisclaimer =
+    globalSetting?.medicalDisclaimer ?? DEFAULT_FOOTER_CONTENT.medicalDisclaimer;
 
   const footerColumns =
     navigation?.footerColumns?.length
@@ -62,10 +73,12 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Social Media Block - Refined Style */}
-        <div className="mb-14 flex flex-col md:flex-row items-center justify-between gap-8 border-b border-gray-100 pb-12">
-          <div className="text-center md:text-left max-w-xl">
-            <h3 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight leading-tight">Будьте ближе к нам</h3>
-            <p className="text-gray-600 text-lg leading-relaxed">Полезные советы врачей, прямые эфиры и закрытые акции только для подписчиков.</p>
+        <div className="mb-14 flex flex-col items-center justify-between gap-8 border-b border-gray-100 pb-12 md:flex-row">
+          <div className="max-w-xl text-center md:text-left">
+            <h3 className="mb-4 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 md:text-4xl">
+              {footerSocialTitle}
+            </h3>
+            <p className="text-lg leading-relaxed text-gray-600">{footerSocialDescription}</p>
           </div>
           <FooterSocialLinks />
         </div>
@@ -88,23 +101,7 @@ export function Footer() {
                 <ChevronDown className={`w-5 h-5 md:w-4 md:h-4 transition-transform ${openSection === 'city' ? 'rotate-180 text-brand' : 'text-gray-400'}`} />
               </button>
               
-              <Card className={`mt-2 p-2 md:absolute md:top-full md:left-0 md:mt-2 md:w-64 z-50 ${openSection === 'city' ? 'block' : 'hidden'}`}>
-                <div className="text-xs font-bold text-gray-400 uppercase tracking-wider px-3 py-2">Города и клиники</div>
-                
-                <div className="mb-2">
-                  <button className="w-full text-left px-3 py-2 text-sm font-bold text-brand bg-brand/5 rounded-lg">Челябинск</button>
-                  <div className="pl-4 pr-2 py-1 space-y-1">
-                    <button className="w-full text-left px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-brand hover:bg-gray-50 rounded-lg transition-colors">ЖК Александровский</button>
-                    <button className="w-full text-left px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-brand hover:bg-gray-50 rounded-lg transition-colors">ЖК Подсолнухи</button>
-                    <button className="w-full text-left px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-brand hover:bg-gray-50 rounded-lg transition-colors">Лесной Остров</button>
-                    <button className="w-full text-left px-3 py-1.5 text-sm font-medium text-gray-600 hover:text-brand hover:bg-gray-50 rounded-lg transition-colors">Клиника ЭКО</button>
-                  </div>
-                </div>
-
-                <div>
-                  <button className="w-full text-left px-3 py-2 text-sm font-medium text-gray-600 hover:text-brand hover:bg-gray-50 rounded-lg transition-colors">Санкт-Петербург</button>
-                </div>
-              </Card>
+              <FooterCityPicker open={openSection === 'city'} />
             </div>
 
             {/* Visually Impaired Button (Desktop) */}
@@ -166,7 +163,7 @@ export function Footer() {
                 </div>
                 <div>
                   <div className="text-gray-900 font-bold text-xl">{phoneLabel}</div>
-                  <div className="text-sm text-gray-500 font-medium">Ежедневно с 8:00 до 20:00</div>
+                  <div className="text-sm font-medium text-gray-500">{workingHours}</div>
                 </div>
               </a>
               <div className="flex items-center gap-3">
@@ -228,13 +225,8 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {siteName}. Все права защищены.
           </p>
-          <p>
-            Лицензия № ЛО-74-01-000000 от 01.01.2020 г. выдана Министерством здравоохранения Челябинской области.
-            ИНН 7400000000, ОГРН 1207400000000.
-          </p>
-          <p className="max-w-4xl leading-relaxed">
-            Имеются противопоказания. Необходима консультация специалиста. Информация на сайте не является публичной офертой и носит справочный характер.
-          </p>
+          <p>{legalNotice}</p>
+          <p className="max-w-4xl leading-relaxed">{medicalDisclaimer}</p>
           <div className="flex flex-wrap gap-4 pt-4">
             <Link to="/privacy" className="hover:text-brand transition-colors">Политика конфиденциальности</Link>
             <Link to="/terms" className="hover:text-brand transition-colors">Пользовательское соглашение</Link>

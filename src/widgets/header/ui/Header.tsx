@@ -71,21 +71,23 @@ export function Header() {
     <>
       {/* Gradient blur backdrop for smooth transition - hide in immersive transparent mode */}
       <div
-        className={`fixed top-0 left-0 right-0 h-20 sm:h-24 z-30 pointer-events-none transition-opacity duration-theme ${
+        className={`fixed top-0 left-0 right-[var(--layout-right-inset,0px)] h-20 sm:h-24 z-30 pointer-events-none transition-[right] duration-300 ${
           isTransparent
             ? "opacity-0"
             : "opacity-100 backdrop-blur-md [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)] bg-white/40 md:bg-white/25 md:backdrop-blur-2xl md:backdrop-saturate-150"
         }`}
       />
 
-      <div className="fixed top-0 left-0 right-0 z-40 pointer-events-none flex justify-center">
+      <div className="fixed top-0 left-0 right-[var(--layout-right-inset,0px)] z-40 pointer-events-none flex justify-center transition-[right] duration-300">
         <Container className="pt-2 sm:pt-3">
           <header
             className={`w-full transition-all duration-theme pointer-events-auto rounded-2xl ${headerSurfaceClass}`}
           >
-            <div className="flex items-center justify-between px-4 py-3 relative">
+            <div className="flex items-center justify-between gap-3 px-4 py-3">
+              {/* Левая группа: лого + город + меню (не разносим justify-between по 4 блокам) */}
+              <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
               {/* Logo */}
-              <Link to="/" className="flex items-center gap-2.5">
+              <Link to="/" className="flex shrink-0 items-center gap-2.5">
                 <img
                   src="/logo-icon.png"
                   alt="Логотип"
@@ -111,19 +113,17 @@ export function Header() {
                 </div>
               </Link>
 
-              {/* Desktop Nav (Hidden on mobile) */}
-              <div className="hidden md:flex items-center ml-4 mr-2">
                 <button
                   onClick={() =>
                     useUISettingsStore.getState().setIsCitySelectorOpen(true)
                   }
-                  className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors ${headerIconButtonClass}`}
+                  className={`hidden md:flex shrink-0 items-center justify-center w-8 h-8 rounded-full transition-colors ${headerIconButtonClass}`}
                   aria-label="Выбрать город"
                 >
                   <MapPin className="w-4 h-4" />
                 </button>
-              </div>
-              <nav className="hidden md:flex items-center gap-6 h-full">
+
+                <nav className="hidden md:flex min-w-0 flex-1 items-center gap-4 lg:gap-6 overflow-hidden">
                 <ServicesMegaMenu isTransparent={isTransparent} />
                 {navigation?.headerMenu?.length
                   ? navigation.headerMenu
@@ -166,9 +166,10 @@ export function Header() {
                     </>
                   )}
               </nav>
+              </div>
 
               {/* Actions */}
-              <div className="flex items-center gap-2 sm:gap-3">
+              <div className="flex shrink-0 items-center gap-2 sm:gap-3">
                 <a
                   href={phoneHref}
                   className={`text-[16px] font-bold transition-colors hidden lg:block mr-2 hover:text-brand ${isTransparent ? "text-white" : "text-gray-700"}`}

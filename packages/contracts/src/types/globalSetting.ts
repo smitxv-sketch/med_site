@@ -12,4 +12,15 @@ export interface GlobalSettingDto {
   socialLinks?: SocialLinkDto[];
   /** Tone of voice для AI / копирайтинга */
   brandVoice?: string;
+  /** Блок соцсетей в футере */
+  footerSocialTitle?: string;
+  footerSocialDescription?: string;
+  /** Режим работы в блоке контактов */
+  workingHours?: string;
+  /** Юридический текст (лицензия, ИНН) */
+  legalNotice?: string;
+  /** Дисклеймер медицинского контента */
+  medicalDisclaimer?: string;
+  /** Подсказка в модалке выбора города */
+  citySelectorHint?: string;
 }

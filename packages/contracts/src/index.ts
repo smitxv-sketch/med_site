@@ -37,6 +37,10 @@ export {
   DEFAULT_CHEL_SOCIAL_LINKS,
 } from './fixtures/defaultSocialLinks.js';
 
+export {
+  DEFAULT_FOOTER_CONTENT,
+} from './fixtures/defaultFooterContent.js';
+
 export type {
   MarketingCondition,
   MarketingRuleDto,

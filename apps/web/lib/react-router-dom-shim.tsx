@@ -6,7 +6,7 @@
  * в Next нет BrowserRouter, без shim падает SectionErrorBoundary.
  */
 import NextLink from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams as useNextSearchParams } from 'next/navigation';
 import React, { type ReactNode } from 'react';
 
 type To = string | { pathname?: string; search?: string; hash?: string };
@@ -58,6 +58,28 @@ export function useNavigate() {
 export function useLocation() {
   const pathname = usePathname() ?? '/';
   return { pathname, search: '', hash: '', state: null, key: 'default' };
+}
+
+/** Совместимость с react-router v6 для Studio (?tenant=) */
+export function useSearchParams(): [
+  URLSearchParams,
+  (next: Record<string, string> | URLSearchParams) => void,
+] {
+  const router = useRouter();
+  const pathname = usePathname() ?? '/';
+  const nextParams = useNextSearchParams();
+  const params = new URLSearchParams(nextParams?.toString() ?? '');
+
+  const setSearchParams = (next: Record<string, string> | URLSearchParams) => {
+    const merged =
+      next instanceof URLSearchParams
+        ? next
+        : new URLSearchParams({ ...Object.fromEntries(params), ...next });
+    const qs = merged.toString();
+    router.push(qs ? `${pathname}?${qs}` : pathname);
+  };
+
+  return [params, setSearchParams];
 }
 
 export function useParams<T extends Record<string, string | undefined> = Record<string, string | undefined>>() {

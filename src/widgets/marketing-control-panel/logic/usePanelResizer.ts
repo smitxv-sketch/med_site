@@ -4,19 +4,15 @@ export function usePanelResizer(isOpen: boolean, initialWidth = 640) {
   const [panelWidth, setPanelWidth] = useState(initialWidth);
 
   useEffect(() => {
-    if (isOpen) {
-      if (window.innerWidth >= 1024) {
-        document.body.style.paddingRight = `${panelWidth}px`;
-        document.body.style.transition = 'padding-right 0.3s ease';
-      } else {
-        document.body.style.paddingRight = '0px';
-      }
-    } else {
-      document.body.style.paddingRight = '0px';
-    }
-    
+    const root = document.documentElement;
+    const inset = isOpen && window.innerWidth >= 1024 ? `${panelWidth}px` : '0px';
+
+    // fixed header/modals игнорируют body padding — используем CSS-переменную
+    root.style.setProperty('--layout-right-inset', inset);
+    root.style.transition = '--layout-right-inset 0.3s ease';
+
     return () => {
-      document.body.style.paddingRight = '0px';
+      root.style.removeProperty('--layout-right-inset');
     };
   }, [isOpen, panelWidth]);
 

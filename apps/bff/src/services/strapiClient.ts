@@ -1,5 +1,6 @@
 import {
   DEFAULT_CHEL_SOCIAL_LINKS,
+  DEFAULT_FOOTER_CONTENT,
   DEFAULT_HOME_BLOCKS,
   DEFAULT_HOME_SEO,
   mapStrapiBlocks,
@@ -174,6 +175,12 @@ export async function fetchGlobalSettingFromStrapi(
         contactEmail?: string;
         contactAddress?: string;
         socialLinks?: Array<{ platform?: string; url?: string; label?: string }>;
+        footerSocialTitle?: string;
+        footerSocialDescription?: string;
+        workingHours?: string;
+        legalNotice?: string;
+        medicalDisclaimer?: string;
+        citySelectorHint?: string;
         locale?: string;
       }>
     >(`/global-setting?${qs}`, locale);
@@ -187,6 +194,12 @@ export async function fetchGlobalSettingFromStrapi(
       contactEmail: data?.contactEmail,
       contactAddress: data?.contactAddress,
       socialLinks: mapSocialLinks(data?.socialLinks),
+      footerSocialTitle: data?.footerSocialTitle,
+      footerSocialDescription: data?.footerSocialDescription,
+      workingHours: data?.workingHours,
+      legalNotice: data?.legalNotice,
+      medicalDisclaimer: data?.medicalDisclaimer,
+      citySelectorHint: data?.citySelectorHint,
     };
   } catch {
     return { locale };
@@ -249,6 +262,7 @@ export function getMockGlobalSetting(locale: string): GlobalSettingDto {
       locale === 'ru-chel' || locale === 'chel'
         ? DEFAULT_CHEL_SOCIAL_LINKS
         : [],
+    ...DEFAULT_FOOTER_CONTENT,
     brandVoice: undefined,
   };
 }
