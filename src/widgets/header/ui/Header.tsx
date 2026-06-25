@@ -17,10 +17,12 @@ export function Header() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  // SSR-safe: window недоступен при первом рендере на сервере Next.js
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
