@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, ChevronLeft, AppWindow, Target, Palette, Scan, Bug, Map, Beaker, LayoutTemplate, Sparkles, TrendingUp, Lightbulb } from 'lucide-react';
+import { Search, ChevronLeft, AppWindow, Target, Palette, Scan, Bug, Map, Beaker, LayoutTemplate, Sparkles, TrendingUp, Lightbulb, Activity } from 'lucide-react';
 import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
 import { useCmsStore } from '@/shared/store/cmsStore';
 
@@ -17,6 +17,7 @@ import { XRayTab } from '../tabs/XRayTab';
 import { StateObserverTab } from '../tabs/StateObserverTab';
 import { ArchitectureTab } from '../tabs/ArchitectureTab';
 import { LaboratoryTab } from '../tabs/LaboratoryTab';
+import { AnalyticsTab } from '../tabs/AnalyticsTab';
 
 const MODULES = [
   { 
@@ -46,7 +47,8 @@ const MODULES = [
   { id: 'prototypes', icon: Lightbulb, label: 'Готовые Сайты', desc: 'Индустриальные шаблоны.', keywords: ['прототип', 'медицина', 'клиника', 'авто', 'ремонт', 'заготовки', 'готовые сайты', 'индустрия'], actions: [] },
   { id: 'ai', icon: Sparkles, label: 'AI Нейросети', desc: 'Настройка ИИ и промптов.', keywords: ['api', 'chatgpt', 'gemini', 'gpt', 'нейросеть', 'ai', 'настройки ai', 'модели'], actions: [] },
   { id: 'evolution', icon: TrendingUp, label: 'Эволюция и Лог', desc: 'История изменений системы.', keywords: ['история', 'логи', 'изменения', 'эффект', 'рост', 'эволюция', 'версии'], actions: [] },
-  
+  { id: 'analytics', icon: Activity, label: 'Аналитика', desc: 'События data-goal в preview.', keywords: ['аналитика', 'метрика', 'события', 'data-goal', 'клики', 'конверсия'], actions: [] },
+
   // Developer
   { id: 'xray', icon: Scan, label: 'Рентген DOM', desc: 'Технический анализ структуры.', keywords: ['рентген', 'dom', 'дерево', 'теги', 'разметка', 'xray', 'разработчик', 'код'], actions: [] },
   { id: 'state', icon: Bug, label: 'Состояние (State)', desc: 'Общее состояние Zustand.', keywords: ['состояние', 'store', 'zustand', 'данные', 'state', 'debug', 'отладка'], actions: [] },
@@ -337,6 +339,7 @@ export function UnifiedWorkspace({ store, openMatrix }: { store: ReturnType<type
             {activeTab === 'prototypes' && <IndustryPrototypesTab />}
             {activeTab === 'ai' && <AiContentTab />}
             {activeTab === 'evolution' && <EvolutionTab />}
+            {activeTab === 'analytics' && <AnalyticsTab />}
             {activeTab === 'xray' && <XRayTab />}
             {activeTab === 'state' && <StateObserverTab />}
             {activeTab === 'arch' && <ArchitectureTab />}

@@ -14,11 +14,19 @@ export const pageBlockSchema: z.ZodType<PageBlock> = z.lazy(() =>
   }),
 );
 
+export const studioPageSeoSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+});
+
 export const studioDraftPatchSchema = z.object({
   revision: z.number().int().nonnegative().optional(),
   engineState: engineStatePatchSchema.optional(),
   pageBlocks: z.array(pageBlockSchema).optional(),
   activePresetId: z.string().nullable().optional(),
+  pageTitle: z.string().optional(),
+  pageSeo: studioPageSeoSchema.partial().optional(),
+  brandVoice: z.string().optional(),
 });
 
 export const designPresetSchema = z.object({

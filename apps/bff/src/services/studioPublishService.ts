@@ -10,6 +10,7 @@ import {
   getWebRevalidateUrl,
 } from '../config/env.js';
 import { draftOverlay, getStudioDraft } from './studioDraftService.js';
+import { pageSeoToStrapi } from './studioSeoMapper.js';
 
 interface StrapiListResponse<T> {
   data: T[];
@@ -76,7 +77,9 @@ async function pushDraftToStrapi(draft: StudioDraftDto): Promise<void> {
       `/pages/${documentId}`,
       {
         data: {
+          title: draft.pageTitle,
           blocks: mapPageBlocksToStrapi(draft.pageBlocks),
+          seo: pageSeoToStrapi(draft.pageSeo),
         },
       },
       draft.locale,
@@ -100,6 +103,16 @@ async function pushDraftToStrapi(draft: StudioDraftDto): Promise<void> {
   );
   if (!themeRes.ok) {
     throw new Error(`Strapi site-theme update failed: ${themeRes.status}`);
+  }
+
+  const globalRes = await strapiWrite(
+    'PUT',
+    '/global-setting',
+    { data: { brandVoice: draft.brandVoice } },
+    draft.locale,
+  );
+  if (!globalRes.ok) {
+    throw new Error(`Strapi global-setting update failed: ${globalRes.status}`);
   }
 }
 

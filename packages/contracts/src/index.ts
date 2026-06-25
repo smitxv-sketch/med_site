@@ -14,6 +14,7 @@ export {
 
 export type {
   PageBlock,
+  BlockAbVariant,
   BlockDesignParams,
   BlockConfigParams,
   SeoFields,
@@ -22,6 +23,19 @@ export type {
   NavigationDto,
   GlobalLayoutDto,
 } from './types/page.js';
+
+export type {
+  MarketingCondition,
+  MarketingRuleDto,
+  MarketingContextDto,
+} from './types/marketing.js';
+
+export type {
+  StudioLabPageDto,
+  StudioLabListDto,
+  AiLayoutRequestDto,
+  AiLayoutResponseDto,
+} from './types/lab.js';
 
 export {
   mapStrapiBlocks,
@@ -59,9 +73,21 @@ export type {
 export type {
   StudioDraftDto,
   StudioDraftPatchDto,
+  StudioPageSeoDto,
   DesignPresetDto,
   SiteThemeDto,
 } from './types/studio.js';
+
+export type {
+  ExperimentStatus,
+  ExperimentVariantDto,
+  ExperimentMetricsDto,
+  ExperimentDto,
+  ExperimentListDto,
+  CreateExperimentDto,
+  EvolutionSuggestionDto,
+  ApplyExperimentWinnerDto,
+} from './types/experiment.js';
 
 export {
   engineStateSchema,
@@ -69,9 +95,14 @@ export {
 } from './schemas/engine.js';
 
 export {
+  DEFAULT_BRAND_VOICE,
+} from './fixtures/defaultBrandVoice.js';
+
+export {
   studioDraftPatchSchema,
+  studioPageSeoSchema,
   designPresetSchema,
   siteThemeSchema,
 } from './schemas/studio.js';
 
-export const CONTRACTS_SCHEMA_VERSION = '1.1.0';
+export const CONTRACTS_SCHEMA_VERSION = '1.4.0';

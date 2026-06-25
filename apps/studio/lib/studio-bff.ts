@@ -3,7 +3,8 @@ import type { NextRequest } from 'next/server';
 /** BFF Studio API: локально напрямую, на проде — через site-ci proxy */
 export function resolveStudioBffBase(): string {
   if (process.env.BFF_INTERNAL_URL) {
-    return process.env.BFF_INTERNAL_URL.replace(/\/$/, '');
+    const base = process.env.BFF_INTERNAL_URL.replace(/\/$/, '');
+    return base.endsWith('/studio') ? base : `${base}/studio`;
   }
   if (process.env.BFF_PROXY_URL) {
     return process.env.BFF_PROXY_URL.replace(/\/$/, '');

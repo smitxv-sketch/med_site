@@ -1,68 +1,45 @@
 'use client';
 
-import type { EngineState, StudioDraftDto } from '@med-site/contracts';
+import type { DesignPresetDto, StudioDraftDto } from '@med-site/contracts';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useCmsStore } from '@/shared/store/cmsStore';
-import { useUISettingsStore } from '@/shared/store/uiSettingsStore';
+import { PRESETS, useUISettingsStore } from '@/shared/store/uiSettingsStore';
+import { designPresetToStrategy } from '@/shared/lib/studio/presetMapper';
+import {
+  applyDraftToStores,
+  pickDraftPatchBody,
+} from '../lib/draftPickers';
 
-const ENGINE_KEYS: (keyof EngineState)[] = [
-  'homePageConcept',
-  'heroDesktopVariant',
-  'heroMobileVariant',
-  'bottomNavVariant',
-  'bottomNavBehavior',
-  'bottomNavActionAnimation',
-  'doctorsSectionVariant',
-  'promotionsSectionVariant',
-  'quickActionsVariant',
-  'directionsIconVariant',
-  'directionsSectionVariant',
-  'colorTheme',
-  'colorIntensity',
-  'appRadius',
-  'customHue',
-  'customSaturation',
-  'customLightness',
-  'fontFamily',
-  'shadowStyle',
-  'animationTheme',
-  'marketingTriggers',
-  'layoutDensity',
-  'socialProofLevel',
-  'pricingStrategy',
-  'urgencyLevel',
-];
-
-function pickEngineState(): EngineState {
-  const s = useUISettingsStore.getState();
-  const picked = {} as EngineState;
-  for (const key of ENGINE_KEYS) {
-    (picked as Record<string, unknown>)[key] = s[key];
-  }
-  return picked;
-}
-
-function applyEngineState(state: EngineState) {
-  const patch: Record<string, unknown> = {};
-  for (const key of ENGINE_KEYS) {
-    patch[key] = state[key];
-  }
-  useUISettingsStore.setState({
-    ...patch,
-    hasUnsavedChanges: false,
-  } as never);
-}
-
-async function fetchDraft(): Promise<StudioDraftDto> {
-  const res = await fetch('/api/studio/draft?tenant=chel&page=home', {
-    cache: 'no-store',
-  });
+async function fetchDraft(pageSlug: string): Promise<StudioDraftDto> {
+  const res = await fetch(
+    `/api/studio/draft?tenant=chel&page=${encodeURIComponent(pageSlug)}`,
+    { cache: 'no-store' },
+  );
   if (!res.ok) throw new Error(`Draft load failed: ${res.status}`);
   return res.json() as Promise<StudioDraftDto>;
 }
 
+/** Подгружает кастомные пресеты с BFF */
+async function hydratePresetsFromBff() {
+  try {
+    const res = await fetch('/api/studio/presets', { cache: 'no-store' });
+    if (!res.ok) return;
+    const json = (await res.json()) as { presets: DesignPresetDto[] };
+    const base = PRESETS.filter((p) => !p.isCustom);
+    const custom = json.presets
+      .filter((p) => !p.isSystem)
+      .map(designPresetToStrategy);
+    useUISettingsStore.setState({ presets: [...base, ...custom] });
+  } catch {
+    /* остаёмся на marketingConfig */
+  }
+}
+
 /** Синхронизация Zustand ↔ BFF draft (autosave + publish) */
 export function useStudioDraftBridge() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageSlug = searchParams.get('page') ?? 'home';
   const [revision, setRevision] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -72,49 +49,62 @@ export function useStudioDraftBridge() {
 
   const hydrateFromDraft = useCallback((draft: StudioDraftDto) => {
     hydrating.current = true;
-    useCmsStore.setState({ pageBlocks: draft.pageBlocks });
-    applyEngineState(draft.engineState);
-    if (draft.activePresetId) {
-      useUISettingsStore.setState({ activePresetId: draft.activePresetId });
-    }
-    useUISettingsStore.setState({ hasUnsavedChanges: false, isCommandCenterUnlocked: true });
+    applyDraftToStores(draft);
     setRevision(draft.revision);
     hydrating.current = false;
   }, []);
 
   useEffect(() => {
-    fetchDraft()
+    void hydratePresetsFromBff();
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    fetchDraft(pageSlug)
       .then(hydrateFromDraft)
       .catch((e) => setError(e instanceof Error ? e.message : 'Load error'))
       .finally(() => setLoading(false));
-  }, [hydrateFromDraft]);
+  }, [hydrateFromDraft, pageSlug]);
+
+  useEffect(() => {
+    const onSwitch = (e: Event) => {
+      const slug = (e as CustomEvent<{ pageSlug: string }>).detail?.pageSlug;
+      if (!slug) return;
+      setSearchParams({ page: slug });
+    };
+    window.addEventListener('studio:switch-page', onSwitch);
+    return () => window.removeEventListener('studio:switch-page', onSwitch);
+  }, [setSearchParams]);
 
   const scheduleSave = useCallback(() => {
     if (hydrating.current) return;
     if (saveTimer.current) clearTimeout(saveTimer.current);
 
     saveTimer.current = setTimeout(async () => {
-      const body = {
-        revision,
-        engineState: pickEngineState(),
-        pageBlocks: useCmsStore.getState().pageBlocks,
-        activePresetId: useUISettingsStore.getState().activePresetId,
-      };
+      const body = pickDraftPatchBody(revision);
       try {
-        const res = await fetch('/api/studio/draft?tenant=chel&page=home', {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        });
+        const res = await fetch(
+          `/api/studio/draft?tenant=chel&page=${encodeURIComponent(pageSlug)}`,
+          {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          },
+        );
+        if (res.status === 409) {
+          setError('Конфликт версии черновика — обновите страницу');
+          return;
+        }
         if (!res.ok) throw new Error(String(res.status));
         const draft = (await res.json()) as StudioDraftDto;
         setRevision(draft.revision);
+        setError(null);
         useUISettingsStore.setState({ hasUnsavedChanges: false });
       } catch {
         useUISettingsStore.setState({ hasUnsavedChanges: true });
       }
     }, 800);
-  }, [revision]);
+  }, [revision, pageSlug]);
 
   useEffect(() => {
     const unsubUi = useUISettingsStore.subscribe(scheduleSave);
@@ -130,19 +120,15 @@ export function useStudioDraftBridge() {
     setPublishing(true);
     setError(null);
     try {
-      await fetch('/api/studio/draft?tenant=chel&page=home', {
+      await fetch(`/api/studio/draft?tenant=chel&page=${encodeURIComponent(pageSlug)}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          revision,
-          engineState: pickEngineState(),
-          pageBlocks: useCmsStore.getState().pageBlocks,
-          activePresetId: useUISettingsStore.getState().activePresetId,
-        }),
+        body: JSON.stringify(pickDraftPatchBody(revision)),
       });
-      const res = await fetch('/api/studio/publish?tenant=chel&page=home', {
-        method: 'POST',
-      });
+      const res = await fetch(
+        `/api/studio/publish?tenant=chel&page=${encodeURIComponent(pageSlug)}`,
+        { method: 'POST' },
+      );
       if (!res.ok) throw new Error(`Publish failed: ${res.status}`);
       const json = (await res.json()) as { draft: StudioDraftDto };
       hydrateFromDraft(json.draft);
@@ -151,7 +137,7 @@ export function useStudioDraftBridge() {
     } finally {
       setPublishing(false);
     }
-  }, [revision, hydrateFromDraft]);
+  }, [revision, hydrateFromDraft, pageSlug]);
 
   return {
     loading,
@@ -159,6 +145,7 @@ export function useStudioDraftBridge() {
     revision,
     publishing,
     publish,
+    pageSlug,
     hasUnsavedChanges: useUISettingsStore((s) => s.hasUnsavedChanges),
   };
 }

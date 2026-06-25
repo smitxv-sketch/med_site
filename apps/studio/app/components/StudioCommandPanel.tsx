@@ -12,6 +12,7 @@ interface StudioCommandPanelProps {
   publishing: boolean;
   revision: number;
   hasUnsavedChanges: boolean;
+  isLabPage?: boolean;
 }
 
 /** Command Center без секретного unlock — всегда доступен в Studio */
@@ -20,6 +21,7 @@ export function StudioCommandPanel({
   publishing,
   revision,
   hasUnsavedChanges,
+  isLabPage = false,
 }: StudioCommandPanelProps) {
   const store = useUISettingsStore();
   const [isMatrixOpen, setIsMatrixOpen] = useState(false);
@@ -65,11 +67,12 @@ export function StudioCommandPanel({
               </button>
               <button
                 type="button"
-                disabled={publishing}
+                disabled={publishing || isLabPage}
                 onClick={onPublish}
+                title={isLabPage ? 'Лабораторные страницы публикуются через перенос на home' : undefined}
                 className="rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-emerald-500 disabled:opacity-60"
               >
-                {publishing ? 'Публикация…' : 'Опубликовать'}
+                {isLabPage ? 'Lab only' : publishing ? 'Публикация…' : 'Опубликовать'}
               </button>
             </div>
           </div>

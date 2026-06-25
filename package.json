@@ -27,6 +27,7 @@
     "test:qms:all": "tsx test-qms-all-slots.ts",
     "smoke:platform": "node scripts/smoke-platform.mjs",
     "smoke:prod": "node scripts/smoke-platform.mjs --prod",
+    "uat:focus": "node scripts/uat-focus.mjs",
     "ci:platform": "node scripts/ci-platform.mjs",
     "deploy:platform": "node scripts/deploy-platform.mjs",
     "deploy:plan": "node scripts/deploy-platform.mjs --dry-run",

@@ -15,6 +15,10 @@
     }
   },
   "attributes": {
+    "brandVoice": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
     "siteName": {
       "type": "string",
       "pluginOptions": { "i18n": { "localized": true } }

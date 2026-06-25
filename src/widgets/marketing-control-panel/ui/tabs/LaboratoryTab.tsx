@@ -3,16 +3,18 @@ import { Beaker, EyeOff, LayoutTemplate, ShieldCheck, ArrowRight, BookOpen, Spar
 import { Link, useNavigate } from 'react-router-dom';
 import { aiService } from '@/shared/lib/ai/aiService';
 import { useCmsStore } from '@/shared/store/cmsStore';
+import { isStudioApp } from '@/shared/config/appTarget';
 
 export const LaboratoryTab = () => {
   const navigate = useNavigate();
+  const inStudio = isStudioApp();
 
   React.useEffect(() => {
-    // При открытии вкладки сразу переходим в песочницу
-    if (window.location.pathname !== '/sandbox') {
+    // В legacy-прототипе — переход в /sandbox; в Studio остаёмся в split-view
+    if (!inStudio && window.location.pathname !== '/sandbox') {
       navigate('/sandbox');
     }
-  }, [navigate]);
+  }, [navigate, inStudio]);
 
   const [prompt, setPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
@@ -32,22 +34,63 @@ export const LaboratoryTab = () => {
     setIsGenerating(true);
 
     try {
-      // Имитация вызова к AI или реальный API
-      const result = await aiService.generateLayout({
-        prompt: userMessage,
-        instruction: 'Создай структуру виджетов для песочницы.',
-      });
+      let result: { blocks?: unknown[]; seo?: { title?: string } };
+
+      if (inStudio) {
+        const layoutRes = await fetch('/api/studio/ai/layout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prompt: userMessage,
+            instruction: 'Создай структуру виджетов для лабораторной страницы Studio.',
+          }),
+        });
+        if (!layoutRes.ok) throw new Error(String(layoutRes.status));
+        result = await layoutRes.json();
+
+        const labRes = await fetch('/api/studio/lab?tenant=chel', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: result.seo?.title ?? 'Лаборатория' }),
+        });
+        if (!labRes.ok) throw new Error(String(labRes.status));
+        const lab = (await labRes.json()) as { pageSlug: string };
+
+        await fetch(`/api/studio/draft?tenant=chel&page=${encodeURIComponent(lab.pageSlug)}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pageBlocks: result.blocks }),
+        });
+
+        if (result.blocks) {
+          useCmsStore.getState().setPageBlocks(result.blocks as never);
+        }
+
+        window.dispatchEvent(
+          new CustomEvent('studio:switch-page', { detail: { pageSlug: lab.pageSlug } }),
+        );
+      } else {
+        result = await aiService.generateLayout({
+          prompt: userMessage,
+          instruction: 'Создай структуру виджетов для песочницы.',
+        });
+
+        if (result && result.blocks) {
+          localStorage.setItem('laboratory_blocks', JSON.stringify(result.blocks));
+          window.dispatchEvent(new Event('sandbox_updated'));
+        }
+      }
 
       if (result && result.blocks) {
-        // Сохраняем в localStorage для песочницы
-        localStorage.setItem("laboratory_blocks", JSON.stringify(result.blocks));
-        window.dispatchEvent(new Event("sandbox_updated"));
-
         setMessages(prev => [...prev, {
           role: 'ai',
           text: (
             <div className="flex flex-col gap-3">
-              <p>Готово! Страница собрана и уже доступна в Песочнице слева. Я добавил базовые виджеты и подготовил тексты.</p>
+              <p>
+                {inStudio
+                  ? 'Готово! Лабораторная страница сохранена в BFF. Preview слева обновлён — можно править и позже перенести на главную.'
+                  : 'Готово! Страница собрана и уже доступна в Песочнице слева. Я добавил базовые виджеты и подготовил тексты.'}
+              </p>
               <p className="text-amber-700 bg-amber-50 p-3 rounded-xl text-sm border border-amber-100">
                  💡 <strong>Рекомендация:</strong> Уточните детали о ваших врачах, ценах или услугах, чтобы я мог наполнить контентом соответствующие блоки. Если чего-то не хватает, напишите мне об этом.
               </p>
@@ -55,7 +98,7 @@ export const LaboratoryTab = () => {
           )
         }]);
       } else {
-        throw new Error("No blocks returned");
+        throw new Error('No blocks returned');
       }
     } catch (e) {
       setMessages(prev => [...prev, {

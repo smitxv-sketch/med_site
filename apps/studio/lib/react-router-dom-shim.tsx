@@ -1,7 +1,7 @@
 'use client';
 
 import NextLink from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams as useNextSearchParams } from 'next/navigation';
 import React, { type ReactNode } from 'react';
 
 type To = string | { pathname?: string; search?: string; hash?: string };
@@ -42,6 +42,20 @@ export function useLocation() {
 
 export function useParams<T extends Record<string, string | undefined> = Record<string, string | undefined>>() {
   return {} as T;
+}
+
+export function useSearchParams(): [URLSearchParams, (next: Record<string, string>) => void] {
+  const params = useNextSearchParams();
+  const router = useRouter();
+  const pathname = usePathname() ?? '/';
+
+  const setSearchParams = (next: Record<string, string>) => {
+    const q = new URLSearchParams(next);
+    const qs = q.toString();
+    router.push(qs ? `${pathname}?${qs}` : pathname);
+  };
+
+  return [params ?? new URLSearchParams(), setSearchParams];
 }
 
 export function BrowserRouter({ children }: { children: ReactNode }) {

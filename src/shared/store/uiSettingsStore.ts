@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import marketingConfig from '../api/marketingConfig.json';
 import { useCmsStore } from './cmsStore';
 import { ENGINE_WIDGET_DEFAULTS } from '../domain/marketing/engineDefaults';
+import { isStudioApp } from '../config/appTarget';
 import { 
   EngineState, StrategyPreset, MarketingRule,
   ColorTheme, ColorIntensity, FontFamily, ShadowStyle, AnimationTheme,
@@ -279,6 +280,26 @@ export const useUISettingsStore = create<UISettingsState>((set, get) => ({
       activePresetId: newPreset.id,
       hasUnsavedChanges: false
     });
+
+    // Wave 4: в Studio сохраняем пресет на BFF (in-memory overlay до Strapi)
+    if (isStudioApp()) {
+      void fetch('/api/studio/presets', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          slug: newPreset.id.replace(/^custom_/, 'custom-'),
+          name: info.name,
+          description: info.desc,
+          emoji: info.emoji,
+          tenant: 'chel',
+          isSystem: false,
+          engineState: currentStateToSave,
+          pageBlocks: currentPageBlocks,
+        }),
+      }).catch(() => {
+        /* локальный пресет уже в Zustand; BFF — best-effort */
+      });
+    }
   },
   deleteCustomPreset: (id) => {
     const state = get();

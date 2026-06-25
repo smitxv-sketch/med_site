@@ -5,13 +5,16 @@ import type {
   SiteThemeDto,
   StudioDraftDto,
   StudioDraftPatchDto,
+  StudioPageSeoDto,
 } from '@med-site/contracts';
 import {
+  DEFAULT_BRAND_VOICE,
   DEFAULT_ENGINE_STATE,
   DEFAULT_HOME_BLOCKS,
 } from '@med-site/contracts';
 import { getStrapiToken, getStrapiUrl } from '../config/env.js';
 import { fetchPageFromStrapi } from './strapiClient.js';
+import { pageSeoFromStrapi } from './studioSeoMapper.js';
 
 interface StrapiSingleResponse<T> {
   data: T | null;
@@ -70,6 +73,51 @@ export async function fetchSiteThemeFromStrapi(
   }
 }
 
+export async function fetchGlobalSettingsFromStrapi(
+  locale: string,
+): Promise<{ brandVoice: string } | null> {
+  try {
+    const json = await strapiGet<
+      StrapiSingleResponse<{ brandVoice?: string }>
+    >('/global-setting', locale);
+    if (!json.data) return null;
+    return {
+      brandVoice: json.data.brandVoice ?? DEFAULT_BRAND_VOICE,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function defaultPageMeta(): { pageTitle: string; pageSeo: StudioPageSeoDto } {
+  const seo = pageSeoFromStrapi(null);
+  return { pageTitle: seo.title, pageSeo: seo };
+}
+
+function buildDraftBase(
+  tenantId: string,
+  locale: string,
+  pageSlug: string,
+  theme: SiteThemeDto | null,
+  pageTitle: string,
+  pageSeo: StudioPageSeoDto,
+  brandVoice: string,
+  pageBlocks: PageBlock[],
+): StudioDraftDto {
+  return {
+    tenantId,
+    locale,
+    pageSlug,
+    revision: theme?.draftRevision ?? 0,
+    engineState: theme?.engineState ?? DEFAULT_ENGINE_STATE,
+    pageBlocks,
+    activePresetId: theme?.activePresetId ?? null,
+    pageTitle,
+    pageSeo,
+    brandVoice,
+    updatedAt: new Date().toISOString(),
+  };
+}
 export async function fetchDesignPresetsFromStrapi(): Promise<DesignPresetDto[]> {
   try {
     const json = await strapiGet<
@@ -112,21 +160,40 @@ export async function getStudioDraft(
   const cached = draftOverlay.get(key);
   if (cached) return cached;
 
-  const [page, theme] = await Promise.all([
+  // Лабораторные страницы — только overlay
+  if (pageSlug.startsWith('lab-')) {
+    const { pageTitle, pageSeo } = defaultPageMeta();
+    const draft = buildDraftBase(
+      tenantId,
+      locale,
+      pageSlug,
+      null,
+      pageTitle,
+      pageSeo,
+      DEFAULT_BRAND_VOICE,
+      DEFAULT_HOME_BLOCKS,
+    );
+    draftOverlay.set(key, draft);
+    return draft;
+  }
+
+  const [page, theme, globalSettings] = await Promise.all([
     fetchPageFromStrapi(pageSlug, locale),
     fetchSiteThemeFromStrapi(locale),
+    fetchGlobalSettingsFromStrapi(locale),
   ]);
 
-  const draft: StudioDraftDto = {
+  const pageSeo = pageSeoFromStrapi(page);
+  const draft = buildDraftBase(
     tenantId,
     locale,
     pageSlug,
-    revision: theme?.draftRevision ?? 0,
-    engineState: theme?.engineState ?? DEFAULT_ENGINE_STATE,
-    pageBlocks: page?.blocks?.length ? page.blocks : DEFAULT_HOME_BLOCKS,
-    activePresetId: theme?.activePresetId ?? null,
-    updatedAt: new Date().toISOString(),
-  };
+    theme,
+    page?.title ?? pageSeo.title,
+    pageSeo,
+    globalSettings?.brandVoice ?? DEFAULT_BRAND_VOICE,
+    page?.blocks?.length ? page.blocks : DEFAULT_HOME_BLOCKS,
+  );
 
   draftOverlay.set(key, draft);
   return draft;
@@ -149,6 +216,10 @@ export async function patchStudioDraft(
     throw err;
   }
 
+  const nextPageSeo = patch.pageSeo
+    ? { ...current.pageSeo, ...patch.pageSeo }
+    : current.pageSeo;
+
   const next: StudioDraftDto = {
     ...current,
     revision: current.revision + 1,
@@ -160,6 +231,9 @@ export async function patchStudioDraft(
       patch.activePresetId !== undefined
         ? patch.activePresetId
         : current.activePresetId,
+    pageTitle: patch.pageTitle ?? current.pageTitle,
+    pageSeo: nextPageSeo,
+    brandVoice: patch.brandVoice ?? current.brandVoice,
     updatedAt: new Date().toISOString(),
   };
 

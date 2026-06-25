@@ -10,6 +10,18 @@ import {
   patchStudioDraft,
 } from '../services/studioDraftService.js';
 import { publishStudioDraft } from '../services/studioPublishService.js';
+import { generateAiLayout } from '../services/aiLayoutService.js';
+import {
+  createCustomPreset,
+  listCustomPresets,
+  mergePresets,
+} from '../services/presetOverlayService.js';
+import {
+  createLabPage,
+  listLabPages,
+  touchLabPage,
+} from '../services/studioLabService.js';
+import { designPresetSchema } from '@med-site/contracts';
 
 function resolveLocale(tenantId: string): string {
   const tenant = getTenantById(tenantId);
@@ -50,6 +62,9 @@ export async function patchDraftHandler(req: Request, res: Response) {
       pageSlug,
       parsed.data as StudioDraftPatchDto,
     );
+    if (pageSlug.startsWith('lab-')) {
+      touchLabPage(tenantId, locale, pageSlug);
+    }
     return res.json(draft);
   } catch (err) {
     const status = (err as { status?: number }).status ?? 502;
@@ -62,11 +77,30 @@ export async function patchDraftHandler(req: Request, res: Response) {
 
 export async function getPresetsHandler(_req: Request, res: Response) {
   try {
-    const presets = await fetchDesignPresetsFromStrapi();
-    return res.json({ presets });
+    const system = await fetchDesignPresetsFromStrapi();
+    const custom = listCustomPresets();
+    return res.json({ presets: mergePresets(system, custom) });
   } catch (err) {
     console.error('[bff] getPresets error:', err);
     return res.status(502).json({ error: 'Failed to load presets' });
+  }
+}
+
+export async function createPresetHandler(req: Request, res: Response) {
+  const parsed = designPresetSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({
+      error: 'Invalid preset',
+      details: parsed.error.flatten(),
+    });
+  }
+
+  try {
+    const preset = createCustomPreset(parsed.data);
+    return res.status(201).json(preset);
+  } catch (err) {
+    console.error('[bff] createPreset error:', err);
+    return res.status(502).json({ error: 'Failed to save preset' });
   }
 }
 
@@ -74,6 +108,12 @@ export async function publishDraftHandler(req: Request, res: Response) {
   const tenantId = String(req.query.tenant ?? 'chel');
   const pageSlug = String(req.query.page ?? 'home');
   const locale = String(req.query.locale ?? resolveLocale(tenantId));
+
+  if (pageSlug.startsWith('lab-')) {
+    return res.status(400).json({
+      error: 'Lab pages cannot be published directly. Copy to home or a production slug first.',
+    });
+  }
 
   try {
     const published = await publishStudioDraft(tenantId, locale, pageSlug);
@@ -84,5 +124,44 @@ export async function publishDraftHandler(req: Request, res: Response) {
     return res.status(status).json({
       error: err instanceof Error ? err.message : 'Publish failed',
     });
+  }
+}
+
+export async function aiLayoutHandler(req: Request, res: Response) {
+  const prompt = String(req.body?.prompt ?? '');
+  const instruction = req.body?.instruction
+    ? String(req.body.instruction)
+    : undefined;
+
+  if (!prompt.trim()) {
+    return res.status(400).json({ error: 'prompt is required' });
+  }
+
+  try {
+    const layout = await generateAiLayout(prompt, instruction);
+    return res.json(layout);
+  } catch (err) {
+    console.error('[bff] aiLayout error:', err);
+    return res.status(502).json({ error: 'AI layout failed' });
+  }
+}
+
+export async function listLabHandler(req: Request, res: Response) {
+  const tenantId = String(req.query.tenant ?? 'chel');
+  const locale = String(req.query.locale ?? resolveLocale(tenantId));
+  return res.json(listLabPages(tenantId, locale));
+}
+
+export async function createLabHandler(req: Request, res: Response) {
+  const tenantId = String(req.query.tenant ?? 'chel');
+  const locale = String(req.query.locale ?? resolveLocale(tenantId));
+  const title = String(req.body?.title ?? 'Лаборатория');
+
+  try {
+    const page = await createLabPage(tenantId, locale, title);
+    return res.status(201).json(page);
+  } catch (err) {
+    console.error('[bff] createLab error:', err);
+    return res.status(502).json({ error: 'Failed to create lab page' });
   }
 }

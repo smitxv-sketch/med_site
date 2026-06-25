@@ -152,8 +152,14 @@ export const useCmsStore = create<CmsState>((set) => ({
     set({ pageBlocks: blocks }); 
     useUISettingsStore.getState().setKey('hasUnsavedChanges', true); 
   },
-  setPageSeo: (seo) => set({ pageSeo: seo }),
-  setBrandVoice: (voice) => set({ brandVoice: voice }),
+  setPageSeo: (seo) => {
+    set({ pageSeo: seo });
+    useUISettingsStore.getState().setKey('hasUnsavedChanges', true);
+  },
+  setBrandVoice: (voice) => {
+    set({ brandVoice: voice });
+    useUISettingsStore.getState().setKey('hasUnsavedChanges', true);
+  },
   
   globalServiceLayout: MOCK_GLOBAL_SERVICE_LAYOUT,
   services: MOCK_SERVICES,

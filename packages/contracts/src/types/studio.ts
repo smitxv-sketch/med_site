@@ -1,5 +1,12 @@
 import type { EngineState } from './engine.js';
+import type { MarketingContextDto } from './marketing.js';
 import type { PageBlock } from './page.js';
+
+/** SEO страницы в формате Command Center UI */
+export interface StudioPageSeoDto {
+  title: string;
+  description: string;
+}
 
 /** Снимок черновика для Command Center (Studio) */
 export interface StudioDraftDto {
@@ -10,6 +17,12 @@ export interface StudioDraftDto {
   engineState: EngineState;
   pageBlocks: PageBlock[];
   activePresetId: string | null;
+  /** Заголовок страницы (Strapi Page.title) */
+  pageTitle: string;
+  /** Meta title/description для UI */
+  pageSeo: StudioPageSeoDto;
+  /** Tone of Voice (GlobalSettings.brandVoice) */
+  brandVoice: string;
   updatedAt: string;
 }
 
@@ -19,6 +32,9 @@ export interface StudioDraftPatchDto {
   engineState?: Partial<EngineState>;
   pageBlocks?: PageBlock[];
   activePresetId?: string | null;
+  pageTitle?: string;
+  pageSeo?: Partial<StudioPageSeoDto>;
+  brandVoice?: string;
 }
 
 export interface DesignPresetDto {
@@ -38,4 +54,6 @@ export interface SiteThemeDto {
   engineState: EngineState;
   activePresetId: string | null;
   draftRevision: number;
+  /** Wave 2: какое UTM-правило сработало на этом запросе */
+  marketing?: MarketingContextDto;
 }

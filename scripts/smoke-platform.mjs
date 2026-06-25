@@ -82,5 +82,23 @@ if (STUDIO) {
   });
 }
 
+// Wave 2: опционально — marketing-context (публичный BFF через web)
+if (process.argv.includes('--wave2') || process.env.SMOKE_WAVE2 === '1') {
+  await run('marketing-context-kids', async () => {
+    const url = `${WEB}/api/marketing-context?utm_campaign=kids`;
+    try {
+      const res = await fetch(url);
+      const text = await res.text();
+      const ok = res.ok && text.includes('preset');
+      console.log(ok ? 'PASS' : 'FAIL', 'marketing-context-kids', res.status, url);
+      if (!ok) console.log('  body:', text.slice(0, 200));
+      return ok;
+    } catch (e) {
+      console.log('FAIL', 'marketing-context-kids', String(e));
+      return false;
+    }
+  });
+}
+
 console.log(`\nSmoke: ${passed}/${total} passed`);
 process.exit(passed === total ? 0 : 1);

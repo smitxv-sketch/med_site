@@ -1,0 +1,102 @@
+{
+  "rules": [
+    {
+      "id": "rule_kids_tiktok",
+      "name": "Детский трафик",
+      "priority": 90,
+      "conditions": {
+        "operator": "OR",
+        "rules": [
+          { "field": "utm_campaign", "operator": "contains", "value": "kids" },
+          { "field": "utm_source", "operator": "equals", "value": "tiktok" }
+        ]
+      },
+      "actions": { "applyPresetId": "kids" }
+    },
+    {
+      "id": "rule_premium",
+      "name": "Премиум / Люкс",
+      "priority": 85,
+      "conditions": {
+        "operator": "OR",
+        "rules": [
+          { "field": "utm_term", "operator": "contains", "value": "дорого" },
+          { "field": "utm_term", "operator": "contains", "value": "люкс" },
+          { "field": "utm_source", "operator": "equals", "value": "forbes" }
+        ]
+      },
+      "actions": { "applyPresetId": "premium" }
+    },
+    {
+      "id": "rule_urgency",
+      "name": "Срочность",
+      "priority": 100,
+      "conditions": {
+        "operator": "OR",
+        "rules": [
+          { "field": "utm_campaign", "operator": "equals", "value": "emergency" },
+          { "field": "utm_term", "operator": "contains", "value": "срочно" },
+          { "field": "utm_term", "operator": "equals", "value": "emergency_dental" }
+        ]
+      },
+      "actions": {
+        "applyRuleId": "rule_urgency",
+        "engineStateOverrides": {
+          "colorTheme": "custom",
+          "customHue": 0,
+          "customSaturation": 80,
+          "customLightness": 45,
+          "appRadius": 0,
+          "shadowStyle": "hard",
+          "promotionsSectionVariant": "C",
+          "heroMobileVariant": "B",
+          "urgencyLevel": "high"
+        }
+      }
+    },
+    {
+      "id": "rule_trust",
+      "name": "Доверие B2B",
+      "priority": 80,
+      "conditions": {
+        "operator": "OR",
+        "rules": [
+          { "field": "utm_campaign", "operator": "equals", "value": "b2b" },
+          { "field": "utm_campaign", "operator": "equals", "value": "senior_care" }
+        ]
+      },
+      "actions": {
+        "applyRuleId": "rule_trust",
+        "engineStateOverrides": {
+          "colorTheme": "blue",
+          "colorIntensity": "pastel",
+          "appRadius": 24,
+          "shadowStyle": "soft",
+          "doctorsSectionVariant": "B",
+          "heroMobileVariant": "C"
+        }
+      }
+    },
+    {
+      "id": "rule_new_year",
+      "name": "Новогоднее промо",
+      "priority": 50,
+      "conditions": {
+        "operator": "OR",
+        "rules": [
+          { "field": "utm_campaign", "operator": "equals", "value": "new_year" },
+          { "field": "utm_campaign", "operator": "equals", "value": "ny2024" }
+        ]
+      },
+      "actions": {
+        "applyRuleId": "rule_new_year",
+        "engineStateOverrides": {
+          "colorTheme": "custom",
+          "customHue": 350,
+          "customSaturation": 70,
+          "customLightness": 45
+        }
+      }
+    }
+  ]
+}

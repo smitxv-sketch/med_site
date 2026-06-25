@@ -23,6 +23,15 @@ export interface BlockConfigParams {
   [key: string]: unknown;
 }
 
+/** Вариант блока для A/B (Wave 2) */
+export interface BlockAbVariant {
+  id: string;
+  label: string;
+  weight?: number;
+  content?: Record<string, unknown>;
+  design?: BlockDesignParams;
+}
+
 export interface PageBlock {
   id: string;
   type: string;
@@ -31,6 +40,8 @@ export interface PageBlock {
   config?: BlockConfigParams;
   children?: PageBlock[];
   props?: Record<string, unknown>;
+  /** Варианты для block-level A/B */
+  abVariants?: BlockAbVariant[];
 }
 
 export interface SeoFields {
