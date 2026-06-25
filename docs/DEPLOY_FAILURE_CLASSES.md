@@ -58,6 +58,15 @@ npm run smoke:prod       # внешние health-checks
 | **Правило** | `--prod` / `SMOKE_ENV=prod` → skip BFF checks. |
 | **Автозащита** | `scripts/smoke-platform.mjs`: `skipBff` включает `isProd`. |
 
+## Класс G — SSR/runtime на сервере Next (не ловится `next build`)
+
+| | |
+|---|---|
+| **Суть** | Динамические страницы (`ƒ`) падают при первом SSR-запросе: `window is not defined`, Framer `useScroll` и т.п. |
+| **Симптом** | Coolify healthy, но HTML с `__next_error__`; в логах `ReferenceError: window is not defined` |
+| **Правило** | Client-only для browser API; `useEffect` + `mounted` или dynamic import `ssr: false`. |
+| **Автозащита** | После деплоя: curl главной без `__next_error__`; опционально `preflight:docker:site` + run + curl (TODO). |
+
 ## Класс E — webhook Coolify (операционный)
 
 | | |

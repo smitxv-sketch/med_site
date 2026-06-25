@@ -1,0 +1,40 @@
+---
+description: Обязательный цикл деплоя — до push, после push, проверка прода
+alwaysApply: true
+---
+
+# Деплой: обязательный цикл для ИИ
+
+SSOT: `docs/DEPLOY_FAILURE_CLASSES.md`, `infra/platform.manifest.json`, `.cursorrules` (секция ДЕПЛОЙ).
+
+## Перед `git push` (если менялись web/bff/studio/src/packages/Dockerfile/.dockerignore)
+
+1. **`npm run ci:platform`** — обязательно. Ловит ошибки сборки и React dedupe.
+2. Если трогали **Dockerfile / .dockerignore / apps/platform|studio|cms**:
+   - `npm run preflight:deploy`
+   - опционально **`npm run preflight:docker:site`** (или `--studio` / `--cms`) — только затронутое приложение, не все три сразу.
+
+## После `git push` (если пользователь ждёт изменения на проде)
+
+**Не считать push завершённым, пока не проверишь деплой.**
+
+1. Сверить коммит: `git rev-parse HEAD` vs последний **finished** деплой в Coolify (класс E).
+2. Если webhook не сработал или коммит старый → **`npm run deploy:platform`** (один app за раз, порядок из manifest) или MCP deploy **только site-ci**, не параллельно studio+strapi+site (класс F).
+3. Дождаться **finished** (не бросать задачу без статуса).
+4. **`npm run smoke:prod`** — ожидание 8/8 (BFF skip на проде — норма, класс D).
+5. Проверить HTML главной: нет `__next_error__` / `ReferenceError: window` в логах контейнера (SSR runtime, класс G).
+
+## Запреты
+
+- Не триггерить **force_rebuild** нескольких приложений одновременно без необходимости.
+- Не говорить пользователю «запушено» / «задеплоено», если Coolify ещё на старом коммите или деплой failed/in_progress.
+- Не полагаться только на `npm run build` — Docker-контекст (класс A/B) и SSR в runtime (класс G) требуют отдельных проверок.
+
+## Когда локальный Docker build
+
+| Ситуация | Действие |
+|----------|----------|
+| Обычный фикс UI/логики | только `ci:platform` |
+| Менялся Dockerfile / .dockerignore | preflight + docker build **одного** app |
+| Серия падений Coolify / перед релизом | docker build + run + curl `/api/health` и `/` |
+| Каждый push | **не нужен** — слишком долго; сервер не нагружать параллельными сборками |

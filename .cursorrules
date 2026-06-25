@@ -55,8 +55,10 @@
 
 ## 🚀 ДЕПЛОЙ (без ручного «шоу»)
 - **SSOT инфраструктуры:** `infra/platform.manifest.json` (UUID приложений, порядок, watch_paths).
-- **Перед push:** `npm run ci:platform` — сборка ловит ошибки до Coolify.
-- **Деплой:** `git push origin main` — Coolify GitHub App деплоит по `watch_paths` (не дергать MCP deploy без причины).
-- **Проверка:** `npm run smoke:prod`.
-- **Ручной триггер:** `npm run deploy:platform` (нужны `COOLIFY_URL` + `COOLIFY_API_TOKEN`).
+- **Классы сбоев:** `docs/DEPLOY_FAILURE_CLASSES.md` — читать при проблемах с Coolify.
+- **Правило для ИИ:** `.cursor/rules/deploy-pipeline.mdc` — полный чеклист до/после push.
+- **Перед push:** `npm run ci:platform` — обязательно. При смене Dockerfile/.dockerignore → `preflight:deploy` и опционально `preflight:docker:*`.
+- **Деплой:** `git push origin main` — Coolify по `watch_paths`. Push ≠ прод: сверить коммит в Coolify (класс E).
+- **После push (если ждут прод):** дождаться finished в Coolify → `npm run smoke:prod` → нет `__next_error__` на главной.
+- **Ручной триггер:** `npm run deploy:platform` — **по одному app**, не параллельно (класс F).
 - Секреты: `infra/coolify.env.example` → только Coolify UI.
