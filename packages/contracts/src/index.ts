@@ -29,6 +29,15 @@ export type {
 } from './types/globalSetting.js';
 
 export type {
+  SocialLinkDto,
+  SocialPlatform,
+} from './types/socialLink.js';
+
+export {
+  DEFAULT_CHEL_SOCIAL_LINKS,
+} from './fixtures/defaultSocialLinks.js';
+
+export type {
   MarketingCondition,
   MarketingRuleDto,
   MarketingContextDto,

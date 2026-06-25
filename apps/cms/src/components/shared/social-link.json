@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_social_links",
+  "info": {
+    "displayName": "SocialLink",
+    "icon": "link",
+    "description": "Ссылка на соцсеть или мессенджер (per tenant / locale)"
+  },
+  "options": {},
+  "attributes": {
+    "platform": {
+      "type": "enumeration",
+      "enum": ["vk", "ok", "max", "telegram", "youtube", "dzen"],
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "label": {
+      "type": "string"
+    }
+  }
+}

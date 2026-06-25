@@ -1,4 +1,5 @@
 import {
+  DEFAULT_CHEL_SOCIAL_LINKS,
   DEFAULT_HOME_BLOCKS,
   DEFAULT_HOME_SEO,
   mapStrapiBlocks,
@@ -6,6 +7,7 @@ import {
   type GlobalSettingDto,
   type NavigationDto,
   type PageDto,
+  type SocialLinkDto,
   type StrapiBlockEntry,
 } from '@med-site/contracts';
 import { getStrapiToken, getStrapiUrl } from '../config/env.js';
@@ -46,6 +48,19 @@ async function strapiFetch<T>(path: string, locale: string): Promise<T> {
     throw new Error(`Strapi ${res.status}: ${path}`);
   }
   return res.json() as Promise<T>;
+}
+
+function mapSocialLinks(
+  raw?: Array<{ platform?: string; url?: string; label?: string }>,
+): SocialLinkDto[] {
+  if (!raw?.length) return [];
+  return raw
+    .filter((item) => item.platform && item.url)
+    .map((item) => ({
+      platform: item.platform as SocialLinkDto['platform'],
+      url: item.url!,
+      label: item.label,
+    }));
 }
 
 export async function fetchPageFromStrapi(
@@ -150,7 +165,7 @@ export async function fetchGlobalSettingFromStrapi(
 ): Promise<GlobalSettingDto> {
   try {
     // Компоненты в Strapi лучше populate явно (targeted) — не используем populate=*.
-    const qs = 'populate[defaultSeo]=*';
+    const qs = 'populate[defaultSeo]=*&populate[socialLinks]=*';
     const json = await strapiFetch<
       StrapiSingleResponse<{
         brandVoice?: string;
@@ -158,6 +173,7 @@ export async function fetchGlobalSettingFromStrapi(
         contactPhone?: string;
         contactEmail?: string;
         contactAddress?: string;
+        socialLinks?: Array<{ platform?: string; url?: string; label?: string }>;
         locale?: string;
       }>
     >(`/global-setting?${qs}`, locale);
@@ -170,6 +186,7 @@ export async function fetchGlobalSettingFromStrapi(
       contactPhone: data?.contactPhone,
       contactEmail: data?.contactEmail,
       contactAddress: data?.contactAddress,
+      socialLinks: mapSocialLinks(data?.socialLinks),
     };
   } catch {
     return { locale };
@@ -228,6 +245,10 @@ export function getMockGlobalSetting(locale: string): GlobalSettingDto {
     contactPhone: '+7 (351) 778-88-87',
     contactEmail: 'info@ci74.ru',
     contactAddress: 'г. Челябинск, ул. 40-летия Победы, 11',
+    socialLinks:
+      locale === 'ru-chel' || locale === 'chel'
+        ? DEFAULT_CHEL_SOCIAL_LINKS
+        : [],
     brandVoice: undefined,
   };
 }

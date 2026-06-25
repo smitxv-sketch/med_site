@@ -1,5 +1,6 @@
 import type { Core } from '@strapi/strapi';
 import {
+  DEFAULT_CHEL_SOCIAL_LINKS,
   DEFAULT_ENGINE_STATE,
   SYSTEM_DESIGN_PRESETS,
 } from '@med-site/contracts';
@@ -158,7 +159,17 @@ async function seedNavigation(strapi: Core.Strapi) {
 async function seedGlobalSetting(strapi: Core.Strapi) {
   const settingUid = 'api::global-setting.global-setting' as never;
 
-  const byLocale: Record<string, Record<string, string>> = {
+  const byLocale: Record<
+    string,
+    {
+      siteName: string;
+      contactPhone: string;
+      contactEmail: string;
+      contactAddress: string;
+      brandVoice: string;
+      socialLinks?: typeof DEFAULT_CHEL_SOCIAL_LINKS;
+    }
+  > = {
     'ru-chel': {
       siteName: 'Сеть клиник «Источник»',
       contactPhone: '+7 (351) 778-88-87',
@@ -166,6 +177,7 @@ async function seedGlobalSetting(strapi: Core.Strapi) {
       contactAddress: 'г. Челябинск, ул. 40-летия Победы, 11',
       brandVoice:
         'Профессиональный, экспертный, вызывающий доверие. Избегать клише.',
+      socialLinks: DEFAULT_CHEL_SOCIAL_LINKS,
     },
     'ru-spb': {
       siteName: 'Клиника «Источник» — СПб',
@@ -173,6 +185,7 @@ async function seedGlobalSetting(strapi: Core.Strapi) {
       contactEmail: 'spb@example.com',
       contactAddress: 'г. Санкт-Петербург',
       brandVoice: 'Профессиональный тон, без маркетинговой воды.',
+      socialLinks: [],
     },
   };
 
@@ -186,6 +199,35 @@ async function seedGlobalSetting(strapi: Core.Strapi) {
       status: 'published',
     });
     strapi.log.info(`[bootstrap] seeded global-setting for ${locale.code}`);
+  }
+}
+
+/** Дописываем соцсети в уже существующий global-setting (prod после миграции схемы) */
+async function ensureGlobalSettingSocialLinks(strapi: Core.Strapi) {
+  const settingUid = 'api::global-setting.global-setting' as never;
+
+  for (const locale of TENANT_LOCALES) {
+    if (locale.code !== 'ru-chel') continue;
+
+    const existing = await strapi.documents(settingUid).findFirst({
+      locale: locale.code,
+      populate: ['socialLinks'] as never,
+    });
+    if (!existing) continue;
+
+    const doc = existing as {
+      documentId?: string;
+      socialLinks?: unknown[];
+    };
+    if (doc.socialLinks?.length) continue;
+
+    await strapi.documents(settingUid).update({
+      documentId: doc.documentId!,
+      data: { socialLinks: DEFAULT_CHEL_SOCIAL_LINKS } as never,
+      locale: locale.code,
+      status: 'published',
+    });
+    strapi.log.info(`[bootstrap] patched socialLinks for ${locale.code}`);
   }
 }
 
@@ -283,6 +325,7 @@ export default {
       await seedHomePage(strapi);
       await seedNavigation(strapi);
       await seedGlobalSetting(strapi);
+      await ensureGlobalSettingSocialLinks(strapi);
       await seedGlobalLayout(strapi);
       await seedSiteTheme(strapi);
       await seedDesignPresets(strapi);
