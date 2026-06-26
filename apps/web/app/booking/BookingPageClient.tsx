@@ -30,7 +30,7 @@ export function BookingPageClient({
       tenantId={tenantId}
     >
       <SiteChrome hideBottomNav>
-        <div className="booking-page mx-auto w-full max-w-5xl px-4 pb-safe pt-4 sm:px-6 sm:pt-6">
+        <div className="booking-page mx-auto w-full max-w-7xl px-4 pb-safe pt-4 sm:px-6 sm:pt-6 lg:px-8">
           <div className="booking-embed relative w-full overflow-hidden rounded-2xl border border-gray-100/90 bg-white shadow-[0_8px_40px_-12px_rgba(0,0,0,0.08)]">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[var(--color-primary)]/[0.04] to-transparent" />
             <div className="relative px-2 py-3 sm:px-4 sm:py-4 md:px-5">
