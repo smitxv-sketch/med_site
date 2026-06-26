@@ -43,6 +43,7 @@ import {
   postBookHandler,
 } from './routes/booking.js';
 import { getStrapiDoctorsHandler } from './routes/doctors.js';
+import { getDiagnosticsHandler } from './routes/diagnostics.js';
 import {
   applyWinnerHandler,
   createExperimentHandler,
@@ -100,6 +101,9 @@ app.get('/api/doctors', getBookingDoctorsHandler);
 
 // Каталог врачей для страницы /doctors (Strapi SSOT)
 app.get('/api/catalog/doctors', getStrapiDoctorsHandler);
+
+// Диагностика (виджет записи вызывает GET /api/diagnostics при инициализации)
+app.get('/api/diagnostics', getDiagnosticsHandler);
 
 // Studio API (Command Center) — за Bearer STUDIO_API_SECRET
 app.get('/studio/draft', studioAuth, getDraftHandler);

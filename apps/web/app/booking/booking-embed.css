@@ -1,0 +1,34 @@
+/* Обёртка виджета записи на сайте — скрываем standalone UI */
+.booking-embed .min-h-screen {
+  min-height: auto !important;
+}
+
+.booking-embed .safe-pt,
+.booking-embed .safe-pb {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.booking-embed .bg-gray-50\/30 {
+  background: transparent !important;
+}
+
+/* Второй хедер виджета (на сайте уже SiteChrome → Header) */
+.booking-embed .min-h-screen > .sticky {
+  display: none !important;
+}
+
+/* Кнопка Debug */
+.booking-embed .min-h-screen > button.fixed {
+  display: none !important;
+}
+
+/* Футер отладки виджета */
+.booking-embed .min-h-screen > .mt-8.pb-4.text-center {
+  display: none !important;
+}
+
+/* Строка Debug: services=0... */
+.booking-embed .text-xs.opacity-50 {
+  display: none !important;
+}

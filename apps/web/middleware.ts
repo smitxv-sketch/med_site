@@ -17,6 +17,7 @@ const BOOKING_API_PREFIXES = [
   '/api/book',
   '/api/doctors',
   '/api/catalog/doctors',
+  '/api/diagnostics',
 ] as const;
 
 function isBookingApi(pathname: string): boolean {
@@ -73,5 +74,7 @@ export const config = {
     '/api/book',
     '/api/doctors',
     '/api/catalog/doctors',
+    '/api/diagnostics',
+    '/api/diagnostics/:path*',
   ],
 };

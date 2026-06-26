@@ -16,6 +16,7 @@ const bookingApiRewrites = [
   'book',
   'doctors',
   'catalog/doctors',
+  'diagnostics',
 ].map((segment) => ({
   source: `/api/${segment}`,
   destination: `${bffInternal}/api/${segment}`,
