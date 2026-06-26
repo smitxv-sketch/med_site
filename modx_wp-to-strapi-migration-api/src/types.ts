@@ -5,6 +5,11 @@ export interface Doctor {
   pagetitle: string;
   alias: string;
   rank: string;
+  /** Отдельные поля звания (до склейки в rank) */
+  degree?: string;
+  category?: string;
+  position?: string;
+  zvanie?: string;
   experience: string | number;
   education: string;
   specialization: string;

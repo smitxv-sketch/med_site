@@ -4,13 +4,13 @@
  */
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import dotenv from 'dotenv';
+import { loadAppEnv } from '../../infra/loadAppEnv.mjs';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: path.join(__dirname, '..', '.env') });
+loadAppEnv('legacy-bridge-istochnik');
 
 const BASE_URL = (process.env.BRIDGE_BASE_URL || 'http://127.0.0.1:3010').replace(/\/$/, '');
 const TOKEN = process.env.BRIDGE_API_TOKEN?.trim() || '';
@@ -19,7 +19,7 @@ const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
 async function bridgeFetch(apiPath: string, query?: Record<string, string | number>) {
   if (!TOKEN) {
-    throw new Error('BRIDGE_API_TOKEN is not set in modx_wp-to-strapi-migration-api/.env');
+    throw new Error('BRIDGE_API_TOKEN is not set in env/bridge.auth.env');
   }
 
   const url = new URL(apiPath.startsWith('/') ? apiPath : `/${apiPath}`, BASE_URL);

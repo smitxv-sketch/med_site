@@ -65,7 +65,7 @@ export function createAuthMiddleware() {
 
   return (req: Request, res: Response, next: NextFunction) => {
     // Docker/Coolify healthcheck без токена
-    if (req.path === '/api/health') {
+    if (req.path === '/api/health' || req.path === '/api/health/live') {
       return next();
     }
 
@@ -93,7 +93,7 @@ export function createAuthMiddleware() {
       error: 'Auth required',
       hint: bridgeToken
         ? 'Use Authorization: Bearer <BRIDGE_API_TOKEN> or Basic auth for the UI.'
-        : 'Configure BRIDGE_API_TOKEN or SITE_PASSWORD in .env',
+        : 'Configure BRIDGE_API_TOKEN or SITE_PASSWORD in env/bridge.auth.env',
     });
   };
 }

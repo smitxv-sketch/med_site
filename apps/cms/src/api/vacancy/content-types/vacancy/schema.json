@@ -43,6 +43,18 @@
       "type": "string",
       "pluginOptions": { "i18n": { "localized": true } }
     },
+    "legacyId": {
+      "type": "string"
+    },
+    "legacySource": {
+      "type": "enumeration",
+      "enum": ["chel", "spb"],
+      "default": "chel"
+    },
+    "contentLocked": {
+      "type": "boolean",
+      "default": false
+    },
     "content": {
       "type": "richtext",
       "required": true,

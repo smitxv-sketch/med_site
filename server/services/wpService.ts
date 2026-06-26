@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // The URL to the PHP script you will upload to your WordPress root
-const WP_API_ENDPOINT = process.env.WP_API_ENDPOINT || 'https://ci74.ru/api/rest.php';
+const CHEL_API_ENDPOINT = process.env.CHEL_API_ENDPOINT || 'https://ci74.ru/api/rest.php';
 
 export const clearWpCache = async () => {
   console.log('WP Doctors cache clear requested (caching disabled)');
@@ -10,7 +10,7 @@ export const clearWpCache = async () => {
 export const getWpDoctors = async () => {
   try {
     console.log('Fetching doctors from WP API endpoint...');
-    const response = await axios.get(`${WP_API_ENDPOINT}?action=get_doctors`, { timeout: 10000 });
+    const response = await axios.get(`${CHEL_API_ENDPOINT}?action=get_doctors`, { timeout: 10000 });
     const cachedRows = response.data;
 
     if (!Array.isArray(cachedRows) || cachedRows.length === 0) {
@@ -63,14 +63,14 @@ export const getWpDoctors = async () => {
 
 export const checkWpConnection = async () => {
   try {
-    const response = await axios.get(`${WP_API_ENDPOINT}?action=ping`, { timeout: 5000 });
+    const response = await axios.get(`${CHEL_API_ENDPOINT}?action=ping`, { timeout: 5000 });
     if (response.data && response.data.status === 'ok') {
       return { connected: true };
     }
     return { connected: false, error: 'Invalid response from WP API' };
   } catch (error: any) {
     console.error('WP Connection Check Failed:', error.message);
-    return { connected: false, error: error.message, host: WP_API_ENDPOINT };
+    return { connected: false, error: error.message, host: CHEL_API_ENDPOINT };
   }
 };
 
@@ -87,7 +87,7 @@ export const getWpUserMeta = async (userIds: number[], keys?: string[], patterns
   if (userIds.length === 0) return {};
 
   try {
-    const response = await axios.post(`${WP_API_ENDPOINT}?action=get_meta`, {
+    const response = await axios.post(`${CHEL_API_ENDPOINT}?action=get_meta`, {
       user_ids: userIds,
       keys: keys || [],
       patterns: patterns || []

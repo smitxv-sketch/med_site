@@ -1,0 +1,13 @@
+{
+  "server": {
+    "port": 3000,
+    "cors_origins": ["*"]
+  },
+  "env": {
+    "openai": "OPENAI_API_KEY",
+    "recaptcha_site": "RECAPTCHA_SITE_KEY",
+    "recaptcha_secret": "RECAPTCHA_SECRET_KEY",
+    "gemini": "GEMINI_API_KEY",
+    "openrouter": "OPENROUTER_API_KEY"
+  }
+}

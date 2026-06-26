@@ -14,10 +14,10 @@
 npm install
 ```
 
-2) Настроить `.env`:
-- Скопировать `.env.example` → `.env`
-- Заполнить DB доступы (MODX/WP)
-- **Обязательно в Coolify:** `SITE_PASSWORD` (+ опционально `SITE_USER`, по умолчанию `admin`)
+2) Настроить env (1:1 с Coolify `legacy-bridge-istochnik`):
+- Скопировать `infra/env/legacy-bridge-istochnik.env.example` → `infra/env/legacy-bridge-istochnik.env`
+- Заполнить секреты (пароль БД ЧЛБ, токены)
+- Проверка MySQL: `npm run test:chel-db`
 
 3) Запуск:
 
@@ -36,7 +36,7 @@ OpenAPI спецификация отдается JSON‑ом:
 
 ## Secrets / безопасность
 
-- Никакие ключи не должны храниться в git. Все значения — через `.env` / Coolify env.
+- Никакие ключи не должны храниться в git. Секреты — в `env/*.env` локально / Coolify env на проде.
 - **`BRIDGE_API_TOKEN`** — Bearer для ИИ, MCP, скриптов (`Authorization: Bearer …`).
 - **`SITE_PASSWORD`** — Basic Auth для UI в браузере.
 - В production нужен **хотя бы один** из двух секретов выше.

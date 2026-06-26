@@ -53,12 +53,40 @@
       { "key": "STUDIO_API_SECRET", "secret": true, "required": true },
       { "key": "STRAPI_API_TOKEN", "secret": true, "required": false, "note": "нужен для publish из Studio" },
       { "key": "WEB_REVALIDATE_URL", "value": "https://istochnik.smitx.ru/api/revalidate", "required": false },
-      { "key": "REVALIDATE_SECRET", "secret": true, "required": false, "note": "= REVALIDATE_TOKEN на web" }
+      { "key": "REVALIDATE_SECRET", "secret": true, "required": false, "note": "BFF → /api/revalidate" },
+      { "key": "REVALIDATE_TOKEN", "secret": true, "required": false, "note": "то же значение что REVALIDATE_SECRET (Next web)" },
+      { "key": "QMS_CHEL_ADDRESS", "secret": false, "required": true, "note": "МИС Челябинск — booking" },
+      { "key": "QMS_CHEL_API_KEY", "secret": true, "required": true },
+      { "key": "CHEL_API_ENDPOINT", "value": "https://ci74.ru/api/rest.php", "required": true, "note": "REST врачей Челябинск (ci74.ru)" },
+      { "key": "BFF_INTERNAL_URL", "value": "http://127.0.0.1:3001", "required": false }
     ],
     "studio-istochnik": [
+      { "key": "NODE_ENV", "value": "production", "required": true },
+      { "key": "PORT", "value": "3003", "required": true },
       { "key": "STUDIO_API_SECRET", "secret": true, "required": true, "sharedWith": "site-ci" },
       { "key": "BFF_PROXY_URL", "value": "https://istochnik.smitx.ru/api/studio-bff", "required": true },
       { "key": "NEXT_PUBLIC_PREVIEW_URL", "value": "https://istochnik.smitx.ru", "required": true }
+    ],
+    "strapi-istochnik": [
+      { "key": "HOST", "value": "0.0.0.0", "required": true },
+      { "key": "PORT", "value": "1337", "required": true },
+      { "key": "NODE_ENV", "value": "production", "required": true, "note": "только runtime, не buildtime в Coolify" },
+      { "key": "APP_KEYS", "secret": true, "required": true },
+      { "key": "API_TOKEN_SALT", "secret": true, "required": true },
+      { "key": "ADMIN_JWT_SECRET", "secret": true, "required": true },
+      { "key": "TRANSFER_TOKEN_SALT", "secret": true, "required": true },
+      { "key": "JWT_SECRET", "secret": true, "required": true },
+      { "key": "ENCRYPTION_KEY", "secret": true, "required": true },
+      { "key": "DATABASE_CLIENT", "value": "postgres", "required": true },
+      { "key": "DATABASE_HOST", "value": "cwdkhczc0mty75tz3nwrmmut", "required": true },
+      { "key": "DATABASE_PORT", "value": "5432", "required": true },
+      { "key": "DATABASE_NAME", "value": "strapi", "required": true },
+      { "key": "DATABASE_USERNAME", "value": "postgres", "required": true },
+      { "key": "DATABASE_PASSWORD", "secret": true, "required": true },
+      { "key": "DATABASE_SSL", "value": "false", "required": true },
+      { "key": "STRAPI_PLUGIN_I18N_INIT_LOCALE_CODE", "value": "ru-RU", "required": false },
+      { "key": "STRAPI_TELEMETRY_DISABLED", "value": "true", "required": false },
+      { "key": "STRAPI_MCP_ENABLED", "value": "false", "required": false }
     ]
   }
 }

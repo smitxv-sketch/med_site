@@ -29,6 +29,7 @@ Node.js / Express сервер, выступающий в роли BFF (Backend 
 *   **`/docs/INFRASTRUCTURE_SERVER.md`** — карта Coolify-сервера (приложения, БД, AI-сервисы).
 *   **`/docs/STRAPI_DEPLOY_POSTMORTEM.md`** — опыт деплоя Strapi (ошибки и решения).
 *   **`/docs/COOLIFY_STRAPI.md`** — краткий runbook Strapi на Coolify.
+*   **`/docs/WHERE_WE_ARE.md`** — **текущий статус работ** (handoff для нового чата; «где мы сейчас»).
 *   **`/docs/legacy/`** — устаревшие SSOT и снимки (не для новой разработки).
 *   **`/docs/archive/`** — исторические черновики и планы v1.
 

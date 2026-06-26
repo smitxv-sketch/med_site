@@ -23,15 +23,21 @@ export interface PromotionDto {
   locale: string;
 }
 
+export type NewsKind = 'news' | 'anonce' | 'article';
+
 export interface NewsDto {
   id: string;
   slug: string;
   title: string;
+  kind: NewsKind;
   excerpt?: string;
   content?: string;
   cover?: CoverImageDto;
   publishedAt: string;
   unpublishAt?: string;
+  anonceLink?: string;
+  sortOrder?: number;
+  showOnHome?: boolean;
   locale: string;
 }
 

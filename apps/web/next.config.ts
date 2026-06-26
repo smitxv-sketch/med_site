@@ -1,10 +1,39 @@
 import type { NextConfig } from 'next';
 import path from 'path';
 
+const bffInternal =
+  process.env.BFF_INTERNAL_URL ||
+  `http://127.0.0.1:${process.env.BFF_PORT ?? '3001'}`;
+
+const bookingApiRewrites = [
+  'wp-doctors',
+  'branches',
+  'theme',
+  'text',
+  'config',
+  'services',
+  'slots',
+  'book',
+  'doctors',
+  'catalog/doctors',
+].map((segment) => ({
+  source: `/api/${segment}`,
+  destination: `${bffInternal}/api/${segment}`,
+}));
+
 const nextConfig: NextConfig = {
   transpilePackages: ['@med-site/contracts', '@med-site/page-engine'],
   experimental: {
     externalDir: true,
+  },
+  async rewrites() {
+    return [
+      ...bookingApiRewrites,
+      {
+        source: '/api/wp-doctors/clear-cache',
+        destination: `${bffInternal}/api/wp-doctors/clear-cache`,
+      },
+    ];
   },
   typescript: {
     ignoreBuildErrors: true,

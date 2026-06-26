@@ -48,9 +48,13 @@ export function mapStrapiPromotion(
 
 export function mapStrapiNews(
   raw: StrapiEntityBase & {
+    kind?: 'news' | 'anonce' | 'article';
     excerpt?: string;
     publishedAt?: string;
     unpublishAt?: string;
+    anonceLink?: string;
+    sortOrder?: number;
+    showOnHome?: boolean;
     coverImage?: unknown;
     coverImageMobile?: unknown;
   },
@@ -61,6 +65,7 @@ export function mapStrapiNews(
     id,
     slug: raw.slug ?? id,
     title: raw.title ?? '',
+    kind: raw.kind ?? 'news',
     excerpt: raw.excerpt,
     content: raw.content,
     cover: mapStrapiCover(
@@ -69,6 +74,9 @@ export function mapStrapiNews(
     ),
     publishedAt: raw.publishedAt ?? new Date().toISOString(),
     unpublishAt: raw.unpublishAt,
+    anonceLink: raw.anonceLink,
+    sortOrder: raw.sortOrder,
+    showOnHome: raw.showOnHome,
     locale: raw.locale ?? locale,
   };
 }

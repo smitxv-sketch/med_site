@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-import dotenv from "dotenv";
+import { loadAppEnv } from "../infra/loadAppEnv.mjs";
 import { createServer as createViteServer } from "vite";
 import apiRouter from "./server/routes/api.js";
 import { initBridgeDb } from "./server/bridgeDb.js";
@@ -9,7 +9,7 @@ import {
   createAuthMiddleware,
 } from "./server/middleware/auth.js";
 
-dotenv.config();
+loadAppEnv("legacy-bridge-istochnik");
 assertProductionAuthConfigured();
 
 async function startServer() {

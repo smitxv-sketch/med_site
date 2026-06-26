@@ -93,4 +93,29 @@ export class StrapiClient {
 
     return res.json();
   }
+
+  /** Поиск по legacy_id (синк add + safe-update) */
+  async findByLegacyId(
+    collection: string,
+    legacyId: string,
+    locale: string,
+  ): Promise<{ documentId: string; contentLocked?: boolean } | null> {
+    const qs = new URLSearchParams({
+      'filters[legacyId][$eq]': legacyId,
+      locale,
+      'pagination[pageSize]': '1',
+    });
+    const res = await this.fetchWithRetry(`${this.baseUrl}/api/${collection}?${qs}`, {
+      headers: { Authorization: `Bearer ${this.token}` },
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    const row = json?.data?.[0];
+    if (!row) return null;
+    const attrs = row.attributes ?? row;
+    return {
+      documentId: String(row.documentId ?? row.id),
+      contentLocked: Boolean(attrs.contentLocked),
+    };
+  }
 }

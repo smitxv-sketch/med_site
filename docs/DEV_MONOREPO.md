@@ -65,15 +65,16 @@ Open http://localhost:1337/admin
 
 ## Environment files
 
-| File | Purpose |
-|------|---------|
-| `.env.example` (root) | Legacy prototype |
-| `apps/web/.env.example` | Next.js public/BFF URLs, DATA_MODE |
-| `apps/bff/.env.example` | BFF port, DATA_MODE |
-| `apps/cms/.env.example` | Strapi secrets + Postgres |
-| `php_backend/config_access.example.php` | PHP backend secrets (copy → `config_access.php`) |
+Секреты: **4 файла** в `infra/env/` — по одному на приложение Coolify (см. `infra/env/*.env.example`).
 
-Never commit `.env` or real secret files.
+| Файл | Coolify app |
+|------|-------------|
+| `legacy-bridge-istochnik.env` | legacy-bridge-istochnik |
+| `site-ci.env` | site-ci |
+| `studio-istochnik.env` | studio-istochnik |
+| `strapi-istochnik.env.example` | strapi-istochnik (справка; локально Strapi не запускаем) |
+
+Never commit `infra/env/*.env` or root `.env`.
 
 ## Tenants SSOT
 

@@ -2,7 +2,7 @@ import { qmsDriver } from '../drivers/QmsDriver.js';
 import { getWpDoctors } from './wpService.js';
 import axios from 'axios';
 
-const WP_API_ENDPOINT = process.env.WP_API_ENDPOINT || 'https://ci74.ru/api/rest.php';
+const CHEL_API_ENDPOINT = process.env.CHEL_API_ENDPOINT || 'https://ci74.ru/api/rest.php';
 
 export const getLinkingSuggestions = async (city: string = 'chel') => {
   // Fetch all MIS doctors
@@ -80,7 +80,7 @@ export const getLinkingSuggestions = async (city: string = 'chel') => {
 
 export const linkDoctor = async (wpUserId: number, qmsId: string) => {
   try {
-    const response = await axios.post(`${WP_API_ENDPOINT}?action=link_doctor`, {
+    const response = await axios.post(`${CHEL_API_ENDPOINT}?action=link_doctor`, {
       wp_user_id: wpUserId,
       qms_id: qmsId
     }, { timeout: 10000 });

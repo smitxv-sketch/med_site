@@ -19,6 +19,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY package.json package-lock.json ./
 COPY apps/web ./apps/web
 COPY apps/bff ./apps/bff
+COPY apps/bff/config ./apps/bff/config
 COPY packages/contracts ./packages/contracts
 COPY packages/page-engine ./packages/page-engine
 COPY src ./src
@@ -39,6 +40,7 @@ ENV BFF_PORT=3001
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/package.json ./
 COPY --from=build /app/apps/bff ./apps/bff
+COPY --from=build /app/apps/bff/config ./apps/bff/config
 COPY --from=build /app/apps/web ./apps/web
 COPY --from=build /app/packages/contracts ./packages/contracts
 COPY --from=build /app/packages/page-engine ./packages/page-engine

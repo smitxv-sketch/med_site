@@ -7,8 +7,8 @@ export const getDiagnostics = async () => {
     timestamp: new Date().toISOString(),
     nodeEnv: process.env.NODE_ENV,
     dataSource: 'static_json (topology.json)', // Currently hardcoded
-    wpDbConfigured: !!process.env.WP_DB_HOST,
-    wpDbHost: process.env.WP_DB_HOST ? `${process.env.WP_DB_HOST.substring(0, 4)}...` : null,
+    chelDbConfigured: !!process.env.CHEL_DB_HOST,
+    chelDbHost: process.env.CHEL_DB_HOST ? `${process.env.CHEL_DB_HOST.substring(0, 4)}...` : null,
     tenants: {},
     connectionTest: {}
   };

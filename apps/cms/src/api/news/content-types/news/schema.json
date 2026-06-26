@@ -50,6 +50,36 @@
       "type": "text",
       "pluginOptions": { "i18n": { "localized": true } }
     },
+    "kind": {
+      "type": "enumeration",
+      "enum": ["news", "anonce", "article"],
+      "default": "news",
+      "required": true
+    },
+    "anonceLink": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "showOnHome": {
+      "type": "boolean",
+      "default": false
+    },
+    "legacyId": {
+      "type": "string"
+    },
+    "legacySource": {
+      "type": "enumeration",
+      "enum": ["chel", "spb"],
+      "default": "chel"
+    },
+    "contentLocked": {
+      "type": "boolean",
+      "default": false
+    },
     "content": {
       "type": "richtext",
       "pluginOptions": { "i18n": { "localized": true } }

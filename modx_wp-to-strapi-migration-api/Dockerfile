@@ -36,6 +36,6 @@ USER bridge
 EXPOSE 3010
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
-  CMD wget -qO- http://127.0.0.1:3010/api/health || exit 1
+  CMD wget -qO- http://127.0.0.1:3010/api/health/live || exit 1
 
 CMD ["npm", "start"]

@@ -4,13 +4,13 @@ dotenv.config();
 
 async function check() {
   const db = await createConnection({
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT),
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    host: process.env.SPB_DB_HOST,
+    port: Number(process.env.SPB_DB_PORT),
+    user: process.env.SPB_DB_USER,
+    password: process.env.SPB_DB_PASSWORD,
+    database: process.env.SPB_DB_NAME,
   });
-  const prefix = process.env.DB_PREFIX || 'modx_';
+  const prefix = process.env.SPB_DB_PREFIX || 'modx_';
 
   const [tvs]: any = await db.query(`
     SELECT tv.name, tvc.value

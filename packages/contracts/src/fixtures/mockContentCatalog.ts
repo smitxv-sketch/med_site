@@ -49,6 +49,7 @@ export function getMockNews(locale: string): NewsDto[] {
       id: 'mock-news-1',
       slug: 'novaya-diagnostika',
       title: 'Новое диагностическое оборудование',
+      kind: 'news',
       excerpt: 'В клинике установлен современный аппарат УЗИ экспертного класса.',
       content: '<p>Мы расширили возможности диагностики для наших пациентов.</p>',
       cover: { url: SAMPLE_IMAGE, alt: 'Новость' },

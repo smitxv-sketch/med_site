@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
-    "lock:linux": "node scripts/sync-lockfile-linux.mjs"
+    "lock:linux": "node scripts/sync-lockfile-linux.mjs",
+    "test:chel-db": "tsx scripts/test-chel-db.ts"
   },
   "dependencies": {
     "@google/genai": "^1.29.0",

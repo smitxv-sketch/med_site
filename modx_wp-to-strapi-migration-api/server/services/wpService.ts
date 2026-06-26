@@ -462,7 +462,7 @@ export async function getChelServices(limit = 50, offset = 0) {
 
 export async function getChelDoctors(): Promise<Doctor[]> {
   try {
-    const baseEndpoint = process.env.WP_API_ENDPOINT || 'https://ci74.ru/api/rest.php';
+    const baseEndpoint = process.env.CHEL_API_ENDPOINT || 'https://ci74.ru/api/rest.php';
     const url = baseEndpoint.includes('?')
       ? `${baseEndpoint}&action=get_doctors`
       : `${baseEndpoint}?action=get_doctors`;
@@ -495,6 +495,10 @@ export async function getChelDoctors(): Promise<Doctor[]> {
         photo: doc.photo_url || '',
         specialization: doc.specialty || '',
         rank: rank,
+        degree: doc.degree || '',
+        category: doc.category || '',
+        position: doc.position || '',
+        zvanie: doc.zvanie || '',
         experience: doc.experience_years || 0,
         education: doc.education_text || '',
         description: doc.description || '',

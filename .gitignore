@@ -16,7 +16,8 @@ packages/*/dist/
 .env.local
 .env.*.local
 apps/*/.env
-apps/cms/.env
+infra/env/*.env
+!infra/env/*.env.example
 
 # PHP / legacy secrets (copy from *.example.*)
 php_backend/config_access.php

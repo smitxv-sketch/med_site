@@ -5,7 +5,6 @@ coverage/
 .DS_Store
 *.log
 .env*
-!.env.example
 sync_settings.db
 
 # Generated exports / dumps (may contain sensitive legacy config)

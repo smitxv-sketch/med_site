@@ -8,7 +8,7 @@ async function check() {
     console.log('No pool');
     return;
   }
-  const prefix = process.env.WP_DB_PREFIX || 'wp_';
+  const prefix = process.env.CHEL_DB_PREFIX || 'wp_';
   
   // Check users with role 'doctor'
   const [userMetaRows] = await pool.execute(`

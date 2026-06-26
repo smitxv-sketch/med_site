@@ -3,10 +3,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 async function run() {
   const pool = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    host: process.env.SPB_DB_HOST,
+    user: process.env.SPB_DB_USER,
+    password: process.env.SPB_DB_PASSWORD,
+    database: process.env.SPB_DB_NAME,
   });
   const [rows] = await pool.query(`
     SELECT tvc.value 

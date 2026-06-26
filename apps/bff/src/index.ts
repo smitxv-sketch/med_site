@@ -31,6 +31,19 @@ import {
   publishDraftHandler,
 } from './routes/studio.js';
 import {
+  getBranchesHandler,
+  getConfigHandler,
+  getServicesHandler,
+  getSlotsHandler,
+  getTextHandler,
+  getThemeHandler,
+  getWpDoctorsHandler,
+  clearWpDoctorsCacheHandler,
+  getBookingDoctorsHandler,
+  postBookHandler,
+} from './routes/booking.js';
+import { getStrapiDoctorsHandler } from './routes/doctors.js';
+import {
   applyWinnerHandler,
   createExperimentHandler,
   listExperimentsHandler,
@@ -70,6 +83,23 @@ app.get('/api/news/:slug', getNewsBySlugHandler);
 app.get('/api/vacancies', getVacanciesHandler);
 app.get('/api/vacancies/:slug', getVacancyBySlugHandler);
 app.get('/api/content-pages/:slug', getContentListPageHandler);
+
+// Booking widget (виджет /src/widget — read-only, API здесь)
+app.get('/api/wp-doctors', getWpDoctorsHandler);
+app.post('/api/wp-doctors/clear-cache', clearWpDoctorsCacheHandler);
+app.get('/api/branches', getBranchesHandler);
+app.get('/api/theme', getThemeHandler);
+app.get('/api/text', getTextHandler);
+app.get('/api/config', getConfigHandler);
+app.get('/api/services', getServicesHandler);
+app.get('/api/slots', getSlotsHandler);
+app.post('/api/book', postBookHandler);
+
+// Виджет записи: врачи по услуге/специальности (QMS + WP)
+app.get('/api/doctors', getBookingDoctorsHandler);
+
+// Каталог врачей для страницы /doctors (Strapi SSOT)
+app.get('/api/catalog/doctors', getStrapiDoctorsHandler);
 
 // Studio API (Command Center) — за Bearer STUDIO_API_SECRET
 app.get('/studio/draft', studioAuth, getDraftHandler);

@@ -119,7 +119,13 @@ export function DoctorCard({ doctor, isFavorite, onToggleFavorite }: DoctorCardP
             <span className="truncate">Ближайшее: <strong className="text-gray-900 font-medium">{doctor.availableToday ? 'Сегодня, 14:30' : 'Завтра, 09:00'}</strong></span>
           </div>
 
-          <Button variant="primary" size="sm" onClick={(e) => e.preventDefault()}>
+          <Button
+            variant="primary"
+            size="sm"
+            as={Link}
+            to={doctor.qmsIds?.[0] ? `/booking?doctor_id=${doctor.qmsIds[0]}` : '/booking'}
+            onClick={(e) => e.stopPropagation()}
+          >
             Записаться
           </Button>
         </div>

@@ -7,6 +7,7 @@ import {
   upsertExportField,
   upsertExportTemplate,
 } from "../bridgeDb.js";
+import { runCheck } from "../lib/healthChecks.js";
 import {
   getChelDoctors,
   getChelServices,
@@ -29,9 +30,12 @@ import fs from 'fs/promises';
 import path from 'path';
 
 import chelRoutes from "./chel.js";
+import syncChelRoutes from "./syncChel.js";
+import syncSpbRoutes from "./syncSpb.js";
 import qaRoutes from "./qa.js";
 import exploreRoutes from "./explore.js";
 import legacyGuardRoutes from "./legacyGuard.js";
+import legacyDiagnosticsRoutes from "./legacyDiagnostics.js";
 import { legacyApiGuardMiddleware } from "../middleware/legacyApiGuard.js";
 
 const execAsync = util.promisify(exec);
@@ -41,9 +45,12 @@ const router = Router();
 // Защита legacy MySQL + контракт «данные частями»
 router.use(legacyApiGuardMiddleware);
 router.use("/legacy", legacyGuardRoutes);
+router.use("/legacy/diagnostics", legacyDiagnosticsRoutes);
 
 // Mount Chelyabinsk routes
 router.use("/chel", chelRoutes);
+router.use("/sync/chel", syncChelRoutes);
+router.use("/sync/spb", syncSpbRoutes);
 
 // Mount QA routes
 router.use("/qa", qaRoutes);
@@ -549,27 +556,33 @@ router.get("/sync/full-graph", async (req, res) => {
   }
 });
 
-router.get("/health", async (_req, res) => {
-  const checks: Record<string, string> = { bridge: "unknown", modx: "unknown" };
+router.get("/health/live", (_req, res) => {
+  // Только «процесс слушает порт» — для Docker/Coolify (≤1s)
+  res.json({ status: "ok", service: "legacy-bridge" });
+});
 
-  try {
-    await getBridgePool().query("SELECT 1");
-    checks.bridge = "connected";
-  } catch (error) {
-    checks.bridge = "failed";
-    return res.status(503).json({
-      status: "error",
-      checks,
-      details: String(error),
-    });
+router.get("/health", async (_req, res) => {
+  const checks: Record<string, string> = {};
+
+  checks.bridge = await runCheck(
+    () => getBridgePool().query("SELECT 1"),
+    3000,
+    "bridge-pg",
+  );
+  if (checks.bridge !== "connected") {
+    return res.status(503).json({ status: "error", checks });
   }
 
-  try {
-    await pool.query("SELECT 1");
-    checks.modx = "connected";
-  } catch {
-    // MODX (СПб) может быть не настроен — это не блокирует healthcheck деплоя
+  const spbHost = process.env.SPB_DB_HOST?.trim();
+  if (!spbHost) {
     checks.modx = "not_configured";
+  } else {
+    // pool.raw — без очереди throttled; таймаут 2.5s, не блокируем деплой
+    checks.modx = await runCheck(
+      () => pool.raw.query("SELECT 1"),
+      2500,
+      "modx-spb",
+    );
   }
 
   res.json({ status: "ok", checks });
