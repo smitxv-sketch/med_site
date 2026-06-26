@@ -13,6 +13,7 @@ export function BookingPageClient({
   engineState,
   navigation,
   globalSetting,
+  tenantId,
 }: {
   engineState: EngineState;
   navigation: NavigationDto | null;

@@ -9,6 +9,7 @@ export function DoctorsPageClient({
   engineState,
   navigation,
   globalSetting,
+  tenantId,
 }: {
   engineState: EngineState;
   navigation: NavigationDto | null;
