@@ -577,7 +577,7 @@ router.get("/health", async (_req, res) => {
   if (!spbHost) {
     checks.modx = "not_configured";
   } else {
-    // pool.raw — без очереди throttled; таймаут 2.5s, не блокируем деплой
+    // Не блокируем ответ: legacy MySQL может быть медленным/недоступным
     checks.modx = await runCheck(
       () => pool.raw.query("SELECT 1"),
       2500,
@@ -585,7 +585,18 @@ router.get("/health", async (_req, res) => {
     );
   }
 
-  res.json({ status: "ok", checks });
+  const chelHost = process.env.CHEL_DB_HOST?.trim();
+  checks.chel = chelHost
+    ? await runCheck(() => dbChel.raw.query("SELECT 1"), 2500, "wp-chel")
+  : "not_configured";
+
+  const legacyOk =
+    checks.modx === "connected" || checks.modx === "not_configured";
+  res.status(legacyOk ? 200 : 207).json({
+    status: legacyOk ? "ok" : "degraded",
+    checks,
+    hint: "Use /api/health/live for orchestrator probes",
+  });
 });
 
 router.get("/export/schema/analyze", async (req, res) => {

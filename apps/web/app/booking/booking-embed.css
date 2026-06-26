@@ -1,11 +1,11 @@
-/* На сайте контент max-w-7xl — виджет standalone сужен до max-w-5xl */
-.booking-embed .min-h-screen.max-w-5xl,
-.booking-embed .max-w-5xl {
-  max-width: 100% !important;
-}
-
+/* Обёртка виджета записи на сайте — скрываем standalone UI */
 .booking-embed .min-h-screen {
   min-height: auto !important;
+}
+
+/* Виджет standalone ограничен max-w-5xl — на сайте растягиваем на ширину карточки */
+.booking-embed .max-w-5xl {
+  max-width: 100% !important;
 }
 
 .booking-embed .safe-pt,
