@@ -46,14 +46,16 @@ export class StrapiClient {
 
   async checkConnection(): Promise<{ success: boolean; message: string }> {
     try {
-      const res = await this.fetchWithRetry(`${this.baseUrl}/api/users/me`, {
-        headers: { 'Authorization': `Bearer ${this.token}` }
+      // API Token Strapi не работает с /users/me — проверяем content API
+      const probe = new URLSearchParams({ 'pagination[pageSize]': '1' });
+      const res = await this.fetchWithRetry(`${this.baseUrl}/api/doctors?${probe}`, {
+        headers: { Authorization: `Bearer ${this.token}` },
       });
-      
+
       if (res.ok) {
         return { success: true, message: 'Успешное подключение к Strapi API' };
       }
-      
+
       if (res.status === 401 || res.status === 403) {
         return { success: false, message: 'Ошибка авторизации: неверный токен' };
       }
