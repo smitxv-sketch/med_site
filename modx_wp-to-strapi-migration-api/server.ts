@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
-import { loadAppEnv } from "../infra/loadAppEnv.mjs";
+import dotenv from "dotenv";
+import fs from "fs";
 import { createServer as createViteServer } from "vite";
 import apiRouter from "./server/routes/api.js";
 import { initBridgeDb } from "./server/bridgeDb.js";
@@ -9,7 +10,22 @@ import {
   createAuthMiddleware,
 } from "./server/middleware/auth.js";
 
-loadAppEnv("legacy-bridge-istochnik");
+/** Локально — .env или infra/env; на Coolify переменные уже в process.env */
+function loadLocalEnv() {
+  if (process.env.NODE_ENV === "production") return;
+  const candidates = [
+    path.resolve(process.cwd(), ".env"),
+    path.resolve(process.cwd(), "../infra/env/legacy-bridge-istochnik.env"),
+  ];
+  for (const filePath of candidates) {
+    if (fs.existsSync(filePath)) {
+      dotenv.config({ path: filePath, override: true });
+      break;
+    }
+  }
+}
+
+loadLocalEnv();
 assertProductionAuthConfigured();
 
 async function startServer() {
