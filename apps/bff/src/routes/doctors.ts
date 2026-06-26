@@ -45,7 +45,24 @@ export async function getStrapiDoctorsHandler(req: Request, res: Response) {
     }
 
     const json = (await response.json()) as { data?: StrapiDoctorRow[] };
-    const items = json.data ?? [];
+    let items = json.data ?? [];
+
+    // Миграционный fallback: записи без locale=ru-chel (например ru-RU после первого синка)
+    if (items.length === 0) {
+      const fallbackQs = new URLSearchParams({
+        'filters[legacySource][$eq]': tenant,
+        'pagination[pageSize]': '200',
+        publicationState: 'live',
+      });
+      const fallbackRes = await fetch(`${base}/api/doctors?${fallbackQs}`, {
+        headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
+        cache: 'no-store',
+      });
+      if (fallbackRes.ok) {
+        const fallbackJson = (await fallbackRes.json()) as { data?: StrapiDoctorRow[] };
+        items = fallbackJson.data ?? [];
+      }
+    }
 
     const doctors = items.map((row) => {
       const a = row;

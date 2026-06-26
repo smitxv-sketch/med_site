@@ -74,11 +74,16 @@ export class StrapiClient {
     }
   }
 
-  async createEntry(collection: string, data: any): Promise<any> {
-    const res = await this.fetchWithRetry(`${this.baseUrl}/api/${collection}`, {
+  async createEntry(collection: string, data: Record<string, unknown>): Promise<any> {
+    const { locale, ...payload } = data;
+    const localeQs =
+      typeof locale === 'string' && locale
+        ? `?locale=${encodeURIComponent(locale)}`
+        : '';
+    const res = await this.fetchWithRetry(`${this.baseUrl}/api/${collection}${localeQs}`, {
       method: 'POST',
       headers: this.headers,
-      body: JSON.stringify({ data })
+      body: JSON.stringify({ data: payload }),
     });
 
     if (!res.ok) {
@@ -89,11 +94,16 @@ export class StrapiClient {
     return res.json();
   }
 
-  async updateEntry(collection: string, id: string | number, data: any): Promise<any> {
-    const res = await this.fetchWithRetry(`${this.baseUrl}/api/${collection}/${id}`, {
+  async updateEntry(collection: string, id: string | number, data: Record<string, unknown>): Promise<any> {
+    const { locale, ...payload } = data;
+    const localeQs =
+      typeof locale === 'string' && locale
+        ? `?locale=${encodeURIComponent(locale)}`
+        : '';
+    const res = await this.fetchWithRetry(`${this.baseUrl}/api/${collection}/${id}${localeQs}`, {
       method: 'PUT',
       headers: this.headers,
-      body: JSON.stringify({ data })
+      body: JSON.stringify({ data: payload }),
     });
 
     if (!res.ok) {
