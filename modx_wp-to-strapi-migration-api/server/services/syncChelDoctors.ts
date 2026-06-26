@@ -6,6 +6,7 @@ import {
   updateSyncMap,
   generateHash,
 } from './syncWorker.js';
+import { makeStrapiDoctorSlug } from '../lib/strapiSlug.js';
 
 export type SyncReport = {
   entity: string;
@@ -17,15 +18,6 @@ export type SyncReport = {
 
 const CITY = 'chelyabinsk';
 const LOCALE = 'ru-chel';
-
-function slugify(name: string, legacyId: string) {
-  const base = name
-    .toLowerCase()
-    .replace(/[^a-zа-я0-9]+/gi, '-')
-    .replace(/^-|-$/g, '')
-    .slice(0, 80);
-  return base ? `${base}-${legacyId}` : `doctor-${legacyId}`;
-}
 
 /** Безопасные поля — обновляются при повторном синке */
 const SAFE_DOCTOR_FIELDS = [
@@ -70,7 +62,7 @@ export async function syncChelDoctors(client: StrapiClient): Promise<SyncReport>
       degree: doc.degree || doc.zvanie || '',
       category: doc.category || '',
       position: doc.position || '',
-      slug: slugify(doc.pagetitle || 'doctor', legacyId),
+      slug: makeStrapiDoctorSlug(doc.pagetitle || 'doctor', legacyId, 'chel'),
       locale: LOCALE,
     };
 

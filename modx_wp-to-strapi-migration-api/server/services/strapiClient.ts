@@ -60,6 +60,14 @@ export class StrapiClient {
         return { success: false, message: 'Ошибка авторизации: неверный токен' };
       }
 
+      if (res.status === 404) {
+        return {
+          success: false,
+          message:
+            'Коллекция doctors не найдена в Strapi — задеплойте apps/cms (content-type Doctor)',
+        };
+      }
+
       return { success: false, message: `Ошибка API: ${res.status} ${res.statusText}` };
     } catch (error: any) {
       return { success: false, message: `Ошибка сети: ${error.message}` };

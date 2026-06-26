@@ -7,18 +7,10 @@ import {
   generateHash,
 } from './syncWorker.js';
 import type { SyncReport } from './syncChelDoctors.js';
+import { makeStrapiDoctorSlug } from '../lib/strapiSlug.js';
 
 const CITY = 'spb';
 const LOCALE = 'ru-spb';
-
-function slugify(name: string, legacyId: string) {
-  const base = name
-    .toLowerCase()
-    .replace(/[^a-zа-я0-9]+/gi, '-')
-    .replace(/^-|-$/g, '')
-    .slice(0, 80);
-  return base ? `${base}-${legacyId}` : `doctor-${legacyId}`;
-}
 
 const SAFE_DOCTOR_FIELDS = [
   'fullName',
@@ -62,7 +54,7 @@ export async function syncSpbDoctors(client: StrapiClient): Promise<SyncReport> 
       degree: doc.degree || doc.zvanie || '',
       category: doc.category || '',
       position: doc.position || '',
-      slug: slugify(doc.pagetitle || 'doctor', legacyId),
+      slug: makeStrapiDoctorSlug(doc.pagetitle || 'doctor', legacyId, 'spb'),
       locale: LOCALE,
     };
 
