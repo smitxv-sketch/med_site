@@ -55,10 +55,38 @@ Authorization: Bearer <BRIDGE_API_TOKEN>
 3) Сервер `legacy-bridge` читает токен из `modx_wp-to-strapi-migration-api/.env`
 
 Инструменты MCP:
+- `bridge_guard` — лимиты и контракт пагинации (читать первым)
 - `bridge_discover` — шаблоны MODX + post_types WordPress
 - `bridge_openapi` — полная Swagger-спека
-- `bridge_get` — любой GET `/api/...`
+- `bridge_get` — одна страница GET `/api/...` (limit ≤ 25)
+- `bridge_fetch_all` — все страницы с паузой (безопасно для Beget)
 - `bridge_health` — проверка MODX-подключения
+
+## Защита БД (пагинация и throttle)
+
+Bridge **не отдаёт большие таблицы одним куском**. Контракт:
+
+```http
+GET /api/legacy/guard
+GET /api/chel/news?limit=20&offset=0
+```
+
+Ответ:
+```json
+{
+  "_meta": {
+    "pagination": { "limit": 20, "offset": 0, "hasMore": true, "nextOffset": 20 },
+    "guard": { "clientDelayMs": 700, "maxLimitPerRequest": 25 }
+  },
+  "data": [ ... ]
+}
+```
+
+Пока `hasMore === true` — следующий запрос с `offset=nextOffset` и пауза `clientDelayMs` мс.
+
+На сервере: очередь SQL (один запрос за раз + пауза ~450 мс), HTTP rate limit ~35 req/min.
+
+Переменные Coolify (опционально): `LEGACY_DB_QUERY_DELAY_MS`, `LEGACY_DB_MAX_LIMIT`, `LEGACY_CLIENT_DELAY_MS`.
 
 ## ENV (обязательно)
 

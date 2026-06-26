@@ -7,6 +7,8 @@ const PUBLIC_ROUTES = [
   { path: '/about', name: 'о клинике' },
   { path: '/contacts', name: 'контакты' },
   { path: '/promotions', name: 'акции' },
+  { path: '/vacancies', name: 'вакансии' },
+  { path: '/news', name: 'новости' },
   { path: '/booking', name: 'запись' },
 ] as const;
 

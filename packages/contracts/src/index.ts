@@ -122,4 +122,31 @@ export {
   siteThemeSchema,
 } from './schemas/studio.js';
 
-export const CONTRACTS_SCHEMA_VERSION = '1.4.0';
+export type {
+  PromotionKind,
+  PromotionDto,
+  NewsDto,
+  VacancyDto,
+  CoverImageDto,
+  ContentListPageDto,
+} from './types/contentCatalog.js';
+
+export {
+  mapStrapiCover,
+} from './strapi/mapStrapiMedia.js';
+
+export {
+  mapStrapiPromotion,
+  mapStrapiNews,
+  mapStrapiVacancy,
+  isPromotionVisible,
+  isNewsVisible,
+} from './strapi/mapContentCatalog.js';
+
+export {
+  getMockPromotions,
+  getMockNews,
+  getMockVacancies,
+} from './fixtures/mockContentCatalog.js';
+
+export const CONTRACTS_SCHEMA_VERSION = '1.5.0';

@@ -1,20 +1,20 @@
-import { PromotionsPageClient } from './PromotionsPageClient';
-import { fetchContentListPage, fetchPromotions } from '../../lib/contentCatalog';
+import { VacanciesPageClient } from './VacanciesPageClient';
+import { fetchContentListPage, fetchVacancies } from '../../lib/contentCatalog';
 import { fetchPageShell } from '../../lib/pageShell';
 import { getWebTenantId } from '../../lib/tenant';
 
 export const dynamic = 'force-dynamic';
 
-export default async function PromotionsPage() {
+export default async function VacanciesPageRoute() {
   const tenantId = await getWebTenantId();
   const [shell, items, listPage] = await Promise.all([
     fetchPageShell(tenantId),
-    fetchPromotions(tenantId),
-    fetchContentListPage('promotions', tenantId),
+    fetchVacancies(tenantId),
+    fetchContentListPage('vacancies', tenantId),
   ]);
 
   return (
-    <PromotionsPageClient
+    <VacanciesPageClient
       items={items}
       pageTitle={listPage.pageTitle}
       pageDescription={listPage.pageDescription}

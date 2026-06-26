@@ -43,6 +43,7 @@ export default function App() {
     schemaAnalysis,
     loading,
     error,
+    loadProgress,
     setExcludedIds
   } = useCityData(city);
 
@@ -183,8 +184,16 @@ export default function App() {
         )}
 
         {loading && !error && (
-          <div className="flex justify-center items-center h-64">
+          <div className="flex flex-col justify-center items-center h-64 gap-4">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#141414]"></div>
+            {loadProgress && (
+              <p className="text-sm text-slate-600 text-center max-w-md">
+                {loadProgress}
+                <span className="block text-xs text-slate-400 mt-1">
+                  Данные загружаются частями — защита БД Beget
+                </span>
+              </p>
+            )}
           </div>
         )}
 

@@ -18,6 +18,9 @@ const PUBLIC_UIDS = [
   'api::global-setting.global-setting',
   'api::site-theme.site-theme',
   'api::design-preset.design-preset',
+  'api::promotion.promotion',
+  'api::news.news',
+  'api::vacancy.vacancy',
 ] as const;
 
 async function ensureLocales(strapi: Core.Strapi) {
@@ -134,6 +137,7 @@ async function seedNavigation(strapi: Core.Strapi) {
       links: [
         { label: 'Услуги и цены', url: '/prices' },
         { label: 'Акции', url: '/promotions' },
+        { label: 'Новости', url: '/news' },
         { label: 'Программы', url: '/programs' },
         { label: 'Подготовка к анализам', url: '/preparation' },
         { label: 'Вопрос-ответ', url: '/faq' },
@@ -347,6 +351,136 @@ async function seedSiteTheme(strapi: Core.Strapi) {
   }
 }
 
+/** Страницы-листинги (заголовок и SEO из CMS) */
+async function seedContentListPages(strapi: Core.Strapi) {
+  const pageUid = 'api::page.page' as never;
+  const pages: Array<{ slug: string; title: string; metaDescription: string }> = [
+    {
+      slug: 'vacancies',
+      title: 'Вакансии',
+      metaDescription:
+        'Присоединяйтесь к команде профессионалов. Современное оборудование и комфортные условия труда.',
+    },
+    {
+      slug: 'news',
+      title: 'Новости',
+      metaDescription: 'Актуальные новости и события клиники «Источник».',
+    },
+    {
+      slug: 'promotions',
+      title: 'Акции и спецпредложения',
+      metaDescription:
+        'Специальные предложения и акции для заботы о вашем здоровье и здоровье близких.',
+    },
+  ];
+
+  for (const locale of TENANT_LOCALES) {
+    for (const page of pages) {
+      const existing = await strapi.documents(pageUid).findMany({
+        filters: { slug: { $eq: page.slug } } as never,
+        locale: locale.code,
+      });
+      if (existing?.length) continue;
+
+      await strapi.documents(pageUid).create({
+        data: {
+          title: page.title,
+          slug: page.slug,
+          seo: {
+            metaTitle: page.title,
+            metaDescription: page.metaDescription,
+          },
+          blocks: [],
+        } as never,
+        locale: locale.code,
+        status: 'published',
+      });
+      strapi.log.info(`[bootstrap] seeded list page ${page.slug} for ${locale.code}`);
+    }
+  }
+}
+
+/** Примеры акций, новостей и вакансий (редактируются в Strapi Admin) */
+async function seedContentCatalog(strapi: Core.Strapi) {
+  const now = Date.now();
+  const in60d = new Date(now + 60 * 86400000).toISOString();
+  const ago7d = new Date(now - 7 * 86400000).toISOString();
+  const ago3d = new Date(now - 3 * 86400000).toISOString();
+
+  const promoUid = 'api::promotion.promotion' as never;
+  const newsUid = 'api::news.news' as never;
+  const vacancyUid = 'api::vacancy.vacancy' as never;
+
+  for (const locale of TENANT_LOCALES) {
+    const promos = await strapi.documents(promoUid).findMany({ locale: locale.code });
+    if (!promos?.length) {
+      await strapi.documents(promoUid).create({
+        data: {
+          title: 'Чек-ап «Здоровое сердце»',
+          slug: 'check-up-zdorovoe-serdce',
+          kind: 'promotion',
+          shortDescription: 'ЭКГ, УЗИ сердца и консультация кардиолога по специальной цене.',
+          content: '<p>Подробности уточняйте у администратора клиники.</p>',
+          startDate: ago7d,
+          endDate: in60d,
+          autoUnpublishOnEnd: true,
+        } as never,
+        locale: locale.code,
+        status: 'published',
+      });
+      await strapi.documents(promoUid).create({
+        data: {
+          title: 'Скидка на первичный приём педиатра',
+          slug: 'pervichnyj-priem-pediatra',
+          kind: 'special_offer',
+          shortDescription: 'Для новых пациентов детской клиники — скидка 15%.',
+          content: '<p>Спецпредложение действует при первом визите.</p>',
+          startDate: ago7d,
+          autoUnpublishOnEnd: false,
+        } as never,
+        locale: locale.code,
+        status: 'published',
+      });
+      strapi.log.info(`[bootstrap] seeded promotions for ${locale.code}`);
+    }
+
+    const news = await strapi.documents(newsUid).findMany({ locale: locale.code });
+    if (!news?.length) {
+      await strapi.documents(newsUid).create({
+        data: {
+          title: 'Новое диагностическое оборудование',
+          slug: 'novoe-diagnosticheskoe-oborudovanie',
+          excerpt: 'В клинике установлен современный аппарат УЗИ экспертного класса.',
+          content: '<p>Расширили возможности диагностики для пациентов.</p>',
+          publishedAt: ago3d,
+        } as never,
+        locale: locale.code,
+        status: 'published',
+      });
+      strapi.log.info(`[bootstrap] seeded news for ${locale.code}`);
+    }
+
+    const vacancies = await strapi.documents(vacancyUid).findMany({ locale: locale.code });
+    if (!vacancies?.length) {
+      await strapi.documents(vacancyUid).create({
+        data: {
+          title: 'Врач-педиатр',
+          slug: 'vrach-pediatr',
+          department: 'Детская клиника',
+          experience: 'от 3 лет',
+          employmentType: 'Полная занятость',
+          location: locale.code === 'ru-chel' ? 'г. Челябинск' : 'г. Санкт-Петербург',
+          content:
+            '<p>Приглашаем в команду опытного врача-педиатра. Амбулаторный приём, профилактика, вакцинация.</p>',
+        } as never,
+        locale: locale.code,
+        status: 'published',
+      });
+      strapi.log.info(`[bootstrap] seeded vacancies for ${locale.code}`);
+    }
+  }
+}
+
 /** Системные пресеты Command Center (глобальные, не i18n) */
 async function seedDesignPresets(strapi: Core.Strapi) {
   const presetUid = 'api::design-preset.design-preset' as never;
@@ -391,6 +525,8 @@ export default {
       await seedGlobalLayout(strapi);
       await seedSiteTheme(strapi);
       await seedDesignPresets(strapi);
+      await seedContentListPages(strapi);
+      await seedContentCatalog(strapi);
     } catch (err) {
       strapi.log.error('[bootstrap] failed:', err);
     }

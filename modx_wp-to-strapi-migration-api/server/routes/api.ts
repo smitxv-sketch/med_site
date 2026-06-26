@@ -31,10 +31,16 @@ import path from 'path';
 import chelRoutes from "./chel.js";
 import qaRoutes from "./qa.js";
 import exploreRoutes from "./explore.js";
+import legacyGuardRoutes from "./legacyGuard.js";
+import { legacyApiGuardMiddleware } from "../middleware/legacyApiGuard.js";
 
 const execAsync = util.promisify(exec);
 
 const router = Router();
+
+// Защита legacy MySQL + контракт «данные частями»
+router.use(legacyApiGuardMiddleware);
+router.use("/legacy", legacyGuardRoutes);
 
 // Mount Chelyabinsk routes
 router.use("/chel", chelRoutes);

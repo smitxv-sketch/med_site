@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { pool as spbPool, getPrefix as getSpbPrefix } from "../db.js";
 import { dbChel } from "../dbChel.js";
+import { parsePagination } from "../lib/pagination.js";
+import { sendExploreList } from "../lib/exploreListResponse.js";
 
 const router = Router();
 
@@ -289,38 +291,34 @@ router.get("/openapi.json", (req, res) => {
 // --- SPB ENDPOINTS ---
 router.get("/spb/doctors", async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit as string) || 10;
-    const offset = parseInt(req.query.offset as string) || 0;
+    const { limit, offset } = parsePagination(req);
     const data = await getSpbData([7], limit, offset, "AND parent != 209");
-    res.json({ _meta: { city: 'spb', entity: 'doctors', limit, offset, count: data.length }, data });
+    sendExploreList(res, req, 'spb', 'doctors', data);
   } catch (e: any) { res.status(500).json({ error: e.message }); }
 });
 
 router.get("/spb/services", async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit as string) || 10;
-    const offset = parseInt(req.query.offset as string) || 0;
+    const { limit, offset } = parsePagination(req);
     const data = await getSpbData([32, 6], limit, offset);
-    res.json({ _meta: { city: 'spb', entity: 'services', limit, offset, count: data.length }, data });
+    sendExploreList(res, req, 'spb', 'services', data);
   } catch (e: any) { res.status(500).json({ error: e.message }); }
 });
 
 router.get("/spb/reviews", async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit as string) || 10;
-    const offset = parseInt(req.query.offset as string) || 0;
-    const data = await getSpbData([19], limit, offset); // Assuming 19 is reviews, adjust if needed
-    res.json({ _meta: { city: 'spb', entity: 'reviews', limit, offset, count: data.length }, data });
+    const { limit, offset } = parsePagination(req);
+    const data = await getSpbData([19], limit, offset);
+    sendExploreList(res, req, 'spb', 'reviews', data);
   } catch (e: any) { res.status(500).json({ error: e.message }); }
 });
 
 router.get("/spb/prices", async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit as string) || 10;
-    const offset = parseInt(req.query.offset as string) || 0;
+    const { limit, offset } = parsePagination(req);
     const spbPrefix = getSpbPrefix();
     const [data] = await spbPool.query(`SELECT * FROM ${spbPrefix}pricelist_items2 LIMIT ? OFFSET ?`, [limit, offset]);
-    res.json({ _meta: { city: 'spb', entity: 'prices', limit, offset, count: (data as any[]).length }, data });
+    sendExploreList(res, req, 'spb', 'prices', data as unknown[]);
   } catch (e: any) { res.status(500).json({ error: e.message }); }
 });
 
@@ -386,45 +384,40 @@ router.get("/spb/templates", async (req, res) => {
 router.get("/spb/content/:templateId", async (req, res) => {
   try {
     const templateId = parseInt(req.params.templateId);
-    const limit = parseInt(req.query.limit as string) || 10;
-    const offset = parseInt(req.query.offset as string) || 0;
+    const { limit, offset } = parsePagination(req);
     const data = await getSpbData([templateId], limit, offset);
-    res.json({ _meta: { city: 'spb', entity: `template_${templateId}`, limit, offset, count: data.length }, data });
+    sendExploreList(res, req, 'spb', `template_${templateId}`, data);
   } catch (e: any) { res.status(500).json({ error: e.message }); }
 });
 
 // --- CHELYABINSK ENDPOINTS ---
 router.get("/chel/doctors", async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit as string) || 10;
-    const offset = parseInt(req.query.offset as string) || 0;
+    const { limit, offset } = parsePagination(req);
     const data = await getChelData('doctor', limit, offset);
-    res.json({ _meta: { city: 'chel', entity: 'doctors', limit, offset, count: data.length }, data });
+    sendExploreList(res, req, 'chel', 'doctors', data);
   } catch (e: any) { res.status(500).json({ error: e.message }); }
 });
 
 router.get("/chel/services", async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit as string) || 10;
-    const offset = parseInt(req.query.offset as string) || 0;
+    const { limit, offset } = parsePagination(req);
     const data = await getChelData('service', limit, offset);
-    res.json({ _meta: { city: 'chel', entity: 'services', limit, offset, count: data.length }, data });
+    sendExploreList(res, req, 'chel', 'services', data);
   } catch (e: any) { res.status(500).json({ error: e.message }); }
 });
 
 router.get("/chel/reviews", async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit as string) || 10;
-    const offset = parseInt(req.query.offset as string) || 0;
+    const { limit, offset } = parsePagination(req);
     const data = await getChelData('review', limit, offset);
-    res.json({ _meta: { city: 'chel', entity: 'reviews', limit, offset, count: data.length }, data });
+    sendExploreList(res, req, 'chel', 'reviews', data);
   } catch (e: any) { res.status(500).json({ error: e.message }); }
 });
 
 router.get("/chel/directions", async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit as string) || 10;
-    const offset = parseInt(req.query.offset as string) || 0;
+    const { limit, offset } = parsePagination(req);
     const [data] = await dbChel.query(`
       SELECT t.term_id, t.name, t.slug, tt.parent, tt.count
       FROM wp_terms t
@@ -432,7 +425,7 @@ router.get("/chel/directions", async (req, res) => {
       WHERE tt.taxonomy = 'direction'
       LIMIT ? OFFSET ?
     `, [limit, offset]);
-    res.json({ _meta: { city: 'chel', entity: 'directions', limit, offset, count: (data as any[]).length }, data });
+    sendExploreList(res, req, 'chel', 'directions', data as unknown[]);
   } catch (e: any) { res.status(500).json({ error: e.message }); }
 });
 
@@ -453,10 +446,9 @@ router.get("/chel/post_types", async (req, res) => {
 router.get("/chel/posts/:postType", async (req, res) => {
   try {
     const postType = req.params.postType;
-    const limit = parseInt(req.query.limit as string) || 10;
-    const offset = parseInt(req.query.offset as string) || 0;
+    const { limit, offset } = parsePagination(req);
     const data = await getChelData(postType, limit, offset);
-    res.json({ _meta: { city: 'chel', entity: `post_type_${postType}`, limit, offset, count: data.length }, data });
+    sendExploreList(res, req, 'chel', `post_type_${postType}`, data);
   } catch (e: any) { res.status(500).json({ error: e.message }); }
 });
 

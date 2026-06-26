@@ -10,6 +10,15 @@ import {
   getSiteThemeHandler,
 } from './routes/content.js';
 import {
+  getContentListPageHandler,
+  getNewsBySlugHandler,
+  getNewsHandler,
+  getPromotionBySlugHandler,
+  getPromotionsHandler,
+  getVacanciesHandler,
+  getVacancyBySlugHandler,
+} from './routes/contentCatalog.js';
+import {
   aiLayoutHandler,
   createLabHandler,
   getDraftHandler,
@@ -53,6 +62,14 @@ app.get('/api/global-layout', getGlobalLayoutHandler);
 app.get('/api/global-setting', getGlobalSettingHandler);
 app.get('/api/site-theme', getSiteThemeHandler);
 app.get('/api/marketing-context', getMarketingContextHandler);
+
+app.get('/api/promotions', getPromotionsHandler);
+app.get('/api/promotions/:slug', getPromotionBySlugHandler);
+app.get('/api/news', getNewsHandler);
+app.get('/api/news/:slug', getNewsBySlugHandler);
+app.get('/api/vacancies', getVacanciesHandler);
+app.get('/api/vacancies/:slug', getVacancyBySlugHandler);
+app.get('/api/content-pages/:slug', getContentListPageHandler);
 
 // Studio API (Command Center) — за Bearer STUDIO_API_SECRET
 app.get('/studio/draft', studioAuth, getDraftHandler);

@@ -49,7 +49,7 @@ export async function getChelReviews(limit = 50, offset = 0) {
   }
 }
 
-export async function getChelDirections() {
+export async function getChelDirections(limit = 100, offset = 0) {
   try {
     const [rows]: any = await dbChel.query(`
       SELECT 
@@ -62,7 +62,9 @@ export async function getChelDirections() {
       FROM wp_terms t
       INNER JOIN wp_term_taxonomy tt ON t.term_id = tt.term_id
       WHERE tt.taxonomy IN ('directions', 'category')
-    `);
+      ORDER BY t.term_id ASC
+      LIMIT ? OFFSET ?
+    `, [limit, offset]);
     return rows.map((r: any) => ({ ...r, city: 'chel' }));
   } catch (error) {
     console.error("Error fetching Chel directions:", error);
@@ -164,7 +166,7 @@ export async function getChelVacancies(limit: number = 100, offset: number = 0) 
   }
 }
 
-export async function getChelClinics() {
+export async function getChelClinics(limit = 100, offset = 0) {
   try {
     const [rows]: any = await dbChel.query(`
       SELECT 
@@ -177,7 +179,8 @@ export async function getChelClinics() {
       FROM wp_posts p
       WHERE p.post_type = 'clinics' AND p.post_status = 'publish'
       ORDER BY p.post_date DESC
-    `);
+      LIMIT ? OFFSET ?
+    `, [limit, offset]);
 
     if (rows.length === 0) return [];
 
@@ -210,7 +213,7 @@ export async function getChelClinics() {
   }
 }
 
-export async function getChelArticles() {
+export async function getChelArticles(limit = 100, offset = 0) {
   try {
     const [rows]: any = await dbChel.query(`
       SELECT 
@@ -223,7 +226,8 @@ export async function getChelArticles() {
       FROM wp_posts p
       WHERE p.post_type = 'articles' AND p.post_status = 'publish'
       ORDER BY p.post_date DESC
-    `);
+      LIMIT ? OFFSET ?
+    `, [limit, offset]);
 
     if (rows.length === 0) return [];
 
@@ -300,7 +304,7 @@ export async function getChelFaq(limit = 100, offset = 0) {
   }
 }
 
-export async function getChelAdvantages() {
+export async function getChelAdvantages(limit = 100, offset = 0) {
   try {
     const [rows]: any = await dbChel.query(`
       SELECT 
@@ -310,7 +314,8 @@ export async function getChelAdvantages() {
       FROM wp_posts p
       WHERE p.post_type = 'advantages' AND p.post_status = 'publish'
       ORDER BY p.post_date DESC
-    `);
+      LIMIT ? OFFSET ?
+    `, [limit, offset]);
 
     if (rows.length === 0) return [];
 
@@ -342,7 +347,7 @@ export async function getChelAdvantages() {
   }
 }
 
-export async function getChelAnonces() {
+export async function getChelAnonces(limit = 100, offset = 0) {
   try {
     const [rows]: any = await dbChel.query(`
       SELECT 
@@ -353,7 +358,8 @@ export async function getChelAnonces() {
       FROM wp_posts p
       WHERE p.post_type IN ('anonces', 'home_anonces') AND p.post_status = 'publish'
       ORDER BY p.post_date DESC
-    `);
+      LIMIT ? OFFSET ?
+    `, [limit, offset]);
 
     if (rows.length === 0) return [];
 
