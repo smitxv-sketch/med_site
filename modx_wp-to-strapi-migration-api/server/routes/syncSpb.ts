@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { StrapiClient } from '../services/strapiClient.js';
 import { getSyncConfig, logSyncEvent } from '../services/syncWorker.js';
-import { syncSpbDoctors } from '../services/syncSpbDoctors.js';
+import { runDoctorSync } from '../services/SyncOrchestrator.js';
 
 const router = Router();
 
@@ -15,7 +15,7 @@ async function buildStrapiClient() {
   return new StrapiClient(baseUrl, token);
 }
 
-/** Синк врачей СПб → Strapi (add + safe fields) */
+/** Синк врачей СПб → Strapi (MODX MySQL, chunked) */
 router.post('/doctors', async (_req, res) => {
   try {
     const client = await buildStrapiClient();
@@ -24,13 +24,14 @@ router.post('/doctors', async (_req, res) => {
       return res.status(502).json(conn);
     }
     await logSyncEvent('spb', 'info', 'sync doctors started');
-    const report = await syncSpbDoctors(client);
+    const report = await runDoctorSync('spb', client);
     await logSyncEvent('spb', 'success', 'sync doctors finished', report);
     res.json({ ok: true, report });
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     await logSyncEvent('spb', 'error', 'sync doctors failed', message);
-    res.status(500).json({ ok: false, error: message });
+    const status = message.includes('already running') ? 409 : 500;
+    res.status(status).json({ ok: false, error: message });
   }
 });
 

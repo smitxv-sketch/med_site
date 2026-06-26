@@ -5,6 +5,26 @@ const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 let chain: Promise<void> = Promise.resolve();
 let lastQueryFinishedAt = 0;
 
+/** Метрики очереди — для /api/legacy/guard/stats */
+const stats = {
+  totalQueries: 0,
+  slowQueries: 0,
+  lastLabel: '',
+  lastSource: '' as LegacyCity | '',
+  lastDurationMs: 0,
+  lastFinishedAt: 0,
+};
+
+export function getLegacyDbQueueStats() {
+  return {
+    ...stats,
+    queryDelayMs: LEGACY_DB_GUARD.queryDelayMs,
+    connectionLimit: LEGACY_DB_GUARD.connectionLimit,
+    policy: 'global_sequential',
+    note: 'Chel+SPb на одном Beget-хосте — один поток SQL',
+  };
+}
+
 /**
  * Глобальная очередь: все запросы к Chel/SPB MySQL идут строго по одному,
  * с паузой между ними — защита Beget от DDoS-подобных паттернов.
@@ -27,7 +47,13 @@ export function scheduleLegacyDbQuery<T>(
     } finally {
       lastQueryFinishedAt = Date.now();
       const took = lastQueryFinishedAt - started;
+      stats.totalQueries += 1;
+      stats.lastLabel = label;
+      stats.lastSource = source;
+      stats.lastDurationMs = took;
+      stats.lastFinishedAt = lastQueryFinishedAt;
       if (took > 5_000) {
+        stats.slowQueries += 1;
         console.warn(`[legacy-db:${source}] slow query "${label}" ${took}ms`);
       }
     }

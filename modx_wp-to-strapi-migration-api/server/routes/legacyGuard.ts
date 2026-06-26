@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { LEGACY_DB_GUARD, guardMetaForClient } from '../config/legacyDbGuard.js';
+import { getLegacyDbQueueStats } from '../lib/legacyDbQueue.js';
 
 const router = Router();
 
@@ -35,6 +36,17 @@ router.get('/guard', (_req, res) => {
     example: {
       request: 'GET /api/chel/news?limit=20&offset=0',
       next: 'GET /api/chel/news?limit=20&offset=20 while _meta.pagination.hasMore === true',
+    },
+  });
+});
+
+/** Метрики очереди SQL — мониторинг нагрузки на Beget */
+router.get('/guard/stats', (_req, res) => {
+  res.json({
+    queue: getLegacyDbQueueStats(),
+    antiBlock: {
+      policy: 'One global SQL stream, 450ms+ between queries, connectionLimit=1',
+      docs: '/api/legacy/guard',
     },
   });
 });

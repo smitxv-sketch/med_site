@@ -138,9 +138,11 @@ Beget разблокировал IP `37.79.254.120` (Coolify). Нужно:
 | Sync workers существуют | ✅ chel/spb routes |
 | Throttle / guard | ✅ `legacyDbGuard.ts` |
 | Postgres sync_map | ✅ `bridgeDb.ts` |
-| Gateway abstraction | 🟡 начато (`dataSources.ts`) |
-| api.ts декомпозиция | 🔴 нужна (900+ строк) |
-| Bridge на проде healthy | 🔴 в работе (фаза 0) |
+| Gateway abstraction | ✅ `LegacyMysqlGateway.ts` + `dataSources.ts` |
+| SyncOrchestrator + DoctorHydrator | ✅ фаза 2 |
+| sync_runs в Postgres | ✅ `bridgeDb.ts` |
+| api.ts декомпозиция | 🟡 doctors/services → repositories |
+| Bridge на проде healthy | ✅ `/api/health/live` |
 
 **Правки к плану:** фазу 1.4 (health) и 0.1 объединяем в немедленный hotfix; декомпозицию `api.ts` не блокируем на фазе 0.
 

@@ -65,7 +65,11 @@ export function createAuthMiddleware() {
 
   return (req: Request, res: Response, next: NextFunction) => {
     // Docker/Coolify healthcheck без токена
-    if (req.path === '/api/health' || req.path === '/api/health/live') {
+    if (
+      req.path === '/api/health' ||
+      req.path === '/api/health/live' ||
+      req.path.startsWith('/api/health/')
+    ) {
       return next();
     }
 

@@ -1,11 +1,10 @@
 import { StrapiClient } from './strapiClient.js';
-import { syncChelDoctors, type SyncReport } from './syncChelDoctors.js';
-import { syncSpbDoctors } from './syncSpbDoctors.js';
+import { runDoctorSync, type SyncCity } from './SyncOrchestrator.js';
+import type { SyncReport } from '../types/doctorCanonical.js';
 
-export type SyncCity = 'chel' | 'spb';
+export type { SyncReport };
 
-/** Единая точка синка врачей: ЧЛБ (REST) или СПб (MODX MySQL) */
+/** Единая точка синка врачей */
 export async function syncDoctors(city: SyncCity, client: StrapiClient): Promise<SyncReport> {
-  if (city === 'chel') return syncChelDoctors(client);
-  return syncSpbDoctors(client);
+  return runDoctorSync(city, client);
 }

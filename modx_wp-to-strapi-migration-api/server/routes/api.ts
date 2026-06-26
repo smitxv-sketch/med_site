@@ -7,7 +7,6 @@ import {
   upsertExportField,
   upsertExportTemplate,
 } from "../bridgeDb.js";
-import { runCheck } from "../lib/healthChecks.js";
 import {
   getChelDoctors,
   getChelServices,
@@ -21,9 +20,8 @@ import {
   getChelAnonces,
   getChelDirections,
 } from "../services/wpService.js";
-import { getSyncConfig, saveSyncConfig, getSyncLogs, runSync } from "../services/syncWorker.js";
+import { getSyncConfig, saveSyncConfig, getSyncLogs, getSyncRuns, runSync } from "../services/syncWorker.js";
 import { StrapiClient } from "../services/strapiClient.js";
-import { dbChel } from "../dbChel.js";
 import { exec } from 'child_process';
 import util from 'util';
 import fs from 'fs/promises';
@@ -36,11 +34,16 @@ import qaRoutes from "./qa.js";
 import exploreRoutes from "./explore.js";
 import legacyGuardRoutes from "./legacyGuard.js";
 import legacyDiagnosticsRoutes from "./legacyDiagnostics.js";
+import healthRoutes from "./health.js";
 import { legacyApiGuardMiddleware } from "../middleware/legacyApiGuard.js";
+import { fetchModxDoctorsWithTvs } from "../repositories/modx/doctorsRepository.js";
+import { fetchModxServicesWithDetails } from "../repositories/modx/servicesRepository.js";
 
 const execAsync = util.promisify(exec);
 
 const router = Router();
+
+router.use("/health", healthRoutes);
 
 // Защита legacy MySQL + контракт «данные частями»
 router.use(legacyApiGuardMiddleware);
@@ -260,58 +263,19 @@ router.post("/export/schema/field", async (req, res) => {
   }
 });
 
-router.get("/sync/logs", async (req, res) => {
-  res.json([]); // Placeholder for actual sync logs if implemented
+router.get("/sync/logs", async (_req, res) => {
+  const logs = await getSyncLogs(50);
+  res.json(logs);
 });
 
-router.get("/doctors", async (req, res) => {
+router.get("/sync/runs", async (_req, res) => {
+  const runs = await getSyncRuns(30);
+  res.json(runs);
+});
+
+router.get("/doctors", async (_req, res) => {
   try {
-    const prefix = getPrefix();
-    const excludedIds = await getExcludedIds();
-    const excludeCondition = excludedIds.length > 0 ? `AND c.id NOT IN (${excludedIds.join(',')})` : '';
-    const [doctors] = await pool.query(`
-      SELECT c.id, c.pagetitle, c.alias, c.parent, p.image, p.thumb
-      FROM ${prefix}site_content c
-      LEFT JOIN ${prefix}ms2_products p ON p.id = c.id
-      WHERE c.template = 7 AND c.parent != 209 AND c.published = 1 AND c.deleted = 0 ${excludeCondition}
-    `);
-    
-    // 2. Fetch TVs for doctors
-    const [tvValues] = await pool.query(`
-      SELECT tvc.contentid as resource_id, tv.name as tv_name, tvc.value 
-      FROM ${prefix}site_tmplvar_contentvalues tvc
-      JOIN ${prefix}site_tmplvars tv ON tv.id = tvc.tmplvarid
-      WHERE tvc.contentid IN (
-        SELECT id FROM ${prefix}site_content WHERE template = 7
-      )
-    `);
-
-    // 3. Map TVs to doctors
-    const doctorsWithDetails = (doctors as any[]).map(doc => {
-      const docTvs = (tvValues as any[]).filter(tv => tv.resource_id === doc.id);
-      const tvMap: Record<string, string> = {};
-      docTvs.forEach(tv => {
-        tvMap[tv.tv_name] = tv.value;
-      });
-
-      return {
-        ...doc,
-        name: doc.pagetitle,
-        rank: tvMap['rank'] || '',
-        specialization: tvMap['specintro'] || '',
-        experience: tvMap['specExperience'] || '',
-        education: tvMap['education'] || '',
-        description: tvMap['des'] || '',
-        photo: doc.image || tvMap['docImg'] || '',
-        thumb: doc.thumb || '',
-        seo: {
-          title: tvMap['title'] || '',
-          description: tvMap['des'] || ''
-        },
-        tvs: tvMap
-      };
-    });
-    
+    const doctorsWithDetails = await fetchModxDoctorsWithTvs();
     res.json(doctorsWithDetails);
   } catch (error) {
     console.error("Database error:", error);
@@ -319,75 +283,9 @@ router.get("/doctors", async (req, res) => {
   }
 });
 
-router.get("/services", async (req, res) => {
+router.get("/services", async (_req, res) => {
   try {
-    const prefix = getPrefix();
-    const excludedIds = await getExcludedIds();
-    const excludeCondition = excludedIds.length > 0 ? `AND id NOT IN (${excludedIds.join(',')})` : '';
-    const [services] = await pool.query(`
-      SELECT id, pagetitle, longtitle, description, introtext, content, parent as parent_id, alias 
-      FROM ${prefix}site_content 
-      WHERE template IN (6, 32) AND published = 1 AND deleted = 0 ${excludeCondition}
-    `);
-
-    // 2. Get categories (parents of services)
-    const [categories] = await pool.query(`
-      SELECT id, pagetitle 
-      FROM ${prefix}site_content 
-      WHERE id IN (SELECT DISTINCT parent FROM ${prefix}site_content WHERE template IN (6, 32))
-    `);
-
-    // 3. Get price items from custom table
-    let priceItems = [];
-    try {
-      const [prices] = await pool.query(`
-        SELECT * FROM ${prefix}pricelist_items2
-      `);
-      priceItems = prices as any[];
-    } catch (e) {
-      console.warn("Table pricelist_items2 might not exist yet:", e);
-    }
-
-    // 4. Fetch TVs for services
-    const [tvValues] = await pool.query(`
-      SELECT tvc.contentid as resource_id, tv.name as tv_name, tvc.value 
-      FROM ${prefix}site_tmplvar_contentvalues tvc
-      JOIN ${prefix}site_tmplvars tv ON tv.id = tvc.tmplvarid
-      WHERE tvc.contentid IN (
-        SELECT id FROM ${prefix}site_content WHERE template IN (6, 32)
-      )
-    `);
-
-    // 5. Map them together
-    const servicesWithDetails = (services as any[]).map(s => {
-      const category = (categories as any[]).find(c => c.id === s.parent_id);
-      
-      // Filter prices where the resource_id matches the service id
-      const servicePrices = priceItems.filter(p => p.resource_id === s.id);
-
-      // Map TVs
-      const srvTvs = (tvValues as any[]).filter(tv => tv.resource_id === s.id);
-      const tvMap: Record<string, string> = {};
-      srvTvs.forEach(tv => {
-        tvMap[tv.tv_name] = tv.value;
-      });
-
-      return {
-        ...s,
-        category,
-        price_items: servicePrices,
-        description: tvMap['des'] || '',
-        image: tvMap['img'] || '',
-        seo: {
-          title: tvMap['title'] || '',
-          description: tvMap['des'] || ''
-        },
-        tvs: tvMap,
-        doctors: [],
-        locations: []
-      };
-    });
-
+    const servicesWithDetails = await fetchModxServicesWithDetails();
     res.json(servicesWithDetails);
   } catch (error) {
     console.error("Database error:", error);
@@ -554,49 +452,6 @@ router.get("/sync/full-graph", async (req, res) => {
     console.error("Database error:", error);
     res.status(500).json({ error: "Failed to fetch full graph from database", details: String(error) });
   }
-});
-
-router.get("/health/live", (_req, res) => {
-  // Только «процесс слушает порт» — для Docker/Coolify (≤1s)
-  res.json({ status: "ok", service: "legacy-bridge" });
-});
-
-router.get("/health", async (_req, res) => {
-  const checks: Record<string, string> = {};
-
-  checks.bridge = await runCheck(
-    () => getBridgePool().query("SELECT 1"),
-    3000,
-    "bridge-pg",
-  );
-  if (checks.bridge !== "connected") {
-    return res.status(503).json({ status: "error", checks });
-  }
-
-  const spbHost = process.env.SPB_DB_HOST?.trim();
-  if (!spbHost) {
-    checks.modx = "not_configured";
-  } else {
-    // Не блокируем ответ: legacy MySQL может быть медленным/недоступным
-    checks.modx = await runCheck(
-      () => pool.raw.query("SELECT 1"),
-      2500,
-      "modx-spb",
-    );
-  }
-
-  const chelHost = process.env.CHEL_DB_HOST?.trim();
-  checks.chel = chelHost
-    ? await runCheck(() => dbChel.raw.query("SELECT 1"), 2500, "wp-chel")
-  : "not_configured";
-
-  const legacyOk =
-    checks.modx === "connected" || checks.modx === "not_configured";
-  res.status(legacyOk ? 200 : 207).json({
-    status: legacyOk ? "ok" : "degraded",
-    checks,
-    hint: "Use /api/health/live for orchestrator probes",
-  });
 });
 
 router.get("/export/schema/analyze", async (req, res) => {

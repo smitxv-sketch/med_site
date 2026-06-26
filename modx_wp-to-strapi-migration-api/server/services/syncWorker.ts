@@ -88,6 +88,41 @@ export const getSyncLogs = async (limit = 50) => {
   return rows;
 };
 
+/** История прогонов синка (фаза 2 плана) */
+export async function startSyncRun(
+  city: string,
+  entityType: string,
+  mode: string,
+): Promise<number> {
+  const { rows } = await getBridgePool().query<{ id: number }>(
+    `INSERT INTO sync_runs (city, entity_type, mode, status)
+     VALUES ($1, $2, $3, 'running') RETURNING id`,
+    [city, entityType, mode],
+  );
+  return rows[0].id;
+}
+
+export async function finishSyncRun(
+  runId: number,
+  status: 'success' | 'error',
+  report?: unknown,
+  errorMessage?: string,
+): Promise<void> {
+  await getBridgePool().query(
+    `UPDATE sync_runs SET status = $2, report = $3, error_message = $4, finished_at = NOW()
+     WHERE id = $1`,
+    [runId, status, report ? JSON.stringify(report) : null, errorMessage ?? null],
+  );
+}
+
+export async function getSyncRuns(limit = 20) {
+  const { rows } = await getBridgePool().query(
+    'SELECT * FROM sync_runs ORDER BY started_at DESC LIMIT $1',
+    [limit],
+  );
+  return rows;
+};
+
 export const runSync = async (city: "spb" | "chelyabinsk") => {
   const config = await getSyncConfig();
 

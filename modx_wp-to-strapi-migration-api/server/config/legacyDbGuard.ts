@@ -24,6 +24,10 @@ export const LEGACY_DB_GUARD = {
   httpRateLimitMax: readInt('LEGACY_HTTP_RATE_LIMIT', 35),
   /** Одно соединение к каждой legacy БД */
   connectionLimit: 1,
+  /** Кэш legacy ping в /api/health (мс) */
+  healthCacheMs: readInt('LEGACY_HEALTH_CACHE_MS', 120_000),
+  /** Пауза между upsert в Strapi при синке (мс) */
+  syncUpsertDelayMs: readInt('LEGACY_SYNC_UPSERT_DELAY_MS', 200),
 } as const;
 
 export type LegacyCity = 'chel' | 'spb';

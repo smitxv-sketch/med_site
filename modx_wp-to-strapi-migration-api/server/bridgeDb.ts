@@ -115,6 +115,18 @@ export async function initBridgeDb(): Promise<void> {
       last_synced TIMESTAMPTZ DEFAULT NOW(),
       UNIQUE(city, entity_type, original_id)
     );
+
+    CREATE TABLE IF NOT EXISTS sync_runs (
+      id SERIAL PRIMARY KEY,
+      city TEXT NOT NULL,
+      entity_type TEXT NOT NULL,
+      mode TEXT DEFAULT 'full',
+      status TEXT NOT NULL,
+      report JSONB,
+      error_message TEXT,
+      started_at TIMESTAMPTZ DEFAULT NOW(),
+      finished_at TIMESTAMPTZ
+    );
   `);
 }
 

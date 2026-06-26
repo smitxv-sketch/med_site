@@ -1,8 +1,6 @@
-import { pool, getPrefix } from '../db.js';
-import { getExcludedIds } from '../bridgeDb.js';
 import type { Doctor } from '../../src/types.js';
+import { loadAllModxDoctorsForSync } from '../repositories/modx/doctorsRepository.js';
 
-/** TV-ключи, где может лежать ID врача в МИС (пока ищем по whitelist) */
 const MIS_ID_TV_KEYS = ['qms_id', 'mis_id', 'misId', 'qqc', 'doctor_qms'] as const;
 
 function pickMisId(tvMap: Record<string, string>): string {
@@ -18,39 +16,13 @@ function parseExperience(raw: string): number {
   return Number.isFinite(n) ? n : 0;
 }
 
-/** Врачи СПб из MODX (template 7) для синка в Strapi */
+/** Врачи СПб из MODX (chunked) для синка в Strapi */
 export async function getSpbDoctorsForSync(): Promise<Doctor[]> {
-  const prefix = getPrefix();
-  const excludedIds = await getExcludedIds();
-  const excludeCondition =
-    excludedIds.length > 0 ? `AND c.id NOT IN (${excludedIds.join(',')})` : '';
+  const rows = await loadAllModxDoctorsForSync();
 
-  const [doctors] = await pool.query(`
-    SELECT c.id, c.pagetitle, c.alias, c.parent, p.image, p.thumb
-    FROM ${prefix}site_content c
-    LEFT JOIN ${prefix}ms2_products p ON p.id = c.id
-    WHERE c.template = 7 AND c.parent != 209 AND c.published = 1 AND c.deleted = 0 ${excludeCondition}
-  `);
-
-  const [tvValues] = await pool.query(`
-    SELECT tvc.contentid as resource_id, tv.name as tv_name, tvc.value
-    FROM ${prefix}site_tmplvar_contentvalues tvc
-    JOIN ${prefix}site_tmplvars tv ON tv.id = tvc.tmplvarid
-    WHERE tvc.contentid IN (
-      SELECT id FROM ${prefix}site_content WHERE template = 7 AND parent != 209
-    )
-  `);
-
-  return (doctors as Array<Record<string, unknown>>).map((doc) => {
+  return rows.map((doc) => {
     const docId = doc.id as number;
-    const docTvs = (tvValues as Array<{ resource_id: number; tv_name: string; value: string }>).filter(
-      (tv) => tv.resource_id === docId,
-    );
-    const tvMap: Record<string, string> = {};
-    docTvs.forEach((tv) => {
-      tvMap[tv.tv_name] = tv.value;
-    });
-
+    const tvMap = (doc.tvMap as Record<string, string>) || {};
     const rank = tvMap.rank || '';
     const rankParts = [tvMap.position, tvMap.zvanie, tvMap.degree, rank].filter(Boolean);
 

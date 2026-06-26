@@ -120,11 +120,24 @@ export class StrapiClient {
     legacyId: string,
     locale: string,
   ): Promise<{ documentId: string; contentLocked?: boolean } | null> {
+    const row = await this.findRowByLegacyId(collection, legacyId, locale);
+    if (row) return row;
+
+    // Fallback: записи без нужной locale (миграция ru-RU → ru-chel)
+    return this.findRowByLegacyId(collection, legacyId);
+  }
+
+  private async findRowByLegacyId(
+    collection: string,
+    legacyId: string,
+    locale?: string,
+  ): Promise<{ documentId: string; contentLocked?: boolean } | null> {
     const qs = new URLSearchParams({
       'filters[legacyId][$eq]': legacyId,
-      locale,
       'pagination[pageSize]': '1',
     });
+    if (locale) qs.set('locale', locale);
+
     const res = await this.fetchWithRetry(`${this.baseUrl}/api/${collection}?${qs}`, {
       headers: { Authorization: `Bearer ${this.token}` },
     });
