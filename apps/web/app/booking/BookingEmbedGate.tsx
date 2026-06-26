@@ -26,10 +26,10 @@ export function BookingEmbedGate({
 
     async function probe() {
       try {
-        const [configRes, doctorsRes, servicesRes] = await Promise.all([
+        // Сначала быстрые эндпоинты — services из QMS может отвечать 10–15 с
+        const [configRes, doctorsRes] = await Promise.all([
           fetch('/api/config', { cache: 'no-store' }),
           fetch('/api/wp-doctors', { cache: 'no-store' }),
-          fetch('/api/services?city=chel', { cache: 'no-store' }),
         ]);
 
         if (!configRes.ok || !doctorsRes.ok) {
@@ -37,18 +37,20 @@ export function BookingEmbedGate({
           return;
         }
 
-        const [doctors, services] = await Promise.all([
-          doctorsRes.json(),
-          servicesRes.ok ? servicesRes.json() : [],
-        ]);
-
+        const doctors = await doctorsRes.json();
         const hasDoctors = Array.isArray(doctors) && doctors.length > 0;
+
+        if (hasDoctors) {
+          if (!cancelled) setStatus('ready');
+          return;
+        }
+
+        // Нет врачей в REST — смотрим услуги QMS (медленнее)
+        const servicesRes = await fetch('/api/services?city=chel', { cache: 'no-store' });
+        const services = servicesRes.ok ? await servicesRes.json() : [];
         const hasServices = Array.isArray(services) && services.length > 0;
 
-        if (!cancelled) {
-          if (hasServices || hasDoctors) setStatus('ready');
-          else setStatus('empty');
-        }
+        if (!cancelled) setStatus(hasServices ? 'ready' : 'empty');
       } catch {
         if (!cancelled) setStatus('unavailable');
       }
