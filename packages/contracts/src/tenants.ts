@@ -30,8 +30,7 @@ export const TENANTS: readonly TenantConfig[] = [
     id: 'spb',
     displayName: 'Санкт-Петербург',
     strapiLocale: 'ru-spb',
-    // Dormant: зарезервировано под будущий домен/маршрутинг
-    publicBaseUrl: 'https://spb.example.ru',
+    publicBaseUrl: 'https://istochnik.smitx.ru/spb',
     routing: {
       mode: 'path-prefix',
       pathPrefix: '/spb',

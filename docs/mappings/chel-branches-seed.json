@@ -1,37 +1,49 @@
 [
   {
     "legacyId": "241",
-    "name": "Клиника Источник (филиал 241)",
-    "slug": "chel-clinic-241",
-    "city": "chel"
+    "name": "Клиника в ЖК Александровский",
+    "slug": "zhk-aleksandrovskiy",
+    "city": "chel",
+    "address": "ул. 40-летия Победы, 11"
   },
   {
     "legacyId": "242",
-    "name": "Клиника Источник (филиал 242)",
-    "slug": "chel-clinic-242",
-    "city": "chel"
+    "name": "Клиника в ЖК Подсолнухи",
+    "slug": "zhk-podsolnuhi",
+    "city": "chel",
+    "address": "ул. Чичерина, 34А"
+  },
+  {
+    "legacyId": "243",
+    "name": "Скорая помощь",
+    "slug": "skoraya-pomoshch",
+    "city": "chel",
+    "address": "ул. 40-летия Победы, 11"
   },
   {
     "legacyId": "244",
-    "name": "ЭкоКлиника (филиал 244)",
-    "slug": "chel-clinic-244",
-    "city": "chel"
+    "name": "Клиника в Лесном острове",
+    "slug": "lesnoy-ostrov",
+    "city": "chel",
+    "address": "ул. Градостроителей, 1/3"
   },
   {
     "legacyId": "245",
-    "name": "Клиника Источник (филиал 245)",
-    "slug": "chel-clinic-245",
-    "city": "chel"
+    "name": "Клиника ЭКО",
+    "slug": "klinika-eko",
+    "city": "chel",
+    "address": "Челябинск, ул. Чичерина, 36В"
   },
   {
     "legacyId": "246",
-    "name": "Клиника Источник (филиал 246)",
-    "slug": "chel-clinic-246",
-    "city": "chel"
+    "name": "Отделение косметологии",
+    "slug": "kosmetologiya",
+    "city": "chel",
+    "address": "ул. Чичерина, 34А"
   },
   {
     "legacyId": "spb-main",
-    "name": "Клиника Источник, Санкт-Петербург",
+    "name": "Клиника «Источник», Санкт-Петербург",
     "slug": "spb-istochnik",
     "city": "spb",
     "address": "Санкт-Петербург"

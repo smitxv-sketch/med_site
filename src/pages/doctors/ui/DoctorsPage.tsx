@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
 import { useDoctorsRepository } from '../../../shared/di/DIContext';
+import { useTenant } from '@/shared/tenant/TenantContext';
 import { Doctor } from '../../../widget/types';
 import { formatSpecialty } from '../../../widget/utils/formatters';
 import { DoctorCard, ProcessedDoctor } from './components/DoctorCard';
@@ -11,10 +12,11 @@ import { Card } from '@/shared/ui/Card';
 
 export function DoctorsPage() {
   const doctorsRepository = useDoctorsRepository();
+  const { tenantId, tenant } = useTenant();
 
   const { data: doctors, isLoading, error } = useQuery<Doctor[]>({
-    queryKey: ['doctors'],
-    queryFn: () => doctorsRepository.getAllDoctors()
+    queryKey: ['doctors', tenantId],
+    queryFn: () => doctorsRepository.getAllDoctors(),
   });
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -104,7 +106,10 @@ export function DoctorsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-1.5 md:gap-2 mb-5 md:mb-8">
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">Наши врачи</h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
+              Наши врачи
+              <span className="sr-only"> — {tenant.displayName}</span>
+            </h1>
             <span className="inline-flex items-center justify-center px-3 py-1 bg-brand/10 text-brand rounded-full font-bold text-sm">
               {filteredDoctors.length}
             </span>

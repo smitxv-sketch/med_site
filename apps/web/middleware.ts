@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { resolveTenant } from '@med-site/contracts';
 
 /** Внутренний BFF в том же контейнере site-ci (см. scripts/start-platform.mjs) */
 const BFF_BASE =
   process.env.BFF_INTERNAL_URL ||
   `http://127.0.0.1:${process.env.BFF_PORT ?? '3001'}`;
 
-/** Пути виджета записи и каталога врачей — rewrites в next.config на проде не срабатывали */
+/** Пути виджета записи и каталога врачей */
 const BOOKING_API_PREFIXES = [
   '/api/wp-doctors',
   '/api/branches',
@@ -26,18 +27,16 @@ function isBookingApi(pathname: string): boolean {
   );
 }
 
-export async function middleware(request: NextRequest) {
+async function proxyBookingBff(request: NextRequest): Promise<NextResponse> {
   const { pathname, search } = request.nextUrl;
-  if (!isBookingApi(pathname)) {
-    return NextResponse.next();
-  }
-
   const target = `${BFF_BASE}${pathname}${search}`;
   const headers = new Headers();
   const contentType = request.headers.get('content-type');
   if (contentType) headers.set('content-type', contentType);
   const auth = request.headers.get('authorization');
   if (auth) headers.set('authorization', auth);
+  const tenantId = request.headers.get('x-tenant-id');
+  if (tenantId) headers.set('x-tenant-id', tenantId);
 
   const init: RequestInit = {
     method: request.method,
@@ -62,6 +61,39 @@ export async function middleware(request: NextRequest) {
   }
 }
 
+export async function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  const host =
+    request.headers.get('x-forwarded-host') ??
+    request.headers.get('host') ??
+    'localhost';
+
+  const { tenant, strippedPathname } = resolveTenant({ host, pathname });
+
+  if (isBookingApi(pathname)) {
+    const reqHeaders = new Headers(request.headers);
+    reqHeaders.set('x-tenant-id', tenant.id);
+    return proxyBookingBff(
+      new NextRequest(request.url, { headers: reqHeaders, method: request.method }),
+    );
+  }
+
+  if (
+    tenant.routing.mode === 'path-prefix' &&
+    strippedPathname !== pathname
+  ) {
+    const url = request.nextUrl.clone();
+    url.pathname = strippedPathname;
+    const reqHeaders = new Headers(request.headers);
+    reqHeaders.set('x-tenant-id', tenant.id);
+    return NextResponse.rewrite(url, { request: { headers: reqHeaders } });
+  }
+
+  const reqHeaders = new Headers(request.headers);
+  reqHeaders.set('x-tenant-id', tenant.id);
+  return NextResponse.next({ request: { headers: reqHeaders } });
+}
+
 export const config = {
   matcher: [
     '/api/wp-doctors/:path*',
@@ -76,5 +108,7 @@ export const config = {
     '/api/catalog/doctors',
     '/api/diagnostics',
     '/api/diagnostics/:path*',
+    '/spb',
+    '/spb/:path*',
   ],
 };

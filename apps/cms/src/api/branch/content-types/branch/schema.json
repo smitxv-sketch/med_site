@@ -5,7 +5,7 @@
     "singularName": "branch",
     "pluralName": "branches",
     "displayName": "Branch",
-    "description": "Филиалы клиники (ЧЛБ: clinics, СПб: один тех. филиал)"
+    "description": "Филиалы организации (tenant = locale в Strapi: ru-chel / ru-spb). Одна организация на город."
   },
   "options": {
     "draftAndPublish": true

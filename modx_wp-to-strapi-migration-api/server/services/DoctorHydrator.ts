@@ -8,6 +8,8 @@ import {
   resolveChelSpecialtySlugs,
   resolveSpbSpecialtySlugs,
   normalizeSpecialtySlugs,
+  inferSpecialtySlugsFromText,
+  isChelDoctorEnabled,
 } from './specialtySsotLoader.js';
 
 const LOCALES = { chel: 'ru-chel', spb: 'ru-spb' } as const;
@@ -56,6 +58,9 @@ export function hydrateDoctorFromLegacy(
 
   const fullName = doc.pagetitle || 'Без имени';
   const meta = asMeta(doc);
+
+  if (source === 'chel' && !isChelDoctorEnabled(meta)) return null;
+
   const tvs = (doc.tvs || {}) as Record<string, string>;
 
   let specialtySlugs: string[] = [];
@@ -63,6 +68,12 @@ export function hydrateDoctorFromLegacy(
 
   if (source === 'chel') {
     specialtySlugs = resolveChelSpecialtySlugs(meta, ctx.ssot);
+    if (!specialtySlugs.length) {
+      specialtySlugs = inferSpecialtySlugsFromText(
+        doc.specialization || String(meta.specialty || ''),
+        ctx.ssot,
+      );
+    }
     branchLegacyIds = resolveChelBranchLegacyIds(meta);
   } else {
     const pageSlug = String(doc.alias || '').replace(/^doctor-/, '');
@@ -70,6 +81,12 @@ export function hydrateDoctorFromLegacy(
       resolveSpbSpecialtySlugs(ctx.spbSpecialtyMap, fullName, pageSlug),
       ctx.ssot,
     );
+    if (!specialtySlugs.length) {
+      specialtySlugs = inferSpecialtySlugsFromText(
+        doc.specialization || String(tvs.specintro || ''),
+        ctx.ssot,
+      );
+    }
     branchLegacyIds = ['spb-main'];
   }
 

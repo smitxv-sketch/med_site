@@ -59,16 +59,17 @@ export function resolveTenant(input: TenantResolveInput): TenantResolveResult {
   const host = normalizeHost(input.host);
   const pathname = normalizePath(input.pathname);
 
-  for (const tenant of TENANTS) {
-    if (matchesDomain(tenant.routing, host)) {
-      return { tenant, strippedPathname: pathname };
-    }
-  }
-
+  // Path-prefix (СПб на /spb) важнее domain-match: иначе chel «съедает» тот же хост
   for (const tenant of TENANTS) {
     const stripped = matchesPathPrefix(tenant.routing, pathname);
     if (stripped !== null) {
       return { tenant, strippedPathname: stripped };
+    }
+  }
+
+  for (const tenant of TENANTS) {
+    if (matchesDomain(tenant.routing, host)) {
+      return { tenant, strippedPathname: pathname };
     }
   }
 

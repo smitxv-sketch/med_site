@@ -15,6 +15,10 @@ export async function proxyBookingBff(
   req.nextUrl.searchParams.forEach((value, key) => {
     url.searchParams.set(key, value);
   });
+  const tenantId = req.headers.get('x-tenant-id');
+  if (tenantId && !url.searchParams.has('tenant')) {
+    url.searchParams.set('tenant', tenantId);
+  }
 
   const headers: Record<string, string> = {};
   const contentType = req.headers.get('content-type');
@@ -22,7 +26,8 @@ export async function proxyBookingBff(
   const auth = req.headers.get('authorization');
   if (auth) headers.Authorization = auth;
 
-  const init: RequestInit = { method, headers, cache: 'no-store' };
+  const tenantId = req.headers.get('x-tenant-id');
+  if (tenantId) url.searchParams.set('tenant', tenantId);
   if (method !== 'GET' && method !== 'HEAD') {
     init.body = await req.text();
   }

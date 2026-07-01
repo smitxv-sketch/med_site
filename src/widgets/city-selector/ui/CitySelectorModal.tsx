@@ -8,10 +8,21 @@ import { useSiteStore } from '@/shared/store/siteStore';
 import { useTenant } from '@/shared/tenant/TenantContext';
 import { isStudioApp } from '@/shared/config/appTarget';
 
+import { resolveTenant } from '@med-site/contracts';
+
 /** Переключение tenant при выборе города на публичном сайте */
 function navigateToTenant(tenantId: string) {
   const target = TENANTS.find((t) => t.id === tenantId);
   if (!target) return;
+
+  if (target.routing.mode === 'path-prefix') {
+    const { strippedPathname } = resolveTenant({
+      host: window.location.host,
+      pathname: window.location.pathname,
+    });
+    window.location.href = `${target.routing.pathPrefix}${strippedPathname}`;
+    return;
+  }
 
   if (target.routing.mode === 'multi-host' && target.publicBaseUrl) {
     const url = new URL(target.publicBaseUrl);
@@ -19,10 +30,6 @@ function navigateToTenant(tenantId: string) {
       window.location.href = target.publicBaseUrl;
       return;
     }
-  }
-
-  if (target.routing.mode === 'path-prefix') {
-    window.location.href = `${target.routing.pathPrefix}/`;
   }
 }
 

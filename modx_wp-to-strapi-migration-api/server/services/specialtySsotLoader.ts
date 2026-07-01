@@ -157,6 +157,34 @@ export function resolveSpbSpecialtySlugs(
   );
 }
 
+/** WP speclist term_id вне словаря Яндекс → slug SSOT */
+const CHEL_WP_TERM_EXTRA: Record<string, string> = {
+  '1296': 'lor', // оториноларинголог → лор (отоларинголог)
+  '1297': 'oftalmolog', // офтальмолог → офтальмолог (окулист)
+};
+
+/** Извлечь SSOT slug из свободного текста специальности (fallback без feed_spec) */
+export function inferSpecialtySlugsFromText(text: string, ssot: SsotIndex): string[] {
+  const n = normKey(text);
+  if (!n) return [];
+  const found: string[] = [];
+  const sorted = [...ssot.items].sort(
+    (a, b) => b.yandexName.length - a.yandexName.length,
+  );
+  for (const item of sorted) {
+    const yn = normKey(item.yandexName.replace(/\s*\([^)]*\)\s*/g, ' '));
+    if (yn.length < 4) continue;
+    if (n.includes(yn)) found.push(item.slug);
+  }
+  return [...new Set(found)];
+}
+
+export function isChelDoctorEnabled(rawMeta: Record<string, unknown>): boolean {
+  const val = rawMeta.enabled;
+  if (val === undefined || val === null || val === '') return true;
+  return val === true || val === 1 || val === '1' || val === 'true';
+}
+
 export async function loadBranchSeed(): Promise<BranchSeedRow[]> {
   const file = await resolveMappingFile('chel-branches-seed.json');
   return JSON.parse(await fs.readFile(file, 'utf8')) as BranchSeedRow[];
@@ -170,8 +198,9 @@ export function resolveChelSpecialtySlugs(
   const list = Array.isArray(ids) ? ids : ids ? [ids] : [];
   const slugs = new Set<string>();
   for (const id of list) {
-    const slug = ssot.byWpTermId.get(String(id));
-    if (slug) slugs.add(slug);
+    const key = String(id);
+    const slug = ssot.byWpTermId.get(key) ?? CHEL_WP_TERM_EXTRA[key];
+    if (slug && ssot.bySlug.has(slug)) slugs.add(slug);
   }
   return [...slugs];
 }
