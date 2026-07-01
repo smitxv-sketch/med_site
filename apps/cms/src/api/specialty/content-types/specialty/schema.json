@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "specialties",
+  "info": {
+    "singularName": "specialty",
+    "pluralName": "specialties",
+    "displayName": "Specialty",
+    "description": "Справочник специальностей (SSOT = словарь Яндекс.Врачи / speclist)"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "yandexName": {
+      "type": "string",
+      "required": true
+    },
+    "chelWpTermId": {
+      "type": "integer"
+    },
+    "doctors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::doctor.doctor",
+      "mappedBy": "specialties"
+    }
+  }
+}

@@ -7,14 +7,33 @@ export type DoctorCanonical = {
   legacySource: 'chel' | 'spb';
   misId: string;
   fullName: string;
+  /** Текстовая специальность с legacy (для карточки / fallback) */
   specialty: string;
+  /** Slug из справочника Specialty (SSOT Яндекс) */
+  specialtySlugs: string[];
+  /** legacyId филиалов (post clinics ЧЛБ или spb-main) */
+  branchLegacyIds: string[];
   photoUrl: string;
   experienceYears: number;
   degree: string;
   category: string;
   position: string;
+  zvanie: string;
   slug: string;
   locale: string;
+  regalia: string;
+  activities: string;
+  bio: string;
+  education: string;
+  extraEducation: string;
+  conferences: string;
+  seoTitle: string;
+  seoDescription: string;
+  phone: string;
+  sortOrder: number;
+  allowBooking: boolean;
+  isAdultDoctor: boolean;
+  isChildDoctor: boolean;
 };
 
 export type SyncReport = {
@@ -25,6 +44,7 @@ export type SyncReport = {
   errors: Array<{ legacyId: string; message: string }>;
 };
 
+/** Поля, обновляемые при каждом safe-синке */
 export const SAFE_DOCTOR_FIELDS = [
   'fullName',
   'misId',
@@ -34,4 +54,22 @@ export const SAFE_DOCTOR_FIELDS = [
   'degree',
   'category',
   'position',
+  'zvanie',
+  'seoTitle',
+  'seoDescription',
+  'phone',
+  'sortOrder',
+  'allowBooking',
+  'isAdultDoctor',
+  'isChildDoctor',
+] as const;
+
+/** Импорт один раз при создании (если не contentLocked) */
+export const IMPORT_ONCE_DOCTOR_FIELDS = [
+  'regalia',
+  'activities',
+  'bio',
+  'education',
+  'extraEducation',
+  'conferences',
 ] as const;

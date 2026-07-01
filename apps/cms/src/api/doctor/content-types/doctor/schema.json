@@ -45,6 +45,18 @@
       "type": "string",
       "pluginOptions": { "i18n": { "localized": true } }
     },
+    "specialties": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::specialty.specialty",
+      "inversedBy": "doctors"
+    },
+    "branches": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::branch.branch",
+      "inversedBy": "doctors"
+    },
     "photoUrl": {
       "type": "string"
     },
@@ -69,6 +81,18 @@
       "type": "string",
       "pluginOptions": { "i18n": { "localized": true } }
     },
+    "zvanie": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "regalia": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "activities": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
     "bio": {
       "type": "richtext",
       "pluginOptions": { "i18n": { "localized": true } }
@@ -76,6 +100,41 @@
     "education": {
       "type": "richtext",
       "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "extraEducation": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "conferences": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "seoTitle": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "seoDescription": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "phone": {
+      "type": "string"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "allowBooking": {
+      "type": "boolean",
+      "default": true
+    },
+    "isAdultDoctor": {
+      "type": "boolean",
+      "default": true
+    },
+    "isChildDoctor": {
+      "type": "boolean",
+      "default": false
     },
     "contentLocked": {
       "type": "boolean",

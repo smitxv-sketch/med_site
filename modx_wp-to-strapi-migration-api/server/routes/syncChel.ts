@@ -3,6 +3,7 @@ import { StrapiClient } from '../services/strapiClient.js';
 import { getSyncConfig, logSyncEvent } from '../services/syncWorker.js';
 import { runDoctorSync } from '../services/SyncOrchestrator.js';
 import { syncChelNewsContent } from '../services/syncChelContent.js';
+import { syncReferenceCatalogs } from '../services/syncCatalogs.js';
 
 const router = Router();
 
@@ -15,6 +16,21 @@ async function buildStrapiClient() {
   }
   return new StrapiClient(baseUrl, token);
 }
+
+router.post('/catalogs', async (_req, res) => {
+  try {
+    const client = await buildStrapiClient();
+    const conn = await client.checkConnection();
+    if (!conn.success) {
+      return res.status(502).json(conn);
+    }
+    const catalogs = await syncReferenceCatalogs(client);
+    res.json({ ok: true, catalogs });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    res.status(500).json({ ok: false, error: message });
+  }
+});
 
 /** Синк врачей Челябинска → Strapi (REST ci74.ru, без MySQL) */
 router.post('/doctors', async (_req, res) => {

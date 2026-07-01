@@ -30,6 +30,7 @@ COPY --from=builder --chown=bridge:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=bridge:nodejs /app/dist ./dist
 COPY --from=builder --chown=bridge:nodejs /app/server ./server
 COPY --from=builder --chown=bridge:nodejs /app/server.ts ./server.ts
+COPY --from=builder --chown=bridge:nodejs /app/data ./data
 
 USER bridge
 

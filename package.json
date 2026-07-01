@@ -28,6 +28,7 @@
     "smoke:platform": "node scripts/smoke-platform.mjs",
     "smoke:prod": "node scripts/smoke-platform.mjs --prod",
     "qms:inventory": "node scripts/qms-fetch-pricelist.mjs --write-docs",
+    "qms:test-spb-proxy": "node scripts/test-qms-spb-proxy.mjs",
     "uat:focus": "node scripts/uat-focus.mjs",
     "test:e2e": "playwright test -c e2e/playwright.config.ts",
     "test:e2e:prod": "node scripts/run-e2e.mjs --prod",

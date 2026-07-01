@@ -1,0 +1,1669 @@
+{
+  "version": 1,
+  "ssot": "yandex_speclist",
+  "description": "Единый справочник специальностей. Канон = словарь Яндекс.Врачи (ACF feed_spec). СПб specintro приводится к этим slug при синке.",
+  "generatedAt": "2026-07-01T13:58:24.672Z",
+  "sources": {
+    "acf": "acf/acf-export-2026-07-01.json",
+    "chelWp": "https://ci74.ru/wp-json/wp/v2/speclist",
+    "spbPages": "https://cispb.com/sitemap.xml → /sotrudniki/*"
+  },
+  "items": [
+    {
+      "id": 1,
+      "yandexName": "абдоминальный хирург",
+      "slug": "абдоминальный-хирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 2,
+      "yandexName": "акушер",
+      "slug": "акушер",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 3,
+      "yandexName": "акушер-гинеколог",
+      "slug": "akusher-ginekolog",
+      "chelWpTermId": 1267,
+      "chelWpName": "Акушер-гинеколог",
+      "chelDoctorsCount": 11,
+      "spbDoctorsCount": 14,
+      "spbRawVariants": [
+        "Заместитель главного врача по ВРТ, врач — акушер-гинеколог, репродуктолог, врач ультразвуковой диагностики, кандидат медицинских наук.",
+        "Врач — акушер-гинеколог первой категории, репродуктолог, врач ультразвуковой диагностики.",
+        "Врач — акушер-гинеколог, репродуктолог, врач ультразвуковой диагностики.",
+        "Старший врач акушер-гинеколог отделения ВРТ, репродуктолог, врач ультразвуковой диагностики, врач высшей категории.",
+        "Врач-акушер-гинеколог, репродуктолог, врач ультразвуковой диагностики.",
+        "Врач акушер-гинеколог, репродуктолог, оперирующий гинеколог. Доктор медицинских наук, доцент кафедры акушерства и гинекологии с клиникой ФГБУ «НМИЦ им. В. А. Алмазова» Минздрава России.",
+        "Заместитель главного врача по акушерству и гинекологии, врач акушер-гинеколог, кандидат медицинских наук.",
+        "Врач — акушер-гинеколог высшей квалификационной категории, врач ультразвуковой диагностики, кандидат медицинских наук.",
+        "Врач — акушер-гинеколог, врач ультразвуковой диагностики, кандидат медицинских наук.",
+        "Врач — акушер-гинеколог высшей квалификационной категории, врач ультразвуковой диагностики.",
+        "Врач — акушер-гинеколог, врач ультразвуковой диагностики.",
+        "Врач акушер-гинеколог, врач ультразвуковой диагностики",
+        "Врач-акушер-гинеколог, врач ультразвуковой диагностики",
+        "Врач пренатальной ультразвуковой диагностики, врач акушер-гинеколог"
+      ]
+    },
+    {
+      "id": 4,
+      "yandexName": "аллерголог",
+      "slug": "аллерголог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 5,
+      "yandexName": "аллерголог-иммунолог",
+      "slug": "allergolog-immunolog",
+      "chelWpTermId": 1278,
+      "chelWpName": "аллерголог-иммунолог",
+      "chelDoctorsCount": 2,
+      "spbDoctorsCount": 1,
+      "spbRawVariants": [
+        "Врач аллерголог-иммунолог, врач аллерголог, врач иммунолог"
+      ]
+    },
+    {
+      "id": 6,
+      "yandexName": "андролог",
+      "slug": "androlog",
+      "chelWpTermId": 1306,
+      "chelWpName": "андролог",
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 2,
+      "spbRawVariants": [
+        "Уролог, уролог-андролог",
+        "Уролог, уролог-андролог, врач ультразвуковой диагностики"
+      ]
+    },
+    {
+      "id": 7,
+      "yandexName": "анестезиолог",
+      "slug": "анестезиолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 8,
+      "yandexName": "анестезиолог-реаниматолог",
+      "slug": "анестезиолог-реаниматолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 2,
+      "spbRawVariants": [
+        "Врач-нефролог, анестезиолог-реаниматолог, врач высшей квалификационной категории. Кандидат медицинских наук.",
+        "Врач — анестезиолог-реаниматолог."
+      ]
+    },
+    {
+      "id": 9,
+      "yandexName": "аритмолог",
+      "slug": "аритмолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 10,
+      "yandexName": "артролог",
+      "slug": "артролог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 11,
+      "yandexName": "бариатрический хирург",
+      "slug": "бариатрический-хирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 12,
+      "yandexName": "вегетолог",
+      "slug": "вегетолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 13,
+      "yandexName": "венеролог",
+      "slug": "венеролог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 14,
+      "yandexName": "вертебролог",
+      "slug": "вертебролог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 15,
+      "yandexName": "вирусолог",
+      "slug": "вирусолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 16,
+      "yandexName": "врач лабораторной диагностики",
+      "slug": "врач-лабораторной-диагностики",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 17,
+      "yandexName": "врач лфк",
+      "slug": "врач-лфк",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 18,
+      "yandexName": "врач общей практики",
+      "slug": "vrach-obshhej-praktiki",
+      "chelWpTermId": 1302,
+      "chelWpName": "врач общей практики",
+      "chelDoctorsCount": 2,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 19,
+      "yandexName": "врач по медико-социальной экспертизе",
+      "slug": "врач-по-медико-социальной-экспертизе",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 20,
+      "yandexName": "врач по паллиативной медицинской помощи",
+      "slug": "врач-по-паллиативной-медицинской-помощи",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 21,
+      "yandexName": "врач по спортивной медицине",
+      "slug": "врач-по-спортивной-медицине",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 22,
+      "yandexName": "врач по рентгенэндоваскулярным диагностике и лечению",
+      "slug": "врач-по-рентгенэндоваскулярным-диагностике-и-лечению",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 23,
+      "yandexName": "врач скорой помощи",
+      "slug": "врач-скорой-помощи",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 24,
+      "yandexName": "врач функциональной диагностики",
+      "slug": "vrach-funkcionalnoj-diagnostiki",
+      "chelWpTermId": 1277,
+      "chelWpName": "врач функциональной диагностики",
+      "chelDoctorsCount": 1,
+      "spbDoctorsCount": 2,
+      "spbRawVariants": [
+        "Врач функциональной диагностики высшей квалификационной категории.",
+        "Кардиолог. Врач функциональной диагностики"
+      ]
+    },
+    {
+      "id": 25,
+      "yandexName": "врач эфферентной терапии",
+      "slug": "врач-эфферентной-терапии",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 26,
+      "yandexName": "гастроэнтеролог",
+      "slug": "gastrojenterolog",
+      "chelWpTermId": 1279,
+      "chelWpName": "гастроэнтеролог",
+      "chelDoctorsCount": 1,
+      "spbDoctorsCount": 4,
+      "spbRawVariants": [
+        "Врач-эндокринолог высшей категории, терапевт, гастроэнтеролог. Кандидат медицинских наук.",
+        "Врач-гастроэнтеролог высшей квалификационной категории, терапевт, диетолог.",
+        "Врач-эндоскопист"
+      ]
+    },
+    {
+      "id": 27,
+      "yandexName": "гематолог",
+      "slug": "gematolog",
+      "chelWpTermId": 1280,
+      "chelWpName": "гематолог",
+      "chelDoctorsCount": 1,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 28,
+      "yandexName": "гемостазиолог",
+      "slug": "gemostaziolog",
+      "chelWpTermId": 1281,
+      "chelWpName": "гемостазиолог",
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 2,
+      "spbRawVariants": [
+        "Врач-терапевт, гемостазиолог",
+        "Терапевт"
+      ]
+    },
+    {
+      "id": 29,
+      "yandexName": "генетик",
+      "slug": "genetik",
+      "chelWpTermId": 1288,
+      "chelWpName": "генетик",
+      "chelDoctorsCount": 1,
+      "spbDoctorsCount": 1,
+      "spbRawVariants": [
+        "Врач-генетик"
+      ]
+    },
+    {
+      "id": 30,
+      "yandexName": "гепатолог",
+      "slug": "гепатолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 31,
+      "yandexName": "гериатр (геронтолог)",
+      "slug": "гериатр",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 32,
+      "yandexName": "гинеколог",
+      "slug": "гинеколог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 33,
+      "yandexName": "гинеколог-эндокринолог",
+      "slug": "ginekolog-jendokrinolog",
+      "chelWpTermId": 1271,
+      "chelWpName": "Гинеколог-эндокринолог",
+      "chelDoctorsCount": 1,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 34,
+      "yandexName": "гипнолог",
+      "slug": "гипнолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 35,
+      "yandexName": "гирудотерапевт",
+      "slug": "гирудотерапевт",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 36,
+      "yandexName": "гнатолог",
+      "slug": "гнатолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 37,
+      "yandexName": "гнойный хирург",
+      "slug": "гнойный-хирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 38,
+      "yandexName": "дезинфектолог",
+      "slug": "дезинфектолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 39,
+      "yandexName": "дерматолог",
+      "slug": "dermatolog",
+      "chelWpTermId": 1272,
+      "chelWpName": "Дерматолог",
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 40,
+      "yandexName": "дерматовенеролог",
+      "slug": "dermatovenerolog",
+      "chelWpTermId": 1273,
+      "chelWpName": "Дерматовенеролог",
+      "chelDoctorsCount": 5,
+      "spbDoctorsCount": 2,
+      "spbRawVariants": [
+        "Врач-дерматовенеролог высшей квалификационной категории",
+        "Врач-дерматовенеролог. Врач-педиатр"
+      ]
+    },
+    {
+      "id": 41,
+      "yandexName": "дефектолог",
+      "slug": "дефектолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 42,
+      "yandexName": "диабетолог",
+      "slug": "диабетолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 43,
+      "yandexName": "диетолог",
+      "slug": "dietolog",
+      "chelWpTermId": 1285,
+      "chelWpName": "диетолог",
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 2,
+      "spbRawVariants": [
+        "Врач-эндокринолог, диетолог",
+        "Врач-гастроэнтеролог высшей квалификационной категории, терапевт, диетолог."
+      ]
+    },
+    {
+      "id": 44,
+      "yandexName": "иммунолог",
+      "slug": "иммунолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 45,
+      "yandexName": "инструктор лфк",
+      "slug": "инструктор-лфк",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 46,
+      "yandexName": "инфекционист",
+      "slug": "инфекционист",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 47,
+      "yandexName": "кардиолог",
+      "slug": "kardiolog",
+      "chelWpTermId": 1274,
+      "chelWpName": "кардиолог",
+      "chelDoctorsCount": 8,
+      "spbDoctorsCount": 2,
+      "spbRawVariants": [
+        "Врач-нефролог, анестезиолог-реаниматолог, врач высшей квалификационной категории. Кандидат медицинских наук.",
+        "Кардиолог. Врач функциональной диагностики"
+      ]
+    },
+    {
+      "id": 48,
+      "yandexName": "кардиохирург",
+      "slug": "кардиохирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 49,
+      "yandexName": "кинезиолог",
+      "slug": "кинезиолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 50,
+      "yandexName": "кистевой хирург",
+      "slug": "кистевой-хирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 51,
+      "yandexName": "клинический фармаколог",
+      "slug": "клинический-фармаколог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 52,
+      "yandexName": "колопроктолог (проктолог)",
+      "slug": "колопроктолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 1,
+      "spbRawVariants": [
+        "Врач-колопроктолог высшей квалификационной категории."
+      ]
+    },
+    {
+      "id": 53,
+      "yandexName": "косметолог",
+      "slug": "kosmetolog",
+      "chelWpTermId": 1308,
+      "chelWpName": "косметолог",
+      "chelDoctorsCount": 3,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 54,
+      "yandexName": "лазерный хирург",
+      "slug": "лазерный-хирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 1,
+      "spbRawVariants": [
+        "Врач-офтальмолог высшей квалификационной категории, лазерный хирург. Кандидат медицинских наук. Заместитель главного врача по поликлинике."
+      ]
+    },
+    {
+      "id": 55,
+      "yandexName": "лимфолог",
+      "slug": "лимфолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 56,
+      "yandexName": "логопед",
+      "slug": "логопед",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 57,
+      "yandexName": "лор (отоларинголог)",
+      "slug": "лор",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 2,
+      "spbRawVariants": [
+        "Врач оториноларинголог (ЛОР), детский отоларинголог"
+      ]
+    },
+    {
+      "id": 58,
+      "yandexName": "малоинвазивный хирург",
+      "slug": "малоинвазивный-хирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 59,
+      "yandexName": "маммолог",
+      "slug": "маммолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 1,
+      "spbRawVariants": [
+        "Врач-онколог, маммолог, врач ультразвуковой диагностики."
+      ]
+    },
+    {
+      "id": 60,
+      "yandexName": "мануальный терапевт",
+      "slug": "мануальный-терапевт",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 61,
+      "yandexName": "массажист",
+      "slug": "массажист",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 62,
+      "yandexName": "миколог",
+      "slug": "миколог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 63,
+      "yandexName": "нарколог",
+      "slug": "нарколог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 64,
+      "yandexName": "невролог",
+      "slug": "nevrolog",
+      "chelWpTermId": 1292,
+      "chelWpName": "невролог",
+      "chelDoctorsCount": 4,
+      "spbDoctorsCount": 1,
+      "spbRawVariants": [
+        "Врач-невролог. Кандидат медицинских наук."
+      ]
+    },
+    {
+      "id": 65,
+      "yandexName": "нейропсихолог",
+      "slug": "нейропсихолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 66,
+      "yandexName": "нейрофизиолог",
+      "slug": "нейрофизиолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 67,
+      "yandexName": "нейрохирург",
+      "slug": "nejrohirurg",
+      "chelWpTermId": 1304,
+      "chelWpName": "нейрохирург",
+      "chelDoctorsCount": 1,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 68,
+      "yandexName": "неонатолог",
+      "slug": "неонатолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 69,
+      "yandexName": "нефролог",
+      "slug": "nefrolog",
+      "chelWpTermId": 1294,
+      "chelWpName": "нефролог",
+      "chelDoctorsCount": 2,
+      "spbDoctorsCount": 1,
+      "spbRawVariants": [
+        "Врач-нефролог, анестезиолог-реаниматолог, врач высшей квалификационной категории. Кандидат медицинских наук."
+      ]
+    },
+    {
+      "id": 70,
+      "yandexName": "нутрициолог",
+      "slug": "нутрициолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 71,
+      "yandexName": "ожоговый хирург (комбустиолог)",
+      "slug": "ожоговый-хирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 72,
+      "yandexName": "онкогинеколог",
+      "slug": "онкогинеколог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 73,
+      "yandexName": "онкодерматолог",
+      "slug": "онкодерматолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 74,
+      "yandexName": "онколог",
+      "slug": "onkolog",
+      "chelWpTermId": 1295,
+      "chelWpName": "онколог",
+      "chelDoctorsCount": 2,
+      "spbDoctorsCount": 2,
+      "spbRawVariants": [
+        "Врач-онколог, маммолог, врач ультразвуковой диагностики.",
+        "Онколог"
+      ]
+    },
+    {
+      "id": 75,
+      "yandexName": "онколог-гематолог",
+      "slug": "онколог-гематолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 76,
+      "yandexName": "онкопроктолог",
+      "slug": "онкопроктолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 77,
+      "yandexName": "онкоуролог",
+      "slug": "онкоуролог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 78,
+      "yandexName": "оптометрист",
+      "slug": "оптометрист",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 79,
+      "yandexName": "ортопед",
+      "slug": "ortoped",
+      "chelWpTermId": 1301,
+      "chelWpName": "ортопед",
+      "chelDoctorsCount": 4,
+      "spbDoctorsCount": 1,
+      "spbRawVariants": [
+        "Врач — травматолог-ортопед, врач ультразвуковой диагностики."
+      ]
+    },
+    {
+      "id": 80,
+      "yandexName": "остеопат",
+      "slug": "остеопат",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 1,
+      "spbRawVariants": [
+        "Врач-остеопат"
+      ]
+    },
+    {
+      "id": 81,
+      "yandexName": "отоневролог",
+      "slug": "отоневролог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 82,
+      "yandexName": "офтальмолог (окулист)",
+      "slug": "офтальмолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 1,
+      "spbRawVariants": [
+        "Врач-офтальмолог высшей квалификационной категории, лазерный хирург. Кандидат медицинских наук. Заместитель главного врача по поликлинике."
+      ]
+    },
+    {
+      "id": 83,
+      "yandexName": "офтальмолог-протезист",
+      "slug": "офтальмолог-протезист",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 84,
+      "yandexName": "офтальмохирург",
+      "slug": "офтальмохирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 85,
+      "yandexName": "паразитолог",
+      "slug": "паразитолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 86,
+      "yandexName": "патологоанатом",
+      "slug": "патологоанатом",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 87,
+      "yandexName": "педиатр",
+      "slug": "pediatr",
+      "chelWpTermId": 1305,
+      "chelWpName": "педиатр",
+      "chelDoctorsCount": 5,
+      "spbDoctorsCount": 1,
+      "spbRawVariants": [
+        "Врач-дерматовенеролог. Врач-педиатр"
+      ]
+    },
+    {
+      "id": 88,
+      "yandexName": "перинатолог",
+      "slug": "перинатолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 89,
+      "yandexName": "пластический хирург",
+      "slug": "пластический-хирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 90,
+      "yandexName": "подиатр",
+      "slug": "подиатр",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 91,
+      "yandexName": "подолог",
+      "slug": "podolog",
+      "chelWpTermId": 1307,
+      "chelWpName": "подолог",
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 92,
+      "yandexName": "профпатолог",
+      "slug": "профпатолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 93,
+      "yandexName": "психиатр",
+      "slug": "psihiatr",
+      "chelWpTermId": 1289,
+      "chelWpName": "психиатр",
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 94,
+      "yandexName": "психолог",
+      "slug": "психолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 2,
+      "spbRawVariants": [
+        "Психолог",
+        "Психолог, кандидат психологических наук."
+      ]
+    },
+    {
+      "id": 95,
+      "yandexName": "психотерапевт",
+      "slug": "psihoterapevt",
+      "chelWpTermId": 1291,
+      "chelWpName": "психотерапевт",
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 1,
+      "spbRawVariants": [
+        "Врач-психотерапевт."
+      ]
+    },
+    {
+      "id": 96,
+      "yandexName": "пульмонолог",
+      "slug": "pulmonolog",
+      "chelWpTermId": 1298,
+      "chelWpName": "пульмонолог",
+      "chelDoctorsCount": 1,
+      "spbDoctorsCount": 2,
+      "spbRawVariants": [
+        "Врач-пульмонолог высшей квалификационной категории.",
+        "Врач – терапевт, пульмонолог."
+      ]
+    },
+    {
+      "id": 97,
+      "yandexName": "радиолог",
+      "slug": "радиолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 98,
+      "yandexName": "радиотерапевт",
+      "slug": "радиотерапевт",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 99,
+      "yandexName": "реабилитолог",
+      "slug": "реабилитолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 100,
+      "yandexName": "реаниматолог",
+      "slug": "реаниматолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 101,
+      "yandexName": "ревматолог",
+      "slug": "revmatolog",
+      "chelWpTermId": 1299,
+      "chelWpName": "ревматолог",
+      "chelDoctorsCount": 2,
+      "spbDoctorsCount": 2,
+      "spbRawVariants": [
+        "Заместитель главного врача по клинико-экспертной работе, врач-ревматолог, кандидат медицинских наук.",
+        "Врач-ревматолог"
+      ]
+    },
+    {
+      "id": 102,
+      "yandexName": "рентгенолог",
+      "slug": "рентгенолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 103,
+      "yandexName": "репродуктолог",
+      "slug": "reproduktolog",
+      "chelWpTermId": 1268,
+      "chelWpName": "Репродуктолог",
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 6,
+      "spbRawVariants": [
+        "Заместитель главного врача по ВРТ, врач — акушер-гинеколог, репродуктолог, врач ультразвуковой диагностики, кандидат медицинских наук.",
+        "Врач — акушер-гинеколог первой категории, репродуктолог, врач ультразвуковой диагностики.",
+        "Врач — акушер-гинеколог, репродуктолог, врач ультразвуковой диагностики.",
+        "Старший врач акушер-гинеколог отделения ВРТ, репродуктолог, врач ультразвуковой диагностики, врач высшей категории.",
+        "Врач-акушер-гинеколог, репродуктолог, врач ультразвуковой диагностики.",
+        "Врач акушер-гинеколог, репродуктолог, оперирующий гинеколог. Доктор медицинских наук, доцент кафедры акушерства и гинекологии с клиникой ФГБУ «НМИЦ им. В. А. Алмазова» Минздрава России."
+      ]
+    },
+    {
+      "id": 104,
+      "yandexName": "рефлексотерапевт",
+      "slug": "refleksoterapevt",
+      "chelWpTermId": 1293,
+      "chelWpName": "рефлексотерапевт",
+      "chelDoctorsCount": 1,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 105,
+      "yandexName": "сексолог",
+      "slug": "сексолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 106,
+      "yandexName": "семейный врач",
+      "slug": "семейный-врач",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 107,
+      "yandexName": "сердечно-сосудистый хирург",
+      "slug": "serdechno-sosudistyj-hirurg",
+      "chelWpTermId": 1309,
+      "chelWpName": "сердечно-сосудистый хирург",
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 108,
+      "yandexName": "сомнолог",
+      "slug": "somnolog",
+      "chelWpTermId": 1276,
+      "chelWpName": "сомнолог",
+      "chelDoctorsCount": 1,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 109,
+      "yandexName": "сосудистый хирург",
+      "slug": "сосудистый-хирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 110,
+      "yandexName": "специалист по грудному вскармливанию",
+      "slug": "специалист-по-грудному-вскармливанию",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 111,
+      "yandexName": "спортивный врач",
+      "slug": "спортивный-врач",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 112,
+      "yandexName": "стоматолог",
+      "slug": "стоматолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 113,
+      "yandexName": "стоматолог-гигиенист",
+      "slug": "стоматолог-гигиенист",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 114,
+      "yandexName": "стоматолог-имплантолог",
+      "slug": "стоматолог-имплантолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 115,
+      "yandexName": "стоматолог-ортодонт",
+      "slug": "стоматолог-ортодонт",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 116,
+      "yandexName": "стоматолог-ортопед",
+      "slug": "стоматолог-ортопед",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 117,
+      "yandexName": "стоматолог-пародонтолог",
+      "slug": "стоматолог-пародонтолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 118,
+      "yandexName": "стоматолог-терапевт",
+      "slug": "стоматолог-терапевт",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 119,
+      "yandexName": "стоматолог-хирург",
+      "slug": "стоматолог-хирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 120,
+      "yandexName": "стоматолог-эндодонт",
+      "slug": "стоматолог-эндодонт",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 121,
+      "yandexName": "судебно-медицинский эксперт",
+      "slug": "судебно-медицинский-эксперт",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 122,
+      "yandexName": "сурдолог",
+      "slug": "сурдолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 123,
+      "yandexName": "сурдолог-протезист",
+      "slug": "сурдолог-протезист",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 124,
+      "yandexName": "терапевт",
+      "slug": "terapevt",
+      "chelWpTermId": 1275,
+      "chelWpName": "терапевт",
+      "chelDoctorsCount": 6,
+      "spbDoctorsCount": 9,
+      "spbRawVariants": [
+        "Психолог",
+        "Врач-терапевт, гемостазиолог",
+        "Врач-эндокринолог высшей категории, терапевт, гастроэнтеролог. Кандидат медицинских наук.",
+        "Врач-гастроэнтеролог высшей квалификационной категории, терапевт, диетолог.",
+        "Терапевт",
+        "Врач-эндоскопист",
+        "Врач-нефролог, анестезиолог-реаниматолог, врач высшей квалификационной категории. Кандидат медицинских наук.",
+        "Врач – терапевт, пульмонолог."
+      ]
+    },
+    {
+      "id": 125,
+      "yandexName": "токсиколог",
+      "slug": "токсиколог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 126,
+      "yandexName": "торакальный онколог",
+      "slug": "торакальный-онколог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 127,
+      "yandexName": "торакальный хирург",
+      "slug": "торакальный-хирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 128,
+      "yandexName": "травматолог",
+      "slug": "travmatolog",
+      "chelWpTermId": 1300,
+      "chelWpName": "травматолог",
+      "chelDoctorsCount": 4,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 129,
+      "yandexName": "трансплантолог",
+      "slug": "трансплантолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 130,
+      "yandexName": "трансфузиолог",
+      "slug": "трансфузиолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 131,
+      "yandexName": "трихолог",
+      "slug": "triholog",
+      "chelWpTermId": 1283,
+      "chelWpName": "Трихолог",
+      "chelDoctorsCount": 2,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 132,
+      "yandexName": "узи-специалист",
+      "slug": "uzi-specialist",
+      "chelWpTermId": 1282,
+      "chelWpName": "узи-специалист",
+      "chelDoctorsCount": 1,
+      "spbDoctorsCount": 16,
+      "spbRawVariants": [
+        "Заместитель главного врача по ВРТ, врач — акушер-гинеколог, репродуктолог, врач ультразвуковой диагностики, кандидат медицинских наук.",
+        "Врач — акушер-гинеколог первой категории, репродуктолог, врач ультразвуковой диагностики.",
+        "Врач — акушер-гинеколог, репродуктолог, врач ультразвуковой диагностики.",
+        "Старший врач акушер-гинеколог отделения ВРТ, репродуктолог, врач ультразвуковой диагностики, врач высшей категории.",
+        "Врач-акушер-гинеколог, репродуктолог, врач ультразвуковой диагностики.",
+        "Уролог, уролог-андролог, врач ультразвуковой диагностики",
+        "Врач — акушер-гинеколог высшей квалификационной категории, врач ультразвуковой диагностики, кандидат медицинских наук.",
+        "Врач — акушер-гинеколог, врач ультразвуковой диагностики, кандидат медицинских наук.",
+        "Врач — акушер-гинеколог высшей квалификационной категории, врач ультразвуковой диагностики.",
+        "Врач — акушер-гинеколог, врач ультразвуковой диагностики.",
+        "Врач акушер-гинеколог, врач ультразвуковой диагностики",
+        "Врач-акушер-гинеколог, врач ультразвуковой диагностики",
+        "Врач пренатальной ультразвуковой диагностики, врач акушер-гинеколог",
+        "Врач ультразвуковой диагностики",
+        "Врач — травматолог-ортопед, врач ультразвуковой диагностики.",
+        "Врач-онколог, маммолог, врач ультразвуковой диагностики."
+      ]
+    },
+    {
+      "id": 133,
+      "yandexName": "уролог",
+      "slug": "urolog",
+      "chelWpTermId": 1270,
+      "chelWpName": "уролог",
+      "chelDoctorsCount": 4,
+      "spbDoctorsCount": 2,
+      "spbRawVariants": [
+        "Уролог, уролог-андролог",
+        "Уролог, уролог-андролог, врач ультразвуковой диагностики"
+      ]
+    },
+    {
+      "id": 134,
+      "yandexName": "физиотерапевт",
+      "slug": "физиотерапевт",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 135,
+      "yandexName": "фитотерапевт",
+      "slug": "фитотерапевт",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 136,
+      "yandexName": "флеболог",
+      "slug": "флеболог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 137,
+      "yandexName": "фониатр",
+      "slug": "фониатр",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 138,
+      "yandexName": "фтизиатр",
+      "slug": "фтизиатр",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 139,
+      "yandexName": "химиотерапевт",
+      "slug": "химиотерапевт",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 140,
+      "yandexName": "хирург",
+      "slug": "hirurg",
+      "chelWpTermId": 1287,
+      "chelWpName": "хирург",
+      "chelDoctorsCount": 5,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 141,
+      "yandexName": "хирург-эндокринолог",
+      "slug": "hirurg-jendokrinolog",
+      "chelWpTermId": 1303,
+      "chelWpName": "хирург-эндокринолог",
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 142,
+      "yandexName": "цитолог",
+      "slug": "цитолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 143,
+      "yandexName": "челюстно-лицевой хирург",
+      "slug": "челюстно-лицевой-хирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 144,
+      "yandexName": "эмбриолог",
+      "slug": "эмбриолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 3,
+      "spbRawVariants": [
+        "Эмбриолог, кандидат биологических наук",
+        "Эмбриолог",
+        "Эмбриолог, врач КЛД эмбриологической лаборатории отделения ВРТ"
+      ]
+    },
+    {
+      "id": 145,
+      "yandexName": "эндоваскулярный хирург",
+      "slug": "эндоваскулярный-хирург",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 146,
+      "yandexName": "эндокринолог",
+      "slug": "jendokrinolog",
+      "chelWpTermId": 1284,
+      "chelWpName": "эндокринолог",
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 5,
+      "spbRawVariants": [
+        "Врач — акушер-гинеколог, врач ультразвуковой диагностики, кандидат медицинских наук.",
+        "Врач-эндокринолог высшей категории, терапевт, гастроэнтеролог. Кандидат медицинских наук.",
+        "Врач-эндокринолог, диетолог",
+        "Врач-эндоскопист"
+      ]
+    },
+    {
+      "id": 147,
+      "yandexName": "эндоскопист",
+      "slug": "эндоскопист",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 3,
+      "spbRawVariants": [
+        "Врач-эндоскопист высшей квалификационной категории.",
+        "Врач-эндоскопист"
+      ]
+    },
+    {
+      "id": 148,
+      "yandexName": "эпидемиолог",
+      "slug": "эпидемиолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    },
+    {
+      "id": 149,
+      "yandexName": "эпилептолог",
+      "slug": "эпилептолог",
+      "chelWpTermId": null,
+      "chelWpName": null,
+      "chelDoctorsCount": 0,
+      "spbDoctorsCount": 0,
+      "spbRawVariants": []
+    }
+  ],
+  "wpExtras": [
+    {
+      "termId": 1269,
+      "name": "Врач ультразвуковой диагностики",
+      "slug": "vrach-ultrazvukovoj-diagnostiki",
+      "count": 0
+    },
+    {
+      "termId": 1286,
+      "name": "колопроктолог",
+      "slug": "koloproktolog",
+      "count": 0
+    },
+    {
+      "termId": 1296,
+      "name": "оториноларинголог",
+      "slug": "otorinolaringolog",
+      "count": 0
+    },
+    {
+      "termId": 1297,
+      "name": "офтальмолог",
+      "slug": "oftalmolog",
+      "count": 0
+    },
+    {
+      "termId": 1290,
+      "name": "психиатр-нарколог",
+      "slug": "psihiatr-narkolog",
+      "count": 0
+    }
+  ],
+  "stats": {
+    "total": 149,
+    "chelUsed": 27,
+    "spbUsed": 33,
+    "bothCities": 17,
+    "spbDoctorsMapped": 52,
+    "spbDoctorsNeedsReview": 1
+  }
+}

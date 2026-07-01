@@ -39,6 +39,8 @@ infra/env/*.env
 
 # PHP / legacy / Firebase (копировать из *.example)
 php_backend/config_access.php
+php_backend/php/config.php
+php_backend/php/config.spb.php
 firebase-applet-config.json
 
 # Синхронизация цен МИС → legacy (пароли БД, API-ключи, HTML-отчёты)
@@ -48,6 +50,8 @@ qms_price/
 # Дампы, экспорты, исследовательские артефакты
 # =============================================================================
 data/
+!modx_wp-to-strapi-migration-api/data/mappings/
+!modx_wp-to-strapi-migration-api/data/mappings/**
 travel/
 .tmp/
 .tmp-ci-test/

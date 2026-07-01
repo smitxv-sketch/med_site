@@ -118,20 +118,22 @@ export class StrapiClient {
   async findByLegacyId(
     collection: string,
     legacyId: string,
-    locale: string,
+    locale?: string,
   ): Promise<{ documentId: string; contentLocked?: boolean } | null> {
     const row = await this.findRowByLegacyId(collection, legacyId, locale);
     if (row) return row;
 
-    // Fallback: записи без нужной locale (миграция ru-RU → ru-chel)
-    return this.findRowByLegacyId(collection, legacyId);
+    if (locale) {
+      return this.findRowByLegacyId(collection, legacyId);
+    }
+    return null;
   }
 
   private async findRowByLegacyId(
     collection: string,
     legacyId: string,
     locale?: string,
-  ): Promise<{ documentId: string; contentLocked?: boolean } | null> {
+  ): Promise<{ documentId: string; contentLocked?: boolean; slug?: string; legacyId?: string } | null> {
     const qs = new URLSearchParams({
       'filters[legacyId][$eq]': legacyId,
       'pagination[pageSize]': '1',
@@ -149,6 +151,82 @@ export class StrapiClient {
     return {
       documentId: String(row.documentId ?? row.id),
       contentLocked: Boolean(attrs.contentLocked),
+      slug: attrs.slug ? String(attrs.slug) : undefined,
+      legacyId: attrs.legacyId ? String(attrs.legacyId) : undefined,
     };
+  }
+
+  async findBySlug(
+    collection: string,
+    slug: string,
+  ): Promise<{ documentId: string } | null> {
+    const qs = new URLSearchParams({
+      'filters[slug][$eq]': slug,
+      'pagination[pageSize]': '1',
+    });
+    const res = await this.fetchWithRetry(`${this.baseUrl}/api/${collection}?${qs}`, {
+      headers: { Authorization: `Bearer ${this.token}` },
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    const row = json?.data?.[0];
+    if (!row) return null;
+    return { documentId: String(row.documentId ?? row.id) };
+  }
+
+  /** Список всех записей коллекции (пагинация) */
+  async listAll(
+    collection: string,
+    opts: { pageSize?: number; locale?: string } = {},
+  ): Promise<Array<{ documentId: string; slug?: string; legacyId?: string }>> {
+    const pageSize = opts.pageSize ?? 100;
+    const out: Array<{ documentId: string; slug?: string; legacyId?: string }> = [];
+    let page = 1;
+
+    for (;;) {
+      const qs = new URLSearchParams({
+        'pagination[page]': String(page),
+        'pagination[pageSize]': String(pageSize),
+        publicationState: 'preview',
+      });
+      if (opts.locale) qs.set('locale', opts.locale);
+
+      const res = await this.fetchWithRetry(`${this.baseUrl}/api/${collection}?${qs}`, {
+        headers: { Authorization: `Bearer ${this.token}` },
+      });
+      if (!res.ok) break;
+      const json = await res.json();
+      const batch = json?.data ?? [];
+      if (!Array.isArray(batch) || batch.length === 0) break;
+
+      for (const row of batch) {
+        const attrs = row.attributes ?? row;
+        out.push({
+          documentId: String(row.documentId ?? row.id),
+          slug: attrs.slug ? String(attrs.slug) : undefined,
+          legacyId: attrs.legacyId ? String(attrs.legacyId) : undefined,
+        });
+      }
+
+      const pageCount = json?.meta?.pagination?.pageCount;
+      if (!pageCount || page >= pageCount) break;
+      page += 1;
+    }
+
+    return out;
+  }
+
+  /** Strapi v5: set relations */
+  async setRelations(
+    collection: string,
+    documentId: string,
+    relations: Record<string, string[]>,
+    locale?: string,
+  ): Promise<void> {
+    const data: Record<string, { set: string[] }> = {};
+    for (const [field, ids] of Object.entries(relations)) {
+      data[field] = { set: ids };
+    }
+    await this.updateEntry(collection, documentId, { ...data, locale });
   }
 }

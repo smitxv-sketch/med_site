@@ -6,6 +6,7 @@ type StrapiDoctorRow = {
   id?: number;
   fullName?: string;
   specialty?: string | null;
+  specialties?: Array<{ title?: string; slug?: string }>;
   photoUrl?: string | null;
   experienceYears?: number | null;
   degree?: string | null;
@@ -33,6 +34,7 @@ export async function getStrapiDoctorsHandler(req: Request, res: Response) {
       'filters[legacySource][$eq]': tenant,
       'pagination[pageSize]': '200',
       publicationState: 'live',
+      populate: 'specialties',
     });
     const url = `${base}/api/doctors?${qs}`;
     const response = await fetch(url, {
@@ -74,10 +76,15 @@ export async function getStrapiDoctorsHandler(req: Request, res: Response) {
       const misRaw = a.misId ? String(a.misId) : '';
       const qmsIds = misRaw.split(',').map((s) => s.trim()).filter(Boolean);
 
+      const specialtyTitles = (a.specialties ?? [])
+        .map((s) => s.title)
+        .filter(Boolean) as string[];
+
       return {
         id: String(a.legacyId || a.documentId || a.id),
         name: a.fullName || '',
-        specialty: a.specialty || '',
+        specialty: specialtyTitles.join(', ') || a.specialty || '',
+        specialties: specialtyTitles,
         image: photoUrl,
         experienceYears: a.experienceYears ?? undefined,
         degree: a.degree ?? undefined,

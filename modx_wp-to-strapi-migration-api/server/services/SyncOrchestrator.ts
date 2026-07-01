@@ -4,6 +4,7 @@ import { getSpbDoctorsForSync } from './spbDoctorSource.js';
 import {
   doctorCanonicalToStrapiPayload,
   hydrateDoctorFromLegacy,
+  type DoctorHydrationContext,
 } from './DoctorHydrator.js';
 import {
   generateHash,
@@ -13,9 +14,18 @@ import {
   finishSyncRun,
 } from './syncWorker.js';
 import type { DoctorCanonical, SyncReport } from '../types/doctorCanonical.js';
-import { SAFE_DOCTOR_FIELDS as SAFE_FIELDS } from '../types/doctorCanonical.js';
+import {
+  SAFE_DOCTOR_FIELDS,
+} from '../types/doctorCanonical.js';
 import { withSyncMutex } from '../lib/syncMutex.js';
 import { LEGACY_DB_GUARD } from '../config/legacyDbGuard.js';
+import {
+  buildBranchLegacyIndex,
+  buildSpecialtySlugIndex,
+  slugsToDocumentIds,
+  syncReferenceCatalogs,
+} from './syncCatalogs.js';
+import { loadSpbDoctorSpecialtyMap, loadSsotIndex } from './specialtySsotLoader.js';
 
 export type SyncCity = 'chel' | 'spb';
 
@@ -31,11 +41,49 @@ async function loadLegacyDoctors(city: SyncCity) {
   return getSpbDoctorsForSync();
 }
 
+type RelationIndexes = {
+  specialtyBySlug: Map<string, string>;
+  branchByLegacyId: Map<string, string>;
+};
+
+function branchIdsForCanonical(
+  canonical: DoctorCanonical,
+  branchIndex: Map<string, string>,
+): string[] {
+  const ids: string[] = [];
+  for (const legacyId of canonical.branchLegacyIds) {
+    const docId = branchIndex.get(legacyId);
+    if (docId) ids.push(docId);
+  }
+  return [...new Set(ids)];
+}
+
+async function applyDoctorRelations(
+  client: StrapiClient,
+  documentId: string,
+  canonical: DoctorCanonical,
+  indexes: RelationIndexes,
+): Promise<void> {
+  const specialtyIds = slugsToDocumentIds(canonical.specialtySlugs, indexes.specialtyBySlug);
+  const branchIds = branchIdsForCanonical(canonical, indexes.branchByLegacyId);
+
+  await client.setRelations(
+    'doctors',
+    documentId,
+    {
+      specialties: specialtyIds,
+      branches: branchIds,
+    },
+    canonical.locale,
+  );
+}
+
 async function upsertOneDoctor(
   client: StrapiClient,
   city: SyncCity,
   canonical: DoctorCanonical,
   report: SyncReport,
+  indexes: RelationIndexes,
 ): Promise<void> {
   const cityKey = CITY_KEYS[city];
   const payload = doctorCanonicalToStrapiPayload(canonical);
@@ -43,7 +91,11 @@ async function upsertOneDoctor(
   delete (safePayload as { locale?: string }).locale;
 
   const existing = await client.findByLegacyId('doctors', canonical.legacyId, canonical.locale);
-  const hash = generateHash(safePayload);
+  const hash = generateHash({
+    ...safePayload,
+    specialtySlugs: canonical.specialtySlugs,
+    branchLegacyIds: canonical.branchLegacyIds,
+  });
 
   if (!existing) {
     await client.createEntry('doctors', {
@@ -53,6 +105,7 @@ async function upsertOneDoctor(
     });
     const created = await client.findByLegacyId('doctors', canonical.legacyId, canonical.locale);
     if (created?.documentId) {
+      await applyDoctorRelations(client, created.documentId, canonical, indexes);
       await updateSyncMap(cityKey, 'doctor', canonical.legacyId, String(created.documentId), hash);
     }
     report.created += 1;
@@ -71,22 +124,23 @@ async function upsertOneDoctor(
   }
 
   const patch: Record<string, unknown> = {};
-  for (const key of SAFE_FIELDS) {
+  for (const key of SAFE_DOCTOR_FIELDS) {
     patch[key] = safePayload[key as keyof typeof safePayload];
   }
 
   await client.updateEntry('doctors', existing.documentId, patch);
+  await applyDoctorRelations(client, existing.documentId, canonical, indexes);
   await updateSyncMap(cityKey, 'doctor', canonical.legacyId, existing.documentId, hash);
   report.updated += 1;
 }
 
 /**
- * SSOT оркестратор синка врачей: mutex, sync_runs, паузы между upsert.
+ * SSOT оркестратор синка врачей: справочники → mutex → upsert + relations.
  */
 export async function runDoctorSync(
   city: SyncCity,
   client: StrapiClient,
-): Promise<SyncReport> {
+): Promise<SyncReport & { catalogs?: Awaited<ReturnType<typeof syncReferenceCatalogs>> }> {
   return withSyncMutex(`doctors:${city}`, async () => {
     const runId = await startSyncRun(CITY_KEYS[city], 'doctor', 'full');
     const report: SyncReport = {
@@ -98,17 +152,29 @@ export async function runDoctorSync(
     };
 
     try {
+      const catalogs = await syncReferenceCatalogs(client);
+      const [ssot, spbSpecialtyMap] = await Promise.all([
+        loadSsotIndex(),
+        loadSpbDoctorSpecialtyMap(),
+      ]);
+      const hydrationCtx: DoctorHydrationContext = { ssot, spbSpecialtyMap };
+
+      const indexes: RelationIndexes = {
+        specialtyBySlug: await buildSpecialtySlugIndex(client),
+        branchByLegacyId: await buildBranchLegacyIndex(client),
+      };
+
       const legacyDoctors = await loadLegacyDoctors(city);
 
       for (const doc of legacyDoctors) {
-        const canonical = hydrateDoctorFromLegacy(doc, city);
+        const canonical = hydrateDoctorFromLegacy(doc, city, hydrationCtx);
         if (!canonical) {
           report.skipped += 1;
           continue;
         }
 
         try {
-          await upsertOneDoctor(client, city, canonical, report);
+          await upsertOneDoctor(client, city, canonical, report, indexes);
           await sleep(LEGACY_DB_GUARD.syncUpsertDelayMs);
         } catch (e) {
           report.errors.push({
@@ -119,7 +185,7 @@ export async function runDoctorSync(
       }
 
       await finishSyncRun(runId, 'success', report);
-      return report;
+      return { ...report, catalogs };
     } catch (e) {
       const message = e instanceof Error ? e.message : String(e);
       await finishSyncRun(runId, 'error', report, message);
