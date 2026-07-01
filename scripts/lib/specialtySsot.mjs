@@ -9,6 +9,17 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const ACF_PATH = path.resolve(__dirname, '../../acf/acf-export-2026-07-01.json');
 
+const CYRILLIC_MAP = {
+  а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'e', ж: 'zh', з: 'z',
+  и: 'i', й: 'y', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', п: 'p', р: 'r',
+  с: 's', т: 't', у: 'u', ф: 'f', х: 'h', ц: 'ts', ч: 'ch', ш: 'sh', щ: 'sch',
+  ъ: '', ы: 'y', ь: '', э: 'e', ю: 'yu', я: 'ya',
+};
+
+function transliterateRu(input) {
+  return [...String(input).toLowerCase()].map((ch) => CYRILLIC_MAP[ch] ?? ch).join('');
+}
+
 /** Синонимы СПб/сайта → каноническое имя Яндекс (если в тексте нет точного вхождения) */
 export const SPB_TEXT_ALIASES = [
   { patterns: ['оториноларинголог', 'отоларинголог', 'лор ', ' лор,', 'лор)'], yandex: 'лор (отоларинголог)' },
@@ -50,11 +61,14 @@ export function norm(s) {
     .trim();
 }
 
-/** URL-slug для Strapi (транслит упрощённый через slug из WP где есть) */
+/** URL-slug для Strapi UID (латиница, без скобок) */
 export function slugFromYandex(name) {
-  return norm(name)
-    .replace(/\s*\([^)]*\)\s*/g, ' ')
-    .replace(/\s+/g, '-')
+  return transliterateRu(
+    norm(name)
+      .replace(/\s*\([^)]*\)\s*/g, ' ')
+      .trim(),
+  )
+    .replace(/[^a-z0-9._~]+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
 }

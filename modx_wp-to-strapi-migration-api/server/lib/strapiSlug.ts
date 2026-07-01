@@ -16,6 +16,15 @@ function transliterateRu(input: string): string {
     .join('');
 }
 
+/** Slug для Strapi UID: только [A-Za-z0-9-_.~] */
+export function toStrapiUidSlug(input: string): string {
+  const ascii = transliterateRu(input)
+    .replace(/[^a-z0-9._~]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return ascii || 'item';
+}
+
 /** Человекочитаемый ASCII-slug + legacy id для уникальности */
 export function makeStrapiDoctorSlug(
   fullName: string,

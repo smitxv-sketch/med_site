@@ -204,7 +204,7 @@ function buildSsotCatalog(yandexDict, wpTerms, chelUsage) {
     return {
       id: index + 1,
       yandexName,
-      slug: wp?.slug || slugFromYandex(yandexName),
+      slug: slugFromYandex(yandexName),
       chelWpTermId: termId ?? null,
       chelWpName: wp?.name ?? null,
       chelDoctorsCount: usage?.doctorCount ?? 0,

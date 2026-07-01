@@ -12,7 +12,7 @@
     {
       "id": 1,
       "yandexName": "абдоминальный хирург",
-      "slug": "абдоминальный-хирург",
+      "slug": "abdominalnyy-hirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -22,7 +22,7 @@
     {
       "id": 2,
       "yandexName": "акушер",
-      "slug": "акушер",
+      "slug": "akusher",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -57,7 +57,7 @@
     {
       "id": 4,
       "yandexName": "аллерголог",
-      "slug": "аллерголог",
+      "slug": "allergolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -92,7 +92,7 @@
     {
       "id": 7,
       "yandexName": "анестезиолог",
-      "slug": "анестезиолог",
+      "slug": "anesteziolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -102,7 +102,7 @@
     {
       "id": 8,
       "yandexName": "анестезиолог-реаниматолог",
-      "slug": "анестезиолог-реаниматолог",
+      "slug": "anesteziolog-reanimatolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -115,7 +115,7 @@
     {
       "id": 9,
       "yandexName": "аритмолог",
-      "slug": "аритмолог",
+      "slug": "aritmolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -125,7 +125,7 @@
     {
       "id": 10,
       "yandexName": "артролог",
-      "slug": "артролог",
+      "slug": "artrolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -135,7 +135,7 @@
     {
       "id": 11,
       "yandexName": "бариатрический хирург",
-      "slug": "бариатрический-хирург",
+      "slug": "bariatricheskiy-hirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -145,7 +145,7 @@
     {
       "id": 12,
       "yandexName": "вегетолог",
-      "slug": "вегетолог",
+      "slug": "vegetolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -155,7 +155,7 @@
     {
       "id": 13,
       "yandexName": "венеролог",
-      "slug": "венеролог",
+      "slug": "venerolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -165,7 +165,7 @@
     {
       "id": 14,
       "yandexName": "вертебролог",
-      "slug": "вертебролог",
+      "slug": "vertebrolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -175,7 +175,7 @@
     {
       "id": 15,
       "yandexName": "вирусолог",
-      "slug": "вирусолог",
+      "slug": "virusolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -185,7 +185,7 @@
     {
       "id": 16,
       "yandexName": "врач лабораторной диагностики",
-      "slug": "врач-лабораторной-диагностики",
+      "slug": "vrach-laboratornoy-diagnostiki",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -195,7 +195,7 @@
     {
       "id": 17,
       "yandexName": "врач лфк",
-      "slug": "врач-лфк",
+      "slug": "vrach-lfk",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -205,7 +205,7 @@
     {
       "id": 18,
       "yandexName": "врач общей практики",
-      "slug": "vrach-obshhej-praktiki",
+      "slug": "vrach-obschey-praktiki",
       "chelWpTermId": 1302,
       "chelWpName": "врач общей практики",
       "chelDoctorsCount": 2,
@@ -215,7 +215,7 @@
     {
       "id": 19,
       "yandexName": "врач по медико-социальной экспертизе",
-      "slug": "врач-по-медико-социальной-экспертизе",
+      "slug": "vrach-po-mediko-sotsialnoy-ekspertize",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -225,7 +225,7 @@
     {
       "id": 20,
       "yandexName": "врач по паллиативной медицинской помощи",
-      "slug": "врач-по-паллиативной-медицинской-помощи",
+      "slug": "vrach-po-palliativnoy-meditsinskoy-pomoschi",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -235,7 +235,7 @@
     {
       "id": 21,
       "yandexName": "врач по спортивной медицине",
-      "slug": "врач-по-спортивной-медицине",
+      "slug": "vrach-po-sportivnoy-meditsine",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -245,7 +245,7 @@
     {
       "id": 22,
       "yandexName": "врач по рентгенэндоваскулярным диагностике и лечению",
-      "slug": "врач-по-рентгенэндоваскулярным-диагностике-и-лечению",
+      "slug": "vrach-po-rentgenendovaskulyarnym-diagnostike-i-lecheniyu",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -255,7 +255,7 @@
     {
       "id": 23,
       "yandexName": "врач скорой помощи",
-      "slug": "врач-скорой-помощи",
+      "slug": "vrach-skoroy-pomoschi",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -265,7 +265,7 @@
     {
       "id": 24,
       "yandexName": "врач функциональной диагностики",
-      "slug": "vrach-funkcionalnoj-diagnostiki",
+      "slug": "vrach-funktsionalnoy-diagnostiki",
       "chelWpTermId": 1277,
       "chelWpName": "врач функциональной диагностики",
       "chelDoctorsCount": 1,
@@ -278,7 +278,7 @@
     {
       "id": 25,
       "yandexName": "врач эфферентной терапии",
-      "slug": "врач-эфферентной-терапии",
+      "slug": "vrach-efferentnoy-terapii",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -288,7 +288,7 @@
     {
       "id": 26,
       "yandexName": "гастроэнтеролог",
-      "slug": "gastrojenterolog",
+      "slug": "gastroenterolog",
       "chelWpTermId": 1279,
       "chelWpName": "гастроэнтеролог",
       "chelDoctorsCount": 1,
@@ -337,7 +337,7 @@
     {
       "id": 30,
       "yandexName": "гепатолог",
-      "slug": "гепатолог",
+      "slug": "gepatolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -347,7 +347,7 @@
     {
       "id": 31,
       "yandexName": "гериатр (геронтолог)",
-      "slug": "гериатр",
+      "slug": "geriatr",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -357,7 +357,7 @@
     {
       "id": 32,
       "yandexName": "гинеколог",
-      "slug": "гинеколог",
+      "slug": "ginekolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -367,7 +367,7 @@
     {
       "id": 33,
       "yandexName": "гинеколог-эндокринолог",
-      "slug": "ginekolog-jendokrinolog",
+      "slug": "ginekolog-endokrinolog",
       "chelWpTermId": 1271,
       "chelWpName": "Гинеколог-эндокринолог",
       "chelDoctorsCount": 1,
@@ -377,7 +377,7 @@
     {
       "id": 34,
       "yandexName": "гипнолог",
-      "slug": "гипнолог",
+      "slug": "gipnolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -387,7 +387,7 @@
     {
       "id": 35,
       "yandexName": "гирудотерапевт",
-      "slug": "гирудотерапевт",
+      "slug": "girudoterapevt",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -397,7 +397,7 @@
     {
       "id": 36,
       "yandexName": "гнатолог",
-      "slug": "гнатолог",
+      "slug": "gnatolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -407,7 +407,7 @@
     {
       "id": 37,
       "yandexName": "гнойный хирург",
-      "slug": "гнойный-хирург",
+      "slug": "gnoynyy-hirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -417,7 +417,7 @@
     {
       "id": 38,
       "yandexName": "дезинфектолог",
-      "slug": "дезинфектолог",
+      "slug": "dezinfektolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -450,7 +450,7 @@
     {
       "id": 41,
       "yandexName": "дефектолог",
-      "slug": "дефектолог",
+      "slug": "defektolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -460,7 +460,7 @@
     {
       "id": 42,
       "yandexName": "диабетолог",
-      "slug": "диабетолог",
+      "slug": "diabetolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -483,7 +483,7 @@
     {
       "id": 44,
       "yandexName": "иммунолог",
-      "slug": "иммунолог",
+      "slug": "immunolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -493,7 +493,7 @@
     {
       "id": 45,
       "yandexName": "инструктор лфк",
-      "slug": "инструктор-лфк",
+      "slug": "instruktor-lfk",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -503,7 +503,7 @@
     {
       "id": 46,
       "yandexName": "инфекционист",
-      "slug": "инфекционист",
+      "slug": "infektsionist",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -526,7 +526,7 @@
     {
       "id": 48,
       "yandexName": "кардиохирург",
-      "slug": "кардиохирург",
+      "slug": "kardiohirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -536,7 +536,7 @@
     {
       "id": 49,
       "yandexName": "кинезиолог",
-      "slug": "кинезиолог",
+      "slug": "kineziolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -546,7 +546,7 @@
     {
       "id": 50,
       "yandexName": "кистевой хирург",
-      "slug": "кистевой-хирург",
+      "slug": "kistevoy-hirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -556,7 +556,7 @@
     {
       "id": 51,
       "yandexName": "клинический фармаколог",
-      "slug": "клинический-фармаколог",
+      "slug": "klinicheskiy-farmakolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -566,7 +566,7 @@
     {
       "id": 52,
       "yandexName": "колопроктолог (проктолог)",
-      "slug": "колопроктолог",
+      "slug": "koloproktolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -588,7 +588,7 @@
     {
       "id": 54,
       "yandexName": "лазерный хирург",
-      "slug": "лазерный-хирург",
+      "slug": "lazernyy-hirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -600,7 +600,7 @@
     {
       "id": 55,
       "yandexName": "лимфолог",
-      "slug": "лимфолог",
+      "slug": "limfolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -610,7 +610,7 @@
     {
       "id": 56,
       "yandexName": "логопед",
-      "slug": "логопед",
+      "slug": "logoped",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -620,7 +620,7 @@
     {
       "id": 57,
       "yandexName": "лор (отоларинголог)",
-      "slug": "лор",
+      "slug": "lor",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -632,7 +632,7 @@
     {
       "id": 58,
       "yandexName": "малоинвазивный хирург",
-      "slug": "малоинвазивный-хирург",
+      "slug": "maloinvazivnyy-hirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -642,7 +642,7 @@
     {
       "id": 59,
       "yandexName": "маммолог",
-      "slug": "маммолог",
+      "slug": "mammolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -654,7 +654,7 @@
     {
       "id": 60,
       "yandexName": "мануальный терапевт",
-      "slug": "мануальный-терапевт",
+      "slug": "manualnyy-terapevt",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -664,7 +664,7 @@
     {
       "id": 61,
       "yandexName": "массажист",
-      "slug": "массажист",
+      "slug": "massazhist",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -674,7 +674,7 @@
     {
       "id": 62,
       "yandexName": "миколог",
-      "slug": "миколог",
+      "slug": "mikolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -684,7 +684,7 @@
     {
       "id": 63,
       "yandexName": "нарколог",
-      "slug": "нарколог",
+      "slug": "narkolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -706,7 +706,7 @@
     {
       "id": 65,
       "yandexName": "нейропсихолог",
-      "slug": "нейропсихолог",
+      "slug": "neyropsiholog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -716,7 +716,7 @@
     {
       "id": 66,
       "yandexName": "нейрофизиолог",
-      "slug": "нейрофизиолог",
+      "slug": "neyrofiziolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -726,7 +726,7 @@
     {
       "id": 67,
       "yandexName": "нейрохирург",
-      "slug": "nejrohirurg",
+      "slug": "neyrohirurg",
       "chelWpTermId": 1304,
       "chelWpName": "нейрохирург",
       "chelDoctorsCount": 1,
@@ -736,7 +736,7 @@
     {
       "id": 68,
       "yandexName": "неонатолог",
-      "slug": "неонатолог",
+      "slug": "neonatolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -758,7 +758,7 @@
     {
       "id": 70,
       "yandexName": "нутрициолог",
-      "slug": "нутрициолог",
+      "slug": "nutritsiolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -768,7 +768,7 @@
     {
       "id": 71,
       "yandexName": "ожоговый хирург (комбустиолог)",
-      "slug": "ожоговый-хирург",
+      "slug": "ozhogovyy-hirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -778,7 +778,7 @@
     {
       "id": 72,
       "yandexName": "онкогинеколог",
-      "slug": "онкогинеколог",
+      "slug": "onkoginekolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -788,7 +788,7 @@
     {
       "id": 73,
       "yandexName": "онкодерматолог",
-      "slug": "онкодерматолог",
+      "slug": "onkodermatolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -811,7 +811,7 @@
     {
       "id": 75,
       "yandexName": "онколог-гематолог",
-      "slug": "онколог-гематолог",
+      "slug": "onkolog-gematolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -821,7 +821,7 @@
     {
       "id": 76,
       "yandexName": "онкопроктолог",
-      "slug": "онкопроктолог",
+      "slug": "onkoproktolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -831,7 +831,7 @@
     {
       "id": 77,
       "yandexName": "онкоуролог",
-      "slug": "онкоуролог",
+      "slug": "onkourolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -841,7 +841,7 @@
     {
       "id": 78,
       "yandexName": "оптометрист",
-      "slug": "оптометрист",
+      "slug": "optometrist",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -863,7 +863,7 @@
     {
       "id": 80,
       "yandexName": "остеопат",
-      "slug": "остеопат",
+      "slug": "osteopat",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -875,7 +875,7 @@
     {
       "id": 81,
       "yandexName": "отоневролог",
-      "slug": "отоневролог",
+      "slug": "otonevrolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -885,7 +885,7 @@
     {
       "id": 82,
       "yandexName": "офтальмолог (окулист)",
-      "slug": "офтальмолог",
+      "slug": "oftalmolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -897,7 +897,7 @@
     {
       "id": 83,
       "yandexName": "офтальмолог-протезист",
-      "slug": "офтальмолог-протезист",
+      "slug": "oftalmolog-protezist",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -907,7 +907,7 @@
     {
       "id": 84,
       "yandexName": "офтальмохирург",
-      "slug": "офтальмохирург",
+      "slug": "oftalmohirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -917,7 +917,7 @@
     {
       "id": 85,
       "yandexName": "паразитолог",
-      "slug": "паразитолог",
+      "slug": "parazitolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -927,7 +927,7 @@
     {
       "id": 86,
       "yandexName": "патологоанатом",
-      "slug": "патологоанатом",
+      "slug": "patologoanatom",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -949,7 +949,7 @@
     {
       "id": 88,
       "yandexName": "перинатолог",
-      "slug": "перинатолог",
+      "slug": "perinatolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -959,7 +959,7 @@
     {
       "id": 89,
       "yandexName": "пластический хирург",
-      "slug": "пластический-хирург",
+      "slug": "plasticheskiy-hirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -969,7 +969,7 @@
     {
       "id": 90,
       "yandexName": "подиатр",
-      "slug": "подиатр",
+      "slug": "podiatr",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -989,7 +989,7 @@
     {
       "id": 92,
       "yandexName": "профпатолог",
-      "slug": "профпатолог",
+      "slug": "profpatolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1009,7 +1009,7 @@
     {
       "id": 94,
       "yandexName": "психолог",
-      "slug": "психолог",
+      "slug": "psiholog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1047,7 +1047,7 @@
     {
       "id": 97,
       "yandexName": "радиолог",
-      "slug": "радиолог",
+      "slug": "radiolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1057,7 +1057,7 @@
     {
       "id": 98,
       "yandexName": "радиотерапевт",
-      "slug": "радиотерапевт",
+      "slug": "radioterapevt",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1067,7 +1067,7 @@
     {
       "id": 99,
       "yandexName": "реабилитолог",
-      "slug": "реабилитолог",
+      "slug": "reabilitolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1077,7 +1077,7 @@
     {
       "id": 100,
       "yandexName": "реаниматолог",
-      "slug": "реаниматолог",
+      "slug": "reanimatolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1100,7 +1100,7 @@
     {
       "id": 102,
       "yandexName": "рентгенолог",
-      "slug": "рентгенолог",
+      "slug": "rentgenolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1137,7 +1137,7 @@
     {
       "id": 105,
       "yandexName": "сексолог",
-      "slug": "сексолог",
+      "slug": "seksolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1147,7 +1147,7 @@
     {
       "id": 106,
       "yandexName": "семейный врач",
-      "slug": "семейный-врач",
+      "slug": "semeynyy-vrach",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1157,7 +1157,7 @@
     {
       "id": 107,
       "yandexName": "сердечно-сосудистый хирург",
-      "slug": "serdechno-sosudistyj-hirurg",
+      "slug": "serdechno-sosudistyy-hirurg",
       "chelWpTermId": 1309,
       "chelWpName": "сердечно-сосудистый хирург",
       "chelDoctorsCount": 0,
@@ -1177,7 +1177,7 @@
     {
       "id": 109,
       "yandexName": "сосудистый хирург",
-      "slug": "сосудистый-хирург",
+      "slug": "sosudistyy-hirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1187,7 +1187,7 @@
     {
       "id": 110,
       "yandexName": "специалист по грудному вскармливанию",
-      "slug": "специалист-по-грудному-вскармливанию",
+      "slug": "spetsialist-po-grudnomu-vskarmlivaniyu",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1197,7 +1197,7 @@
     {
       "id": 111,
       "yandexName": "спортивный врач",
-      "slug": "спортивный-врач",
+      "slug": "sportivnyy-vrach",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1207,7 +1207,7 @@
     {
       "id": 112,
       "yandexName": "стоматолог",
-      "slug": "стоматолог",
+      "slug": "stomatolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1217,7 +1217,7 @@
     {
       "id": 113,
       "yandexName": "стоматолог-гигиенист",
-      "slug": "стоматолог-гигиенист",
+      "slug": "stomatolog-gigienist",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1227,7 +1227,7 @@
     {
       "id": 114,
       "yandexName": "стоматолог-имплантолог",
-      "slug": "стоматолог-имплантолог",
+      "slug": "stomatolog-implantolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1237,7 +1237,7 @@
     {
       "id": 115,
       "yandexName": "стоматолог-ортодонт",
-      "slug": "стоматолог-ортодонт",
+      "slug": "stomatolog-ortodont",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1247,7 +1247,7 @@
     {
       "id": 116,
       "yandexName": "стоматолог-ортопед",
-      "slug": "стоматолог-ортопед",
+      "slug": "stomatolog-ortoped",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1257,7 +1257,7 @@
     {
       "id": 117,
       "yandexName": "стоматолог-пародонтолог",
-      "slug": "стоматолог-пародонтолог",
+      "slug": "stomatolog-parodontolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1267,7 +1267,7 @@
     {
       "id": 118,
       "yandexName": "стоматолог-терапевт",
-      "slug": "стоматолог-терапевт",
+      "slug": "stomatolog-terapevt",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1277,7 +1277,7 @@
     {
       "id": 119,
       "yandexName": "стоматолог-хирург",
-      "slug": "стоматолог-хирург",
+      "slug": "stomatolog-hirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1287,7 +1287,7 @@
     {
       "id": 120,
       "yandexName": "стоматолог-эндодонт",
-      "slug": "стоматолог-эндодонт",
+      "slug": "stomatolog-endodont",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1297,7 +1297,7 @@
     {
       "id": 121,
       "yandexName": "судебно-медицинский эксперт",
-      "slug": "судебно-медицинский-эксперт",
+      "slug": "sudebno-meditsinskiy-ekspert",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1307,7 +1307,7 @@
     {
       "id": 122,
       "yandexName": "сурдолог",
-      "slug": "сурдолог",
+      "slug": "surdolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1317,7 +1317,7 @@
     {
       "id": 123,
       "yandexName": "сурдолог-протезист",
-      "slug": "сурдолог-протезист",
+      "slug": "surdolog-protezist",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1346,7 +1346,7 @@
     {
       "id": 125,
       "yandexName": "токсиколог",
-      "slug": "токсиколог",
+      "slug": "toksikolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1356,7 +1356,7 @@
     {
       "id": 126,
       "yandexName": "торакальный онколог",
-      "slug": "торакальный-онколог",
+      "slug": "torakalnyy-onkolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1366,7 +1366,7 @@
     {
       "id": 127,
       "yandexName": "торакальный хирург",
-      "slug": "торакальный-хирург",
+      "slug": "torakalnyy-hirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1386,7 +1386,7 @@
     {
       "id": 129,
       "yandexName": "трансплантолог",
-      "slug": "трансплантолог",
+      "slug": "transplantolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1396,7 +1396,7 @@
     {
       "id": 130,
       "yandexName": "трансфузиолог",
-      "slug": "трансфузиолог",
+      "slug": "transfuziolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1416,7 +1416,7 @@
     {
       "id": 132,
       "yandexName": "узи-специалист",
-      "slug": "uzi-specialist",
+      "slug": "uzi-spetsialist",
       "chelWpTermId": 1282,
       "chelWpName": "узи-специалист",
       "chelDoctorsCount": 1,
@@ -1456,7 +1456,7 @@
     {
       "id": 134,
       "yandexName": "физиотерапевт",
-      "slug": "физиотерапевт",
+      "slug": "fizioterapevt",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1466,7 +1466,7 @@
     {
       "id": 135,
       "yandexName": "фитотерапевт",
-      "slug": "фитотерапевт",
+      "slug": "fitoterapevt",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1476,7 +1476,7 @@
     {
       "id": 136,
       "yandexName": "флеболог",
-      "slug": "флеболог",
+      "slug": "flebolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1486,7 +1486,7 @@
     {
       "id": 137,
       "yandexName": "фониатр",
-      "slug": "фониатр",
+      "slug": "foniatr",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1496,7 +1496,7 @@
     {
       "id": 138,
       "yandexName": "фтизиатр",
-      "slug": "фтизиатр",
+      "slug": "ftiziatr",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1506,7 +1506,7 @@
     {
       "id": 139,
       "yandexName": "химиотерапевт",
-      "slug": "химиотерапевт",
+      "slug": "himioterapevt",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1526,7 +1526,7 @@
     {
       "id": 141,
       "yandexName": "хирург-эндокринолог",
-      "slug": "hirurg-jendokrinolog",
+      "slug": "hirurg-endokrinolog",
       "chelWpTermId": 1303,
       "chelWpName": "хирург-эндокринолог",
       "chelDoctorsCount": 0,
@@ -1536,7 +1536,7 @@
     {
       "id": 142,
       "yandexName": "цитолог",
-      "slug": "цитолог",
+      "slug": "tsitolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1546,7 +1546,7 @@
     {
       "id": 143,
       "yandexName": "челюстно-лицевой хирург",
-      "slug": "челюстно-лицевой-хирург",
+      "slug": "chelyustno-litsevoy-hirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1556,7 +1556,7 @@
     {
       "id": 144,
       "yandexName": "эмбриолог",
-      "slug": "эмбриолог",
+      "slug": "embriolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1570,7 +1570,7 @@
     {
       "id": 145,
       "yandexName": "эндоваскулярный хирург",
-      "slug": "эндоваскулярный-хирург",
+      "slug": "endovaskulyarnyy-hirurg",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1580,7 +1580,7 @@
     {
       "id": 146,
       "yandexName": "эндокринолог",
-      "slug": "jendokrinolog",
+      "slug": "endokrinolog",
       "chelWpTermId": 1284,
       "chelWpName": "эндокринолог",
       "chelDoctorsCount": 0,
@@ -1595,7 +1595,7 @@
     {
       "id": 147,
       "yandexName": "эндоскопист",
-      "slug": "эндоскопист",
+      "slug": "endoskopist",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1608,7 +1608,7 @@
     {
       "id": 148,
       "yandexName": "эпидемиолог",
-      "slug": "эпидемиолог",
+      "slug": "epidemiolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,
@@ -1618,7 +1618,7 @@
     {
       "id": 149,
       "yandexName": "эпилептолог",
-      "slug": "эпилептолог",
+      "slug": "epileptolog",
       "chelWpTermId": null,
       "chelWpName": null,
       "chelDoctorsCount": 0,

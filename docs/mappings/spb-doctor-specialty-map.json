@@ -20,7 +20,7 @@
         "ревматолог"
       ],
       "ssotSlugs": [
-        "ревматолог"
+        "revmatolog"
       ],
       "confidence": "high"
     },
@@ -34,8 +34,8 @@
         "лазерный хирург"
       ],
       "ssotSlugs": [
-        "офтальмолог",
-        "лазерный-хирург"
+        "oftalmolog",
+        "lazernyy-hirurg"
       ],
       "confidence": "medium"
     },
@@ -50,9 +50,9 @@
         "репродуктолог"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог",
-        "узи-специалист",
-        "репродуктолог"
+        "akusher-ginekolog",
+        "uzi-spetsialist",
+        "reproduktolog"
       ],
       "confidence": "low"
     },
@@ -67,9 +67,9 @@
         "репродуктолог"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог",
-        "узи-специалист",
-        "репродуктолог"
+        "akusher-ginekolog",
+        "uzi-spetsialist",
+        "reproduktolog"
       ],
       "confidence": "low"
     },
@@ -84,9 +84,9 @@
         "репродуктолог"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог",
-        "узи-специалист",
-        "репродуктолог"
+        "akusher-ginekolog",
+        "uzi-spetsialist",
+        "reproduktolog"
       ],
       "confidence": "low"
     },
@@ -101,9 +101,9 @@
         "репродуктолог"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог",
-        "узи-специалист",
-        "репродуктолог"
+        "akusher-ginekolog",
+        "uzi-spetsialist",
+        "reproduktolog"
       ],
       "confidence": "low"
     },
@@ -118,9 +118,9 @@
         "репродуктолог"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог",
-        "узи-специалист",
-        "репродуктолог"
+        "akusher-ginekolog",
+        "uzi-spetsialist",
+        "reproduktolog"
       ],
       "confidence": "low"
     },
@@ -134,8 +134,8 @@
         "репродуктолог"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог",
-        "репродуктолог"
+        "akusher-ginekolog",
+        "reproduktolog"
       ],
       "confidence": "medium"
     },
@@ -148,7 +148,7 @@
         "генетик"
       ],
       "ssotSlugs": [
-        "генетик"
+        "genetik"
       ],
       "confidence": "high"
     },
@@ -162,8 +162,8 @@
         "терапевт"
       ],
       "ssotSlugs": [
-        "психолог",
-        "терапевт"
+        "psiholog",
+        "terapevt"
       ],
       "confidence": "medium"
     },
@@ -176,7 +176,7 @@
         "психолог"
       ],
       "ssotSlugs": [
-        "психолог"
+        "psiholog"
       ],
       "confidence": "high"
     },
@@ -189,7 +189,7 @@
         "психотерапевт"
       ],
       "ssotSlugs": [
-        "психотерапевт"
+        "psihoterapevt"
       ],
       "confidence": "high"
     },
@@ -203,8 +203,8 @@
         "уролог"
       ],
       "ssotSlugs": [
-        "андролог",
-        "уролог"
+        "androlog",
+        "urolog"
       ],
       "confidence": "medium"
     },
@@ -219,9 +219,9 @@
         "уролог"
       ],
       "ssotSlugs": [
-        "узи-специалист",
-        "андролог",
-        "уролог"
+        "uzi-spetsialist",
+        "androlog",
+        "urolog"
       ],
       "confidence": "low"
     },
@@ -234,7 +234,7 @@
         "акушер-гинеколог"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог"
+        "akusher-ginekolog"
       ],
       "confidence": "high"
     },
@@ -248,8 +248,8 @@
         "узи-специалист"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог",
-        "узи-специалист"
+        "akusher-ginekolog",
+        "uzi-spetsialist"
       ],
       "confidence": "medium"
     },
@@ -264,9 +264,9 @@
         "эндокринолог"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог",
-        "узи-специалист",
-        "эндокринолог"
+        "akusher-ginekolog",
+        "uzi-spetsialist",
+        "endokrinolog"
       ],
       "confidence": "low"
     },
@@ -280,8 +280,8 @@
         "узи-специалист"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог",
-        "узи-специалист"
+        "akusher-ginekolog",
+        "uzi-spetsialist"
       ],
       "confidence": "medium"
     },
@@ -295,8 +295,8 @@
         "узи-специалист"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог",
-        "узи-специалист"
+        "akusher-ginekolog",
+        "uzi-spetsialist"
       ],
       "confidence": "medium"
     },
@@ -310,8 +310,8 @@
         "узи-специалист"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог",
-        "узи-специалист"
+        "akusher-ginekolog",
+        "uzi-spetsialist"
       ],
       "confidence": "medium"
     },
@@ -325,8 +325,8 @@
         "узи-специалист"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог",
-        "узи-специалист"
+        "akusher-ginekolog",
+        "uzi-spetsialist"
       ],
       "confidence": "medium"
     },
@@ -340,8 +340,8 @@
         "узи-специалист"
       ],
       "ssotSlugs": [
-        "акушер-гинеколог",
-        "узи-специалист"
+        "akusher-ginekolog",
+        "uzi-spetsialist"
       ],
       "confidence": "medium"
     },
@@ -354,7 +354,7 @@
         "узи-специалист"
       ],
       "ssotSlugs": [
-        "узи-специалист"
+        "uzi-spetsialist"
       ],
       "confidence": "medium"
     },
@@ -368,8 +368,8 @@
         "терапевт"
       ],
       "ssotSlugs": [
-        "гемостазиолог",
-        "терапевт"
+        "gemostaziolog",
+        "terapevt"
       ],
       "confidence": "medium"
     },
@@ -383,8 +383,8 @@
         "ортопед"
       ],
       "ssotSlugs": [
-        "узи-специалист",
-        "ортопед"
+        "uzi-spetsialist",
+        "ortoped"
       ],
       "confidence": "medium"
     },
@@ -399,9 +399,9 @@
         "терапевт"
       ],
       "ssotSlugs": [
-        "гастроэнтеролог",
-        "эндокринолог",
-        "терапевт"
+        "gastroenterolog",
+        "endokrinolog",
+        "terapevt"
       ],
       "confidence": "low"
     },
@@ -415,8 +415,8 @@
         "диетолог"
       ],
       "ssotSlugs": [
-        "эндокринолог",
-        "диетолог"
+        "endokrinolog",
+        "dietolog"
       ],
       "confidence": "medium"
     },
@@ -431,9 +431,9 @@
         "терапевт"
       ],
       "ssotSlugs": [
-        "гастроэнтеролог",
-        "диетолог",
-        "терапевт"
+        "gastroenterolog",
+        "dietolog",
+        "terapevt"
       ],
       "confidence": "low"
     },
@@ -447,8 +447,8 @@
         "терапевт"
       ],
       "ssotSlugs": [
-        "гемостазиолог",
-        "терапевт"
+        "gemostaziolog",
+        "terapevt"
       ],
       "confidence": "medium"
     },
@@ -461,7 +461,7 @@
         "эндоскопист"
       ],
       "ssotSlugs": [
-        "эндоскопист"
+        "endoskopist"
       ],
       "confidence": "high"
     },
@@ -477,10 +477,10 @@
         "терапевт"
       ],
       "ssotSlugs": [
-        "гастроэнтеролог",
-        "эндокринолог",
-        "эндоскопист",
-        "терапевт"
+        "gastroenterolog",
+        "endokrinolog",
+        "endoskopist",
+        "terapevt"
       ],
       "confidence": "low"
     },
@@ -496,10 +496,10 @@
         "терапевт"
       ],
       "ssotSlugs": [
-        "гастроэнтеролог",
-        "эндокринолог",
-        "эндоскопист",
-        "терапевт"
+        "gastroenterolog",
+        "endokrinolog",
+        "endoskopist",
+        "terapevt"
       ],
       "confidence": "low"
     },
@@ -512,7 +512,7 @@
         "невролог"
       ],
       "ssotSlugs": [
-        "невролог"
+        "nevrolog"
       ],
       "confidence": "high"
     },
@@ -525,7 +525,7 @@
         "врач функциональной диагностики"
       ],
       "ssotSlugs": [
-        "врач-функциональной-диагностики"
+        "vrach-funktsionalnoy-diagnostiki"
       ],
       "confidence": "high"
     },
@@ -540,9 +540,9 @@
         "онколог"
       ],
       "ssotSlugs": [
-        "узи-специалист",
-        "маммолог",
-        "онколог"
+        "uzi-spetsialist",
+        "mammolog",
+        "onkolog"
       ],
       "confidence": "low"
     },
@@ -555,7 +555,7 @@
         "онколог"
       ],
       "ssotSlugs": [
-        "онколог"
+        "onkolog"
       ],
       "confidence": "high"
     },
@@ -568,7 +568,7 @@
         "колопроктолог (проктолог)"
       ],
       "ssotSlugs": [
-        "колопроктолог"
+        "koloproktolog"
       ],
       "confidence": "medium"
     },
@@ -581,7 +581,7 @@
         "пульмонолог"
       ],
       "ssotSlugs": [
-        "пульмонолог"
+        "pulmonolog"
       ],
       "confidence": "high"
     },
@@ -597,10 +597,10 @@
         "терапевт"
       ],
       "ssotSlugs": [
-        "анестезиолог-реаниматолог",
-        "кардиолог",
-        "нефролог",
-        "терапевт"
+        "anesteziolog-reanimatolog",
+        "kardiolog",
+        "nefrolog",
+        "terapevt"
       ],
       "confidence": "low"
     },
@@ -613,7 +613,7 @@
         "дерматовенеролог"
       ],
       "ssotSlugs": [
-        "дерматовенеролог"
+        "dermatovenerolog"
       ],
       "confidence": "high"
     },
@@ -627,8 +627,8 @@
         "педиатр"
       ],
       "ssotSlugs": [
-        "дерматовенеролог",
-        "педиатр"
+        "dermatovenerolog",
+        "pediatr"
       ],
       "confidence": "medium"
     },
@@ -642,8 +642,8 @@
         "терапевт"
       ],
       "ssotSlugs": [
-        "пульмонолог",
-        "терапевт"
+        "pulmonolog",
+        "terapevt"
       ],
       "confidence": "medium"
     },
@@ -656,7 +656,7 @@
         "анестезиолог-реаниматолог"
       ],
       "ssotSlugs": [
-        "анестезиолог-реаниматолог"
+        "anesteziolog-reanimatolog"
       ],
       "confidence": "high"
     },
@@ -669,7 +669,7 @@
         "эмбриолог"
       ],
       "ssotSlugs": [
-        "эмбриолог"
+        "embriolog"
       ],
       "confidence": "high"
     },
@@ -682,7 +682,7 @@
         "эмбриолог"
       ],
       "ssotSlugs": [
-        "эмбриолог"
+        "embriolog"
       ],
       "confidence": "high"
     },
@@ -695,7 +695,7 @@
         "эмбриолог"
       ],
       "ssotSlugs": [
-        "эмбриолог"
+        "embriolog"
       ],
       "confidence": "high"
     },
@@ -708,7 +708,7 @@
         "ревматолог"
       ],
       "ssotSlugs": [
-        "ревматолог"
+        "revmatolog"
       ],
       "confidence": "high"
     },
@@ -722,8 +722,8 @@
         "кардиолог"
       ],
       "ssotSlugs": [
-        "врач-функциональной-диагностики",
-        "кардиолог"
+        "vrach-funktsionalnoy-diagnostiki",
+        "kardiolog"
       ],
       "confidence": "medium"
     },
@@ -736,7 +736,7 @@
         "лор (отоларинголог)"
       ],
       "ssotSlugs": [
-        "лор"
+        "lor"
       ],
       "confidence": "medium"
     },
@@ -749,7 +749,7 @@
         "лор (отоларинголог)"
       ],
       "ssotSlugs": [
-        "лор"
+        "lor"
       ],
       "confidence": "medium"
     },
@@ -762,7 +762,7 @@
         "остеопат"
       ],
       "ssotSlugs": [
-        "остеопат"
+        "osteopat"
       ],
       "confidence": "high"
     },
@@ -775,7 +775,7 @@
         "аллерголог-иммунолог"
       ],
       "ssotSlugs": [
-        "аллерголог-иммунолог"
+        "allergolog-immunolog"
       ],
       "confidence": "high"
     }
