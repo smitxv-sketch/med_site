@@ -1,0 +1,39 @@
+[
+  {
+    "legacyId": "241",
+    "name": "Клиника Источник (филиал 241)",
+    "slug": "chel-clinic-241",
+    "city": "chel"
+  },
+  {
+    "legacyId": "242",
+    "name": "Клиника Источник (филиал 242)",
+    "slug": "chel-clinic-242",
+    "city": "chel"
+  },
+  {
+    "legacyId": "244",
+    "name": "ЭкоКлиника (филиал 244)",
+    "slug": "chel-clinic-244",
+    "city": "chel"
+  },
+  {
+    "legacyId": "245",
+    "name": "Клиника Источник (филиал 245)",
+    "slug": "chel-clinic-245",
+    "city": "chel"
+  },
+  {
+    "legacyId": "246",
+    "name": "Клиника Источник (филиал 246)",
+    "slug": "chel-clinic-246",
+    "city": "chel"
+  },
+  {
+    "legacyId": "spb-main",
+    "name": "Клиника Источник, Санкт-Петербург",
+    "slug": "spb-istochnik",
+    "city": "spb",
+    "address": "Санкт-Петербург"
+  }
+]

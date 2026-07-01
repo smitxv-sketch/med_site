@@ -1,0 +1,783 @@
+{
+  "generatedAt": "2026-07-01T13:58:24.681Z",
+  "ssot": "yandex_speclist",
+  "doctors": [
+    {
+      "slug": "tupikov-vladislav-anatolevich",
+      "fullName": "Тупиков Владислав Анатольевич",
+      "url": "https://cispb.com/sotrudniki/tupikov-vladislav-anatolevich/",
+      "rawSpecintro": "Главный врач, кандидат медицинских наук.",
+      "ssot": [],
+      "ssotSlugs": [],
+      "confidence": "none"
+    },
+    {
+      "slug": "gromova-olga-aleksandrovna",
+      "fullName": "Громова Ольга Александровна",
+      "url": "https://cispb.com/sotrudniki/gromova-olga-aleksandrovna/",
+      "rawSpecintro": "Заместитель главного врача по клинико-экспертной работе, врач-ревматолог, кандидат медицинских наук.",
+      "ssot": [
+        "ревматолог"
+      ],
+      "ssotSlugs": [
+        "ревматолог"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "Suslo-Irina-Sergeevna",
+      "fullName": "Сусло Ирина Сергеевна",
+      "url": "https://cispb.com/sotrudniki/Suslo-Irina-Sergeevna/",
+      "rawSpecintro": "Врач-офтальмолог высшей квалификационной категории, лазерный хирург. Кандидат медицинских наук. Заместитель главного врача по поликлинике.",
+      "ssot": [
+        "офтальмолог (окулист)",
+        "лазерный хирург"
+      ],
+      "ssotSlugs": [
+        "офтальмолог",
+        "лазерный-хирург"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "nikitin-sergej-vasilevich",
+      "fullName": "Никитин Сергей Васильевич",
+      "url": "https://cispb.com/sotrudniki/nikitin-sergej-vasilevich",
+      "rawSpecintro": "Заместитель главного врача по ВРТ, врач — акушер-гинеколог, репродуктолог, врач ультразвуковой диагностики, кандидат медицинских наук.",
+      "ssot": [
+        "акушер-гинеколог",
+        "узи-специалист",
+        "репродуктолог"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог",
+        "узи-специалист",
+        "репродуктолог"
+      ],
+      "confidence": "low"
+    },
+    {
+      "slug": "Zejnalova-Ajgyun-Elshanovna",
+      "fullName": "Зейналова Айгюнь Элшановна",
+      "url": "https://cispb.com/sotrudniki/Zejnalova-Ajgyun-Elshanovna/",
+      "rawSpecintro": "Врач — акушер-гинеколог первой категории, репродуктолог, врач ультразвуковой диагностики.",
+      "ssot": [
+        "акушер-гинеколог",
+        "узи-специалист",
+        "репродуктолог"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог",
+        "узи-специалист",
+        "репродуктолог"
+      ],
+      "confidence": "low"
+    },
+    {
+      "slug": "Lomova-Mitrofanova-Tatyana-YUrevna",
+      "fullName": "Ломова-Митрофанова Татьяна Юрьевна",
+      "url": "https://cispb.com/sotrudniki/Lomova-Mitrofanova-Tatyana-YUrevna/",
+      "rawSpecintro": "Врач — акушер-гинеколог, репродуктолог, врач ультразвуковой диагностики.",
+      "ssot": [
+        "акушер-гинеколог",
+        "узи-специалист",
+        "репродуктолог"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог",
+        "узи-специалист",
+        "репродуктолог"
+      ],
+      "confidence": "low"
+    },
+    {
+      "slug": "kojstrik-anna-vilorovna",
+      "fullName": "Койстрик Анна Вилоровна",
+      "url": "https://cispb.com/sotrudniki/kojstrik-anna-vilorovna",
+      "rawSpecintro": "Старший врач акушер-гинеколог отделения ВРТ, репродуктолог, врач ультразвуковой диагностики, врач высшей категории.",
+      "ssot": [
+        "акушер-гинеколог",
+        "узи-специалист",
+        "репродуктолог"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог",
+        "узи-специалист",
+        "репродуктолог"
+      ],
+      "confidence": "low"
+    },
+    {
+      "slug": "kasumova",
+      "fullName": "Касумова Аида Рауфовна",
+      "url": "https://cispb.com/sotrudniki/kasumova",
+      "rawSpecintro": "Врач-акушер-гинеколог, репродуктолог, врач ультразвуковой диагностики.",
+      "ssot": [
+        "акушер-гинеколог",
+        "узи-специалист",
+        "репродуктолог"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог",
+        "узи-специалист",
+        "репродуктолог"
+      ],
+      "confidence": "low"
+    },
+    {
+      "slug": "arutyunyan-arutyun-feliksovich",
+      "fullName": "Арутюнян Арутюн Феликсович",
+      "url": "https://cispb.com/sotrudniki/arutyunyan-arutyun-feliksovich",
+      "rawSpecintro": "Врач акушер-гинеколог, репродуктолог, оперирующий гинеколог. Доктор медицинских наук, доцент кафедры акушерства и гинекологии с клиникой ФГБУ «НМИЦ им. В. А. Алмазова» Минздрава России.",
+      "ssot": [
+        "акушер-гинеколог",
+        "репродуктолог"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог",
+        "репродуктолог"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "Dvojnova-Natalya-Mihajlovna",
+      "fullName": "Двойнова Наталья Михайловна",
+      "url": "https://cispb.com/sotrudniki/Dvojnova-Natalya-Mihajlovna/",
+      "rawSpecintro": "Врач-генетик",
+      "ssot": [
+        "генетик"
+      ],
+      "ssotSlugs": [
+        "генетик"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "pikulyova-oksana-anatolevna",
+      "fullName": "Пикулёва Оксана Анатольевна",
+      "url": "https://cispb.com/sotrudniki/pikulyova-oksana-anatolevna",
+      "rawSpecintro": "Психолог",
+      "ssot": [
+        "психолог",
+        "терапевт"
+      ],
+      "ssotSlugs": [
+        "психолог",
+        "терапевт"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "Vsemirnova-YUliya-Vladimirovna",
+      "fullName": "Всемирнова Юлия Владимировна",
+      "url": "https://cispb.com/sotrudniki/Vsemirnova-YUliya-Vladimirovna/",
+      "rawSpecintro": "Психолог, кандидат психологических наук.",
+      "ssot": [
+        "психолог"
+      ],
+      "ssotSlugs": [
+        "психолог"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "kerroll-natalya-valerievna",
+      "fullName": "Кэрролл Наталья Валериевна",
+      "url": "https://cispb.com/sotrudniki/kerroll-natalya-valerievna",
+      "rawSpecintro": "Врач-психотерапевт.",
+      "ssot": [
+        "психотерапевт"
+      ],
+      "ssotSlugs": [
+        "психотерапевт"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "dovzhanskij-iliya-vasilevich",
+      "fullName": "Довжанский Илия Васильевич",
+      "url": "https://cispb.com/sotrudniki/dovzhanskij-iliya-vasilevich",
+      "rawSpecintro": "Уролог, уролог-андролог",
+      "ssot": [
+        "андролог",
+        "уролог"
+      ],
+      "ssotSlugs": [
+        "андролог",
+        "уролог"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "pislegin-andrej-vyacheslavovich",
+      "fullName": "Пислегин Андрей Вячеславович",
+      "url": "https://cispb.com/sotrudniki/pislegin-andrej-vyacheslavovich",
+      "rawSpecintro": "Уролог, уролог-андролог, врач ультразвуковой диагностики",
+      "ssot": [
+        "узи-специалист",
+        "андролог",
+        "уролог"
+      ],
+      "ssotSlugs": [
+        "узи-специалист",
+        "андролог",
+        "уролог"
+      ],
+      "confidence": "low"
+    },
+    {
+      "slug": "Gafurova-Dina-Nailevna",
+      "fullName": "Гафурова Дина Наилевна",
+      "url": "https://cispb.com/sotrudniki/Gafurova-Dina-Nailevna/",
+      "rawSpecintro": "Заместитель главного врача по акушерству и гинекологии, врач акушер-гинеколог, кандидат медицинских наук.",
+      "ssot": [
+        "акушер-гинеколог"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "Egunyan-Anzhela-SHalikovna",
+      "fullName": "Егунян Анжела Шаликовна",
+      "url": "https://cispb.com/sotrudniki/Egunyan-Anzhela-SHalikovna/",
+      "rawSpecintro": "Врач — акушер-гинеколог высшей квалификационной категории, врач ультразвуковой диагностики, кандидат медицинских наук.",
+      "ssot": [
+        "акушер-гинеколог",
+        "узи-специалист"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог",
+        "узи-специалист"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "Suslova-Elena-Vladimirovna",
+      "fullName": "Суслова Елена Владимировна",
+      "url": "https://cispb.com/sotrudniki/Suslova-Elena-Vladimirovna/",
+      "rawSpecintro": "Врач — акушер-гинеколог, врач ультразвуковой диагностики, кандидат медицинских наук.",
+      "ssot": [
+        "акушер-гинеколог",
+        "узи-специалист",
+        "эндокринолог"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог",
+        "узи-специалист",
+        "эндокринолог"
+      ],
+      "confidence": "low"
+    },
+    {
+      "slug": "gerasimova-elena-anatolevna",
+      "fullName": "Герасимова Елена Анатольевна",
+      "url": "https://cispb.com/sotrudniki/gerasimova-elena-anatolevna",
+      "rawSpecintro": "Врач — акушер-гинеколог высшей квалификационной категории, врач ультразвуковой диагностики.",
+      "ssot": [
+        "акушер-гинеколог",
+        "узи-специалист"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог",
+        "узи-специалист"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "foos-oksana-vyacheslavovna",
+      "fullName": "Фоос Оксана Вячеславовна",
+      "url": "https://cispb.com/sotrudniki/foos-oksana-vyacheslavovna",
+      "rawSpecintro": "Врач — акушер-гинеколог, врач ультразвуковой диагностики.",
+      "ssot": [
+        "акушер-гинеколог",
+        "узи-специалист"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог",
+        "узи-специалист"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "bondarchuk-lyudmila-valerevna",
+      "fullName": "Бондарчук Людмила Валерьевна",
+      "url": "https://cispb.com/sotrudniki/bondarchuk-lyudmila-valerevna",
+      "rawSpecintro": "Врач акушер-гинеколог, врач ультразвуковой диагностики",
+      "ssot": [
+        "акушер-гинеколог",
+        "узи-специалист"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог",
+        "узи-специалист"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "shiyanova-ekaterina-vladislavovna",
+      "fullName": "Шиянова Екатерина Владиславовна",
+      "url": "https://cispb.com/sotrudniki/shiyanova-ekaterina-vladislavovna",
+      "rawSpecintro": "Врач-акушер-гинеколог, врач ультразвуковой диагностики",
+      "ssot": [
+        "акушер-гинеколог",
+        "узи-специалист"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог",
+        "узи-специалист"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "ekaterina-aleksandrovna-karaseva",
+      "fullName": "Карасева Екатерина Александровна",
+      "url": "https://cispb.com/sotrudniki/ekaterina-aleksandrovna-karaseva",
+      "rawSpecintro": "Врач пренатальной ультразвуковой диагностики, врач акушер-гинеколог",
+      "ssot": [
+        "акушер-гинеколог",
+        "узи-специалист"
+      ],
+      "ssotSlugs": [
+        "акушер-гинеколог",
+        "узи-специалист"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "Reshanova-Lyudmila-Mihajlovna",
+      "fullName": "Решанова Людмила Михайловна",
+      "url": "https://cispb.com/sotrudniki/Reshanova-Lyudmila-Mihajlovna/",
+      "rawSpecintro": "Врач ультразвуковой диагностики",
+      "ssot": [
+        "узи-специалист"
+      ],
+      "ssotSlugs": [
+        "узи-специалист"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "frolova-nadezhda-vasilevna",
+      "fullName": "Фролова Надежда Васильевна",
+      "url": "https://cispb.com/sotrudniki/frolova-nadezhda-vasilevna",
+      "rawSpecintro": "Врач-терапевт, гемостазиолог",
+      "ssot": [
+        "гемостазиолог",
+        "терапевт"
+      ],
+      "ssotSlugs": [
+        "гемостазиолог",
+        "терапевт"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "gromov-ivan-anatolevich",
+      "fullName": "Громов Иван Анатольевич",
+      "url": "https://cispb.com/sotrudniki/gromov-ivan-anatolevich/",
+      "rawSpecintro": "Врач — травматолог-ортопед, врач ультразвуковой диагностики.",
+      "ssot": [
+        "узи-специалист",
+        "ортопед"
+      ],
+      "ssotSlugs": [
+        "узи-специалист",
+        "ортопед"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "cherednikova_marina_anatolevna",
+      "fullName": "Чередникова Марина Анатольевна",
+      "url": "https://cispb.com/sotrudniki/cherednikova_marina_anatolevna/",
+      "rawSpecintro": "Врач-эндокринолог высшей категории, терапевт, гастроэнтеролог. Кандидат медицинских наук.",
+      "ssot": [
+        "гастроэнтеролог",
+        "эндокринолог",
+        "терапевт"
+      ],
+      "ssotSlugs": [
+        "гастроэнтеролог",
+        "эндокринолог",
+        "терапевт"
+      ],
+      "confidence": "low"
+    },
+    {
+      "slug": "tachovali-taufik-moxamedovich",
+      "fullName": "Тачовали Тауфик Мохамедович",
+      "url": "https://cispb.com/sotrudniki/tachovali-taufik-moxamedovich",
+      "rawSpecintro": "Врач-эндокринолог, диетолог",
+      "ssot": [
+        "эндокринолог",
+        "диетолог"
+      ],
+      "ssotSlugs": [
+        "эндокринолог",
+        "диетолог"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "Kuznecova-Anna-Vladimirovna",
+      "fullName": "Кузнецова Анна Владимировна",
+      "url": "https://cispb.com/sotrudniki/Kuznecova-Anna-Vladimirovna/",
+      "rawSpecintro": "Врач-гастроэнтеролог высшей квалификационной категории, терапевт, диетолог.",
+      "ssot": [
+        "гастроэнтеролог",
+        "диетолог",
+        "терапевт"
+      ],
+      "ssotSlugs": [
+        "гастроэнтеролог",
+        "диетолог",
+        "терапевт"
+      ],
+      "confidence": "low"
+    },
+    {
+      "slug": "bronnikovaalex",
+      "fullName": "Бронникова Александра Александровна",
+      "url": "https://cispb.com/sotrudniki/bronnikovaalex",
+      "rawSpecintro": "Терапевт",
+      "ssot": [
+        "гемостазиолог",
+        "терапевт"
+      ],
+      "ssotSlugs": [
+        "гемостазиолог",
+        "терапевт"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "paderin-valerij-borisovich",
+      "fullName": "Падерин Валерий Борисович",
+      "url": "https://cispb.com/sotrudniki/paderin-valerij-borisovich/",
+      "rawSpecintro": "Врач-эндоскопист высшей квалификационной категории.",
+      "ssot": [
+        "эндоскопист"
+      ],
+      "ssotSlugs": [
+        "эндоскопист"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "belova-polina-aleksandrovna",
+      "fullName": "Белова Полина Александровна",
+      "url": "https://cispb.com/sotrudniki/belova-polina-aleksandrovna",
+      "rawSpecintro": "Врач-эндоскопист",
+      "ssot": [
+        "гастроэнтеролог",
+        "эндокринолог",
+        "эндоскопист",
+        "терапевт"
+      ],
+      "ssotSlugs": [
+        "гастроэнтеролог",
+        "эндокринолог",
+        "эндоскопист",
+        "терапевт"
+      ],
+      "confidence": "low"
+    },
+    {
+      "slug": "galanova",
+      "fullName": "Галанова Дарья Валерьевна",
+      "url": "https://cispb.com/sotrudniki/galanova",
+      "rawSpecintro": "Врач-эндоскопист",
+      "ssot": [
+        "гастроэнтеролог",
+        "эндокринолог",
+        "эндоскопист",
+        "терапевт"
+      ],
+      "ssotSlugs": [
+        "гастроэнтеролог",
+        "эндокринолог",
+        "эндоскопист",
+        "терапевт"
+      ],
+      "confidence": "low"
+    },
+    {
+      "slug": "Potaseeva-Olga-Albertovna",
+      "fullName": "Потасеева Ольга Альбертовна",
+      "url": "https://cispb.com/sotrudniki/Potaseeva-Olga-Albertovna/",
+      "rawSpecintro": "Врач-невролог. Кандидат медицинских наук.",
+      "ssot": [
+        "невролог"
+      ],
+      "ssotSlugs": [
+        "невролог"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "mladenceva-tatjana-ehduardovna",
+      "fullName": "Младенцева Татьяна Эдуардовна",
+      "url": "https://cispb.com/sotrudniki/mladenceva-tatjana-ehduardovna/",
+      "rawSpecintro": "Врач функциональной диагностики высшей квалификационной категории.",
+      "ssot": [
+        "врач функциональной диагностики"
+      ],
+      "ssotSlugs": [
+        "врач-функциональной-диагностики"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "Vazhenina-Inna-Igorevna",
+      "fullName": "Важенина Инна Игоревна",
+      "url": "https://cispb.com/sotrudniki/Vazhenina-Inna-Igorevna/",
+      "rawSpecintro": "Врач-онколог, маммолог, врач ультразвуковой диагностики.",
+      "ssot": [
+        "узи-специалист",
+        "маммолог",
+        "онколог"
+      ],
+      "ssotSlugs": [
+        "узи-специалист",
+        "маммолог",
+        "онколог"
+      ],
+      "confidence": "low"
+    },
+    {
+      "slug": "rajgorodskij-maksim-vladimirovich",
+      "fullName": "Райгородский Максим Владимирович",
+      "url": "https://cispb.com/sotrudniki/rajgorodskij-maksim-vladimirovich",
+      "rawSpecintro": "Онколог",
+      "ssot": [
+        "онколог"
+      ],
+      "ssotSlugs": [
+        "онколог"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "bejg-tarik-maxmudovich",
+      "fullName": "Бейг Тарик Махмудович",
+      "url": "https://cispb.com/sotrudniki/bejg-tarik-maxmudovich",
+      "rawSpecintro": "Врач-колопроктолог высшей квалификационной категории.",
+      "ssot": [
+        "колопроктолог (проктолог)"
+      ],
+      "ssotSlugs": [
+        "колопроктолог"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "bezuzhkevich-valentin-vitalevich",
+      "fullName": "Безужкевич Валентин Витальевич",
+      "url": "https://cispb.com/sotrudniki/bezuzhkevich-valentin-vitalevich",
+      "rawSpecintro": "Врач-пульмонолог высшей квалификационной категории.",
+      "ssot": [
+        "пульмонолог"
+      ],
+      "ssotSlugs": [
+        "пульмонолог"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "akimenko-tatyana-igorevna",
+      "fullName": "Акименко Татьяна Игоревна",
+      "url": "https://cispb.com/sotrudniki/akimenko-tatyana-igorevna",
+      "rawSpecintro": "Врач-нефролог, анестезиолог-реаниматолог, врач высшей квалификационной категории. Кандидат медицинских наук.",
+      "ssot": [
+        "анестезиолог-реаниматолог",
+        "кардиолог",
+        "нефролог",
+        "терапевт"
+      ],
+      "ssotSlugs": [
+        "анестезиолог-реаниматолог",
+        "кардиолог",
+        "нефролог",
+        "терапевт"
+      ],
+      "confidence": "low"
+    },
+    {
+      "slug": "KLYUEVA-TATYANA-ANATOLEVNA",
+      "fullName": "Клюева Татьяна Анатольевна",
+      "url": "https://cispb.com/sotrudniki/KLYUEVA-TATYANA-ANATOLEVNA/",
+      "rawSpecintro": "Врач-дерматовенеролог высшей квалификационной категории",
+      "ssot": [
+        "дерматовенеролог"
+      ],
+      "ssotSlugs": [
+        "дерматовенеролог"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "antonova-svetlana-borisovna",
+      "fullName": "Антонова Светлана Борисовна",
+      "url": "https://cispb.com/sotrudniki/antonova-svetlana-borisovna",
+      "rawSpecintro": "Врач-дерматовенеролог. Врач-педиатр",
+      "ssot": [
+        "дерматовенеролог",
+        "педиатр"
+      ],
+      "ssotSlugs": [
+        "дерматовенеролог",
+        "педиатр"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "malczeva-olga-aleksandrovna",
+      "fullName": "Мальцева Ольга Александровна",
+      "url": "https://cispb.com/sotrudniki/malczeva-olga-aleksandrovna",
+      "rawSpecintro": "Врач – терапевт, пульмонолог.",
+      "ssot": [
+        "пульмонолог",
+        "терапевт"
+      ],
+      "ssotSlugs": [
+        "пульмонолог",
+        "терапевт"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "Ivanov-Maksim-Vitalevich",
+      "fullName": "Иванов Максим Витальевич",
+      "url": "https://cispb.com/sotrudniki/Ivanov-Maksim-Vitalevich/",
+      "rawSpecintro": "Врач — анестезиолог-реаниматолог.",
+      "ssot": [
+        "анестезиолог-реаниматолог"
+      ],
+      "ssotSlugs": [
+        "анестезиолог-реаниматолог"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "reshetnikov-igor-vladimirovich",
+      "fullName": "Решетников Игорь Владимирович",
+      "url": "https://cispb.com/sotrudniki/reshetnikov-igor-vladimirovich",
+      "rawSpecintro": "Эмбриолог, кандидат биологических наук",
+      "ssot": [
+        "эмбриолог"
+      ],
+      "ssotSlugs": [
+        "эмбриолог"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "glushhenko-anna-sergeevna",
+      "fullName": "Глущенко Анна Сергеевна",
+      "url": "https://cispb.com/sotrudniki/glushhenko-anna-sergeevna",
+      "rawSpecintro": "Эмбриолог",
+      "ssot": [
+        "эмбриолог"
+      ],
+      "ssotSlugs": [
+        "эмбриолог"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "dedenevaev",
+      "fullName": "Деденева Елена Викторовна",
+      "url": "https://cispb.com/sotrudniki/dedenevaev",
+      "rawSpecintro": "Эмбриолог, врач КЛД эмбриологической лаборатории отделения ВРТ",
+      "ssot": [
+        "эмбриолог"
+      ],
+      "ssotSlugs": [
+        "эмбриолог"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "kaczelnik-ekaterina-yurevna",
+      "fullName": "Кацельник Екатерина Юрьевна",
+      "url": "https://cispb.com/sotrudniki/kaczelnik-ekaterina-yurevna",
+      "rawSpecintro": "Врач-ревматолог",
+      "ssot": [
+        "ревматолог"
+      ],
+      "ssotSlugs": [
+        "ревматолог"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "skuridin-daniil-sergeevich",
+      "fullName": "Скуридин Даниил Сергеевич",
+      "url": "https://cispb.com/sotrudniki/skuridin-daniil-sergeevich",
+      "rawSpecintro": "Кардиолог. Врач функциональной диагностики",
+      "ssot": [
+        "врач функциональной диагностики",
+        "кардиолог"
+      ],
+      "ssotSlugs": [
+        "врач-функциональной-диагностики",
+        "кардиолог"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "rumyanczeva-elena-evgenevna",
+      "fullName": "Румянцева Елена Евгеньевна",
+      "url": "https://cispb.com/sotrudniki/rumyanczeva-elena-evgenevna",
+      "rawSpecintro": "Врач оториноларинголог (ЛОР), детский отоларинголог",
+      "ssot": [
+        "лор (отоларинголог)"
+      ],
+      "ssotSlugs": [
+        "лор"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "savin-maksim-sergeevich",
+      "fullName": "Савин Максим Сергеевич",
+      "url": "https://cispb.com/sotrudniki/savin-maksim-sergeevich",
+      "rawSpecintro": "Врач оториноларинголог (ЛОР), детский отоларинголог",
+      "ssot": [
+        "лор (отоларинголог)"
+      ],
+      "ssotSlugs": [
+        "лор"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "slug": "ekkertdmitrii",
+      "fullName": "Эккерт Дмитрий Александрович",
+      "url": "https://cispb.com/sotrudniki/ekkertdmitrii",
+      "rawSpecintro": "Врач-остеопат",
+      "ssot": [
+        "остеопат"
+      ],
+      "ssotSlugs": [
+        "остеопат"
+      ],
+      "confidence": "high"
+    },
+    {
+      "slug": "kuznetsovaraisanikolaevna",
+      "fullName": "Кузнецова Раиса Николаевна",
+      "url": "https://cispb.com/sotrudniki/kuznetsovaraisanikolaevna",
+      "rawSpecintro": "Врач аллерголог-иммунолог, врач аллерголог, врач иммунолог",
+      "ssot": [
+        "аллерголог-иммунолог"
+      ],
+      "ssotSlugs": [
+        "аллерголог-иммунолог"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
