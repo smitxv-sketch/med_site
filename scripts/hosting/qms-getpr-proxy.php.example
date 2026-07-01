@@ -1,0 +1,73 @@
+<?php
+/**
+ * Прокси getPr для bridge / cron (IP хостинга в whitelist QMS).
+ *
+ * Разместить на хостинге сайта, например:
+ *   ЧЛБ: https://ci74.ru/qms_price/chel/proxy_getpr.php
+ *   СПб: https://cispb.com/price_update/proxy_getpr.php
+ *
+ * В Coolify (bridge-istochnik):
+ *   QMS_CHEL_SITE_PROXY_URL=https://ci74.ru/qms_price/chel/proxy_getpr.php
+ *   QMS_SPB_SITE_PROXY_URL=https://cispb.com/price_update/proxy_getpr.php
+ *
+ * Запрос: POST application/json
+ *   { "apikey": "...", "unauthorized": 1, "qqc244": "..." }
+ *
+ * Опционально заголовок X-QMS-Proxy-Token (см. $proxyToken ниже).
+ */
+header('Content-Type: application/json; charset=utf-8');
+
+// --- настройки (заменить на боевые) ---
+$targetUrl = 'https://back.ci74.ru/qms-api/getPr'; // для СПб: back.cispb.ru
+$proxyToken = ''; // если пусто — проверка токена отключена
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['error' => 'POST only']);
+    exit;
+}
+
+if ($proxyToken !== '') {
+    $hdr = $_SERVER['HTTP_X_QMS_PROXY_TOKEN'] ?? '';
+    if (!hash_equals($proxyToken, $hdr)) {
+        http_response_code(403);
+        echo json_encode(['error' => 'Invalid proxy token']);
+        exit;
+    }
+}
+
+$raw = file_get_contents('php://input');
+$payload = json_decode($raw, true);
+if (!is_array($payload) || empty($payload['apikey']) || empty($payload['qqc244'])) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Expected JSON: apikey, qqc244, unauthorized']);
+    exit;
+}
+
+$ch = curl_init($targetUrl);
+curl_setopt_array($ch, [
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => json_encode([
+        'apikey' => $payload['apikey'],
+        'unauthorized' => (int)($payload['unauthorized'] ?? 1),
+        'qqc244' => $payload['qqc244'],
+    ]),
+    CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+    CURLOPT_TIMEOUT => 90,
+    CURLOPT_SSL_VERIFYPEER => false,
+]);
+
+$body = curl_exec($ch);
+$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$err = curl_error($ch);
+curl_close($ch);
+
+if ($body === false) {
+    http_response_code(502);
+    echo json_encode(['error' => 'curl failed', 'detail' => $err]);
+    exit;
+}
+
+http_response_code($code ?: 200);
+echo $body;

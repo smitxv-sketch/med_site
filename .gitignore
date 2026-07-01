@@ -1,17 +1,35 @@
-# Dependencies (создаётся командой npm install)
+# =============================================================================
+# Зависимости (npm / yarn / pnpm)
+# =============================================================================
 node_modules/
+**/node_modules/
 
-# Build output
+# PHP Composer (если появится)
+vendor/
+**/vendor/
+
+# =============================================================================
+# Сборка и кэш
+# =============================================================================
 dist/
+out/
 .next/
+.turbo/
+.cache/
+coverage/
 apps/web/.next/
 apps/bff/dist/
+apps/studio/.next/
 apps/cms/.cache/
 apps/cms/build/
 apps/cms/dist/
+apps/cms/.strapi/
+apps/cms/.tmp/
 packages/*/dist/
 
-# Environment & secrets
+# =============================================================================
+# Секреты и локальные env
+# =============================================================================
 .env
 .env.local
 .env.*.local
@@ -19,42 +37,83 @@ apps/*/.env
 infra/env/*.env
 !infra/env/*.env.example
 
-# PHP / legacy secrets (copy from *.example.*)
+# PHP / legacy / Firebase (копировать из *.example)
 php_backend/config_access.php
 firebase-applet-config.json
 
-# Strapi uploads (local)
-apps/cms/public/uploads/
+# Синхронизация цен МИС → legacy (пароли БД, API-ключи, HTML-отчёты)
+qms_price/
 
-# Logs
+# =============================================================================
+# Дампы, экспорты, исследовательские артефакты
+# =============================================================================
+data/
+travel/
+.tmp/
+.tmp-ci-test/
+
+# Bridge / migration: сгенерированные выгрузки (могут содержать PII)
+modx_wp-to-strapi-migration-api/public/export/
+
+# Большие JSON/HTML-дампы с прод-сайтов (локальное исследование)
+site_spb.md
+modx-to-strapi-migration-api-researcher.zip
+docs/legacy/audits/*_raw.json
+
+# SQLite / локальные БД
+*.db
+*.sqlite
+*.sqlite3
+
+# SQL-бэкапы (price sync и пр.)
+backup_*.sql
+**/backup_*.sql
+
+# =============================================================================
+# Временные и черновые файлы в корне
+# =============================================================================
+tmp-*
+tmp_*
+temp_*.js
+part*.txt
+mobile_menu_bad.txt
+logs.txt
 *.log
 npm-debug.log*
 
-# OS
-.DS_Store
-Thumbs.db
+# Случайные скриншоты/фото в корне репозитория
+/IMG_*.JPG
+/IMG_*.jpg
+/IMG_*.png
 
-# Playwright / QA
+# Архивы (не хранить в git)
+*.zip
+*.tar.gz
+*.7z
+
+# =============================================================================
+# Strapi uploads (локально)
+# =============================================================================
+apps/cms/public/uploads/
+
+# =============================================================================
+# QA / Playwright
+# =============================================================================
 playwright-report/
 test-results/
 blob-report/
 
-# IDE
+# =============================================================================
+# OS и IDE
+# =============================================================================
+.DS_Store
+Thumbs.db
 .idea/
 .vscode/
 .cursor/mcp.json
 *.swp
 *.swo
+*.bak
 
 # Vite
 *.local
-
-# Docker
-apps/cms/.tmp/
-
-# Temporary / experiments (should never be deployed)
-.tmp/
-.tmp-ci-test/
-data/
-travel/
-*.zip

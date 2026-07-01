@@ -35,6 +35,7 @@ import exploreRoutes from "./explore.js";
 import legacyGuardRoutes from "./legacyGuard.js";
 import legacyDiagnosticsRoutes from "./legacyDiagnostics.js";
 import healthRoutes from "./health.js";
+import qmsRoutes from "./qms.js";
 import { legacyApiGuardMiddleware } from "../middleware/legacyApiGuard.js";
 import { fetchModxDoctorsWithTvs } from "../repositories/modx/doctorsRepository.js";
 import { fetchModxServicesWithDetails } from "../repositories/modx/servicesRepository.js";
@@ -44,6 +45,7 @@ const execAsync = util.promisify(exec);
 const router = Router();
 
 router.use("/health", healthRoutes);
+router.use("/qms", qmsRoutes);
 
 // Защита legacy MySQL + контракт «данные частями»
 router.use(legacyApiGuardMiddleware);
