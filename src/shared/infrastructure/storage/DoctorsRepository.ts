@@ -23,11 +23,15 @@ export interface IDoctorsRepository {
 /** Strapi SSOT для каталога; booking-виджет по-прежнему использует /api/wp-doctors */
 export class APIDoctorsRepository implements IDoctorsRepository {
   async getAllDoctors(): Promise<Doctor[]> {
+    const tenantId = resolveTenantId();
     try {
-      const fromStrapi = await fetchPlatformDoctors(resolveTenantId());
+      const fromStrapi = await fetchPlatformDoctors(tenantId);
       if (fromStrapi.length > 0) return fromStrapi;
+      // Пустой каталог СПб — не подмешиваем врачей ЧЛБ из legacy WP
+      if (tenantId !== DEFAULT_TENANT_ID) return [];
     } catch (e) {
-      console.warn('[DoctorsRepository] Strapi /api/doctors failed, fallback to wp-doctors', e);
+      console.warn('[DoctorsRepository] Strapi catalog failed', e);
+      if (tenantId !== DEFAULT_TENANT_ID) return [];
     }
     return getAllDoctors();
   }
