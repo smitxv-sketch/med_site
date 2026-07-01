@@ -3,7 +3,7 @@ import { loadBranchSeed, loadSsotIndex } from './specialtySsotLoader.js';
 
 export type CatalogSyncReport = {
   specialties: { created: number; updated: number; skipped: number };
-  branches: { created: number; updated: number; skipped: number };
+  branches: { created: number; updated: number; skipped: number; archived: number };
 };
 
 /** Идемпотентный seed справочника Specialty из specialty-ssot.json */
@@ -42,7 +42,8 @@ export async function syncSpecialtiesCatalog(client: StrapiClient): Promise<Cata
 /** Seed филиалов ЧЛБ + тех. филиал СПб */
 export async function syncBranchesCatalog(client: StrapiClient): Promise<CatalogSyncReport['branches']> {
   const seeds = await loadBranchSeed();
-  const report = { created: 0, updated: 0, skipped: 0 };
+  const report = { created: 0, updated: 0, skipped: 0, archived: 0 };
+  const seedLegacyIds = new Set(seeds.map((row) => row.legacyId));
 
   for (const row of seeds) {
     const payload = {
@@ -65,6 +66,19 @@ export async function syncBranchesCatalog(client: StrapiClient): Promise<Catalog
 
     await client.updateEntry('branches', existing.documentId, payload);
     report.updated += 1;
+  }
+
+  // Снять с публикации устаревшие филиалы (245 ЭКО, 246 косметология → алиасы 242)
+  const allBranches = await client.listAll('branches', { pageSize: 50 });
+  for (const row of allBranches) {
+    const legacyId = String(row.legacyId || '');
+    if (!legacyId || seedLegacyIds.has(legacyId)) continue;
+    try {
+      await client.deleteEntry('branches', row.documentId);
+      report.archived += 1;
+    } catch (e) {
+      console.warn('[syncBranchesCatalog] failed to delete orphan branch', legacyId, e);
+    }
   }
 
   return report;

@@ -229,4 +229,18 @@ export class StrapiClient {
     }
     await this.updateEntry(collection, documentId, { ...data, locale });
   }
+
+  /** Удалить запись (устаревшие филиалы после смены seed) */
+  async deleteEntry(collection: string, documentId: string): Promise<void> {
+    const res = await this.fetchWithRetry(`${this.baseUrl}/api/${collection}/${documentId}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${this.token}` },
+    });
+    if (!res.ok && res.status !== 404) {
+      const errorData = await res.json().catch(() => null);
+      throw new Error(
+        `Failed to delete ${documentId} in ${collection}: ${res.statusText} - ${JSON.stringify(errorData)}`,
+      );
+    }
+  }
 }
