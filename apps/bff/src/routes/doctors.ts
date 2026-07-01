@@ -19,9 +19,10 @@ type StrapiDoctorRow = {
 
 /** Врачи из Strapi CMS для страницы /doctors */
 export async function getStrapiDoctorsHandler(req: Request, res: Response) {
+  // Явный ?tenant= важнее заголовка middleware (для /api/... без /spb в path)
   const tenant =
-    (req.headers['x-tenant-id'] as string) ||
     (req.query.tenant as string) ||
+    (req.headers['x-tenant-id'] as string) ||
     'chel';
   const locale = tenant === 'spb' ? 'ru-spb' : 'ru-chel';
   const token = getStrapiToken();
