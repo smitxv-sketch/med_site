@@ -16,9 +16,14 @@ function transliterateRu(input: string): string {
     .join('');
 }
 
-/** Slug для Strapi UID: только [A-Za-z0-9-_.~] */
+/** Slug для Strapi UID: только [A-Za-z0-9-_.~] (скобки убираем как в SSOT-скрипте) */
 export function toStrapiUidSlug(input: string): string {
-  const ascii = transliterateRu(input)
+  const cleaned = String(input)
+    .toLowerCase()
+    .replace(/ё/g, 'е')
+    .replace(/\s*\([^)]*\)\s*/g, ' ')
+    .trim();
+  const ascii = transliterateRu(cleaned)
     .replace(/[^a-z0-9._~]+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-+|-+$/g, '');

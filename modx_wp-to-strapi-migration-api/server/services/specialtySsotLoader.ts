@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { toStrapiUidSlug } from '../lib/strapiSlug.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -70,7 +71,8 @@ export async function loadSsotIndex(): Promise<SsotIndex> {
   const items: SsotSpecialtyItem[] = raw.items.map((row) => ({
     id: row.id,
     yandexName: row.yandexName,
-    slug: row.slug,
+    // Strapi UID — только латиница; всегда из yandexName (JSON мог содержать кириллицу из WP)
+    slug: toStrapiUidSlug(row.yandexName),
     chelWpTermId: row.chelWpTermId,
     chelWpName: row.chelWpName,
   }));
@@ -96,12 +98,21 @@ const normKey = (s: string) =>
 export function normalizeSpecialtySlugs(slugs: string[], ssot: SsotIndex): string[] {
   const out = new Set<string>();
   for (const raw of slugs) {
-    if (ssot.bySlug.has(raw)) {
-      out.add(raw);
-      continue;
+    const candidates = [raw, toStrapiUidSlug(raw)];
+    let matched = false;
+    for (const key of candidates) {
+      if (ssot.bySlug.has(key)) {
+        out.add(key);
+        matched = true;
+        break;
+      }
     }
+    if (matched) continue;
     const item = ssot.items.find(
-      (i) => normKey(i.yandexName) === normKey(raw) || normKey(i.slug) === normKey(raw),
+      (i) =>
+        normKey(i.yandexName) === normKey(raw) ||
+        normKey(i.slug) === normKey(raw) ||
+        i.slug === toStrapiUidSlug(raw),
     );
     if (item) out.add(item.slug);
   }
