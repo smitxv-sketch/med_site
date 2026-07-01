@@ -25,7 +25,7 @@ import {
   slugsToDocumentIds,
   syncReferenceCatalogs,
 } from './syncCatalogs.js';
-import { loadSpbDoctorSpecialtyMap, loadSsotIndex } from './specialtySsotLoader.js';
+import { loadSpbDoctorSpecialtyMap, loadSsotIndex, loadBranchSeed, buildBranchWpAliasIndex } from './specialtySsotLoader.js';
 
 export type SyncCity = 'chel' | 'spb';
 
@@ -156,11 +156,16 @@ export async function runDoctorSync(
 
     try {
       const catalogs = await syncReferenceCatalogs(client);
-      const [ssot, spbSpecialtyMap] = await Promise.all([
+      const [ssot, spbSpecialtyMap, branchSeeds] = await Promise.all([
         loadSsotIndex(),
         loadSpbDoctorSpecialtyMap(),
+        loadBranchSeed(),
       ]);
-      const hydrationCtx: DoctorHydrationContext = { ssot, spbSpecialtyMap };
+      const hydrationCtx: DoctorHydrationContext = {
+        ssot,
+        spbSpecialtyMap,
+        branchWpAliasIndex: buildBranchWpAliasIndex(branchSeeds),
+      };
 
       const indexes: RelationIndexes = {
         specialtyBySlug: await buildSpecialtySlugIndex(client),

@@ -17,6 +17,8 @@ const LOCALES = { chel: 'ru-chel', spb: 'ru-spb' } as const;
 export type DoctorHydrationContext = {
   ssot: SsotIndex;
   spbSpecialtyMap: Map<string, string[]>;
+  /** Нормализация WP clinic ID → филиал (ЭКО/косметология → Подсолнухи) */
+  branchWpAliasIndex: Map<string, string>;
 };
 
 function parseMisId(raw?: string): string {
@@ -74,7 +76,7 @@ export function hydrateDoctorFromLegacy(
         ctx.ssot,
       );
     }
-    branchLegacyIds = resolveChelBranchLegacyIds(meta);
+    branchLegacyIds = resolveChelBranchLegacyIds(meta, ctx.branchWpAliasIndex);
   } else {
     const pageSlug = String(doc.alias || '').replace(/^doctor-/, '');
     specialtySlugs = normalizeSpecialtySlugs(

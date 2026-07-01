@@ -31,6 +31,8 @@ export type BranchSeedRow = {
   slug: string;
   city: 'chel' | 'spb';
   address?: string;
+  /** WP post_type=clinics — направления внутри филиала, не отдельные Branch в Strapi */
+  wpClinicAliasIds?: string[];
 };
 
 function repoRoot() {
@@ -190,6 +192,17 @@ export async function loadBranchSeed(): Promise<BranchSeedRow[]> {
   return JSON.parse(await fs.readFile(file, 'utf8')) as BranchSeedRow[];
 }
 
+/** WP clinics ID → legacyId филиала (245 ЭКО, 246 косметология → 242 Подсолнухи) */
+export function buildBranchWpAliasIndex(seeds: BranchSeedRow[]): Map<string, string> {
+  const map = new Map<string, string>();
+  for (const row of seeds) {
+    for (const alias of row.wpClinicAliasIds ?? []) {
+      map.set(String(alias), row.legacyId);
+    }
+  }
+  return map;
+}
+
 export function resolveChelSpecialtySlugs(
   rawMeta: Record<string, unknown>,
   ssot: SsotIndex,
@@ -205,10 +218,19 @@ export function resolveChelSpecialtySlugs(
   return [...slugs];
 }
 
-export function resolveChelBranchLegacyIds(rawMeta: Record<string, unknown>): string[] {
+export function resolveChelBranchLegacyIds(
+  rawMeta: Record<string, unknown>,
+  wpAliasIndex?: Map<string, string>,
+): string[] {
   const clinics = rawMeta.clinics;
   const list = Array.isArray(clinics) ? clinics : clinics ? [clinics] : [];
-  return list.map((id) => String(id)).filter(Boolean);
+  const ids = list
+    .map((id) => {
+      const key = String(id);
+      return wpAliasIndex?.get(key) ?? key;
+    })
+    .filter(Boolean);
+  return [...new Set(ids)];
 }
 
 export function parseBoolMeta(val: unknown): boolean {
