@@ -15,6 +15,8 @@ export async function proxyBookingBff(
   req.nextUrl.searchParams.forEach((value, key) => {
     url.searchParams.set(key, value);
   });
+
+  // tenant из middleware (/spb → spb) пробрасываем в BFF
   const tenantId = req.headers.get('x-tenant-id');
   if (tenantId && !url.searchParams.has('tenant')) {
     url.searchParams.set('tenant', tenantId);
@@ -25,9 +27,9 @@ export async function proxyBookingBff(
   if (contentType) headers['Content-Type'] = contentType;
   const auth = req.headers.get('authorization');
   if (auth) headers.Authorization = auth;
+  if (tenantId) headers['x-tenant-id'] = tenantId;
 
-  const tenantId = req.headers.get('x-tenant-id');
-  if (tenantId) url.searchParams.set('tenant', tenantId);
+  const init: RequestInit = { method, headers, cache: 'no-store' };
   if (method !== 'GET' && method !== 'HEAD') {
     init.body = await req.text();
   }
