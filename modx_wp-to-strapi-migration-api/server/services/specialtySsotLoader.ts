@@ -36,9 +36,10 @@ function repoRoot() {
   return path.resolve(__dirname, '../../..');
 }
 
-/** Путь к JSON маппинга: в Docker /app/data/mappings, локально docs/mappings */
+/** Путь к JSON маппинга: в Docker /app/server/mappings, локально docs/mappings */
 async function resolveMappingFile(name: string): Promise<string> {
   const candidates = [
+    path.join(__dirname, '../mappings', name),
     path.join(__dirname, '../../data/mappings', name),
     path.join(repoRoot(), 'docs/mappings', name),
   ];
