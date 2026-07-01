@@ -128,7 +128,10 @@ async function upsertOneDoctor(
     patch[key] = safePayload[key as keyof typeof safePayload];
   }
 
-  await client.updateEntry('doctors', existing.documentId, patch);
+  await client.updateEntry('doctors', existing.documentId, {
+    ...patch,
+    locale: canonical.locale,
+  });
   await applyDoctorRelations(client, existing.documentId, canonical, indexes);
   await updateSyncMap(cityKey, 'doctor', canonical.legacyId, existing.documentId, hash);
   report.updated += 1;
