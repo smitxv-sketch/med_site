@@ -19,13 +19,14 @@ const BOOKING_API_PREFIXES = [
   '/api/doctors',
   '/api/catalog/doctors',
   '/api/catalog/prices',
+  '/api/catalog/services',
   '/api/diagnostics',
 ] as const;
 
 function isBookingApi(pathname: string): boolean {
   return BOOKING_API_PREFIXES.some(
     (p) => pathname === p || pathname.startsWith(`${p}/`),
-  );
+  ) || pathname.startsWith('/api/catalog/services/');
 }
 
 /** Edge-safe tenant (без импорта @med-site/contracts в middleware) */
@@ -115,6 +116,7 @@ export const config = {
     '/api/doctors',
     '/api/catalog/doctors',
     '/api/catalog/prices',
+    '/api/catalog/services/:path*',
     '/api/diagnostics',
     '/api/diagnostics/:path*',
     '/spb',

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -17,6 +18,9 @@ import { useUISettingsStore } from "../../../shared/store/uiSettingsStore";
 import { Button } from "@/shared/ui/Button";
 import { Card } from "@/shared/ui/Card";
 import { DoctorsWidget } from "@/widgets/doctors-widget/ui/DoctorsWidget";
+import { useTenant } from "@/shared/tenant/TenantContext";
+import { fetchCatalogService } from "@/shared/api/platformPrices";
+import { CatalogServiceView } from "./CatalogServiceView";
 
 const renderPlatformBadge = (platform?: string) => {
   switch (platform) {
@@ -63,20 +67,23 @@ const renderPlatformBadge = (platform?: string) => {
 
 export function ServicePage() {
   const { serviceId } = useParams<{ serviceId: string }>();
+  const { tenantId } = useTenant();
   const isDevMode = useUISettingsStore((state) => state.isDevMode);
-
-  // D = Pro Clinic (С сайдбаром), E = Упрощенный (Без сайдбара), F = Классический (с отзывами)
   const [heroMode, setHeroMode] = useState<"D" | "E" | "F">("F");
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [activeSection, setActiveSection] = useState<string>("about");
 
-  const activeHeroMode = heroMode;
+  const mockData = serviceId ? servicesDb[serviceId] : null;
+  const { data: catalogService, isLoading: catalogLoading } = useQuery({
+    queryKey: ["catalog-service", tenantId, serviceId],
+    queryFn: () => fetchCatalogService(serviceId!, tenantId),
+    enabled: Boolean(serviceId) && tenantId === "spb" && !mockData,
+  });
 
-  // Fetch mock data based on URL parameter
-  const serviceData = serviceId ? servicesDb[serviceId] : null;
+  const serviceData = mockData;
 
-  // Intersection Observer for sticky nav highlighting
   React.useEffect(() => {
+    if (!serviceData) return;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -96,6 +103,18 @@ export function ServicePage() {
 
     return () => observer.disconnect();
   }, [serviceData]);
+
+  const activeHeroMode = heroMode;
+
+  if (catalogService) {
+    return <CatalogServiceView data={catalogService} />;
+  }
+
+  if (catalogLoading && tenantId === "spb" && serviceId && !mockData) {
+    return (
+      <div className="py-20 text-center text-gray-500">Загрузка услуги…</div>
+    );
+  }
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);

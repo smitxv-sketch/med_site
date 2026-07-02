@@ -1,0 +1,10 @@
+{
+  "_comment": "Быстрые ярлыки на /prices для СПб — без хардкода в React",
+  "shortcuts": [
+    { "tabId": "consultation", "label": "Частная поликлиника", "tone": "blue" },
+    { "tabId": "programs", "label": "Клиника ВРТ", "tone": "fuchsia" },
+    { "tabId": "diagnostics", "label": "Диагностика", "tone": "emerald" },
+    { "tabId": "programs", "label": "Комплексные программы", "tone": "orange" },
+    { "tabId": "treatment", "label": "Лечение и процедуры", "tone": "rose" }
+  ]
+}

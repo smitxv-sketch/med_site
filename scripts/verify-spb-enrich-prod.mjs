@@ -49,6 +49,9 @@ const catsWithIntro = (categories.data || []).filter((c) => String(c.expertIntro
 const pricesRes = await fetch(`${SITE}/api/catalog/prices?tenant=spb`);
 const prices = await pricesRes.json().catch(() => ({}));
 
+const programRes = await fetch(`${SITE}/api/catalog/services/B03.36?tenant=spb`);
+const program = programRes.ok ? await programRes.json() : null;
+
 console.log(
   JSON.stringify(
     {
@@ -63,6 +66,13 @@ console.log(
         placementCount: prices.placementCount,
         categoryCount: prices.categoryCount,
       },
+      sampleProgram: program
+        ? {
+            article: program.article,
+            isProgram: program.isProgram,
+            includedCount: program.includedItems?.length ?? 0,
+          }
+        : { status: programRes.status },
     },
     null,
     2,

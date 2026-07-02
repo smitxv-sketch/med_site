@@ -1,0 +1,9 @@
+{
+  "tabs": [
+    { "id": "all", "label": "Все услуги" },
+    { "id": "consultation", "label": "Приём врачей", "tabQms": "priem" },
+    { "id": "diagnostics", "label": "Диагностика", "tabQms": "diagnostika" },
+    { "id": "programs", "label": "Комплексные программы", "tabQms": "programmy" },
+    { "id": "treatment", "label": "Лечение", "tabQms": "lechenie" }
+  ]
+}

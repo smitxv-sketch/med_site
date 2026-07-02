@@ -149,4 +149,15 @@ export {
   getMockVacancies,
 } from './fixtures/mockContentCatalog.js';
 
+export type {
+  PriceTabId,
+  PriceCatalogTabDto,
+  PriceQuickNavDto,
+  PriceCatalogItemDto,
+  PriceCatalogCategoryDto,
+  PriceCatalogDto,
+  ServiceIncludedItemDto,
+  CatalogServiceDetailDto,
+} from './types/priceCatalog.js';
+
 export const CONTRACTS_SCHEMA_VERSION = '1.5.0';
