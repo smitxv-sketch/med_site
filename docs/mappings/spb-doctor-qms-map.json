@@ -1,0 +1,711 @@
+{
+  "generatedAt": "2026-07-02T13:09:44.983Z",
+  "stats": {
+    "modxTotal": 53,
+    "qmsTotal": 38,
+    "matched": 38,
+    "unmatchedModx": 15,
+    "unmatchedQms": 1
+  },
+  "doctors": [
+    {
+      "legacyId": "78",
+      "fullName": "Тупиков Владислав Анатольевич",
+      "slug": "tupikov-vladislav-anatolevich",
+      "misIds": [],
+      "misId": "spb-legacy-78",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "80",
+      "fullName": "Громова Ольга Александровна",
+      "slug": "gromova-olga-aleksandrovna",
+      "misIds": [
+        "ТAIdAABBnAA"
+      ],
+      "misId": "ТAIdAABBnAA",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "84",
+      "fullName": "Громов Иван Анатольевич",
+      "slug": "gromov-ivan-anatolevich",
+      "misIds": [
+        "ТAIdAABAEAA"
+      ],
+      "misId": "ТAIdAABAEAA",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "85",
+      "fullName": "Гафурова Дина Наилевна",
+      "slug": "gafurova-dina-nailevna",
+      "misIds": [],
+      "misId": "spb-legacy-85",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "88",
+      "fullName": "Егунян Анжела Шаликовна",
+      "slug": "egunyan-anzhela-shalikovna",
+      "misIds": [
+        "ТAIdAABBGAB"
+      ],
+      "misId": "ТAIdAABBGAB",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "89",
+      "fullName": "Суслова Елена Владимировна",
+      "slug": "suslova-elena-vladimirovna",
+      "misIds": [
+        "ТAIdAABBGAE"
+      ],
+      "misId": "ТAIdAABBGAE",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "91",
+      "fullName": "Зейналова Айгюнь Элшановна",
+      "slug": "zejnalova-ajgyun-elshanovna",
+      "misIds": [
+        "ТAIdAADArAA"
+      ],
+      "misId": "ТAIdAADArAA",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "92",
+      "fullName": "Решанова Людмила Михайловна",
+      "slug": "reshanova-lyudmila-mixajlovna",
+      "misIds": [
+        "ТAIdAABATAF"
+      ],
+      "misId": "ТAIdAABATAF",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "94",
+      "fullName": "Чередникова Марина Анатольевна",
+      "slug": "cherednikova-marina-anatolevna",
+      "misIds": [
+        "ТAIdAABAPAA"
+      ],
+      "misId": "ТAIdAABAPAA",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "95",
+      "fullName": "Кузнецова Анна Владимировна",
+      "slug": "kuzneczova-anna-vladimirovna",
+      "misIds": [
+        "ТAIdAABAFAC"
+      ],
+      "misId": "ТAIdAABAFAC",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "97",
+      "fullName": "Потасеева Ольга Альбертовна",
+      "slug": "potaseeva-olga-albertovna",
+      "misIds": [],
+      "misId": "spb-legacy-97",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "98",
+      "fullName": "Падерин Валерий Борисович",
+      "slug": "paderin-valerij-borisovich",
+      "misIds": [],
+      "misId": "spb-legacy-98",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "100",
+      "fullName": "Сусло Ирина Сергеевна",
+      "slug": "suslo-irina-sergeevna",
+      "misIds": [
+        "ТAIdAABANAG"
+      ],
+      "misId": "ТAIdAABANAG",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "103",
+      "fullName": "Младенцева Татьяна Эдуардовна",
+      "slug": "mladenczeva-tatyana-eduardovna",
+      "misIds": [],
+      "misId": "spb-legacy-103",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "104",
+      "fullName": "Клюева Татьяна Анатольевна",
+      "slug": "klyueva-tatyana-anatolevna",
+      "misIds": [
+        "ТAIdAABACAA"
+      ],
+      "misId": "ТAIdAABACAA",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "106",
+      "fullName": "Важенина Инна Игоревна",
+      "slug": "vazhenina-inna-igorevna",
+      "misIds": [
+        "ТAIdAABBDAC"
+      ],
+      "misId": "ТAIdAABBDAC",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "108",
+      "fullName": "Двойнова Наталья Михайловна",
+      "slug": "dvojnova-natalya-mixajlovna",
+      "misIds": [
+        "ТAIdAADAVAA"
+      ],
+      "misId": "ТAIdAADAVAA",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "110",
+      "fullName": "Иванов Максим Витальевич",
+      "slug": "ivanov-maksim-vitalevich",
+      "misIds": [
+        "ТAIdAADAUAD"
+      ],
+      "misId": "ТAIdAADAUAD",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "113",
+      "fullName": "Всемирнова Юлия Владимировна",
+      "slug": "vsemirnova-yuliya-vladimirovna",
+      "misIds": [
+        "ТAIdAADAqAA"
+      ],
+      "misId": "ТAIdAADAqAA",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "225",
+      "fullName": "Ломова-Митрофанова Татьяна Юрьевна",
+      "slug": "lomova-mitrofanova-tatyana-yurevna",
+      "misIds": [
+        "ТAIdAADArAD"
+      ],
+      "misId": "ТAIdAADArAD",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "341",
+      "fullName": "Акименко Татьяна Игоревна",
+      "slug": "akimenko-tatyana-igorevna",
+      "misIds": [],
+      "misId": "spb-legacy-341",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "344",
+      "fullName": "Глущенко Анна Сергеевна",
+      "slug": "glushhenko-anna-sergeevna",
+      "misIds": [],
+      "misId": "spb-legacy-344",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "345",
+      "fullName": "Герасимова Елена Анатольевна",
+      "slug": "gerasimova-elena-anatolevna",
+      "misIds": [
+        "ТAIdAABBGAK"
+      ],
+      "misId": "ТAIdAABBGAK",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "346",
+      "fullName": "Фоос Оксана Вячеславовна",
+      "slug": "foos-oksana-vyacheslavovna",
+      "misIds": [
+        "ТAIdAABBGAJ"
+      ],
+      "misId": "ТAIdAABBGAJ",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "350",
+      "fullName": "Тачовали Тауфик Мохамедович",
+      "slug": "tachovali-taufik-moxamedovich",
+      "misIds": [],
+      "misId": "spb-legacy-350",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "375",
+      "fullName": "Кэрролл Наталья Валериевна",
+      "slug": "kerroll-natalya-valerievna",
+      "misIds": [],
+      "misId": "spb-legacy-375",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "408",
+      "fullName": "Койстрик Анна Вилоровна",
+      "slug": "kojstrik-anna-vilorovna",
+      "misIds": [
+        "ТAIdAADArAG"
+      ],
+      "misId": "ТAIdAADArAG",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "409",
+      "fullName": "Безужкевич Валентин Витальевич",
+      "slug": "bezuzhkevich-valentin-vitalevich",
+      "misIds": [
+        "ТAIdAABARAB"
+      ],
+      "misId": "ТAIdAABARAB",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "544",
+      "fullName": "Бейг Тарик Махмудович",
+      "slug": "bejg-tarik-maxmudovich",
+      "misIds": [
+        "ТAIdAABAHAD"
+      ],
+      "misId": "ТAIdAABAHAD",
+      "confidence": "medium",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "547",
+      "fullName": "Карасева Екатерина Александровна",
+      "slug": "ekaterina-aleksandrovna-karaseva",
+      "misIds": [
+        "ТAIdAABATAS"
+      ],
+      "misId": "ТAIdAABATAS",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "563",
+      "fullName": "Никитин Сергей Васильевич",
+      "slug": "nikitin-sergej-vasilevich",
+      "misIds": [
+        "ТAIdAADArAH"
+      ],
+      "misId": "ТAIdAADArAH",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "566",
+      "fullName": "Мальцева Ольга Александровна",
+      "slug": "malczeva-olga-aleksandrovna",
+      "misIds": [
+        "ТAIdAABBnAA"
+      ],
+      "misId": "ТAIdAABBnAA",
+      "confidence": "medium",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "602",
+      "fullName": "Деденева Елена Викторовна",
+      "slug": "dedenevaev",
+      "misIds": [],
+      "misId": "spb-legacy-602",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "611",
+      "fullName": "Румянцева Елена Евгеньевна",
+      "slug": "rumyanczeva-elena-evgenevna",
+      "misIds": [],
+      "misId": "spb-legacy-611",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "612",
+      "fullName": "Кацельник Екатерина Юрьевна",
+      "slug": "kaczelnik-ekaterina-yurevna",
+      "misIds": [
+        "ТAIdAABBfAH"
+      ],
+      "misId": "ТAIdAABBfAH",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "624",
+      "fullName": "Пикулёва Оксана Анатольевна",
+      "slug": "pikulyova-oksana-anatolevna",
+      "misIds": [
+        "ТAIdAADAqAB"
+      ],
+      "misId": "ТAIdAADAqAB",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "625",
+      "fullName": "Довжанский Илия Васильевич",
+      "slug": "dovzhanskij-iliya-vasilevich",
+      "misIds": [
+        "ТAIdAABBqAA"
+      ],
+      "misId": "ТAIdAABBqAA",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "626",
+      "fullName": "Пислегин Андрей Вячеславович",
+      "slug": "pislegin-andrej-vyacheslavovich",
+      "misIds": [
+        "ТAIdAABBVAB"
+      ],
+      "misId": "ТAIdAABBVAB",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "644",
+      "fullName": "Бондарчук Людмила Валерьевна",
+      "slug": "bondarchuk-lyudmila-valerevna",
+      "misIds": [],
+      "misId": "spb-legacy-644",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "671",
+      "fullName": "Фролова Надежда Васильевна",
+      "slug": "frolova-nadezhda-vasilevna",
+      "misIds": [
+        "ТAIdAABBrAA"
+      ],
+      "misId": "ТAIdAABBrAA",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "703",
+      "fullName": "Шиянова Екатерина Владиславовна",
+      "slug": "shiyanova-ekaterina-vladislavovna",
+      "misIds": [],
+      "misId": "spb-legacy-703",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "719",
+      "fullName": "Решетников Игорь Владимирович",
+      "slug": "reshetnikov-igor-vladimirovich",
+      "misIds": [],
+      "misId": "spb-legacy-719",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    },
+    {
+      "legacyId": "727",
+      "fullName": "Арутюнян Арутюн Феликсович",
+      "slug": "arutyunyan-arutyun-feliksovich",
+      "misIds": [
+        "ТAIdAADArAL"
+      ],
+      "misId": "ТAIdAADArAL",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "728",
+      "fullName": "Райгородский Максим Владимирович",
+      "slug": "rajgorodskij-maksim-vladimirovich",
+      "misIds": [
+        "ТAIdAABBDAD"
+      ],
+      "misId": "ТAIdAABBDAD",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "736",
+      "fullName": "Скуридин Даниил Сергеевич",
+      "slug": "skuridin-daniil-sergeevich",
+      "misIds": [
+        "ТAIdAABAJAH"
+      ],
+      "misId": "ТAIdAABAJAH",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "737",
+      "fullName": "Антонова Светлана Борисовна",
+      "slug": "antonova-svetlana-borisovna",
+      "misIds": [
+        "ТAIdAABACAI"
+      ],
+      "misId": "ТAIdAABACAI",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "743",
+      "fullName": "Эккерт Дмитрий Александрович",
+      "slug": "ekkertdmitrii",
+      "misIds": [
+        "ТAIdAABBxAA"
+      ],
+      "misId": "ТAIdAABBxAA",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "747",
+      "fullName": "Бронникова Александра Александровна",
+      "slug": "bronnikovaalex",
+      "misIds": [
+        "ТAIdAABAOAS"
+      ],
+      "misId": "ТAIdAABAOAS",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "752",
+      "fullName": "Кузнецова Раиса Николаевна",
+      "slug": "kuznetsovaraisanikolaevna",
+      "misIds": [
+        "ТAIdAABAQAC"
+      ],
+      "misId": "ТAIdAABAQAC",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "758",
+      "fullName": "Белова Полина Александровна",
+      "slug": "belova-polina-aleksandrovna",
+      "misIds": [
+        "ТAIdAABADAC"
+      ],
+      "misId": "ТAIdAABADAC",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "759",
+      "fullName": "Касумова Аида Рауфовна",
+      "slug": "kasumova",
+      "misIds": [
+        "ТAIdAADArAM"
+      ],
+      "misId": "ТAIdAADArAM",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "761",
+      "fullName": "Савин Максим Сергеевич",
+      "slug": "savin-maksim-sergeevich",
+      "misIds": [
+        "ТAIdAABASAJ"
+      ],
+      "misId": "ТAIdAABASAJ",
+      "confidence": "high",
+      "matchSource": "fio",
+      "allowBooking": true
+    },
+    {
+      "legacyId": "766",
+      "fullName": "Галанова Дарья Валерьевна",
+      "slug": "galanova",
+      "misIds": [],
+      "misId": "spb-legacy-766",
+      "confidence": "none",
+      "matchSource": "none",
+      "allowBooking": false
+    }
+  ],
+  "needsReview": [
+    {
+      "legacyId": "78",
+      "fullName": "Тупиков Владислав Анатольевич",
+      "reason": "low score 0.33"
+    },
+    {
+      "legacyId": "85",
+      "fullName": "Гафурова Дина Наилевна",
+      "reason": "no QMS match"
+    },
+    {
+      "legacyId": "97",
+      "fullName": "Потасеева Ольга Альбертовна",
+      "reason": "low score 0.33"
+    },
+    {
+      "legacyId": "98",
+      "fullName": "Падерин Валерий Борисович",
+      "reason": "no QMS match"
+    },
+    {
+      "legacyId": "103",
+      "fullName": "Младенцева Татьяна Эдуардовна",
+      "reason": "low score 0.33"
+    },
+    {
+      "legacyId": "341",
+      "fullName": "Акименко Татьяна Игоревна",
+      "reason": "low score 0.33"
+    },
+    {
+      "legacyId": "344",
+      "fullName": "Глущенко Анна Сергеевна",
+      "reason": "low score 0.33"
+    },
+    {
+      "legacyId": "350",
+      "fullName": "Тачовали Тауфик Мохамедович",
+      "reason": "no QMS match"
+    },
+    {
+      "legacyId": "375",
+      "fullName": "Кэрролл Наталья Валериевна",
+      "reason": "low score 0.33"
+    },
+    {
+      "legacyId": "544",
+      "fullName": "Бейг Тарик Махмудович",
+      "reason": "fuzzy match score=0.67 → Бейг Тарик"
+    },
+    {
+      "legacyId": "566",
+      "fullName": "Мальцева Ольга Александровна",
+      "reason": "fuzzy match score=0.67 → Громова Ольга Александровна"
+    },
+    {
+      "legacyId": "602",
+      "fullName": "Деденева Елена Викторовна",
+      "reason": "low score 0.33"
+    },
+    {
+      "legacyId": "611",
+      "fullName": "Румянцева Елена Евгеньевна",
+      "reason": "low score 0.33"
+    },
+    {
+      "legacyId": "644",
+      "fullName": "Бондарчук Людмила Валерьевна",
+      "reason": "low score 0.33"
+    },
+    {
+      "legacyId": "703",
+      "fullName": "Шиянова Екатерина Владиславовна",
+      "reason": "low score 0.33"
+    },
+    {
+      "legacyId": "719",
+      "fullName": "Решетников Игорь Владимирович",
+      "reason": "low score 0.33"
+    },
+    {
+      "legacyId": "766",
+      "fullName": "Галанова Дарья Валерьевна",
+      "reason": "no QMS match"
+    }
+  ],
+  "unmatchedQms": [
+    {
+      "misId": "ТAIdAABBGAQ",
+      "fullName": "Мороз Екатерина Александровна"
+    }
+  ]
+}
