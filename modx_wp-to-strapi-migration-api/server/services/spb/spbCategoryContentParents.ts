@@ -1,9 +1,8 @@
 import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import type { StrapiClient } from '../strapiClient.js';
 import { SPB_LOCALE } from '../../types/serviceSync.js';
 import { LEGACY_DB_GUARD } from '../../config/legacyDbGuard.js';
+import { resolveSpbMappingPath } from './spbMappingPaths.js';
 
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
@@ -18,21 +17,15 @@ const CONTENT_FIELDS = [
 
 /** Загрузить маппинг «дочерняя рубрика → родительская» */
 export function loadCategoryContentParents(): Map<string, string> {
-  const roots = [
-    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../docs/mappings/spb-category-content-parents.json'),
-    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../mappings/spb-category-content-parents.json'),
-  ];
   const out = new Map<string, string>();
-  for (const p of roots) {
-    if (!fs.existsSync(p)) continue;
-    const raw = JSON.parse(fs.readFileSync(p, 'utf8')) as Record<string, string>;
-    for (const [child, parent] of Object.entries(raw)) {
-      if (child.startsWith('_')) continue;
-      const c = child.trim();
-      const par = String(parent ?? '').trim();
-      if (c && par) out.set(c, par);
-    }
-    break;
+  const p = resolveSpbMappingPath('spb-category-content-parents.json');
+  if (!p) return out;
+  const raw = JSON.parse(fs.readFileSync(p, 'utf8')) as Record<string, string>;
+  for (const [child, parent] of Object.entries(raw)) {
+    if (child.startsWith('_')) continue;
+    const c = child.trim();
+    const par = String(parent ?? '').trim();
+    if (c && par) out.set(c, par);
   }
   return out;
 }

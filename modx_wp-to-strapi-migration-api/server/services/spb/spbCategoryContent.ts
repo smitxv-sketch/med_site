@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { LegacyMysqlGateway } from '../../legacy/LegacyMysqlGateway.js';
 import { LEGACY_DB_GUARD } from '../../config/legacyDbGuard.js';
+import { resolveSpbMappingPath } from './spbMappingPaths.js';
 
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
@@ -19,20 +20,14 @@ export type SpbCategoryModxEnrich = {
 type OverridesFile = Record<string, number | string>;
 
 function loadOverrides(): Map<string, number> {
-  const roots = [
-    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../docs/mappings/spb-category-modx-overrides.json'),
-    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../mappings/spb-category-modx-overrides.json'),
-  ];
+  const p = resolveSpbMappingPath('spb-category-modx-overrides.json');
   const map = new Map<string, number>();
-  for (const p of roots) {
-    if (!fs.existsSync(p)) continue;
-    const raw = JSON.parse(fs.readFileSync(p, 'utf8')) as OverridesFile;
-    for (const [cat, id] of Object.entries(raw)) {
-      if (cat.startsWith('_')) continue;
-      const n = Number(id);
-      if (n > 0) map.set(cat.trim(), n);
-    }
-    break;
+  if (!p) return map;
+  const raw = JSON.parse(fs.readFileSync(p, 'utf8')) as OverridesFile;
+  for (const [cat, id] of Object.entries(raw)) {
+    if (cat.startsWith('_')) continue;
+    const n = Number(id);
+    if (n > 0) map.set(cat.trim(), n);
   }
   return map;
 }
