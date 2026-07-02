@@ -53,12 +53,28 @@ export async function loadTopPublishedCategories(limit = 10): Promise<string[]> 
   return (rows as Array<{ category: string }>).map((r) => String(r.category).trim());
 }
 
-/** Приоритет обогащения: must + топ по прайсу (без дублей) */
-export async function resolveEnrichCategoryNames(extra: string[] = []): Promise<string[]> {
+/** Все опубликованные рубрики из прайса MODX */
+export async function loadAllPublishedPricelistCategories(): Promise<string[]> {
+  const gw = LegacyMysqlGateway.get('spb');
+  const prefix = gw.getPrefix();
+  const [rows] = await gw.query(
+    `SELECT DISTINCT TRIM(category) AS category
+     FROM ${prefix}pricelist_items2
+     WHERE (deleted IS NULL OR deleted = 0) AND published = 1 AND TRIM(category) != ''
+     ORDER BY category`,
+  );
+  return (rows as Array<{ category: string }>).map((r) => String(r.category).trim());
+}
+
+/** Приоритет обогащения: override + все рубрики прайса + опционально Strapi */
+export async function resolveEnrichCategoryNames(
+  options: { extra?: string[]; strapiTitles?: string[] } = {},
+): Promise<string[]> {
   const overrides = loadOverrides();
-  const must = [...overrides.keys(), ...extra];
-  const top = await loadTopPublishedCategories(12);
-  return [...new Set([...must, ...top].map((s) => s.trim()).filter(Boolean))];
+  const must = [...overrides.keys(), ...(options.extra ?? [])];
+  const allPublished = await loadAllPublishedPricelistCategories();
+  const fromStrapi = (options.strapiTitles ?? []).map((s) => s.trim()).filter(Boolean);
+  return [...new Set([...must, ...allPublished, ...fromStrapi])];
 }
 
 /** MODX resource id для рубрики: override → мода resource_id из прайса */
@@ -119,7 +135,7 @@ export async function loadSpbCategoryModxEnrich(
   const [pages] = await gw.query(
     `SELECT id, pagetitle, description, introtext, content
      FROM ${prefix}site_content
-     WHERE id IN (${ids.join(',')}) AND deleted = 0`,
+     WHERE id IN (${ids.join(',')})`,
   );
 
   for (const p of pages as Array<Record<string, unknown>>) {

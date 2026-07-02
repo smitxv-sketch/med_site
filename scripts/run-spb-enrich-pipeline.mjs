@@ -28,19 +28,6 @@ const BRIDGE = (process.env.BRIDGE_URL || 'https://bridge.istochnik.smitx.ru').r
 const TOKEN = process.env.BRIDGE_API_TOKEN || '';
 const waitBridge = process.argv.includes('--wait-bridge');
 
-const PRIORITY_CATEGORIES = [
-  'Частная поликлиника',
-  'Отделение ВРТ',
-  'Программы ЭКО',
-  'Гастроэнтерология',
-  'Кардиология',
-  'Услуги по гинекологии',
-  'Хирургия',
-  'Оториноларингология',
-  'Эндоскопическая диагностика',
-  'УЗИ при беременности',
-];
-
 async function bridgePost(pathname, timeoutMs = 600_000) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), timeoutMs);
@@ -99,36 +86,34 @@ if (waitBridge) await waitForRoutes();
 
 const log = { startedAt: new Date().toISOString(), steps: [] };
 
-console.log('[1/3] categories/enrich…');
+console.log('[1/4] categories/enrich (все рубрики прайса + Strapi)…');
 const catReport = await bridgePost('/api/sync/spb/categories/enrich');
 log.steps.push({ step: 'categories/enrich', report: catReport.report ?? catReport });
 console.log(JSON.stringify(catReport.report ?? catReport, null, 2));
 
-console.log('[2/3] programs…');
+console.log('[2/4] programs…');
 const progReport = await bridgePost('/api/sync/spb/programs', 900_000);
 log.steps.push({ step: 'programs', report: progReport.report ?? progReport });
 console.log(JSON.stringify(progReport.report ?? progReport, null, 2));
 
-console.log('[3/3] MODX enrich услуг по рубрикам…');
-for (const category of PRIORITY_CATEGORIES) {
-  console.log(`  → ${category}`);
-  try {
-    const r = await bridgePost(
-      `/api/sync/spb/services?category=${encodeURIComponent(category)}&modxEnrich=1&mergeQms=0`,
-      600_000,
-    );
-    log.steps.push({
-      step: `services:${category}`,
-      services: r.report?.services,
-      errors: r.report?.errors?.length ?? 0,
-    });
-  } catch (e) {
-    log.steps.push({ step: `services:${category}`, error: String(e.message || e) });
-    console.error('  FAIL', e.message || e);
-  }
+console.log('[3/4] MODX enrich услуг (весь прайс, без QMS merge)…');
+try {
+  const r = await bridgePost(
+    '/api/sync/spb/services?category=all&modxEnrich=1&mergeQms=0',
+    1_800_000,
+  );
+  log.steps.push({
+    step: 'services:all',
+    services: r.report?.services,
+    errors: r.report?.errors?.length ?? 0,
+  });
+  console.log(JSON.stringify(r.report?.services ?? r.report, null, 2));
+} catch (e) {
+  log.steps.push({ step: 'services:all', error: String(e.message || e) });
+  console.error('FAIL', e.message || e);
 }
 
-console.log('[extra] legacy-only-queue write…');
+console.log('[4/4] legacy-only-queue write…');
 const queue = await bridgeGet('/api/sync/spb/legacy-only-queue?write=1');
 log.steps.push({ step: 'legacy-only-queue', count: queue.json?.count });
 

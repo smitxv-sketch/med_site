@@ -27,9 +27,17 @@ export async function syncSpbCategoryContent(
   client: StrapiClient,
   options: { categories?: string[] } = {},
 ): Promise<CategoryEnrichReport> {
-  const categories = options.categories?.length
-    ? options.categories
-    : await resolveEnrichCategoryNames();
+  let categories = options.categories;
+  if (!categories?.length) {
+    const strapiRows = await client.listEntries('service-categories', {
+      locale: SPB_LOCALE,
+      fields: ['title'],
+    });
+    const strapiTitles = strapiRows
+      .map((r) => String(r.attrs.title ?? '').trim())
+      .filter(Boolean);
+    categories = await resolveEnrichCategoryNames({ strapiTitles });
+  }
 
   const modxIds = await resolveCategoryModxIds(categories);
   const enrichByResource = await loadSpbCategoryModxEnrich([...modxIds.values()]);
