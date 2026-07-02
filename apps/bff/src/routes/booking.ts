@@ -12,7 +12,7 @@ export async function getBookingDoctorsHandler(req: Request, res: Response) {
   const city = (req.query.city as string) || 'chel';
   const specialty = req.query.specialty as string | undefined;
   const rawDoctors = await qmsDriver.getDoctors(city, specialty);
-  const doctors = await hydrateDoctors(rawDoctors);
+  const doctors = await hydrateDoctors(rawDoctors, city);
   res.json(doctors);
 }
 

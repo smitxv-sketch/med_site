@@ -131,10 +131,15 @@ export async function initBridgeDb(): Promise<void> {
 }
 
 export async function getExcludedIds(): Promise<number[]> {
-  const { rows } = await getBridgePool().query<{ resource_id: number }>(
-    "SELECT resource_id FROM excluded_resources",
-  );
-  return rows.map((r) => r.resource_id);
+  try {
+    const { rows } = await getBridgePool().query<{ resource_id: number }>(
+      "SELECT resource_id FROM excluded_resources",
+    );
+    return rows.map((r) => r.resource_id);
+  } catch {
+    // Локально / без bridge PG — без исключений
+    return [];
+  }
 }
 
 export async function listExcludedResourceIds(): Promise<number[]> {

@@ -1,26 +1,88 @@
 import type { MisDoctor } from './interfaces/MisDriver.js';
 import { getWpDoctors } from './wpService.js';
+import { getStrapiToken, getStrapiUrl } from '../config/env.js';
 
-/** Обогащение врачей из QMS данными из WP REST (фото, стаж, тексты) */
-export const hydrateDoctors = async (misDoctors: MisDoctor[]): Promise<unknown[]> => {
+type CatalogDoctor = {
+  misId?: string | null;
+  fullName?: string;
+  specialty?: string | null;
+  photoUrl?: string | null;
+  experienceYears?: number | null;
+  degree?: string | null;
+  category?: string | null;
+  legacyId?: string | null;
+};
+
+async function loadStrapiCatalogDoctors(city: string): Promise<CatalogDoctor[]> {
+  const token = getStrapiToken();
+  if (!token) return [];
+  const locale = city === 'spb' ? 'ru-spb' : 'ru-chel';
+  const base = getStrapiUrl().replace(/\/$/, '');
+  const qs = new URLSearchParams({
+    locale,
+    'filters[legacySource][$eq]': city,
+    'pagination[pageSize]': '200',
+    publicationState: 'live',
+  });
+  const res = await fetch(`${base}/api/doctors?${qs}`, {
+    headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
+    cache: 'no-store',
+  });
+  if (!res.ok) return [];
+  const json = (await res.json()) as { data?: CatalogDoctor[] };
+  return json.data ?? [];
+}
+
+/** Обогащение врачей из QMS данными каталога (WP ЧЛБ или Strapi СПб) */
+export const hydrateDoctors = async (
+  misDoctors: MisDoctor[],
+  city = 'chel',
+): Promise<unknown[]> => {
   try {
-    const wpDoctors = await getWpDoctors();
-    const wpDoctorsMap = new Map<string, (typeof wpDoctors)[number]>();
-    for (const d of wpDoctors) {
-      if (d.qms_id) {
-        const ids = String(d.qms_id).split(',').map((id: string) => id.trim()).filter(Boolean);
-        for (const id of ids) {
-          wpDoctorsMap.set(id, d);
-        }
-      }
-    }
-
     const normalizeName = (name: string) =>
       (name || '').trim().toLowerCase().split(/\s+/).sort().join(' ');
 
-    const wpDoctorsByName = new Map(
-      wpDoctors.map((d) => [normalizeName(d.display_name), d]),
-    );
+    const catalogByMis = new Map<string, CatalogDoctor>();
+    const catalogByName = new Map<string, CatalogDoctor>();
+
+    if (city === 'spb') {
+      const strapiDoctors = await loadStrapiCatalogDoctors('spb');
+      for (const d of strapiDoctors) {
+        const misRaw = d.misId ? String(d.misId) : '';
+        for (const id of misRaw.split(',').map((s) => s.trim()).filter(Boolean)) {
+          if (!id.startsWith('spb-legacy-')) catalogByMis.set(id, d);
+        }
+        catalogByName.set(normalizeName(d.fullName || ''), d);
+      }
+    } else {
+      const wpDoctors = await getWpDoctors();
+      for (const d of wpDoctors) {
+        if (!d.qms_id) continue;
+        const ids = String(d.qms_id).split(',').map((id: string) => id.trim()).filter(Boolean);
+        for (const id of ids) {
+          catalogByMis.set(id, {
+            misId: d.qms_id,
+            fullName: d.display_name,
+            specialty: d.specialty,
+            photoUrl: d.photo_url,
+            experienceYears: d.experience_years ? Number(d.experience_years) : undefined,
+            degree: d.degree,
+            category: d.category,
+            legacyId: String(d.ID),
+          });
+        }
+        catalogByName.set(normalizeName(d.display_name), {
+          misId: d.qms_id,
+          fullName: d.display_name,
+          specialty: d.specialty,
+          photoUrl: d.photo_url,
+          experienceYears: d.experience_years ? Number(d.experience_years) : undefined,
+          degree: d.degree,
+          category: d.category,
+          legacyId: String(d.ID),
+        });
+      }
+    }
 
     const groupedDoctors = new Map<string, MisDoctor>();
 
@@ -37,7 +99,7 @@ export const hydrateDoctors = async (misDoctors: MisDoctor[]): Promise<unknown[]
             }
           }
         }
-        if (wpDoctorsMap.has(misDoc.id) && !wpDoctorsMap.has(existing.id)) {
+        if (catalogByMis.has(misDoc.id) && !catalogByMis.has(existing.id)) {
           existing.id = misDoc.id;
           existing.specialty = misDoc.specialty;
         }
@@ -49,35 +111,21 @@ export const hydrateDoctors = async (misDoctors: MisDoctor[]): Promise<unknown[]
     const mergedMisDoctors = Array.from(groupedDoctors.values());
 
     return mergedMisDoctors.map((misDoc) => {
-      let wpDoc = wpDoctorsMap.get(misDoc.id);
-      if (!wpDoc) {
-        wpDoc = wpDoctorsByName.get(normalizeName(misDoc.name));
+      let cat = catalogByMis.get(misDoc.id);
+      if (!cat) {
+        cat = catalogByName.get(normalizeName(misDoc.name));
       }
 
       return {
         ...misDoc,
         id: misDoc.id,
-        databaseId: wpDoc ? String(wpDoc.ID) : undefined,
-        name: wpDoc ? wpDoc.display_name : misDoc.name,
-        specialty: wpDoc ? wpDoc.specialty || misDoc.specialty : misDoc.specialty,
-        image: wpDoc ? wpDoc.photo_url : undefined,
-        experienceYears:
-          wpDoc && wpDoc.experience_years ? parseInt(String(wpDoc.experience_years), 10) : undefined,
-        price: wpDoc ? wpDoc.price : undefined,
-        duration: wpDoc ? wpDoc.duration : undefined,
-        badges: wpDoc ? wpDoc.badges || [] : [],
-        description: wpDoc ? wpDoc.description : undefined,
-        anonce: wpDoc ? wpDoc.anonce : undefined,
-        activities: wpDoc ? wpDoc.activities : undefined,
-        educationText: wpDoc ? wpDoc.educationText : undefined,
-        educationHistory: wpDoc ? wpDoc.educationHistory : undefined,
-        degree: wpDoc ? wpDoc.degree : undefined,
-        zvanie: wpDoc ? wpDoc.zvanie : undefined,
-        category: wpDoc ? wpDoc.category : undefined,
-        position: wpDoc ? wpDoc.position : undefined,
-        isChildDoctor: wpDoc ? wpDoc.isChildDoctor : undefined,
-        isAdultDoctor: wpDoc ? wpDoc.isAdultDoctor : undefined,
-        rawMeta: wpDoc ? wpDoc.rawMeta : undefined,
+        databaseId: cat?.legacyId ? String(cat.legacyId) : undefined,
+        name: cat?.fullName || misDoc.name,
+        specialty: cat?.specialty || misDoc.specialty,
+        image: cat?.photoUrl || undefined,
+        experienceYears: cat?.experienceYears ?? undefined,
+        degree: cat?.degree ?? undefined,
+        category: cat?.category ?? undefined,
       };
     });
   } catch (error) {

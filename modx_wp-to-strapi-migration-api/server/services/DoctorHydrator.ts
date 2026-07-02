@@ -7,9 +7,11 @@ import {
   resolveChelBranchLegacyIds,
   resolveChelSpecialtySlugs,
   resolveSpbSpecialtySlugs,
+  resolveSpbMisId,
   normalizeSpecialtySlugs,
   inferSpecialtySlugsFromText,
   isChelDoctorEnabled,
+  type SpbDoctorQmsMapRow,
 } from './specialtySsotLoader.js';
 
 const LOCALES = { chel: 'ru-chel', spb: 'ru-spb' } as const;
@@ -17,6 +19,8 @@ const LOCALES = { chel: 'ru-chel', spb: 'ru-spb' } as const;
 export type DoctorHydrationContext = {
   ssot: SsotIndex;
   spbSpecialtyMap: Map<string, string[]>;
+  /** MODX legacyId / ФИО → misId из QMS (JSON, не MODX TV) */
+  spbQmsMap: Map<string, SpbDoctorQmsMapRow>;
   /** Нормализация WP clinic ID → филиал (ЭКО/косметология → Подсолнухи) */
   branchWpAliasIndex: Map<string, string>;
 };
@@ -55,13 +59,23 @@ export function hydrateDoctorFromLegacy(
   ctx: DoctorHydrationContext,
 ): DoctorCanonical | null {
   const legacyId = String(doc.id);
-  const misId = parseMisId(doc.qms_id);
-  if (!misId) return null;
-
   const fullName = doc.pagetitle || 'Без имени';
   const meta = asMeta(doc);
 
   if (source === 'chel' && !isChelDoctorEnabled(meta)) return null;
+
+  const pageSlug = String(doc.alias || '').replace(/^doctor-/, '');
+  let misId = '';
+  let allowBooking = true;
+
+  if (source === 'chel') {
+    misId = parseMisId(doc.qms_id);
+    if (!misId) return null;
+  } else {
+    const mapped = resolveSpbMisId(ctx.spbQmsMap, legacyId, fullName, pageSlug);
+    misId = mapped?.misId || `spb-legacy-${legacyId}`;
+    allowBooking = mapped?.allowBooking ?? false;
+  }
 
   const tvs = (doc.tvs || {}) as Record<string, string>;
 
@@ -78,7 +92,6 @@ export function hydrateDoctorFromLegacy(
     }
     branchLegacyIds = resolveChelBranchLegacyIds(meta, ctx.branchWpAliasIndex);
   } else {
-    const pageSlug = String(doc.alias || '').replace(/^doctor-/, '');
     specialtySlugs = normalizeSpecialtySlugs(
       resolveSpbSpecialtySlugs(ctx.spbSpecialtyMap, fullName, pageSlug),
       ctx.ssot,
@@ -135,7 +148,7 @@ export function hydrateDoctorFromLegacy(
     seoDescription: seoDescRaw,
     phone: source === 'chel' ? String(meta.phone || '') : String(tvs.tel || ''),
     sortOrder: source === 'chel' ? parseInt(String(meta.ord || '0'), 10) || 0 : 0,
-    allowBooking: source === 'chel' ? parseBoolMeta(meta.signup ?? true) : true,
+    allowBooking: source === 'chel' ? parseBoolMeta(meta.signup ?? true) : allowBooking,
     isAdultDoctor:
       source === 'chel'
         ? parseBoolMeta(meta.feed_adultdoctor ?? doc.is_adult_doctor ?? true)

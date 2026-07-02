@@ -25,7 +25,13 @@ import {
   slugsToDocumentIds,
   syncReferenceCatalogs,
 } from './syncCatalogs.js';
-import { loadSpbDoctorSpecialtyMap, loadSsotIndex, loadBranchSeed, buildBranchWpAliasIndex } from './specialtySsotLoader.js';
+import {
+  loadSpbDoctorSpecialtyMap,
+  loadSpbDoctorQmsMap,
+  loadSsotIndex,
+  loadBranchSeed,
+  buildBranchWpAliasIndex,
+} from './specialtySsotLoader.js';
 
 export type SyncCity = 'chel' | 'spb';
 
@@ -156,14 +162,16 @@ export async function runDoctorSync(
 
     try {
       const catalogs = await syncReferenceCatalogs(client);
-      const [ssot, spbSpecialtyMap, branchSeeds] = await Promise.all([
+      const [ssot, spbSpecialtyMap, spbQmsMap, branchSeeds] = await Promise.all([
         loadSsotIndex(),
         loadSpbDoctorSpecialtyMap(),
+        city === 'spb' ? loadSpbDoctorQmsMap() : Promise.resolve(new Map()),
         loadBranchSeed(),
       ]);
       const hydrationCtx: DoctorHydrationContext = {
         ssot,
         spbSpecialtyMap,
+        spbQmsMap,
         branchWpAliasIndex: buildBranchWpAliasIndex(branchSeeds),
       };
 

@@ -25,6 +25,17 @@ export type SpbDoctorSpecialtyRow = {
   ssotSlugs: string[];
 };
 
+export type SpbDoctorQmsMapRow = {
+  legacyId: string;
+  fullName: string;
+  slug: string;
+  misId: string;
+  misIds: string[];
+  confidence: string;
+  matchSource: string;
+  allowBooking: boolean;
+};
+
 export type BranchSeedRow = {
   legacyId: string;
   name: string;
@@ -140,6 +151,53 @@ export async function loadSpbDoctorSpecialtyMap(): Promise<Map<string, string[]>
     combined.set(`slug:${row.slug}`, row.ssotSlugs);
   }
   return combined;
+}
+
+/** Маппинг MODX → QMS misId (генерируется scripts/build-spb-doctor-qms-map.mjs) */
+export async function loadSpbDoctorQmsMap(): Promise<Map<string, SpbDoctorQmsMapRow>> {
+  try {
+    const file = await resolveMappingFile('spb-doctor-qms-map.json');
+    const raw = JSON.parse(await fs.readFile(file, 'utf8')) as {
+      doctors: SpbDoctorQmsMapRow[];
+    };
+
+    const norm = (s: string) =>
+      String(s || '')
+        .toLowerCase()
+        .replace(/ё/g, 'е')
+        .trim();
+
+    const combined = new Map<string, SpbDoctorQmsMapRow>();
+    for (const row of raw.doctors ?? []) {
+      combined.set(`legacy:${row.legacyId}`, row);
+      combined.set(`name:${norm(row.fullName)}`, row);
+      combined.set(`slug:${row.slug}`, row);
+    }
+    return combined;
+  } catch {
+    console.warn(
+      '[loadSpbDoctorQmsMap] spb-doctor-qms-map.json не найден — запустите scripts/build-spb-doctor-qms-map.mjs',
+    );
+    return new Map();
+  }
+}
+
+export function resolveSpbMisId(
+  map: Map<string, SpbDoctorQmsMapRow>,
+  legacyId: string,
+  fullName: string,
+  pageSlug: string,
+): SpbDoctorQmsMapRow | undefined {
+  const norm = (s: string) =>
+    String(s || '')
+      .toLowerCase()
+      .replace(/ё/g, 'е')
+      .trim();
+  return (
+    map.get(`legacy:${legacyId}`) ||
+    map.get(`name:${norm(fullName)}`) ||
+    map.get(`slug:${pageSlug}`)
+  );
 }
 
 export function resolveSpbSpecialtySlugs(
