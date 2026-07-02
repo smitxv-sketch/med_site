@@ -6,6 +6,7 @@ import {
   resolveCategoryModxIds,
   resolveEnrichCategoryNames,
 } from './spbCategoryContent.js';
+import { inheritSpbCategoryContent } from './spbCategoryContentParents.js';
 import { SPB_LOCALE } from '../../types/serviceSync.js';
 import { LEGACY_DB_GUARD } from '../../config/legacyDbGuard.js';
 
@@ -99,6 +100,9 @@ export async function syncSpbCategoryContent(
       });
     }
   }
+
+  const inheritReport = await inheritSpbCategoryContent(client);
+  report.updated += inheritReport.inherited;
 
   return report;
 }

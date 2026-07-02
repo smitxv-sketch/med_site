@@ -140,11 +140,15 @@ export async function loadSpbCategoryModxEnrich(
 
   for (const p of pages as Array<Record<string, unknown>>) {
     const id = Number(p.id);
-    out.set(id, {
-      modxResourceId: id,
-      aboutHeader: String(p.pagetitle ?? '').trim() || undefined,
-      bodyMiddle: String(p.content ?? '').trim() || undefined,
-    });
+    const pagetitle = String(p.pagetitle ?? '').trim();
+    const cur = out.get(id) ?? { modxResourceId: id };
+    cur.aboutHeader = pagetitle || undefined;
+    cur.bodyMiddle = String(p.content ?? '').trim() || undefined;
+    const introtext = String(p.introtext ?? '').trim();
+    const description = String(p.description ?? '').trim();
+    if (!cur.expertIntro && introtext.length > 20) cur.expertIntro = introtext;
+    if (!cur.expertIntro && description.length > 20) cur.expertIntro = description;
+    out.set(id, cur);
   }
 
   const [tvs] = await gw.query(
@@ -165,7 +169,8 @@ export async function loadSpbCategoryModxEnrich(
     if (row.name === 'title') cur.seoTitle = val;
     if (row.name === 'text' || row.name === 'docText') cur.aboutText = val;
     if (row.name === 'docIntrotext' && !cur.expertIntro) cur.expertIntro = val;
-    if (row.name === 'about_header') cur.aboutHeader = val;
+    // Короткий about_header («Ухо», «Нос») не подменяет название направления
+    if (row.name === 'about_header' && val.length >= 12) cur.aboutHeader = val;
     if (row.name === 'about_text') cur.aboutText = val;
     if (row.name === 'text_middle') cur.bodyMiddle = val;
     out.set(id, cur);
@@ -178,7 +183,12 @@ export function categoryEnrichToPayload(enrich: SpbCategoryModxEnrich): Record<s
   const patch: Record<string, string> = {};
   if (enrich.seoTitle) patch.seoTitle = enrich.seoTitle;
   if (enrich.seoDescription) patch.seoDescription = enrich.seoDescription;
-  if (enrich.expertIntro) patch.expertIntro = enrich.expertIntro;
+  if (enrich.expertIntro) {
+    patch.expertIntro = enrich.expertIntro;
+  } else if (enrich.seoDescription && enrich.seoDescription.length > 40) {
+    // У части направлений нет minText — краткий intro из meta description
+    patch.expertIntro = enrich.seoDescription;
+  }
   if (enrich.aboutHeader) patch.aboutHeader = enrich.aboutHeader;
   if (enrich.aboutText) patch.aboutText = enrich.aboutText;
   if (enrich.bodyMiddle) patch.bodyMiddle = enrich.bodyMiddle;

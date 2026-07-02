@@ -80,6 +80,66 @@ function loadQuickNav(tenant: string): PriceQuickNavDto[] {
   return raw.shortcuts ?? [];
 }
 
+type CategoryContentFields = {
+  expertIntro?: string;
+  aboutText?: string;
+  aboutHeader?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+};
+
+/** Дочерние рубрики без текста → подставляем контент родителя на витрине */
+function loadCategoryContentParents(): Map<string, string> {
+  const raw = loadJsonConfig<Record<string, string>>('spbCategoryContentParents.json');
+  const out = new Map<string, string>();
+  for (const [child, parent] of Object.entries(raw)) {
+    if (child.startsWith('_')) continue;
+    const c = child.trim();
+    const p = String(parent ?? '').trim();
+    if (c && p) out.set(c, p);
+  }
+  return out;
+}
+
+function applyInheritedCategoryContent(
+  categories: Array<PriceCatalogDto['categories'][number]>,
+): void {
+  const parents = loadCategoryContentParents();
+  if (!parents.size) return;
+
+  const byName = new Map(categories.map((c) => [c.name, c]));
+  const pickFields = (src: CategoryContentFields): CategoryContentFields => ({
+    expertIntro: src.expertIntro,
+    aboutText: src.aboutText,
+    aboutHeader: src.aboutHeader,
+    seoTitle: src.seoTitle,
+    seoDescription: src.seoDescription,
+  });
+
+  for (const [childName, parentName] of parents) {
+    const child = byName.get(childName);
+    const parent = byName.get(parentName);
+    if (!child || !parent) continue;
+
+    const src = pickFields(parent);
+    if (!String(child.expertIntro ?? '').trim() && src.expertIntro) {
+      child.expertIntro = src.expertIntro;
+    }
+    if (!String(child.aboutText ?? '').trim() && src.aboutText) {
+      child.aboutText = src.aboutText;
+    }
+    if (!String(child.aboutHeader ?? '').trim() && src.aboutHeader) {
+      child.aboutHeader = src.aboutHeader;
+    }
+    if (!String(child.seoTitle ?? '').trim() && src.seoTitle) {
+      child.seoTitle = src.seoTitle;
+    }
+    if (!String(child.seoDescription ?? '').trim() && src.seoDescription) {
+      child.seoDescription = src.seoDescription;
+    }
+  }
+}
+
 async function fetchPlacements(opts: {
   locale: string;
   categorySlug?: string;
@@ -202,6 +262,8 @@ export async function buildPriceCatalog(opts: {
       ),
     }))
     .sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+
+  if (opts.tenant === 'spb') applyInheritedCategoryContent(categories);
 
   return {
     tenant: opts.tenant,
