@@ -131,6 +131,7 @@ export class StrapiClient {
     contentLocked?: boolean;
     titleLocked?: boolean;
     priceLocked?: boolean;
+    attrs?: Record<string, unknown>;
   } | null> {
     const row = await this.findRowByLegacyId(collection, legacyId, locale);
     if (row) return row;
@@ -152,6 +153,7 @@ export class StrapiClient {
     priceLocked?: boolean;
     slug?: string;
     legacyId?: string;
+    attrs?: Record<string, unknown>;
   } | null> {
     const qs = new URLSearchParams({
       'filters[legacyId][$eq]': legacyId,
@@ -174,7 +176,57 @@ export class StrapiClient {
       priceLocked: attrs.priceLocked === true,
       slug: attrs.slug ? String(attrs.slug) : undefined,
       legacyId: attrs.legacyId ? String(attrs.legacyId) : undefined,
+      attrs,
     };
+  }
+
+  /** Пагинированный список с выбранными полями */
+  async listEntries(
+    collection: string,
+    opts: {
+      locale?: string;
+      pageSize?: number;
+      fields?: string[];
+      publicationState?: 'live' | 'preview';
+    } = {},
+  ): Promise<Array<{ documentId: string; attrs: Record<string, unknown> }>> {
+    const pageSize = opts.pageSize ?? 100;
+    const out: Array<{ documentId: string; attrs: Record<string, unknown> }> = [];
+    let page = 1;
+
+    for (;;) {
+      const qs = new URLSearchParams({
+        'pagination[page]': String(page),
+        'pagination[pageSize]': String(pageSize),
+        publicationState: opts.publicationState ?? 'preview',
+      });
+      if (opts.locale) qs.set('locale', opts.locale);
+      for (const f of opts.fields ?? []) {
+        qs.append(`fields[${qs.getAll('fields').length}]`, f);
+      }
+
+      const res = await this.fetchWithRetry(`${this.baseUrl}/api/${collection}?${qs}`, {
+        headers: { Authorization: `Bearer ${this.token}` },
+      });
+      if (!res.ok) break;
+      const json = await res.json();
+      const batch = json?.data ?? [];
+      if (!Array.isArray(batch) || batch.length === 0) break;
+
+      for (const row of batch) {
+        const attrs = (row.attributes ?? row) as Record<string, unknown>;
+        out.push({
+          documentId: String(row.documentId ?? row.id),
+          attrs,
+        });
+      }
+
+      const pageCount = json?.meta?.pagination?.pageCount;
+      if (!pageCount || page >= pageCount) break;
+      page += 1;
+    }
+
+    return out;
   }
 
   async findBySlug(

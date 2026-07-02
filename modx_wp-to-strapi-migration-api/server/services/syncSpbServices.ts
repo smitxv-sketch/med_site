@@ -120,6 +120,7 @@ async function upsertService(
   categoryDocIds: string[],
   qms: Map<string, QmsPriceItem>,
   modx: Map<number, { description?: string; summary?: string; seoTitle?: string }>,
+  modxEnrich: boolean,
   report: ServiceSyncReport,
 ): Promise<void> {
   const legacyId = serviceLegacyId(row.article);
@@ -177,8 +178,21 @@ async function upsertService(
     return;
   }
 
+  const enrich = modxEnrich && row.modxResourceId ? modx.get(row.modxResourceId) : undefined;
+  const cur = existing.attrs ?? {};
+  const enrichPatch: Record<string, unknown> = {};
+  if (enrich?.description && !String(cur.description ?? '').trim()) {
+    enrichPatch.description = enrich.description;
+  }
+  if (enrich?.summary && !String(cur.summary ?? '').trim()) {
+    enrichPatch.summary = enrich.summary;
+  }
+  if (enrich?.seoTitle && !String(cur.seoTitle ?? '').trim()) {
+    enrichPatch.seoTitle = enrich.seoTitle;
+  }
+
   const mapRow = await getSyncMap('spb', 'service', legacyId);
-  if (mapRow?.data_hash === hash) {
+  if (mapRow?.data_hash === hash && !Object.keys(enrichPatch).length) {
     report.services.skipped += 1;
     return;
   }
@@ -191,6 +205,7 @@ async function upsertService(
   }
   await client.updateEntry('services', existing.documentId, {
     ...patch,
+    ...enrichPatch,
     locale: SPB_LOCALE,
   });
   await client.setRelations(
@@ -240,7 +255,15 @@ export async function syncSpbServices(
     const aggregated = aggregateSpbServices(rows);
     const qms = await buildQmsIndex(mergeQms);
 
-    const categoryNames = [...new Set(rows.map((r) => r.category).filter(Boolean))];
+    // Рубрики только из опубликованных строк — без «hidden-only» (−8 лишних categories)
+    const categoryNames = [
+      ...new Set(
+        rows
+          .filter((r) => Number(r.published) === 1)
+          .map((r) => r.category)
+          .filter(Boolean),
+      ),
+    ];
     const categoryDocIdByName = new Map<string, string>();
 
     for (const name of categoryNames) {
@@ -276,7 +299,7 @@ export async function syncSpbServices(
       }
 
       try {
-        await upsertService(client, service, categoryDocIds, qms, modx, report);
+        await upsertService(client, service, categoryDocIds, qms, modx, modxEnrich, report);
         await sleep(LEGACY_DB_GUARD.syncUpsertDelayMs);
       } catch (e) {
         report.errors.push({

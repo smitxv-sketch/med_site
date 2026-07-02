@@ -43,6 +43,7 @@ import {
   postBookHandler,
 } from './routes/booking.js';
 import { getStrapiDoctorsHandler } from './routes/doctors.js';
+import { getCatalogPricesHandler } from './routes/catalog.js';
 import { getDiagnosticsHandler } from './routes/diagnostics.js';
 import {
   applyWinnerHandler,
@@ -101,6 +102,9 @@ app.get('/api/doctors', getBookingDoctorsHandler);
 
 // Каталог врачей для страницы /doctors (Strapi SSOT)
 app.get('/api/catalog/doctors', getStrapiDoctorsHandler);
+
+// Каталог прайса: только placement + enabled (не все 741 Service)
+app.get('/api/catalog/prices', getCatalogPricesHandler);
 
 // Диагностика (виджет записи вызывает GET /api/diagnostics при инициализации)
 app.get('/api/diagnostics', getDiagnosticsHandler);

@@ -9,9 +9,20 @@ import { getSpbDoctorsForSync } from '../services/spbDoctorSource.js';
 import { fetchSpbQmsDoctorCatalog } from '../services/spbQmsDoctorCatalog.js';
 import { buildSpbDoctorQmsMap } from '../services/spbDoctorQmsMapper.js';
 import { syncSpbServices } from '../services/syncSpbServices.js';
+import { syncSpbCategoryContent } from '../services/spb/syncSpbCategoryContent.js';
+import { syncSpbPrograms } from '../services/spb/syncSpbPrograms.js';
+import { buildSpbLegacyOnlyQueue } from '../services/spb/spbLegacyOnlyQueue.js';
 
 const router = Router();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+async function legacyOnlyPaths() {
+  const root = path.resolve(__dirname, '../../..');
+  return {
+    docs: path.join(root, 'docs/mappings/spb-legacy-only-queue.json'),
+    server: path.join(__dirname, '../mappings/spb-legacy-only-queue.json'),
+  };
+}
 
 async function mappingPaths() {
   const root = path.resolve(__dirname, '../../..');
@@ -140,6 +151,81 @@ router.post('/services', async (req, res) => {
     await logSyncEvent('spb', 'error', 'sync services failed', message);
     const status = message.includes('already running') ? 409 : 500;
     res.status(status).json({ ok: false, error: message });
+  }
+});
+
+/**
+ * MODX-enrich текстов рубрик (expertIntro, aboutText, SEO).
+ * Query: categories=Частная поликлиника,Отделение ВРТ (опц.; иначе приоритетный список + топ-10)
+ */
+router.post('/categories/enrich', async (req, res) => {
+  try {
+    const client = await buildStrapiClient();
+    const conn = await client.checkConnection();
+    if (!conn.success) return res.status(502).json(conn);
+
+    const categories =
+      typeof req.query.categories === 'string' && req.query.categories.trim()
+        ? req.query.categories.split(',').map((s) => s.trim()).filter(Boolean)
+        : undefined;
+
+    await logSyncEvent('spb', 'info', 'category enrich started', { categories });
+    const report = await syncSpbCategoryContent(client, { categories });
+    await logSyncEvent('spb', 'success', 'category enrich finished', report);
+    res.json({ ok: true, report });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    await logSyncEvent('spb', 'error', 'category enrich failed', message);
+    res.status(500).json({ ok: false, error: message });
+  }
+});
+
+/**
+ * Программы: isProgram + includedItems из json_data / uslugiPrice.
+ * Query: category=... (опц.)
+ */
+router.post('/programs', async (req, res) => {
+  try {
+    const client = await buildStrapiClient();
+    const conn = await client.checkConnection();
+    if (!conn.success) return res.status(502).json(conn);
+
+    const categoryFilter =
+      typeof req.query.category === 'string' && req.query.category.trim()
+        ? req.query.category.trim()
+        : undefined;
+
+    await logSyncEvent('spb', 'info', 'programs sync started', { categoryFilter });
+    const report = await syncSpbPrograms(client, { categoryFilter });
+    await logSyncEvent('spb', 'success', 'programs sync finished', report);
+    res.json({ ok: true, report });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    await logSyncEvent('spb', 'error', 'programs sync failed', message);
+    res.status(500).json({ ok: false, error: message });
+  }
+});
+
+/**
+ * Очередь legacy-only (MODX без QMS) для Studio.
+ * ?write=1 — сохранить spb-legacy-only-queue.json
+ */
+router.get('/legacy-only-queue', async (req, res) => {
+  try {
+    const queue = await buildSpbLegacyOnlyQueue();
+    const write = req.query.write === '1' || req.query.write === 'true';
+    if (write) {
+      const paths = await legacyOnlyPaths();
+      const json = JSON.stringify(queue, null, 2);
+      await fs.mkdir(path.dirname(paths.docs), { recursive: true });
+      await fs.mkdir(path.dirname(paths.server), { recursive: true });
+      await fs.writeFile(paths.docs, json, 'utf8');
+      await fs.writeFile(paths.server, json, 'utf8');
+    }
+    res.json({ ok: true, ...queue });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    res.status(500).json({ ok: false, error: message });
   }
 });
 
