@@ -8,6 +8,7 @@ import { runDoctorSync } from '../services/SyncOrchestrator.js';
 import { getSpbDoctorsForSync } from '../services/spbDoctorSource.js';
 import { fetchSpbQmsDoctorCatalog } from '../services/spbQmsDoctorCatalog.js';
 import { buildSpbDoctorQmsMap } from '../services/spbDoctorQmsMapper.js';
+import { syncSpbServices } from '../services/syncSpbServices.js';
 
 const router = Router();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -18,6 +19,13 @@ async function mappingPaths() {
     docs: path.join(root, 'docs/mappings/spb-doctor-qms-map.json'),
     server: path.join(__dirname, '../mappings/spb-doctor-qms-map.json'),
   };
+}
+
+async function probeStrapiCollection(
+  client: StrapiClient,
+  collection: string,
+): Promise<{ ok: boolean; status: number }> {
+  return client.probeCollection(collection);
 }
 
 async function buildStrapiClient() {
@@ -85,6 +93,48 @@ router.post('/doctors/build-qms-map', async (req, res) => {
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     res.status(500).json({ ok: false, error: message });
+  }
+});
+
+/**
+ * Синк услуг и рубрик СПб → Strapi.
+ * Query: category=Кардиология (пилот), mergeQms=0, modxEnrich=0
+ */
+router.post('/services', async (req, res) => {
+  try {
+    const client = await buildStrapiClient();
+    const conn = await client.checkConnection();
+    if (!conn.success) {
+      return res.status(502).json(conn);
+    }
+
+    const servicesProbe = await probeStrapiCollection(client, 'service-categories');
+    if (!servicesProbe.ok) {
+      return res.status(502).json({
+        success: false,
+        message:
+          servicesProbe.status === 404
+            ? 'Коллекция service-categories не найдена — задеплойте apps/cms (Service + ServiceCategory)'
+            : `Strapi service-categories: HTTP ${servicesProbe.status}`,
+      });
+    }
+
+    const categoryFilter =
+      typeof req.query.category === 'string' && req.query.category.trim()
+        ? req.query.category.trim()
+        : 'Кардиология';
+    const mergeQms = req.query.mergeQms !== '0' && req.query.mergeQms !== 'false';
+    const modxEnrich = req.query.modxEnrich !== '0' && req.query.modxEnrich !== 'false';
+
+    await logSyncEvent('spb', 'info', 'sync services started', { categoryFilter });
+    const report = await syncSpbServices(client, { categoryFilter, mergeQms, modxEnrich });
+    await logSyncEvent('spb', 'success', 'sync services finished', report);
+    res.json({ ok: true, report });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    await logSyncEvent('spb', 'error', 'sync services failed', message);
+    const status = message.includes('already running') ? 409 : 500;
+    res.status(status).json({ ok: false, error: message });
   }
 });
 

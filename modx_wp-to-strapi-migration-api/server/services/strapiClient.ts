@@ -74,6 +74,13 @@ export class StrapiClient {
     }
   }
 
+  async probeCollection(collection: string): Promise<{ ok: boolean; status: number }> {
+    const res = await this.fetchWithRetry(`${this.baseUrl}/api/${collection}?pagination[pageSize]=1`, {
+      headers: { Authorization: `Bearer ${this.token}` },
+    });
+    return { ok: res.ok, status: res.status };
+  }
+
   async createEntry(collection: string, data: Record<string, unknown>): Promise<any> {
     const { locale, ...payload } = data;
     const localeQs =
@@ -119,7 +126,12 @@ export class StrapiClient {
     collection: string,
     legacyId: string,
     locale?: string,
-  ): Promise<{ documentId: string; contentLocked?: boolean } | null> {
+  ): Promise<{
+    documentId: string;
+    contentLocked?: boolean;
+    titleLocked?: boolean;
+    priceLocked?: boolean;
+  } | null> {
     const row = await this.findRowByLegacyId(collection, legacyId, locale);
     if (row) return row;
 
@@ -133,7 +145,14 @@ export class StrapiClient {
     collection: string,
     legacyId: string,
     locale?: string,
-  ): Promise<{ documentId: string; contentLocked?: boolean; slug?: string; legacyId?: string } | null> {
+  ): Promise<{
+    documentId: string;
+    contentLocked?: boolean;
+    titleLocked?: boolean;
+    priceLocked?: boolean;
+    slug?: string;
+    legacyId?: string;
+  } | null> {
     const qs = new URLSearchParams({
       'filters[legacyId][$eq]': legacyId,
       'pagination[pageSize]': '1',
@@ -151,6 +170,8 @@ export class StrapiClient {
     return {
       documentId: String(row.documentId ?? row.id),
       contentLocked: Boolean(attrs.contentLocked),
+      titleLocked: attrs.titleLocked === true,
+      priceLocked: attrs.priceLocked === true,
       slug: attrs.slug ? String(attrs.slug) : undefined,
       legacyId: attrs.legacyId ? String(attrs.legacyId) : undefined,
     };

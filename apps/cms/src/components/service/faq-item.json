@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_service_faq_items",
+  "info": {
+    "displayName": "Service FAQ Item",
+    "description": "Вопрос-ответ (СПб MIGX faq_services)"
+  },
+  "options": {},
+  "attributes": {
+    "question": {
+      "type": "string",
+      "required": true
+    },
+    "answer": {
+      "type": "richtext",
+      "required": true
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

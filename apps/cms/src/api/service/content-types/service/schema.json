@@ -1,0 +1,162 @@
+{
+  "kind": "collectionType",
+  "collectionName": "services",
+  "info": {
+    "singularName": "service",
+    "pluralName": "services",
+    "displayName": "Service",
+    "description": "Позиция прайса (1:1 QMS Duv per locale)"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "article": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "titleLocked": {
+      "type": "boolean",
+      "default": false
+    },
+    "price": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "priceLocked": {
+      "type": "boolean",
+      "default": false
+    },
+    "qmsSectionVal": {
+      "type": "string"
+    },
+    "qmsOrgId": {
+      "type": "string"
+    },
+    "legacyId": {
+      "type": "string",
+      "required": true
+    },
+    "legacySource": {
+      "type": "enumeration",
+      "enum": ["chel", "spb"],
+      "required": true
+    },
+    "modxResourceId": {
+      "type": "integer"
+    },
+    "legacyDextraId": {
+      "type": "string"
+    },
+    "legacyDextraCategoryId": {
+      "type": "string"
+    },
+    "tabQms": {
+      "type": "enumeration",
+      "enum": ["priem", "diagnostika", "programmy", "lechenie"]
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::service-category.service-category",
+      "inversedBy": "services"
+    },
+    "legacyOnly": {
+      "type": "boolean",
+      "default": false
+    },
+    "isProgram": {
+      "type": "boolean",
+      "default": false
+    },
+    "hasDetailPage": {
+      "type": "boolean",
+      "default": false
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "summary": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "intro": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "description": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "seoTitle": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "seoDescription": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "includedListTitle": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "includedItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "service.included-item"
+    },
+    "contentBlocks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "service.content-block"
+    },
+    "faqItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "service.faq-item"
+    },
+    "showFaqs": {
+      "type": "boolean",
+      "default": false
+    },
+    "showReviews": {
+      "type": "boolean",
+      "default": false
+    },
+    "showPriceOnPage": {
+      "type": "boolean",
+      "default": true
+    },
+    "isTelemedicine": {
+      "type": "boolean",
+      "default": false
+    },
+    "externalLink": {
+      "type": "string"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "contentLocked": {
+      "type": "boolean",
+      "default": false
+    },
+    "misSyncAt": {
+      "type": "datetime"
+    }
+  }
+}

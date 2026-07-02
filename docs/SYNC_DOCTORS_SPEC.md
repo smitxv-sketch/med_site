@@ -6,7 +6,9 @@ Booking и слоты: **site-ci BFF** → QMS + WP REST (виджет `/src/wid
 
 Подробности по ЧЛБ-контенту: [SYNC_CHEL_SPEC.md](./SYNC_CHEL_SPEC.md).
 
-**Аудит заполненности:** 2026-06-26. Скрипт: `modx_wp-to-strapi-migration-api/scripts/analyze-doctor-fields.mjs` → JSON-отчёт `modx_wp-to-strapi-migration-api/public/export/doctor_fields_audit.json`.
+**Аудит заполненности:** 2026-06-26. Скрипт: `modx_wp-to-strapi-migration-api/scripts/analyze-doctor-fields.mjs`.
+
+**Статус синка (2026-07-02):** ЧЛБ **68** врачей в Strapi (`ru-chel`). СПб **53** врача (`ru-spb`), misId из JSON-мапа QMS — **ожидает** proxy-spb + booking key; сейчас `spb-legacy-{id}`. См. `docs/WHERE_WE_ARE.md`.
 
 ---
 
@@ -15,8 +17,8 @@ Booking и слоты: **site-ci BFF** → QMS + WP REST (виджет `/src/wid
 | | Челябинск | Санкт-Петербург |
 |---|-----------|-----------------|
 | **Источник** | REST `get_doctors` (68 врачей) | MODX MySQL, template 7 |
-| **Аудит** | Полный (прод API) | Bridge сейчас **503**; ниже — схема MODX + 3 примера из `site_spb.md` |
-| **misId** | 68/68 (100%) | TV с MIS ID **не найден** в примерах — блокер синка |
+| **Аудит** | Полный (прод API) | 53 врача в Strapi; QMS qqc-мап — в очереди |
+| **misId** | 68/68 (100%) | В MODX TV пусто → JSON-мап при синке |
 | **Образование** | `education_text` 68/68; JSON-история 64/68 | `education` + `educationDop` — в примерах 3/3 |
 | **Опыт** | `experience_years` 67/68 | `specExperience` — текст («25 лет», «с 1982 года») |
 | **Био на карточке** | `description` **0/68**; вместо него `anonce` 68/68 + `activities` 65/68 | `des` 3/3 + `specintro` 3/3 |

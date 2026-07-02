@@ -1,0 +1,1222 @@
+{
+  "generatedAt": "2026-07-02T10:07:06.681Z",
+  "services": {
+    "label": "Услуги MODX 6+32",
+    "templates": [
+      6,
+      32
+    ],
+    "total": 110,
+    "published": 106,
+    "contentFields": {
+      "pagetitle": {
+        "filled": 110,
+        "empty": 0,
+        "maxLen": 85,
+        "pct": 100
+      },
+      "longtitle": {
+        "filled": 0,
+        "empty": 110,
+        "maxLen": 0,
+        "pct": 0
+      },
+      "description": {
+        "filled": 0,
+        "empty": 110,
+        "maxLen": 0,
+        "pct": 0
+      },
+      "introtext": {
+        "filled": 0,
+        "empty": 110,
+        "maxLen": 0,
+        "pct": 0
+      },
+      "content": {
+        "filled": 0,
+        "empty": 110,
+        "maxLen": 0,
+        "pct": 0
+      },
+      "alias": {
+        "filled": 110,
+        "empty": 0,
+        "maxLen": 54,
+        "pct": 100
+      }
+    },
+    "templateTv": {
+      "action_form": {
+        "filled": 12,
+        "empty": 0,
+        "maxLen": 687,
+        "samples": [
+          {
+            "id": 64,
+            "preview": "[{\"MIGX_id\":\"1\",\"image\":\"400 lm.png\",\"text\":\"\\u0411\\u0435\\u0441\\u043f\\u043b\\u0430\\u0442\\u043d\\u0430\\u044f \\u043a\\u043e\\u…"
+          },
+          {
+            "id": 53,
+            "preview": "[{\"MIGX_id\":\"1\",\"image\":\"doctor/Падерин-Валерий.png\",\"text\":\"Записывайтесь на ФГДС и ФКС со скидкой 25% после 15.00|Паде…"
+          },
+          {
+            "id": 320,
+            "preview": "[{\"MIGX_id\":\"1\",\"image\":\"doctor\\/\\u041f\\u0430\\u0434\\u0435\\u0440\\u0438\\u043d-\\u0412\\u0430\\u043b\\u0435\\u0440\\u0438\\u0439.p…"
+          }
+        ],
+        "looksJson": 12,
+        "looksHtml": 0,
+        "pct": 11
+      },
+      "addnapravleniya": {
+        "filled": 41,
+        "empty": 0,
+        "maxLen": 25,
+        "samples": [
+          {
+            "id": 77,
+            "preview": "24||48"
+          },
+          {
+            "id": 48,
+            "preview": "29||55"
+          },
+          {
+            "id": 73,
+            "preview": "75||71||629"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 37
+      },
+      "articles": {
+        "filled": 32,
+        "empty": 0,
+        "maxLen": 18,
+        "samples": [
+          {
+            "id": 27,
+            "preview": "357||414||360"
+          },
+          {
+            "id": 24,
+            "preview": "357||414"
+          },
+          {
+            "id": 63,
+            "preview": "414||635"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 29
+      },
+      "articles2": {
+        "filled": 2,
+        "empty": 0,
+        "maxLen": 275,
+        "samples": [
+          {
+            "id": 27,
+            "preview": "[{\"MIGX_id\":\"1\",\"img\":\"\",\"name\":\"\",\"text\":\"\",\"date\":\"\",\"date2\":\"\",\"links\":\"https:\\/\\/cispb.com\\/articles\\/besplodie-tolk…"
+          },
+          {
+            "id": 672,
+            "preview": "[{\"MIGX_id\":\"1\",\"img\":\"\",\"name\":\"\",\"text\":\"\",\"date\":\"\",\"date2\":\"\",\"links\":\"https:\\/\\/cispb.com\\/articles\\/besplodie-tolk…"
+          }
+        ],
+        "looksJson": 2,
+        "looksHtml": 0,
+        "pct": 2
+      },
+      "blogArticles": {
+        "filled": 1,
+        "empty": 0,
+        "maxLen": 2272,
+        "samples": [
+          {
+            "id": 753,
+            "preview": "[{\"MIGX_id\":\"1\",\"article\":\"712 \\u0427\\u0442\\u043e \\u0442\\u0430\\u043a\\u043e\\u0435 \\u0434\\u0435\\u043d\\u0441\\u0438\\u0442\\u0…"
+          }
+        ],
+        "looksJson": 1,
+        "looksHtml": 0,
+        "pct": 1
+      },
+      "blogAuthor": {
+        "filled": 39,
+        "empty": 0,
+        "maxLen": 3,
+        "samples": [
+          {
+            "id": 76,
+            "preview": "602"
+          },
+          {
+            "id": 321,
+            "preview": "408"
+          },
+          {
+            "id": 633,
+            "preview": "91"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 35
+      },
+      "blogBlocks": {
+        "filled": 46,
+        "empty": 0,
+        "maxLen": 133161,
+        "samples": [
+          {
+            "id": 606,
+            "preview": "[{\"MIGX_id\":\"1\",\"type\":\"blogImageFullwidth\",\"hideTopMargin\":\"\",\"title\":\"\",\"hideTitle\":\"\",\"caption\":\"\",\"text\":\"<p>Комплек…"
+          },
+          {
+            "id": 623,
+            "preview": "[{\"MIGX_id\":\"1\",\"type\":\"blogImageFullwidth\",\"hideTopMargin\":\"\",\"title\":\"\",\"hideTitle\":\"Y\",\"caption\":\"\",\"text\":\"<p>Диагно…"
+          },
+          {
+            "id": 76,
+            "preview": "[{\"MIGX_id\":\"2\",\"type\":\"blogText\",\"hideTopMargin\":\"Y\",\"title\":\"\",\"hideTitle\":\"Y\",\"caption\":\"\",\"text\":\"<p><img alt=\\\"\\\" s…"
+          }
+        ],
+        "looksJson": 46,
+        "looksHtml": 46,
+        "pct": 42
+      },
+      "blogDate": {
+        "filled": 27,
+        "empty": 0,
+        "maxLen": 19,
+        "samples": [
+          {
+            "id": 63,
+            "preview": "2025-05-09 13:57:00"
+          },
+          {
+            "id": 62,
+            "preview": "2025-09-12 14:27:00"
+          },
+          {
+            "id": 76,
+            "preview": "2025-07-20 15:51:00"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 25
+      },
+      "button_txt": {
+        "filled": 65,
+        "empty": 1,
+        "maxLen": 36,
+        "samples": [
+          {
+            "id": 59,
+            "preview": "Записаться"
+          },
+          {
+            "id": 558,
+            "preview": "Записаться"
+          },
+          {
+            "id": 46,
+            "preview": "Записаться на УЗИ"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 59
+      },
+      "categoryIs": {
+        "filled": 50,
+        "empty": 0,
+        "maxLen": 1,
+        "samples": [
+          {
+            "id": 27,
+            "preview": "1"
+          },
+          {
+            "id": 46,
+            "preview": "1"
+          },
+          {
+            "id": 66,
+            "preview": "1"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 45
+      },
+      "des": {
+        "filled": 109,
+        "empty": 0,
+        "maxLen": 372,
+        "samples": [
+          {
+            "id": 21,
+            "preview": "Сотрудники клиники «Источник» Санкт-Петербург"
+          },
+          {
+            "id": 25,
+            "preview": "Записаться на прием к анестезиологу в профильном медицинском центре Санкт-Петербурга! Профессиональные врачи высшей кате…"
+          },
+          {
+            "id": 26,
+            "preview": "Приём гастроэнтеролога в клинике «Источник», СПб ✓ Врачи высшей категории ✓ Диагностика и лечение заболеваний ЖКТ ✓ ФГДС…"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 99
+      },
+      "docImg": {
+        "filled": 28,
+        "empty": 0,
+        "maxLen": 64,
+        "samples": [
+          {
+            "id": 22,
+            "preview": "doctor/gromova-olga-aleksandrovna.jpg"
+          },
+          {
+            "id": 24,
+            "preview": "doctor/Эрлихман-квадрат-15х15-280x280-c-default.jpg"
+          },
+          {
+            "id": 29,
+            "preview": "uslugi/Решанова-квадрат-15х15-280x280-c-default.jpg"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 25
+      },
+      "docIntrotext": {
+        "filled": 27,
+        "empty": 0,
+        "maxLen": 185,
+        "samples": [
+          {
+            "id": 22,
+            "preview": "Заместитель главного врача по поликлинике, врач-ревматолог, кандидат медицинских наук."
+          },
+          {
+            "id": 24,
+            "preview": "Врач — акушер-гинеколог, врач-репродуктолог, врач ультразвуковой диагностики, кандидат медицинских наук."
+          },
+          {
+            "id": 29,
+            "preview": "Врач ультразвуковой диагностики (пренатальная диагностика, гинекология)"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 25
+      },
+      "docName": {
+        "filled": 27,
+        "empty": 0,
+        "maxLen": 28,
+        "samples": [
+          {
+            "id": 22,
+            "preview": "ГРОМОВА ОЛЬГА АЛЕКСАНДРОВНА"
+          },
+          {
+            "id": 24,
+            "preview": "ЭРЛИХМАН НАДЕЖДА МАРКОВНА"
+          },
+          {
+            "id": 29,
+            "preview": "РЕШАНОВА ЛЮДМИЛА МИХАЙЛОВНА"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 25
+      },
+      "docText": {
+        "filled": 13,
+        "empty": 0,
+        "maxLen": 638,
+        "samples": [
+          {
+            "id": 22,
+            "preview": "<p><span>Клиника «Источник»  — это современная многопрофильная клиника, обладающая уникальным набором всех необходимых р…"
+          },
+          {
+            "id": 24,
+            "preview": "<p><span>Отделение ЭКО клиники  «Источник» –  отделение вспомогательных репродуктивных технологий нового уровня, где ваш…"
+          },
+          {
+            "id": 29,
+            "preview": "<p>Во время беременности прохождение УЗИ – это способ определить, не возникло ли каких-либо осложнений. На начальных пор…"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 13,
+        "pct": 12
+      },
+      "dropdown-text-after": {
+        "filled": 60,
+        "empty": 0,
+        "maxLen": 11378,
+        "samples": [
+          {
+            "id": 46,
+            "preview": "<h2>Подготовка к УЗИ</h2>\r\n<p dir=\"ltr\"><span>Специальная подготовка нужна только для нескольких видов УЗИ. </span></p>\r…"
+          },
+          {
+            "id": 47,
+            "preview": "<h2>Подготовка к УЗИ внутренних органов</h2>\r\n<p><strong>Трансабдоминальное</strong></p>\r\n<ul>\r\n<li>Исследование обычно …"
+          },
+          {
+            "id": 48,
+            "preview": "<h2>Плановые УЗИ: когда проводятся и что исследуется</h2>\r\n<p>Плановые исследование выполняется на каждом триместре бере…"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 60,
+        "pct": 55
+      },
+      "dropdown-text-before": {
+        "filled": 61,
+        "empty": 0,
+        "maxLen": 8897,
+        "samples": [
+          {
+            "id": 46,
+            "preview": "<h2>Общее описание</h2>\r\n<p dir=\"ltr\"><span>При проведении УЗИ используются волны с частотой выше 20 кГц, которые не вос…"
+          },
+          {
+            "id": 47,
+            "preview": "<p>Общее УЗИ проводится с разными целями.</p>\r\n<ul>\r\n<li>Оценка состояния печени: выявление цирроза, жировой дистрофии, …"
+          },
+          {
+            "id": 48,
+            "preview": "<p>Узи беременным проводится для: </p>\r\n<ol>\r\n<li>Подтверждения: ранняя диагностика, <span>локализация плодного яйца, </…"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 61,
+        "pct": 55
+      },
+      "equipment_list": {
+        "filled": 29,
+        "empty": 0,
+        "maxLen": 2936,
+        "samples": [
+          {
+            "id": 50,
+            "preview": "[{\"MIGX_id\":\"2\",\"equipment_name\":\"\\u042d\\u043b\\u0435\\u043a\\u0442\\u0440\\u043e\\u043a\\u0430\\u0440\\u0434\\u0438\\u043e\\u0433\\u…"
+          },
+          {
+            "id": 24,
+            "preview": "[{\"MIGX_id\":\"1\",\"equipment_name\":\"\\u0410\\u043d\\u0430\\u043b\\u0438\\u0437\\u0430\\u0442\\u043e\\u0440 \\u0433\\u0430\\u0437\\u043e\\…"
+          },
+          {
+            "id": 46,
+            "preview": "[{\"MIGX_id\":\"1\",\"equipment_name\":\"\\u0421\\u0438\\u0441\\u0442\\u0435\\u043c\\u0430 \\u0423\\u0417\\u0418 Acuson \\u0425600\",\"equip…"
+          }
+        ],
+        "looksJson": 29,
+        "looksHtml": 0,
+        "pct": 26
+      },
+      "faq_services": {
+        "filled": 56,
+        "empty": 0,
+        "maxLen": 27794,
+        "samples": [
+          {
+            "id": 48,
+            "preview": "[{\"MIGX_id\":\"2\",\"question\":\"\\u0427\\u0442\\u043e \\u043c\\u043e\\u0436\\u0435\\u0442 \\u043f\\u043e\\u043a\\u0430\\u0437\\u0430\\u0442…"
+          },
+          {
+            "id": 77,
+            "preview": "[{\"MIGX_id\":\"5\",\"question\":\"\\u041a\\u0430\\u043a\\u0438\\u0435 \\u0434\\u043e\\u043a\\u0443\\u043c\\u0435\\u043d\\u0442\\u044b \\u043d…"
+          },
+          {
+            "id": 46,
+            "preview": "[{\"MIGX_id\":\"16\",\"question\":\"\\u0414\\u043b\\u044f \\u0447\\u0435\\u0433\\u043e \\u0434\\u0435\\u043b\\u0430\\u044e\\u0442 \\u0423\\u04…"
+          }
+        ],
+        "looksJson": 56,
+        "looksHtml": 56,
+        "pct": 51
+      },
+      "first_block_text": {
+        "filled": 50,
+        "empty": 0,
+        "maxLen": 2390,
+        "samples": [
+          {
+            "id": 46,
+            "preview": "<p dir=\"ltr\"><span>Ультразвуковое исследование применяется в различных клинических ситуациях.</span></p>\r\n<ul>\r\n<li>Бере…"
+          },
+          {
+            "id": 47,
+            "preview": "<ol>\r\n<li aria-level=\"1\">Боль или дискомфорт в животе.</li>\r\n<li aria-level=\"1\">Нарушения работы печени, желчевыводящих …"
+          },
+          {
+            "id": 48,
+            "preview": "<p><span>Ультразвуковая диагностика беременности</span> является необходимым элементом процесса вынашивания плода. Показ…"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 50,
+        "pct": 45
+      },
+      "first_block_title": {
+        "filled": 50,
+        "empty": 0,
+        "maxLen": 67,
+        "samples": [
+          {
+            "id": 46,
+            "preview": "Показания для УЗИ"
+          },
+          {
+            "id": 47,
+            "preview": "Показания к УЗИ"
+          },
+          {
+            "id": 48,
+            "preview": "Показания к УЗИ"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 45
+      },
+      "HitsPage": {
+        "filled": 29,
+        "empty": 0,
+        "maxLen": 4,
+        "samples": [
+          {
+            "id": 63,
+            "preview": "446"
+          },
+          {
+            "id": 62,
+            "preview": "422"
+          },
+          {
+            "id": 76,
+            "preview": "3829"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 26
+      },
+      "img": {
+        "filled": 48,
+        "empty": 0,
+        "maxLen": 111,
+        "samples": [
+          {
+            "id": 25,
+            "preview": "uslugi/anesteziologiya.jpg"
+          },
+          {
+            "id": 26,
+            "preview": "uslugi/gastroentologiya.jpg"
+          },
+          {
+            "id": 32,
+            "preview": "uslugi/dermatovenerologiya.jpg"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 44
+      },
+      "json_data": {
+        "filled": 89,
+        "empty": 16,
+        "maxLen": 4949,
+        "samples": [
+          {
+            "id": 43,
+            "preview": "[{\"id\":\"43\",\"name\":\"Оформление санитарно-курортной карты\"},{\"id\":\"43\",\"name\":\"Осмотр врача специалиста перед вакцинацией…"
+          },
+          {
+            "id": 47,
+            "preview": "[{\"id\":\"1128\",\"name\":\"Ультразвуковое дуплексное сканирование брюшной аорты и висцеральных ветвей (ЧС, ГД)\"},{\"id\":\"236\",…"
+          },
+          {
+            "id": 674,
+            "preview": "[{\"id\":\"156\",\"name\":\"Консультация психолога (60 минут)\"},{\"id\":\"1114\",\"name\":\"Прием психолога/психотерапевта в рамках ко…"
+          }
+        ],
+        "looksJson": 89,
+        "looksHtml": 0,
+        "pct": 81
+      },
+      "keyw": {
+        "filled": 3,
+        "empty": 0,
+        "maxLen": 112,
+        "samples": [
+          {
+            "id": 570,
+            "preview": "Кольпоскопия, рак шейки матки, эрозия шейки матки"
+          },
+          {
+            "id": 710,
+            "preview": "криоконсервация эмбрионов, криоконсервация яйцеклеток, криоконсервация спермы, криоконсервация "
+          },
+          {
+            "id": 721,
+            "preview": "трихология, лечение волос, анализы кожи головы, восстановление волос, консультация трихолога, клиника трихологии"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 3
+      },
+      "list-of-examinations": {
+        "filled": 3,
+        "empty": 0,
+        "maxLen": 67,
+        "samples": [
+          {
+            "id": 651,
+            "preview": "documenty/spisok-rekomenduemyh-obsledovaniy-pered-krioperenosom.pdf"
+          },
+          {
+            "id": 629,
+            "preview": "documenty/spisok-rekomenduemyh-obsledovaniy-pered-krioperenosom.pdf"
+          },
+          {
+            "id": 669,
+            "preview": "documenty/spisok-rekomenduemyh-obsledovaniy-pered-krioperenosom.pdf"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 3
+      },
+      "minText": {
+        "filled": 101,
+        "empty": 0,
+        "maxLen": 1438,
+        "samples": [
+          {
+            "id": 25,
+            "preview": "<p><span>Анестезиология – это наука об использовании методов обезболивания в медицине с целью анестезии и управления жиз…"
+          },
+          {
+            "id": 26,
+            "preview": "<p>Гастроэнтеролог — это специалист, который занимается лечением, диагностикой и профилактикой патологий ЖКТ. Все отделы…"
+          },
+          {
+            "id": 32,
+            "preview": "<p><span>Дерматовенеролог – это врач, который специализируется на изучении, выявлении, профилактике и лечении патологий …"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 101,
+        "pct": 92
+      },
+      "newsImg": {
+        "filled": 1,
+        "empty": 0,
+        "maxLen": 12,
+        "samples": [
+          {
+            "id": 753,
+            "preview": "osteopat.jpg"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 1
+      },
+      "price": {
+        "filled": 14,
+        "empty": 0,
+        "maxLen": 10,
+        "samples": [
+          {
+            "id": 606,
+            "preview": "от 1550"
+          },
+          {
+            "id": 48,
+            "preview": "от 3000"
+          },
+          {
+            "id": 623,
+            "preview": "от 1550"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 13
+      },
+      "priceright": {
+        "filled": 2,
+        "empty": 0,
+        "maxLen": 4,
+        "samples": [
+          {
+            "id": 325,
+            "preview": "7600"
+          },
+          {
+            "id": 320,
+            "preview": "6500"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 2
+      },
+      "priceTemplate": {
+        "filled": 11,
+        "empty": 0,
+        "maxLen": 1,
+        "samples": [
+          {
+            "id": 321,
+            "preview": "1"
+          },
+          {
+            "id": 324,
+            "preview": "1"
+          },
+          {
+            "id": 325,
+            "preview": "1"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 10
+      },
+      "rev": {
+        "filled": 1,
+        "empty": 0,
+        "maxLen": 430,
+        "samples": [
+          {
+            "id": 22,
+            "preview": "[{\"MIGX_id\":\"1\",\"name\":\"Екатерина, 2 апреля 2021\",\"text\":\"Клиника просто супер! Новый ремонт, всё чисто и аккуратно. Оба…"
+          }
+        ],
+        "looksJson": 1,
+        "looksHtml": 0,
+        "pct": 1
+      },
+      "revCategory": {
+        "filled": 6,
+        "empty": 0,
+        "maxLen": 2169,
+        "samples": [
+          {
+            "id": 22,
+            "preview": "[{\"MIGX_id\":\"1\",\"name\":\"Екатерина, 2 апреля 2021\",\"text\":\"Клиника просто супер! Новый ремонт, всё чисто и аккуратно. Оба…"
+          },
+          {
+            "id": 24,
+            "preview": "[{\"MIGX_id\":\"1\",\"name\":\"+7-966-75XXXXX, 12 апреля 2022\",\"text\":\"Первый наш ребёнок (сынок Мишенька) появился в Челябинск…"
+          },
+          {
+            "id": 26,
+            "preview": "[{\"MIGX_id\":\"1\",\"name\":\"Александра 23 июня 2021\",\"text\":\"Посетила гастроэнтеролога, врач оказался хорошим, разобрался в …"
+          }
+        ],
+        "looksJson": 6,
+        "looksHtml": 0,
+        "pct": 5
+      },
+      "second_block_text": {
+        "filled": 49,
+        "empty": 0,
+        "maxLen": 2381,
+        "samples": [
+          {
+            "id": 46,
+            "preview": "<p dir=\"ltr\"><span>Ультразвуковая диагностика является безопасной и имеет минимум противопоказаний, которые носят индиви…"
+          },
+          {
+            "id": 47,
+            "preview": "<ol>\r\n<li>При отсутствии показаний наши врачи считают проведение УЗ-обследования излишним.</li>\r\n<li aria-level=\"1\">При …"
+          },
+          {
+            "id": 48,
+            "preview": "<p>Абсолютные противопоказания отсутствуют.</p>"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 49,
+        "pct": 45
+      },
+      "second_block_title": {
+        "filled": 49,
+        "empty": 0,
+        "maxLen": 75,
+        "samples": [
+          {
+            "id": 46,
+            "preview": "Противопоказания для УЗИ"
+          },
+          {
+            "id": 47,
+            "preview": "Противопоказания"
+          },
+          {
+            "id": 48,
+            "preview": "Противопоказания "
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 45
+      },
+      "showDoc": {
+        "filled": 79,
+        "empty": 0,
+        "maxLen": 1,
+        "samples": [
+          {
+            "id": 29,
+            "preview": "1"
+          },
+          {
+            "id": 47,
+            "preview": "1"
+          },
+          {
+            "id": 48,
+            "preview": "1"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 72
+      },
+      "showPrice": {
+        "filled": 80,
+        "empty": 0,
+        "maxLen": 1,
+        "samples": [
+          {
+            "id": 39,
+            "preview": "1"
+          },
+          {
+            "id": 48,
+            "preview": "1"
+          },
+          {
+            "id": 31,
+            "preview": "1"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 73
+      },
+      "spoiler_services": {
+        "filled": 6,
+        "empty": 0,
+        "maxLen": 5006,
+        "samples": [
+          {
+            "id": 59,
+            "preview": "[{\"MIGX_id\":\"3\",\"title_spoiler\":\"«Прием маммолога + УЗИ молочных желез»\",\"description_spoiler\":\"<p>Сегодня каждая пятая …"
+          },
+          {
+            "id": 54,
+            "preview": "[{\"MIGX_id\":\"1\",\"title_spoiler\":\"Комплексная программа «Всё включено»\",\"description_spoiler\":\"<p><span>Для кого разработ…"
+          },
+          {
+            "id": 379,
+            "preview": "[{\"MIGX_id\":\"5\",\"title_spoiler\":\"Комплексная программа «Прием кардиолога + ЭКГ»\",\"description_spoiler\":\"<p><span>Комплек…"
+          }
+        ],
+        "looksJson": 6,
+        "looksHtml": 6,
+        "pct": 5
+      },
+      "subtitle": {
+        "filled": 11,
+        "empty": 0,
+        "maxLen": 49,
+        "samples": [
+          {
+            "id": 59,
+            "preview": "Комплексные программы медицинских чек-апов"
+          },
+          {
+            "id": 54,
+            "preview": "Комплексные программы по акушерству и гинекологии"
+          },
+          {
+            "id": 58,
+            "preview": "Комплексные программы по урологии"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 10
+      },
+      "textContent": {
+        "filled": 31,
+        "empty": 0,
+        "maxLen": 3505,
+        "samples": [
+          {
+            "id": 25,
+            "preview": "<h2>Чем занимается специалист</h2>\r\n<p>Врач данной специальности выполняет следующие функции:</p>\r\n<ul>\r\n<li>проводит ос…"
+          },
+          {
+            "id": 32,
+            "preview": "<h2>Какие болезни лечит</h2>\r\n<p>Чаще всего специалист данного профиля сталкивается со следующими патологиями:</p>\r\n<ul>…"
+          },
+          {
+            "id": 33,
+            "preview": "<h2>Чем занимается диетолог</h2>\r\n<p>Данный специалист:</p>\r\n<ul>\r\n<li>разрабатывает индивидуальные диеты для пациентов …"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 31,
+        "pct": 28
+      },
+      "textContent2": {
+        "filled": 3,
+        "empty": 0,
+        "maxLen": 570,
+        "samples": [
+          {
+            "id": 38,
+            "preview": "<p>Офтальмолог – это врач, который занимается изучением причин, патогенеза заболеваний органов зрения, а также их диагно…"
+          },
+          {
+            "id": 27,
+            "preview": "<h2></h2>"
+          },
+          {
+            "id": 672,
+            "preview": "<h2></h2>"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 3,
+        "pct": 3
+      },
+      "title": {
+        "filled": 109,
+        "empty": 0,
+        "maxLen": 132,
+        "samples": [
+          {
+            "id": 21,
+            "preview": "Специалисты клиники «Источник» Санкт-Петербург"
+          },
+          {
+            "id": 25,
+            "preview": "Анестезиология – консультация, запись в СПб | Клиника Источник"
+          },
+          {
+            "id": 26,
+            "preview": "Гастроэнтеролог в Санкт-Петербурге — запись на приём, цены, консультация | Клиника «Источник»"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 99
+      },
+      "uslugiPrice": {
+        "filled": 79,
+        "empty": 0,
+        "maxLen": 20287,
+        "samples": [
+          {
+            "id": 25,
+            "preview": "[{\"MIGX_id\":\"1\",\"name\":\"Прием анестезиолога\",\"price\":\"2300\"},{\"MIGX_id\":\"2\",\"name\":\"Анестезия инфильтрационная\",\"price\":…"
+          },
+          {
+            "id": 26,
+            "preview": "[{\"MIGX_id\":\"1\",\"name\":\"\\u0424\\u0413\\u0414\\u0421 \\u043f\\u043e\\u0434 \\u043d\\u0430\\u0440\\u043a\\u043e\\u0437\\u043e\\u043c\",\"p…"
+          },
+          {
+            "id": 32,
+            "preview": "[{\"MIGX_id\":\"1\",\"name\":\"Прием дерматовенеролога (высшей категории)\",\"price\":\"2800\"},{\"MIGX_id\":\"2\",\"name\":\"Прием дермато…"
+          }
+        ],
+        "looksJson": 79,
+        "looksHtml": 0,
+        "pct": 72
+      },
+      "uslugiPrice1": {
+        "filled": 5,
+        "empty": 0,
+        "maxLen": 6,
+        "samples": [
+          {
+            "id": 321,
+            "preview": "179550"
+          },
+          {
+            "id": 322,
+            "preview": "8900"
+          },
+          {
+            "id": 323,
+            "preview": "2800"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 5
+      },
+      "uslugiPriceName": {
+        "filled": 14,
+        "empty": 0,
+        "maxLen": 38,
+        "samples": [
+          {
+            "id": 26,
+            "preview": "Цены на услуги по гастроэнтерологии"
+          },
+          {
+            "id": 76,
+            "preview": "Цены на программы ЭКО"
+          },
+          {
+            "id": 27,
+            "preview": "Цены на услуги гинеколога"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 13
+      },
+      "uslugiVideoImg": {
+        "filled": 4,
+        "empty": 0,
+        "maxLen": 26,
+        "samples": [
+          {
+            "id": 22,
+            "preview": "video/video.jpg"
+          },
+          {
+            "id": 23,
+            "preview": "video/video.jpg"
+          },
+          {
+            "id": 31,
+            "preview": "гинекологический ЧЕКАП.jpg"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 4
+      },
+      "uslugiVideoLink": {
+        "filled": 2,
+        "empty": 0,
+        "maxLen": 28,
+        "samples": [
+          {
+            "id": 22,
+            "preview": "https://youtu.be/t1i7AtdnCTY"
+          },
+          {
+            "id": 23,
+            "preview": "https://youtu.be/t1i7AtdnCTY"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 2
+      },
+      "uslugiVideoName": {
+        "filled": 2,
+        "empty": 0,
+        "maxLen": 20,
+        "samples": [
+          {
+            "id": 22,
+            "preview": "Давайте знакомиться!"
+          },
+          {
+            "id": 23,
+            "preview": "Давайте знакомиться"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 0,
+        "pct": 2
+      },
+      "uslugiVideoText": {
+        "filled": 4,
+        "empty": 0,
+        "maxLen": 424,
+        "samples": [
+          {
+            "id": 22,
+            "preview": "<p>Клиника «Источник» — это место, где многолетний опыт ведущих врачей города сочетается с прогрессиными современными те…"
+          },
+          {
+            "id": 24,
+            "preview": "<p><span> </span></p>"
+          },
+          {
+            "id": 23,
+            "preview": "<p>Клиника «Источник» — это место, где многолетний опыт ведущих врачей города сочетается с прогрессиными современными те…"
+          }
+        ],
+        "looksJson": 0,
+        "looksHtml": 4,
+        "pct": 4
+      },
+      "uslugPre": {
+        "filled": 58,
+        "empty": 0,
+        "maxLen": 14908,
+        "samples": [
+          {
+            "id": 22,
+            "preview": "[{\"MIGX_id\":\"1\",\"img\":\"uslugi\\/pre\\/1.jpg\",\"name\":\"\\u0417\\u0430\\u0431\\u043e\\u0442\\u043b\\u0438\\u0432\\u044b\\u0439 \\u043f\\u…"
+          },
+          {
+            "id": 23,
+            "preview": "[{\"MIGX_id\":\"1\",\"img\":\"uslugi\\/free-icon-medical-checkup-9140880.png\",\"name\":\"\\u0422\\u043e\\u043b\\u044c\\u043a\\u043e \\u043…"
+          },
+          {
+            "id": 558,
+            "preview": "[{\"MIGX_id\":\"2\",\"img\":\"medical_result_health_document_virus_medical_coronavirus_icon_140693.png\",\"name\":\"\\u041f\\u0440\\u0…"
+          }
+        ],
+        "looksJson": 58,
+        "looksHtml": 2,
+        "pct": 53
+      }
+    },
+    "topParents": [
+      {
+        "parentId": 22,
+        "count": 31
+      },
+      {
+        "parentId": 24,
+        "count": 12
+      },
+      {
+        "parentId": 23,
+        "count": 11
+      },
+      {
+        "parentId": 66,
+        "count": 10
+      },
+      {
+        "parentId": 76,
+        "count": 10
+      },
+      {
+        "parentId": 63,
+        "count": 8
+      },
+      {
+        "parentId": 27,
+        "count": 6
+      },
+      {
+        "parentId": 21,
+        "count": 4
+      },
+      {
+        "parentId": 46,
+        "count": 4
+      },
+      {
+        "parentId": 226,
+        "count": 4
+      },
+      {
+        "parentId": 44,
+        "count": 2
+      },
+      {
+        "parentId": 53,
+        "count": 2
+      },
+      {
+        "parentId": 669,
+        "count": 2
+      },
+      {
+        "parentId": 0,
+        "count": 1
+      },
+      {
+        "parentId": 30,
+        "count": 1
+      }
+    ]
+  },
+  "programs": {
+    "label": "Программы MODX 12",
+    "templates": [
+      12
+    ],
+    "total": 0,
+    "published": 0,
+    "contentFields": {
+      "pagetitle": {
+        "filled": 0,
+        "empty": 0,
+        "maxLen": 0,
+        "pct": 0
+      },
+      "longtitle": {
+        "filled": 0,
+        "empty": 0,
+        "maxLen": 0,
+        "pct": 0
+      },
+      "description": {
+        "filled": 0,
+        "empty": 0,
+        "maxLen": 0,
+        "pct": 0
+      },
+      "introtext": {
+        "filled": 0,
+        "empty": 0,
+        "maxLen": 0,
+        "pct": 0
+      },
+      "content": {
+        "filled": 0,
+        "empty": 0,
+        "maxLen": 0,
+        "pct": 0
+      },
+      "alias": {
+        "filled": 0,
+        "empty": 0,
+        "maxLen": 0,
+        "pct": 0
+      }
+    },
+    "templateTv": {},
+    "topParents": []
+  }
+}

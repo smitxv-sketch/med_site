@@ -15,7 +15,12 @@ import {
 import { dbChel } from '../dbChel.js';
 import { parsePagination } from '../lib/pagination.js';
 import { handleChelDoctors, handleChelList } from '../lib/chelRouteHandlers.js';
+import { sendPaginatedJson, sendSinglePageJson } from '../lib/pagination.js';
 import { guardMetaForClient } from '../config/legacyDbGuard.js';
+import {
+  getChelDirectionMetaProbe,
+  listChelDirectionMetaInventory,
+} from '../services/chelDirectionMeta.js';
 
 const router = Router();
 
@@ -30,6 +35,56 @@ router.get('/faq', handleChelList('faq', getChelFaq));
 router.get('/advantages', handleChelList('advantages', getChelAdvantages));
 router.get('/anonces', handleChelList('anonces', getChelAnonces));
 router.get('/directions', handleChelList('directions', getChelDirections));
+
+/**
+ * GET /api/chel/directions/meta/inventory?limit=25&offset=0
+ * Сводка: у каких рубрик directions есть meta блока врача (wp_termmeta).
+ */
+router.get('/directions/meta/inventory', async (req, res) => {
+  try {
+    const { limit, offset } = parsePagination(req);
+    const data = await listChelDirectionMetaInventory(limit, offset);
+    sendPaginatedJson(res, req, {
+      city: 'chel',
+      entity: 'direction_meta_inventory',
+      limit,
+      offset,
+      data,
+    });
+  } catch (error) {
+    console.error('Error fetching direction meta inventory:', error);
+    res.status(500).json({
+      error: 'Failed to fetch direction meta inventory',
+      guard: { docsPath: '/api/legacy/guard' },
+    });
+  }
+});
+
+/**
+ * GET /api/chel/directions/:id/meta
+ * Probe: termmeta рубрики + разрешённый пост сотрудника (блок service-group на ci74).
+ */
+router.get('/directions/:id/meta', async (req, res) => {
+  try {
+    const termId = Number.parseInt(String(req.params.id), 10);
+    if (!Number.isFinite(termId) || termId <= 0) {
+      return res.status(400).json({ error: 'Invalid direction id' });
+    }
+
+    const data = await getChelDirectionMetaProbe(termId);
+    if (!data) {
+      return res.status(404).json({ error: 'Direction not found', termId });
+    }
+
+    sendSinglePageJson(res, { city: 'chel', entity: 'direction_meta', data: [data] });
+  } catch (error) {
+    console.error('Error fetching direction meta:', error);
+    res.status(500).json({
+      error: 'Failed to fetch direction meta',
+      guard: { docsPath: '/api/legacy/guard' },
+    });
+  }
+});
 
 /**
  * Дамп схемы WP — только малыми порциями таблиц (не весь SHOW TABLES разом).

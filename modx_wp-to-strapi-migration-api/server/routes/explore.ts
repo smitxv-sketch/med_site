@@ -402,7 +402,7 @@ router.get("/chel/doctors", async (req, res) => {
 router.get("/chel/services", async (req, res) => {
   try {
     const { limit, offset } = parsePagination(req);
-    const data = await getChelData('service', limit, offset);
+    const data = await getChelData('services', limit, offset);
     sendExploreList(res, req, 'chel', 'services', data);
   } catch (e: any) { res.status(500).json({ error: e.message }); }
 });

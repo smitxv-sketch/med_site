@@ -1,0 +1,1196 @@
+{
+  "generatedAt": "2026-07-02T10:35:36.044Z",
+  "directionsPerService": [
+    {
+      "direction_count": 0,
+      "posts": 20
+    },
+    {
+      "direction_count": 1,
+      "posts": 1028
+    },
+    {
+      "direction_count": 2,
+      "posts": 119
+    },
+    {
+      "direction_count": 3,
+      "posts": 121
+    },
+    {
+      "direction_count": 4,
+      "posts": 14
+    },
+    {
+      "direction_count": 5,
+      "posts": 15
+    },
+    {
+      "direction_count": 6,
+      "posts": 5
+    },
+    {
+      "direction_count": 7,
+      "posts": 13
+    },
+    {
+      "direction_count": 8,
+      "posts": 2
+    },
+    {
+      "direction_count": 9,
+      "posts": 5
+    },
+    {
+      "direction_count": 18,
+      "posts": 1
+    },
+    {
+      "direction_count": 24,
+      "posts": 1
+    },
+    {
+      "direction_count": 33,
+      "posts": 1
+    }
+  ],
+  "taxonomiesOnServices": [
+    {
+      "taxonomy": "directions",
+      "posts": 1325,
+      "links": 2017
+    }
+  ],
+  "metaKeyRegistry": [
+    {
+      "key": "_about_header",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_about_text",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_about_video",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_article",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_dextra_category_id",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_dextra_id",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_doctor_id",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_edit_last",
+      "filled": 1237,
+      "total": 1237,
+      "pct": 100
+    },
+    {
+      "key": "_edit_lock",
+      "filled": 1273,
+      "total": 1273,
+      "pct": 100
+    },
+    {
+      "key": "_enabled",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_faqs_view",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_item_view",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_ord",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_price",
+      "filled": 1345,
+      "total": 1345,
+      "pct": 100
+    },
+    {
+      "key": "_product_image_gallery",
+      "filled": 0,
+      "total": 96,
+      "pct": 0
+    },
+    {
+      "key": "_reviews_view",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_seo_description",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_seo_title",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_telemedecine",
+      "filled": 1228,
+      "total": 1228,
+      "pct": 100
+    },
+    {
+      "key": "_text",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_text_header",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_text_list",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_text_list_header",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_text_welcome",
+      "filled": 1344,
+      "total": 1344,
+      "pct": 100
+    },
+    {
+      "key": "_vcv-globalCssMigrated",
+      "filled": 1267,
+      "total": 1267,
+      "pct": 100
+    },
+    {
+      "key": "_vcv-sourceChecksum",
+      "filled": 1267,
+      "total": 1267,
+      "pct": 100
+    },
+    {
+      "key": "_wp_old_date",
+      "filled": 2,
+      "total": 2,
+      "pct": 100
+    },
+    {
+      "key": "_wp_old_slug",
+      "filled": 99,
+      "total": 99,
+      "pct": 100
+    },
+    {
+      "key": "about_header",
+      "filled": 3,
+      "total": 1344,
+      "pct": 0
+    },
+    {
+      "key": "about_text",
+      "filled": 3,
+      "total": 1344,
+      "pct": 0
+    },
+    {
+      "key": "about_video",
+      "filled": 3,
+      "total": 1344,
+      "pct": 0
+    },
+    {
+      "key": "article",
+      "filled": 1336,
+      "total": 1344,
+      "pct": 99
+    },
+    {
+      "key": "dextra_category_id",
+      "filled": 927,
+      "total": 1344,
+      "pct": 69
+    },
+    {
+      "key": "dextra_id",
+      "filled": 927,
+      "total": 1344,
+      "pct": 69
+    },
+    {
+      "key": "doctor_id",
+      "filled": 42,
+      "total": 1344,
+      "pct": 3
+    },
+    {
+      "key": "enabled",
+      "filled": 1300,
+      "total": 1344,
+      "pct": 97
+    },
+    {
+      "key": "faqs_view",
+      "filled": 647,
+      "total": 1344,
+      "pct": 48
+    },
+    {
+      "key": "item_view",
+      "filled": 34,
+      "total": 1344,
+      "pct": 3
+    },
+    {
+      "key": "ord",
+      "filled": 1056,
+      "total": 1344,
+      "pct": 79
+    },
+    {
+      "key": "price",
+      "filled": 1342,
+      "total": 1345,
+      "pct": 100
+    },
+    {
+      "key": "reviews_view",
+      "filled": 634,
+      "total": 1344,
+      "pct": 47
+    },
+    {
+      "key": "seo_description",
+      "filled": 0,
+      "total": 1344,
+      "pct": 0
+    },
+    {
+      "key": "seo_title",
+      "filled": 0,
+      "total": 1344,
+      "pct": 0
+    },
+    {
+      "key": "telemedecine",
+      "filled": 13,
+      "total": 1228,
+      "pct": 1
+    },
+    {
+      "key": "text",
+      "filled": 69,
+      "total": 1344,
+      "pct": 5
+    },
+    {
+      "key": "text_header",
+      "filled": 5,
+      "total": 1344,
+      "pct": 0
+    },
+    {
+      "key": "text_list",
+      "filled": 26,
+      "total": 1344,
+      "pct": 2
+    },
+    {
+      "key": "text_list_header",
+      "filled": 26,
+      "total": 1344,
+      "pct": 2
+    },
+    {
+      "key": "text_welcome",
+      "filled": 23,
+      "total": 1344,
+      "pct": 2
+    },
+    {
+      "key": "vcvSourceCssFileUrl",
+      "filled": 13,
+      "total": 1267,
+      "pct": 1
+    }
+  ],
+  "postStructure": {
+    "with_parent": "0",
+    "with_menu_order": "0",
+    "total": 1345
+  },
+  "faqPostTypes": [],
+  "faqRelatedMetaKeys": [
+    {
+      "meta_key": "directions",
+      "c": 74064
+    },
+    {
+      "meta_key": "_directions",
+      "c": 74064
+    },
+    {
+      "meta_key": "service",
+      "c": 36742
+    },
+    {
+      "meta_key": "_service",
+      "c": 36742
+    },
+    {
+      "meta_key": "faqs_view",
+      "c": 7433
+    },
+    {
+      "meta_key": "_faqs_view",
+      "c": 7433
+    },
+    {
+      "meta_key": "service_id",
+      "c": 2911
+    },
+    {
+      "meta_key": "_service_id",
+      "c": 2911
+    }
+  ],
+  "reviewRelatedMetaKeys": [
+    {
+      "meta_key": "_doctor_id",
+      "c": 1461
+    },
+    {
+      "meta_key": "doctor_id",
+      "c": 1461
+    },
+    {
+      "meta_key": "_directions",
+      "c": 1391
+    },
+    {
+      "meta_key": "directions",
+      "c": 1391
+    },
+    {
+      "meta_key": "_service_id",
+      "c": 1071
+    },
+    {
+      "meta_key": "service_id",
+      "c": 1071
+    }
+  ],
+  "detailPageSamples": [
+    {
+      "id": 10711,
+      "title": "Кольпоскопия",
+      "slug": "kolposkopiya",
+      "contentMetaKeys": [
+        "doctor_id",
+        "text_list_header",
+        "text_header",
+        "about_video",
+        "price",
+        "about_header",
+        "text_welcome",
+        "text",
+        "about_text",
+        "enabled",
+        "article",
+        "ord",
+        "seo_title",
+        "seo_description",
+        "dextra_id",
+        "dextra_category_id",
+        "text_list",
+        "faqs_view",
+        "reviews_view",
+        "item_view",
+        "vcvSourceCssFileUrl",
+        "telemedecine"
+      ],
+      "taxonomies": [
+        {
+          "term_id": 576,
+          "name": "Диагностика (Гинекология)",
+          "taxonomy": "directions"
+        }
+      ],
+      "contentMeta": {
+        "doctor_id": "513",
+        "text_list_header": "Чем отличается простая кольпоскопия от расширенной?",
+        "text_header": "",
+        "about_video": "",
+        "price": "1850",
+        "about_header": "",
+        "text_welcome": "Кольпоскопия – это процедура по диагностике гинекологических заболеваний, во время которой врач-гинеколог производит с помощью осмотр шейки матки, стенок влагалища и вульвы. Сегодня эта процедура стала уже распространенной в практике врачей- гинекологов Челябинска.\r\n\r\nКольпоскоп – это увеличительный прибор, который во время осмотра находится на расстоянии от женщины и не требует введения дополнительных приборов в полость матки. Многие пациентки отмечают, что процедура проходит абсолютно безболезненно. Некоторый дискомфорт может появиться только при расширенной кольпоскопии, которая проводится с применением химических реактивов.",
+        "text": "<strong>Кольпоскопия шейки матки не имеет противопоказаний, ее можно проводить и во время беременности. </strong>Даже более того: вовремя проведенный осмотр при беременности поможет выявить нарушения в организме женщины на ранней стадии и предотвратить их осложнения.\r\n\r\n<strong>Но во время месячных процедуру не проводят.</strong> Поэтому, если вы записались на проведение обследования на период менструации – лучше заранее позвонить в клинику и попросить администратора о переносе визита к врачу-гинекологу.\r\n\r\nВ нашей клинике кольпоскопию шейки матки проводят опытные врачи-гинекологи, для которых эта процедура является одной из основных в практике. Поэтому вы можете быть уверены, что с ее помощью врач проведет внимательный осмотр и при наличии заболеваний назначит вам верный курс лечения и поможет справиться с недугом.\r\n\r\nЦена проведения процедуры в нашей клинике указана в перечне услуг отделения гинекологии.\r\n\r\n<strong>Сделать кольпоскопию в Челябинске вы можете, обратившись в любой из филиалов клиники «Источник». Звоните по телефону +7 (351) 77-88-887 и наш оператор подберет удобное для вас время записи.</strong>",
+        "about_text": "",
+        "enabled": "1",
+        "article": "A03.20.001",
+        "ord": "900",
+        "seo_title": "",
+        "seo_description": "",
+        "dextra_id": "123",
+        "dextra_category_id": "11",
+        "text_list": "Простая – проведение только визуального осмотра с помощью кольпоскопа.\r\nРасширенная (РКС) – визуальный осмотр с оценкой реакции на химические препараты (проба с 3% раствором уксусной кислоты или проба Шиллера – с раствором Люголя).",
+        "faqs_view": "1",
+        "reviews_view": "1",
+        "item_view": "1",
+        "vcvSourceCssFileUrl": "",
+        "telemedecine": "0"
+      }
+    },
+    {
+      "id": 10716,
+      "title": "Прием врача—акушера-гинеколога",
+      "slug": "priem_akushera_ginekologa-128",
+      "contentMetaKeys": [
+        "doctor_id",
+        "text_list_header",
+        "text_header",
+        "about_video",
+        "price",
+        "about_header",
+        "text_welcome",
+        "text",
+        "about_text",
+        "enabled",
+        "article",
+        "ord",
+        "seo_title",
+        "seo_description",
+        "dextra_id",
+        "dextra_category_id",
+        "text_list",
+        "faqs_view",
+        "reviews_view",
+        "item_view",
+        "vcvSourceCssFileUrl",
+        "telemedecine"
+      ],
+      "taxonomies": [
+        {
+          "term_id": 577,
+          "name": "Консультации",
+          "taxonomy": "directions"
+        }
+      ],
+      "contentMeta": {
+        "doctor_id": "513",
+        "text_list_header": "На приеме у гинеколога вы сможете",
+        "text_header": "",
+        "about_video": "",
+        "price": "3600",
+        "about_header": "",
+        "text_welcome": "На приеме гинекологи клиники «Источник» проводят консультацию, осмотр, забор анализов, амбулаторное лечение заболеваний, ультразвуковую диагностику органов малого таза, проведение диагностики и лечения заболеваний шейки матки (видеокольпоскопия, биопсия, эксцизия), осуществляют ведение беременности и помогают в подборе методов контрацепции.",
+        "text": "<strong>Сколько стоит прием специалиста?</strong>\r\n\r\nЧем выше квалификация специалиста, тем выше цена приема. Именно поэтому стоимость врача высшей категории больше, чем у врачей 1 или 2 категории. Самая высокая стоимость приема – у доктора наук и профессора. Таким образом, врачи замотивированы на постоянный профессиональный рост, а не на назначение лишних анализов и обследований.\r\n\r\nОднако, стоит упомянуть о том, что каждый врач отделения гинекологии клиники «Источник» в Челябинске – профессионал своего дела с минимальным опытом работы в профессии – 5 лет. Таким образом, каждый наш специалист – уже не новичок в своем деле и обладает богатым опытом.\r\n\r\nКроме того, наши специалисты проходят курсы по антивозрастной медицине и с удовольствием ответят вам на вопросы касательно поддержания тонуса органов репродуктивной системы.\r\n\r\nВ Челябинске вы можете посетить гинеколога в любом из филиалов клиники «Источник», а посмотреть портфолио и отзывы о специалистах можно на нашем сайте. Мы постарались сделать все, что от нас зависит, чтобы вам было комфортно в нашей клинике. А вы – смогли найти врача, с которым вам было бы комфортно на протяжении всей жизни. Ведь поддержка собственного здоровья – одна из важных задач современной женщины.\r\n\r\nЗаписывайтесь на прием в акушеру-гинекологу по телефону +7 (351) 77-88-887.",
+        "about_text": "",
+        "enabled": "1",
+        "article": "B01.001.41",
+        "ord": "615",
+        "seo_title": "",
+        "seo_description": "",
+        "dextra_id": "128",
+        "dextra_category_id": "12",
+        "text_list": "Получить полную консультацию врача и ответы на ваши вопросы\r\nПройти осмотр и диагностику заболевания\r\nСдать все необходимые анализы\r\nОбсудить результаты анализов и получить необходимое лечение\r\nПри необходимости – врач выпишет вам направление на хирургическую операцию",
+        "faqs_view": "1",
+        "reviews_view": "1",
+        "item_view": "1",
+        "vcvSourceCssFileUrl": "",
+        "telemedecine": "1"
+      }
+    },
+    {
+      "id": 10745,
+      "title": "Биоревитализация интимной области",
+      "slug": "biorevitalizaciya_intimnoj_oblasti",
+      "contentMetaKeys": [
+        "doctor_id",
+        "text_list_header",
+        "text_header",
+        "about_video",
+        "price",
+        "about_header",
+        "text_welcome",
+        "text",
+        "about_text",
+        "enabled",
+        "article",
+        "ord",
+        "seo_title",
+        "seo_description",
+        "dextra_id",
+        "dextra_category_id",
+        "text_list",
+        "faqs_view",
+        "reviews_view",
+        "item_view",
+        "vcvSourceCssFileUrl",
+        "telemedecine"
+      ],
+      "taxonomies": [
+        {
+          "term_id": 581,
+          "name": "Эстетическая гинекология",
+          "taxonomy": "directions"
+        }
+      ],
+      "contentMeta": {
+        "doctor_id": "",
+        "text_list_header": "",
+        "text_header": "",
+        "about_video": "",
+        "price": "8700",
+        "about_header": "",
+        "text_welcome": "",
+        "text": "",
+        "about_text": "",
+        "enabled": "1",
+        "article": "B12.002.16",
+        "ord": "302",
+        "seo_title": "",
+        "seo_description": "",
+        "dextra_id": "157",
+        "dextra_category_id": "16",
+        "text_list": "",
+        "faqs_view": "1",
+        "reviews_view": "1",
+        "item_view": "1",
+        "vcvSourceCssFileUrl": "",
+        "telemedecine": "0"
+      }
+    },
+    {
+      "id": 10746,
+      "title": "Гименопластика (восстановление девственности)",
+      "slug": "gimenoplastika_vosstanovlenie_devstvennosti",
+      "contentMetaKeys": [
+        "doctor_id",
+        "text_list_header",
+        "text_header",
+        "about_video",
+        "price",
+        "about_header",
+        "text_welcome",
+        "text",
+        "about_text",
+        "enabled",
+        "article",
+        "ord",
+        "seo_title",
+        "seo_description",
+        "dextra_id",
+        "dextra_category_id",
+        "text_list",
+        "faqs_view",
+        "reviews_view",
+        "item_view",
+        "vcvSourceCssFileUrl",
+        "telemedecine"
+      ],
+      "taxonomies": [
+        {
+          "term_id": 581,
+          "name": "Эстетическая гинекология",
+          "taxonomy": "directions"
+        }
+      ],
+      "contentMeta": {
+        "doctor_id": "",
+        "text_list_header": "Виды восстановления девственности",
+        "text_header": "",
+        "about_video": "",
+        "price": "6900",
+        "about_header": "",
+        "text_welcome": "Хирургическая операция по рефлорации, восстановлению девственной плевы у женщин.",
+        "text": "<h2>Подготовка к рефлорации</h2>\r\nОперация проводится по окончании менструаций, когда кровотечение в половых органах женщины при травматизации слизистых и мышечных тканей влагалища можно минимизировать. Кроме того, заблаговременно придется отменить прием всех лекарств, снижающих свертываемость крови. Это ускорит процесс заживления и уменьшит послеоперационный отек в месте шва.\r\nПеред операцией необходимо сдать ряд на анализов на инфекции передаваемые половым путем, биохимию крови, а так же пробы на анестетики (при наличии аллергии). Как противопоказание к данной процедуре выступают воспалительные процессы и не свертываемость крови. Сама рефлорация проводится на 4–5 день цикла под местным или общим наркозом в течении 15–45 минут.\r\n<h4>Перед проведением процедуры необходима консультация врача - гинеколога.</h4>\r\n<h2></h2>",
+        "about_text": "",
+        "enabled": "1",
+        "article": "B12.002.01",
+        "ord": "1060",
+        "seo_title": "",
+        "seo_description": "",
+        "dextra_id": "158",
+        "dextra_category_id": "16",
+        "text_list": "1. Краткосрочная гименопластика.\r\nСегодня чаще всего используется краткосрочное восстановление, при которой период до предполагаемого полового контакта с партнером не должен превышать 7–10 дней, так как по истечению этого срока плева расползается. Операция проводится не позднее, чем за пять дней до очередной менструации.\r\n2. Долгосрочная гименопластика\r\nБолее сложная методика обладает наилучшей сохранностью результата, периодом на 2–3 года.\r\nРана заживает в течение 3–7 дней. Все швы рассасывающиеся.",
+        "faqs_view": "1",
+        "reviews_view": "1",
+        "item_view": "1",
+        "vcvSourceCssFileUrl": "",
+        "telemedecine": "0"
+      }
+    },
+    {
+      "id": 10808,
+      "title": "Гемостазиограмма",
+      "slug": "gemostaziogramma-221",
+      "contentMetaKeys": [
+        "doctor_id",
+        "text_list_header",
+        "text_header",
+        "about_video",
+        "price",
+        "about_header",
+        "text_welcome",
+        "text",
+        "about_text",
+        "enabled",
+        "article",
+        "ord",
+        "seo_title",
+        "seo_description",
+        "dextra_id",
+        "dextra_category_id",
+        "text_list",
+        "faqs_view",
+        "reviews_view",
+        "item_view",
+        "vcvSourceCssFileUrl",
+        "telemedecine"
+      ],
+      "taxonomies": [
+        {
+          "term_id": 573,
+          "name": "Гемостазиология",
+          "taxonomy": "directions"
+        },
+        {
+          "term_id": 586,
+          "name": "Исследование гемостаза",
+          "taxonomy": "directions"
+        }
+      ],
+      "contentMeta": {
+        "doctor_id": "527",
+        "text_list_header": "Показания",
+        "text_header": "",
+        "about_video": "",
+        "price": "1790",
+        "about_header": "",
+        "text_welcome": "В механизмах гемостаза участвуют: сосудистая стенка, тромбоциты, факторы свертывания, фибринолитические факторы, а также физиологические антикоагулянты, их кофакторы, активаторы и ингибиторы.\r\n<div>\r\n<div></div>\r\n<div>Дефицит факторов свертывания (врожденный или приобретенный) приводит к гипокоагуляции и возрастанию риска кровотечений (в том числе внутри- и послеоперационных). Предоперационная оценка состояния пациентов обязательно включают в себя общий (клинический) анализ крови с подсчетом тромбоцитов и базовую гемостазиограмму (коагулограмму) – минимальный набор тестов, необходимый для оценки свертывающей системы крови. Понижение свертывающей способности крови проявляется уменьшением концентрации факторов свертывания крови и удлинением времени свертывания.</div>\r\n<div></div>\r\n<div>Повышение концентрации факторов свертывания приводит к состоянию гиперкоагуляции, в результате возрастает риск тромботических осложнений, в том числе опасных для жизни (инсульт, инфаркт, тромбоэмболия легочной артерии [ТЭЛА]).</div>\r\n</div>\r\n<strong>Подготовка</strong>\r\n\r\nВзятие крови предпочтительно проводить утром натощак, после 8-14 часов ночного периода голодания (воду пить можно), допустимо днем через 4 часа после легкого приема пищи.",
+        "text": "<strong>В данный профиль входят следующие анализы:</strong>\r\n<ul>\r\n \t<li>Тромбиновое время</li>\r\n \t<li>Протромбин, МНО (протромбиновое время)</li>\r\n \t<li>Фибриноген</li>\r\n \t<li>АЧТВ (АПТВ, активированное частичное (парциальное) тромбопластиновое время, Activated Partial thromboplastin time, APTT)</li>\r\n \t<li>Антитромбин<em lang=\"EN-US\">-III</em></li>\r\n \t<li>РФМК (растворимые фибрин-мономерные комплексы)</li>\r\n \t<li>  <em lang=\"EN-US\">XII – </em>зависимый фибринолиз</li>\r\n \t<li>Спонтанный (эуглобулиновый) фибринолиз</li>\r\n \t<li>Агрегация тромбоцитов с АДФ, адреналином, коллагеном</li>\r\n</ul>\r\n<div>\r\n<div>Данный набор коагулологических тестов обычно применяют в комплексе с общим анализом крови, включающим оценку числа тромбоцитов, эритроцитов, гемоглобина, гематокрита и пр.</div>\r\n<div></div>\r\n<div><strong>Система гемостаза</strong> – биологическая система, выполняющая в организме функции поддержания постоянного уровня вязкости крови, остановки кровотечений при повреждениях стенок сосудов, растворения тромбов, выполнивших свою функцию.</div>\r\n<div></div>\r\n<div>Основные этапы гемостаза (остановки кровотечения):</div>\r\n<div>\r\n<ol>\r\n \t<li>Сосудистый спазм.</li>\r\n \t<li>Агрегация тромбоцитов (образование «белого тромба»).</li>\r\n \t<li>Свертывание плазмы крови (формирование «красного тромба»).</li>\r\n \t<li>Частичное или полное растворение сгустка (фибринолиз).</li>\r\n</ol>\r\n</div>\r\n</div>",
+        "about_text": "",
+        "enabled": "1",
+        "article": "B03.005.03",
+        "ord": "1340",
+        "seo_title": "",
+        "seo_description": "",
+        "dextra_id": "221",
+        "dextra_category_id": "21",
+        "text_list": "пред- и послеоперационный скрининг; \r\nобследование при повышенной кровоточивости и/или подозрении на патологию свертывания крови; \r\nобследование при беременности; \r\nскрининговые обследования при патологии печени, сердечно-сосудистых, аутоиммунных заболеваниях и пр. (см. также комплекс «Гемостазиограмма (коагулограмма) расширенная»).",
+        "faqs_view": "1",
+        "reviews_view": "1",
+        "item_view": "1",
+        "vcvSourceCssFileUrl": "",
+        "telemedecine": "0"
+      }
+    },
+    {
+      "id": 10973,
+      "title": "Аппаратное промывание",
+      "slug": "apparatnoe_promyvanie-386",
+      "contentMetaKeys": [
+        "doctor_id",
+        "text_list_header",
+        "text_header",
+        "about_video",
+        "price",
+        "about_header",
+        "text_welcome",
+        "text",
+        "about_text",
+        "enabled",
+        "article",
+        "ord",
+        "seo_title",
+        "seo_description",
+        "dextra_id",
+        "dextra_category_id",
+        "text_list",
+        "faqs_view",
+        "reviews_view",
+        "item_view",
+        "vcvSourceCssFileUrl",
+        "telemedecine"
+      ],
+      "taxonomies": [
+        {
+          "term_id": 602,
+          "name": "Горло",
+          "taxonomy": "directions"
+        }
+      ],
+      "contentMeta": {
+        "doctor_id": "",
+        "text_list_header": "",
+        "text_header": "",
+        "about_video": "",
+        "price": "1500",
+        "about_header": "",
+        "text_welcome": "Как проходит процедура? В клинике «Источник» промывание миндалин проводится с помощью аппарата Otopront вакуумным методом. Гнойные пробки удаляются за счёт действия отрицательного давления, их место тут же заполняет антисептический раствор.\r\n\r\nВ чем преимущества? Для достижения лечебного эффекта требуется лекарства меньше, чем при промывании обычным методом. Процедура абсолютно безболезненна. А небольшой размер насадки аппарата позволяет точно направить лечебное воздействие на миндалину даже у маленьких пациентов. Все части аппарата после каждой процедуры стерилизуются.\r\n\r\n<strong>Показания:</strong> воспаление небных миндалин, гланд, пробки в горле, хронический тонзиллит.",
+        "text": "",
+        "about_text": "",
+        "enabled": "1",
+        "article": "A25.08.004",
+        "ord": "2065",
+        "seo_title": "",
+        "seo_description": "",
+        "dextra_id": "386",
+        "dextra_category_id": "37",
+        "text_list": "",
+        "faqs_view": "1",
+        "reviews_view": "1",
+        "item_view": "1",
+        "vcvSourceCssFileUrl": "",
+        "telemedecine": "0"
+      }
+    },
+    {
+      "id": 10982,
+      "title": "Пункция верхнечелюстной пазухи с промыванием (с одной стороны)",
+      "slug": "punkciya_verhnechelyustnoj_pazuhi_s_promyvaniem_s_odnoj_storony",
+      "contentMetaKeys": [
+        "doctor_id",
+        "text_list_header",
+        "text_header",
+        "about_video",
+        "price",
+        "about_header",
+        "text_welcome",
+        "text",
+        "about_text",
+        "enabled",
+        "article",
+        "ord",
+        "seo_title",
+        "seo_description",
+        "dextra_id",
+        "dextra_category_id",
+        "text_list",
+        "faqs_view",
+        "reviews_view",
+        "item_view",
+        "vcvSourceCssFileUrl",
+        "telemedecine"
+      ],
+      "taxonomies": [
+        {
+          "term_id": 602,
+          "name": "Горло",
+          "taxonomy": "directions"
+        }
+      ],
+      "contentMeta": {
+        "doctor_id": "",
+        "text_list_header": "",
+        "text_header": "",
+        "about_video": "",
+        "price": "2300",
+        "about_header": "",
+        "text_welcome": "",
+        "text": "",
+        "about_text": "",
+        "enabled": "1",
+        "article": "A11.08.004.007",
+        "ord": "2100",
+        "seo_title": "",
+        "seo_description": "",
+        "dextra_id": "395",
+        "dextra_category_id": "37",
+        "text_list": "",
+        "faqs_view": "1",
+        "reviews_view": "1",
+        "item_view": "1",
+        "vcvSourceCssFileUrl": "",
+        "telemedecine": "0"
+      }
+    },
+    {
+      "id": 11009,
+      "title": "Аудиометрия",
+      "slug": "audiometriya-422",
+      "contentMetaKeys": [
+        "doctor_id",
+        "text_list_header",
+        "text_header",
+        "about_video",
+        "price",
+        "about_header",
+        "text_welcome",
+        "text",
+        "about_text",
+        "enabled",
+        "article",
+        "ord",
+        "seo_title",
+        "seo_description",
+        "dextra_id",
+        "dextra_category_id",
+        "text_list",
+        "faqs_view",
+        "reviews_view",
+        "item_view",
+        "vcvSourceCssFileUrl",
+        "telemedecine"
+      ],
+      "taxonomies": [
+        {
+          "term_id": 604,
+          "name": "Ухо",
+          "taxonomy": "directions"
+        }
+      ],
+      "contentMeta": {
+        "doctor_id": "572",
+        "text_list_header": "",
+        "text_header": "",
+        "about_video": "",
+        "price": "1400",
+        "about_header": "",
+        "text_welcome": "Как проходит обследование? Процедура абсолютна безболезненна. Пациент сидит в кресле в наушниках, подключенных к аудиометру. ЛОР-врач подает в ухо сигнал определенной частоты и силы. Пациент должен нажать кнопку, как только услышит сигнал. Если он сигнал не слышит, доктор добавляет громкость. Таким образом определяется порог слышимости.\r\n\r\nВ клинике источник проверка остроты слуха проводится на аудиометре немецкой компании Otopront.\r\n\r\n<strong>Показания:</strong> острая и хроническая тугоухость, воспалительные процессы в полости среднего уха (отиты), отосклероз, оценка эффективности лечения.",
+        "text": "",
+        "about_text": "",
+        "enabled": "1",
+        "article": "B03.028.01",
+        "ord": "2255",
+        "seo_title": "",
+        "seo_description": "",
+        "dextra_id": "422",
+        "dextra_category_id": "39",
+        "text_list": "",
+        "faqs_view": "1",
+        "reviews_view": "1",
+        "item_view": "1",
+        "vcvSourceCssFileUrl": "",
+        "telemedecine": "0"
+      }
+    },
+    {
+      "id": 11024,
+      "title": "Тимпанометрия",
+      "slug": "timpanometriya-437",
+      "contentMetaKeys": [
+        "doctor_id",
+        "text_list_header",
+        "text_header",
+        "about_video",
+        "price",
+        "about_header",
+        "text_welcome",
+        "text",
+        "about_text",
+        "enabled",
+        "article",
+        "ord",
+        "seo_title",
+        "seo_description",
+        "dextra_id",
+        "dextra_category_id",
+        "text_list",
+        "faqs_view",
+        "reviews_view",
+        "item_view",
+        "vcvSourceCssFileUrl",
+        "telemedecine"
+      ],
+      "taxonomies": [
+        {
+          "term_id": 604,
+          "name": "Ухо",
+          "taxonomy": "directions"
+        }
+      ],
+      "contentMeta": {
+        "doctor_id": "",
+        "text_list_header": "Показания",
+        "text_header": "",
+        "about_video": "",
+        "price": "1200",
+        "about_header": "",
+        "text_welcome": "<strong>Тимпанометрия – </strong>это тест, который используется, для диагностики заболеваний среднего уха. Это не проверка слуха, а определение функции среднего уха проводить поступающие в него звуки.\r\n\r\nТимпанометрия – это метод исследования, который проводится для выявления нарушений среднего уха. Во время теста Вы испытываете чувство давления в вашем ухе, как во время взлета самолета.",
+        "text": "<strong>Как проводится процедура?</strong>\r\n\r\nСначала производится осмотр ушей на наличие заболеваний и удаления серных масс.\r\n\r\nЗатем начинается сам тест, желательно не двигаться, не разговаривать, не жевать, чтобы не влиять на точность обследования.\r\n\r\nТест проводится специальным зондом, который герметично вставляется в ухо. В момент исследования в пространстве между наружным слуховым проходом и барабанной полостью изменяется воздушное давление.\r\n\r\nДалее в замкнутую область поступает звуковой сигнал, который вызывает вибрацию перепонки. Большая часть сигналов проходит далее в среднее ухо, а меньшая – возвращается, отражаясь от нее. Встроенный микрофон принимает отраженную информацию, после чего данные регистрируются на специальных графиках – тимпанограммах.\r\n\r\nТимпанометр изменит давление в вашем ухе, производя пищащий звук. Давление в ухе будет автоматически меняться, приводя в движение барабанную перепонку.\r\n\r\n<strong>Тимпанометрия – это очень важный диагностический инструмент, позволяющий выявить причины ухудшения слуха.</strong> Если доктор назначил такую процедуру, не стоит ее надолго откладывать. Ранняя диагностика позволяет избежать множества проблем в будущем.",
+        "about_text": "",
+        "enabled": "1",
+        "article": "A12.25.008",
+        "ord": "2320",
+        "seo_title": "",
+        "seo_description": "",
+        "dextra_id": "437",
+        "dextra_category_id": "39",
+        "text_list": "Заболевания среднего уха\r\nПатология слуховых труб и барабанной перепонки\r\nСостояние после перенесенных отитов\r\nАденоиды и/или аденоидиты\r\nСнижение слуха",
+        "faqs_view": "1",
+        "reviews_view": "1",
+        "item_view": "1",
+        "vcvSourceCssFileUrl": "",
+        "telemedecine": "0"
+      }
+    },
+    {
+      "id": 11382,
+      "title": "ФГС (эзофагогастродуоденоскопия)",
+      "slug": "fgs_ezofagogastroduodenoskopiya-795",
+      "contentMetaKeys": [
+        "doctor_id",
+        "text_list_header",
+        "text_header",
+        "about_video",
+        "price",
+        "about_header",
+        "text_welcome",
+        "text",
+        "about_text",
+        "enabled",
+        "article",
+        "ord",
+        "seo_title",
+        "seo_description",
+        "dextra_id",
+        "dextra_category_id",
+        "text_list",
+        "faqs_view",
+        "reviews_view",
+        "item_view",
+        "vcvSourceCssFileUrl",
+        "telemedecine"
+      ],
+      "taxonomies": [
+        {
+          "term_id": 632,
+          "name": "Эндоскопическая диагностика",
+          "taxonomy": "directions"
+        }
+      ],
+      "contentMeta": {
+        "doctor_id": "539",
+        "text_list_header": "",
+        "text_header": "",
+        "about_video": "",
+        "price": "4500",
+        "about_header": "",
+        "text_welcome": "<p style=\"text-align: justify;\">Эзофагогастродуоденоскопия (ЭГДС) – это исследование, позволяющее оценить состояние слизистой пищевода, желудка и двенадцатиперстной кишки. В клинике «Источник» обследование проходит с помощью эндоскопа с меньшим диаметром (8,5 мм вместо стандартных 9,8 мм). Поэтому процедура намного легче переносится, нет сильного рвотного рефлекса.</p>\r\n\r\n<ul style=\"text-align: justify;\">\r\n \t<li>Возможно проведение процедуры под наркозом.</li>\r\n \t<li>Показания: изжога, боли в животе, частая икота, проблемы с глотанием, стул черного цвета, анемия, рвота, потеря веса, снижение аппетита.</li>\r\n</ul>",
+        "text": "",
+        "about_text": "",
+        "enabled": "1",
+        "article": "A03.16.013",
+        "ord": "4380",
+        "seo_title": "",
+        "seo_description": "",
+        "dextra_id": "795",
+        "dextra_category_id": "67",
+        "text_list": "",
+        "faqs_view": "1",
+        "reviews_view": "1",
+        "item_view": "1",
+        "vcvSourceCssFileUrl": "",
+        "telemedecine": "0"
+      }
+    }
+  ],
+  "complexListSamples": [
+    {
+      "id": 10711,
+      "title": "Кольпоскопия",
+      "textListPreview": "Простая – проведение только визуального осмотра с помощью кольпоскопа.\r\nРасширенная (РКС) – визуальный осмотр с оценкой реакции на химические препараты (проба с 3% раствором уксусной кислоты или проба Шиллера – с раствором Люголя)."
+    },
+    {
+      "id": 10716,
+      "title": "Прием врача—акушера-гинеколога",
+      "textListPreview": "Получить полную консультацию врача и ответы на ваши вопросы\r\nПройти осмотр и диагностику заболевания\r\nСдать все необходимые анализы\r\nОбсудить результаты анализов и получить необходимое лечение\r\nПри необходимости – врач выпишет вам направление на хирургическую операцию"
+    },
+    {
+      "id": 10746,
+      "title": "Гименопластика (восстановление девственности)",
+      "textListPreview": "1. Краткосрочная гименопластика.\r\nСегодня чаще всего используется краткосрочное восстановление, при которой период до предполагаемого полового контакта с партнером не должен превышать 7–10 дней, так как по истечению этого срока плева расползается. Операция проводится не позднее, чем за пять дней до очередной менструации.\r\n2. Долгосрочная гименопластика\r\nБолее сложная методика обладает наилучшей сохранностью результата, периодом на 2–3 года.\r\nРана заживает в течение 3–7 дней. Все швы рассасывающи"
+    },
+    {
+      "id": 10808,
+      "title": "Гемостазиограмма",
+      "textListPreview": "пред- и послеоперационный скрининг; \r\nобследование при повышенной кровоточивости и/или подозрении на патологию свертывания крови; \r\nобследование при беременности; \r\nскрининговые обследования при патологии печени, сердечно-сосудистых, аутоиммунных заболеваниях и пр. (см. также комплекс «Гемостазиограмма (коагулограмма) расширенная»)."
+    },
+    {
+      "id": 11024,
+      "title": "Тимпанометрия",
+      "textListPreview": "Заболевания среднего уха\r\nПатология слуховых труб и барабанной перепонки\r\nСостояние после перенесенных отитов\r\nАденоиды и/или аденоидиты\r\nСнижение слуха"
+    }
+  ],
+  "dextra": {
+    "postsWithBothArticleAndDextra": 920,
+    "publishWithoutArticle": 9
+  },
+  "draftMetaKeysTop": [
+    {
+      "meta_key": "seo_description",
+      "c": 208
+    },
+    {
+      "meta_key": "_faqs_view",
+      "c": 208
+    },
+    {
+      "meta_key": "seo_title",
+      "c": 208
+    },
+    {
+      "meta_key": "_item_view",
+      "c": 208
+    },
+    {
+      "meta_key": "text",
+      "c": 208
+    },
+    {
+      "meta_key": "_ord",
+      "c": 208
+    },
+    {
+      "meta_key": "text_header",
+      "c": 208
+    },
+    {
+      "meta_key": "_price",
+      "c": 208
+    },
+    {
+      "meta_key": "text_list",
+      "c": 208
+    },
+    {
+      "meta_key": "_reviews_view",
+      "c": 208
+    },
+    {
+      "meta_key": "text_list_header",
+      "c": 208
+    },
+    {
+      "meta_key": "_seo_description",
+      "c": 208
+    },
+    {
+      "meta_key": "text_welcome",
+      "c": 208
+    },
+    {
+      "meta_key": "_seo_title",
+      "c": 208
+    },
+    {
+      "meta_key": "_text",
+      "c": 208
+    },
+    {
+      "meta_key": "_text_header",
+      "c": 208
+    },
+    {
+      "meta_key": "_text_list",
+      "c": 208
+    },
+    {
+      "meta_key": "_text_list_header",
+      "c": 208
+    },
+    {
+      "meta_key": "_text_welcome",
+      "c": 208
+    },
+    {
+      "meta_key": "about_header",
+      "c": 208
+    },
+    {
+      "meta_key": "about_text",
+      "c": 208
+    },
+    {
+      "meta_key": "about_video",
+      "c": 208
+    },
+    {
+      "meta_key": "article",
+      "c": 208
+    },
+    {
+      "meta_key": "_about_header",
+      "c": 208
+    },
+    {
+      "meta_key": "dextra_category_id",
+      "c": 208
+    },
+    {
+      "meta_key": "_about_text",
+      "c": 208
+    },
+    {
+      "meta_key": "dextra_id",
+      "c": 208
+    },
+    {
+      "meta_key": "_about_video",
+      "c": 208
+    },
+    {
+      "meta_key": "doctor_id",
+      "c": 208
+    },
+    {
+      "meta_key": "_article",
+      "c": 208
+    }
+  ],
+  "gaps": {
+    "note": "FAQ на ЧЛБ — через faqs_view флаг + отдельные сущности; проверить faq post_type и termmeta faqs",
+    "exploreBug": "explore.ts использует post_type 'service' вместо 'services'"
+  }
+}

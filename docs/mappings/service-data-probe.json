@@ -1,0 +1,83 @@
+{
+  "generatedAt": "2026-07-02T09:00:00.000Z",
+  "note": "Аудит через bridge.istochnik.smitx.ru + public QMS dump. ЧЛБ QMS getPr на bridge — ошибка (нужен proxy ЧЛБ).",
+  "sections": {
+    "qms_spb": {
+      "source": "bridge /api/qms/pricelist?city=spb",
+      "orgCount": 1,
+      "itemCount": 2249,
+      "uniqueArticles": 2249,
+      "transport": ["spb:site_proxy"],
+      "publicDumpRows": 1764,
+      "comment": "Bridge через proxy даёт больше позиций, чем public json.html"
+    },
+    "qms_chel": {
+      "error": "QMS fetch failed на bridge — нужен QMS_CHEL_SITE_PROXY_URL / whitelist"
+    },
+    "spb_pricelist_items2": {
+      "totalRows": 650,
+      "uniqueArticles": 244,
+      "publishedRows": 485,
+      "hiddenRows": 115,
+      "uniqueTabs": ["Прием врачей", "Лечение", "Диагностика", "Комплексные программы"],
+      "uniqueCategories": 56,
+      "topCategories": [
+        ["Частная поликлиника", 89],
+        ["Хирургия", 42],
+        ["Услуги по гинекологии", 42],
+        ["Кардиология", 11]
+      ],
+      "cardiologyExample": {
+        "category": "Кардиология",
+        "publishedArticles": 11,
+        "spansTabs": ["Прием врачей", "Диагностика"],
+        "matchesScreenshot": true
+      },
+      "schema": ["tab", "category", "doc_id", "name", "price", "published", "resource_id"]
+    },
+    "spb_overlap_qms_legacy": {
+      "qmsUnique": 2249,
+      "legacyUniqueArticles": 244,
+      "legacyPublishedArticles": 206,
+      "matchedArticles": 204,
+      "publishedMatched": 195,
+      "inQmsNotOnSite": 2045,
+      "onSiteNotInQms": 40
+    },
+    "spb_modx_content": {
+      "servicesTemplate6_32": 136,
+      "programsTemplate12": 33,
+      "comment": "Страницы услуг/направлений отдельно от строк прайса"
+    },
+    "chel_services": {
+      "total": 1345,
+      "withArticle": 1336,
+      "uniqueArticles": 1073,
+      "enabled": 1300,
+      "itemViewDetailPage": 34,
+      "withLongText": 69,
+      "complexInTitle": 45,
+      "noArticle": 9,
+      "topDirections": [
+        ["Взрослая клиника", 151],
+        ["Диагностика", 145],
+        ["Травматология-ортопедия", 95],
+        ["Кардиология", "via taxonomy — needs mapping"]
+      ]
+    },
+    "chel_directions": {
+      "totalTerms": 200,
+      "rootDirections": 11,
+      "childTerms": 189,
+      "rootsSample": ["Взрослая клиника", "Детская клиника", "Косметология", "Биохимические исследования"]
+    },
+    "architecture_insight": {
+      "twoLevelNav": {
+        "level1_tab": "4 вида: Приём / Диагностика / Программы / Лечение — СПб: поле tab; QMS: section.val (78 разделов)",
+        "level2_category": "Рубрики сайта — СПб: поле category (56 значений); ЧЛБ: taxonomy directions (дерево)"
+      },
+      "qms_section_to_tab": "Автомат ~72% (56/78 секций), 22 секции review",
+      "prototype_pricesPage": "Сейчас mock pricesDb.ts — не live данные"
+    }
+  }
+}

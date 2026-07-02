@@ -1,0 +1,129 @@
+{
+  "kind": "collectionType",
+  "collectionName": "service_categories",
+  "info": {
+    "singularName": "service-category",
+    "pluralName": "service-categories",
+    "displayName": "Service Category",
+    "description": "Рубрика прайса / направление (ЧЛБ directions, СПб pricelist category)"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "legacyId": {
+      "type": "string",
+      "required": true
+    },
+    "legacySource": {
+      "type": "enumeration",
+      "enum": ["chel", "spb"],
+      "required": true
+    },
+    "tabQms": {
+      "type": "enumeration",
+      "enum": ["priem", "diagnostika", "programmy", "lechenie"]
+    },
+    "tabLegacy": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service-category.service-category",
+      "inversedBy": "children"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service-category.service-category",
+      "mappedBy": "parent"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "showInMenu": {
+      "type": "boolean",
+      "default": true
+    },
+    "showFaqs": {
+      "type": "boolean",
+      "default": false
+    },
+    "showReviews": {
+      "type": "boolean",
+      "default": false
+    },
+    "featuredDoctor": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::doctor.doctor"
+    },
+    "expertIntro": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "aboutHeader": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "aboutText": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "aboutVideo": {
+      "type": "string"
+    },
+    "bodyMiddle": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "seoTitle": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "seoDescription": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "seoText": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "phone": {
+      "type": "string"
+    },
+    "contentLocked": {
+      "type": "boolean",
+      "default": false
+    },
+    "services": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::service.service",
+      "mappedBy": "categories"
+    }
+  }
+}

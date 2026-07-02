@@ -67,6 +67,15 @@ async function fetchGetPr(url, apikey, qqc244) {
   return data.data.sections;
 }
 
+/** ci74 proxy-spb.php / proxy.php?endpoint=getPr */
+async function fetchViaSiteProxy(proxyBase, apikey, qqc244) {
+  let url = proxyBase.replace(/\/$/, '');
+  if (!url.includes('endpoint=')) {
+    url += `${url.includes('?') ? '&' : '?'}endpoint=getPr`;
+  }
+  return fetchGetPr(url, apikey, qqc244);
+}
+
 function parseJsonDump(raw) {
   const stripped = raw.replace(/^[\s\S]*?<pre[^>]*>/i, '').replace(/<\/pre>[\s\S]*$/i, '').trim();
   const data = JSON.parse(stripped);
@@ -176,7 +185,25 @@ async function loadCity(city) {
     console.warn(`[${city}] bridge:`, e.message);
   }
 
-  // 2) Прямой API (если bridge не дал все org)
+  // 2) Прокси на хостинге (СПб: ci74.ru/booking/php/proxy-spb.php)
+  const siteProxy =
+    city === 'spb'
+      ? process.env.QMS_SPB_SITE_PROXY_URL
+      : process.env.QMS_CHEL_SITE_PROXY_URL;
+  if (!orgResults.length && siteProxy && cfg.apikey) {
+    for (const org of cfg.orgs) {
+      if (!org.id || orgResults.some((r) => r.id === org.id)) continue;
+      try {
+        const sections = await fetchViaSiteProxy(siteProxy, cfg.apikey, org.id);
+        orgResults.push({ id: org.id, label: org.label, sections: normalizeSections(sections, org.source) });
+        sources.push(`site-proxy:${org.key}`);
+      } catch (e) {
+        console.warn(`[${city}] site-proxy ${org.key}:`, e.message);
+      }
+    }
+  }
+
+  // 3) Прямой API (если bridge и proxy не дали все org)
   if (orgResults.length < cfg.orgs.filter((o) => o.id).length) {
     for (const org of cfg.orgs) {
       if (!org.id || orgResults.some((r) => r.id === org.id)) continue;
@@ -190,7 +217,7 @@ async function loadCity(city) {
     }
   }
 
-  // 3) Публичный / локальный дамп (для СПб — один org)
+  // 4) Публичный / локальный дамп (для СПб — один org)
   if (!orgResults.length) {
     const tryDump = async (sections, source, label, id) => {
       orgResults.push({ id, label, sections: normalizeSections(sections, source) });

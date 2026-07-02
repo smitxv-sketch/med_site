@@ -97,27 +97,39 @@ flowchart TB
 ### Этап 0 — Done ✅
 
 - Bridge stable, LegacyMysqlGateway, SyncOrchestrator, anti-Beget.
-- Doctor content-type, flat sync 68 врачей ЧЛБ.
-- `/api/catalog/doctors` на site-ci.
+- Doctor content-type, flat sync **68 врачей ЧЛБ** + **53 врача СПб** (2026-07-02).
+- `/api/catalog/doctors?tenant=chel|spb` на site-ci.
+- Branch seed (ЧЛБ филиалы + алиасы ЭКО/косметология), Specialty SSOT, relations врач↔branch/specialty.
+- СПб misId: JSON-мап MODX↔QMS **в работе** (ждём proxy-spb.php на ci74 + booking API key).
 
-### Этап 1 — Онтология и аудит (следующий чат)
+### Этап 1 — Услуги и прайс (текущий фокус)
+
+**Handoff:** [`docs/HANDOFF_SERVICES_PRICES.md`](./HANDOFF_SERVICES_PRICES.md)
 
 | # | Задача | Артефакт |
 |---|--------|----------|
-| 1.1 | Инвентаризация полей врача ЧЛБ (REST) | обновить `SYNC_DOCTORS_SPEC.md` |
-| 1.2 | Инвентаризация MODX template 7 + TV (СПб) | после fix MySQL |
-| 1.3 | Список филиалов ЧЛБ/СПб с legacy id | `docs/02-content-structure.md` + JSON |
-| 1.4 | ER-диаграмма Strapi v2 | этот файл + схемы в `apps/cms` |
-| 1.5 | Инвентаризация section.val (getPr) | `docs/mappings/qms-sections-inventory.md` (+ Branch/Specialty позже) |
+| 1.1 | Квиз + решения по SSOT цены/текста | `docs/SYNC_SERVICES_SPEC.md` (создать) |
+| 1.2 | Инвентарь legacy услуг ЧЛБ/СПб | bridge probe + таблица в spec |
+| 1.3 | Маппинг `section.val` → категория сайта | дополнить `docs/mappings/qms-sections-inventory.md` |
+| 1.4 | Модель Strapi Service / PriceItem | `apps/cms` + contracts |
+| 1.5 | Пилот синка одного раздела getPr | `POST /api/sync/.../services` или расширить qms sync |
 
-### Этап 2 — Strapi schema v2
+### Этап 1b — Дозакрыть врачей СПб (параллельно, не блокер услуг)
+
+| # | Задача |
+|---|--------|
+| 1b.1 | Залить `proxy-spb.php` на ci74.ru/booking/php/ |
+| 1b.2 | `QMS_SPB_BOOKING_API_KEY` в Coolify |
+| 1b.3 | `spb-doctor-qms-map.json` → ре-синк врачей с qqc |
+
+### Этап 2 — Strapi schema v2 (частично done для Doctor)
 
 | # | Content-type | Relations |
 |---|--------------|-----------|
-| 2.1 | Branch | locale, city |
-| 2.2 | Specialty | locale optional |
-| 2.3 | Doctor (extend) | branches, specialties |
-| 2.4 | Service (later) | specialties, branches, doctors |
+| 2.1 | Branch | locale, city — **done** |
+| 2.2 | Specialty | locale optional — **done** |
+| 2.3 | Doctor (extend) | branches, specialties — **done** |
+| 2.4 | Service | specialties, branches, doctors — **следующий** |
 
 ### Этап 3 — Sync v2 (bridge)
 

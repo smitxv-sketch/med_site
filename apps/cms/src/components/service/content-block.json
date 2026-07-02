@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_service_content_blocks",
+  "info": {
+    "displayName": "Service Content Block",
+    "description": "Текстовый блок страницы услуги (СПб first_block / second_block)"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "richtext"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

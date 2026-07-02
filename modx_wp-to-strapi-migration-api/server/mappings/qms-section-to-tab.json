@@ -1,0 +1,23 @@
+{
+  "version": "2026-07-02",
+  "comment": "QMS section.val → Strapi tabQms. review = вручную в Studio после синка.",
+  "auto": {
+    "КОНСУЛЬТАТИВНЫЙ ПРИЕМ": "priem",
+    "КОМПЛЕКСНЫЕ ПРОГРАММЫ": "programmy",
+    "УЗИ АКУШЕРСТВО": "diagnostika",
+    "УЗИ ГИНЕКОЛОГИЯ": "diagnostika",
+    "УЗИ ОБЩИЕ": "diagnostika",
+    "ФУНКЦИОНАЛЬНАЯ ДИАГНОСТИКА": "diagnostika",
+    "ПРОЦЕДУРНЫЕ УСЛУГИ": "lechenie",
+    "ХИРУРГИЯ": "lechenie",
+    "УРОЛОГИЯ. ОПЕРАЦИИ": "lechenie",
+    "ВАКЦИНАЦИЯ": "lechenie"
+  },
+  "spbTabLegacy": {
+    "Прием врачей": "priem",
+    "Диагностика": "diagnostika",
+    "Комплексные программы": "programmy",
+    "Лечение": "lechenie"
+  },
+  "review": []
+}

@@ -50,8 +50,6 @@ qms_price/
 # Дампы, экспорты, исследовательские артефакты
 # =============================================================================
 data/
-!modx_wp-to-strapi-migration-api/data/mappings/
-!modx_wp-to-strapi-migration-api/data/mappings/**
 travel/
 .tmp/
 .tmp-ci-test/

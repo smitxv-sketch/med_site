@@ -1,0 +1,1099 @@
+{
+  "generatedAt": "2026-07-02T10:07:43.920Z",
+  "postType": "services",
+  "counts": {
+    "total": 1554,
+    "byStatus": {
+      "draft": 208,
+      "publish": 1345,
+      "trash": 1
+    }
+  },
+  "scannedPublished": 1345,
+  "postFields": {
+    "post_content": {
+      "filled": 0,
+      "empty": 1345,
+      "maxLen": 0,
+      "pct": 0
+    },
+    "post_excerpt": {
+      "filled": 0,
+      "empty": 1345,
+      "maxLen": 0,
+      "pct": 0
+    }
+  },
+  "metaContent": {
+    "about_header": {
+      "filled": 3,
+      "empty": 1341,
+      "maxLen": 133,
+      "samples": [
+        {
+          "postId": 14018,
+          "preview": "Какова цена сохранения своих клеток?"
+        },
+        {
+          "postId": 56091,
+          "preview": "Остеопороз - одно из заболеваний, которое долго остаётся незамеченным. Его обычно обнаруживают уже тогда, когда нужны се…"
+        },
+        {
+          "postId": 61154,
+          "preview": "Где в Челябинске проверить плотность костей без рентгена? "
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 0
+    },
+    "about_text": {
+      "filled": 3,
+      "empty": 1341,
+      "maxLen": 1213,
+      "samples": [
+        {
+          "postId": 15565,
+          "preview": "В клинике «Источник» ультразвуковое исследование органов малого таза у женщин проводят как врачи ультразвуковой диагност…"
+        },
+        {
+          "postId": 15584,
+          "preview": "На сроках беременности 30-34 недели также рекомендуется провести допплерометрию для того, чтобы дать комплексную оценку …"
+        },
+        {
+          "postId": 57582,
+          "preview": "Что входит в комплекс:\r\n<ul>\r\n \t<li>Клинический анализ крови: общий анализ, лейкоформула, СОЭ (с микроскопией мазка кров…"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 1,
+      "pct": 0
+    },
+    "about_video": {
+      "filled": 3,
+      "empty": 1341,
+      "maxLen": 43,
+      "samples": [
+        {
+          "postId": 14018,
+          "preview": "https://www.youtube.com/watch?v=_sI_Ps7JSEk"
+        },
+        {
+          "postId": 15565,
+          "preview": "https://youtu.be/LmwAelIN_xU"
+        },
+        {
+          "postId": 15584,
+          "preview": "https://youtu.be/LmwAelIN_xU"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 0
+    },
+    "article": {
+      "filled": 1336,
+      "empty": 8,
+      "maxLen": 17,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "B01.002.17"
+        },
+        {
+          "postId": 10608,
+          "preview": "B01.002.16"
+        },
+        {
+          "postId": 10650,
+          "preview": "B01.003.16"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 99
+    },
+    "doctor_id": {
+      "filled": 42,
+      "empty": 1302,
+      "maxLen": 3,
+      "samples": [
+        {
+          "postId": 10711,
+          "preview": "513"
+        },
+        {
+          "postId": 10716,
+          "preview": "513"
+        },
+        {
+          "postId": 10808,
+          "preview": "527"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 3
+    },
+    "enabled": {
+      "filled": 1300,
+      "empty": 44,
+      "maxLen": 1,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "1"
+        },
+        {
+          "postId": 10608,
+          "preview": "1"
+        },
+        {
+          "postId": 10650,
+          "preview": "1"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 97
+    },
+    "faqs_view": {
+      "filled": 647,
+      "empty": 697,
+      "maxLen": 1,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "1"
+        },
+        {
+          "postId": 10608,
+          "preview": "1"
+        },
+        {
+          "postId": 10650,
+          "preview": "1"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 48
+    },
+    "item_view": {
+      "filled": 34,
+      "empty": 1310,
+      "maxLen": 1,
+      "samples": [
+        {
+          "postId": 10711,
+          "preview": "1"
+        },
+        {
+          "postId": 10716,
+          "preview": "1"
+        },
+        {
+          "postId": 10745,
+          "preview": "1"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 3
+    },
+    "ord": {
+      "filled": 1056,
+      "empty": 288,
+      "maxLen": 4,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "85"
+        },
+        {
+          "postId": 10608,
+          "preview": "90"
+        },
+        {
+          "postId": 10650,
+          "preview": "305"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 79
+    },
+    "price": {
+      "filled": 1342,
+      "empty": 3,
+      "maxLen": 10,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "3000"
+        },
+        {
+          "postId": 10608,
+          "preview": "3000"
+        },
+        {
+          "postId": 10650,
+          "preview": "350"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "reviews_view": {
+      "filled": 634,
+      "empty": 710,
+      "maxLen": 1,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "1"
+        },
+        {
+          "postId": 10608,
+          "preview": "1"
+        },
+        {
+          "postId": 10650,
+          "preview": "1"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 47
+    },
+    "seo_description": {
+      "filled": 0,
+      "empty": 1344,
+      "maxLen": 0,
+      "samples": [],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 0
+    },
+    "seo_title": {
+      "filled": 0,
+      "empty": 1344,
+      "maxLen": 0,
+      "samples": [],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 0
+    },
+    "telemedecine": {
+      "filled": 13,
+      "empty": 1215,
+      "maxLen": 1,
+      "samples": [
+        {
+          "postId": 10716,
+          "preview": "1"
+        },
+        {
+          "postId": 10719,
+          "preview": "1"
+        },
+        {
+          "postId": 14187,
+          "preview": "1"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 1
+    },
+    "text": {
+      "filled": 69,
+      "empty": 1275,
+      "maxLen": 4468,
+      "samples": [
+        {
+          "postId": 10711,
+          "preview": "<strong>Кольпоскопия шейки матки не имеет противопоказаний, ее можно проводить и во время беременности. </strong>Даже бо…"
+        },
+        {
+          "postId": 10716,
+          "preview": "<strong>Сколько стоит прием специалиста?</strong>\r\n\r\nЧем выше квалификация специалиста, тем выше цена приема. Именно поэ…"
+        },
+        {
+          "postId": 10746,
+          "preview": "<h2>Подготовка к рефлорации</h2>\r\nОперация проводится по окончании менструаций, когда кровотечение в половых органах жен…"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 54,
+      "pct": 5
+    },
+    "text_header": {
+      "filled": 5,
+      "empty": 1339,
+      "maxLen": 123,
+      "samples": [
+        {
+          "postId": 14018,
+          "preview": "Главные принципы работы"
+        },
+        {
+          "postId": 14052,
+          "preview": "Описание программы:"
+        },
+        {
+          "postId": 56091,
+          "preview": "В клинике Источник можно проверить кости без рентгена. Денситометрия R.E.M.S. позволяет сделать это без лучевой нагрузки…"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 0
+    },
+    "text_list": {
+      "filled": 26,
+      "empty": 1318,
+      "maxLen": 2783,
+      "samples": [
+        {
+          "postId": 10711,
+          "preview": "Простая – проведение только визуального осмотра с помощью кольпоскопа.\r\nРасширенная (РКС) – визуальный осмотр с оценкой …"
+        },
+        {
+          "postId": 10716,
+          "preview": "Получить полную консультацию врача и ответы на ваши вопросы\r\nПройти осмотр и диагностику заболевания\r\nСдать все необходи…"
+        },
+        {
+          "postId": 10746,
+          "preview": "1. Краткосрочная гименопластика.\r\nСегодня чаще всего используется краткосрочное восстановление, при которой период до пр…"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 2
+    },
+    "text_list_header": {
+      "filled": 26,
+      "empty": 1318,
+      "maxLen": 106,
+      "samples": [
+        {
+          "postId": 10711,
+          "preview": "Чем отличается простая кольпоскопия от расширенной?"
+        },
+        {
+          "postId": 10716,
+          "preview": "На приеме у гинеколога вы сможете"
+        },
+        {
+          "postId": 10746,
+          "preview": "Виды восстановления девственности"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 2
+    },
+    "text_welcome": {
+      "filled": 23,
+      "empty": 1321,
+      "maxLen": 1238,
+      "samples": [
+        {
+          "postId": 10711,
+          "preview": "Кольпоскопия – это процедура по диагностике гинекологических заболеваний, во время которой врач-гинеколог производит с п…"
+        },
+        {
+          "postId": 10716,
+          "preview": "На приеме гинекологи клиники «Источник» проводят консультацию, осмотр, забор анализов, амбулаторное лечение заболеваний,…"
+        },
+        {
+          "postId": 10746,
+          "preview": "Хирургическая операция по рефлорации, восстановлению девственной плевы у женщин."
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 6,
+      "pct": 2
+    },
+    "vcvSourceCssFileUrl": {
+      "filled": 13,
+      "empty": 1254,
+      "maxLen": 59,
+      "samples": [
+        {
+          "postId": 144580,
+          "preview": "/assets-bundles/f5b4dfbecc1c91986179be6a898fd27d.source.css"
+        },
+        {
+          "postId": 145234,
+          "preview": "/assets-bundles/f5b4dfbecc1c91986179be6a898fd27d.source.css"
+        },
+        {
+          "postId": 145238,
+          "preview": "/assets-bundles/f5b4dfbecc1c91986179be6a898fd27d.source.css"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 1
+    }
+  },
+  "metaAcfRefs": {
+    "_about_header": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd2e86faaee"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd2e86faaee"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd2e86faaee"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_about_text": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd2f82faaf1"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd2f82faaf1"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd2f82faaf1"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_about_video": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd2d66faaea"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd2d66faaea"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd2d66faaea"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_article": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd31dc00a5f"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd31dc00a5f"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd31dc00a5f"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_dextra_category_id": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd30d27c373"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd30d27c373"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd30d27c373"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_dextra_id": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd304ae2267"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd304ae2267"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd304ae2267"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_doctor_id": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd2dfcfaaec"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd2dfcfaaec"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd2dfcfaaec"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_edit_last": {
+      "filled": 1237,
+      "empty": 0,
+      "maxLen": 3,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "742"
+        },
+        {
+          "postId": 10608,
+          "preview": "742"
+        },
+        {
+          "postId": 10650,
+          "preview": "779"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_edit_lock": {
+      "filled": 1273,
+      "empty": 0,
+      "maxLen": 14,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "1774864469:742"
+        },
+        {
+          "postId": 10608,
+          "preview": "1774864879:742"
+        },
+        {
+          "postId": 10650,
+          "preview": "1716542644:742"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 95
+    },
+    "_enabled": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd314cd67aa"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd314cd67aa"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd314cd67aa"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_faqs_view": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dfee550e2c47"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dfee550e2c47"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dfee550e2c47"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_item_view": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dfee5bee2c49"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dfee5bee2c49"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dfee5bee2c49"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_ord": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd31f900a60"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd31f900a60"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd31f900a60"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_price": {
+      "filled": 1345,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd2d8bfaaeb"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd2d8bfaaeb"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd2d8bfaaeb"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_product_image_gallery": {
+      "filled": 0,
+      "empty": 96,
+      "maxLen": 0,
+      "samples": [],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 0
+    },
+    "_reviews_view": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dfee586e2c48"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dfee586e2c48"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dfee586e2c48"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_seo_description": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd32b91cc93"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd32b91cc93"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd32b91cc93"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_seo_title": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd329c1cc92"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd329c1cc92"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd329c1cc92"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_telemedecine": {
+      "filled": 1228,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5f8471343feba"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5f8471343feba"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5f8471343feba"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 91
+    },
+    "_text": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd2f2cfaaf0"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd2f2cfaaf0"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd2f2cfaaf0"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_text_header": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd2d04faae9"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd2d04faae9"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd2d04faae9"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_text_list": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd2e37faaed"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd2e37faaed"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd2e37faaed"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_text_list_header": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd2c8dfaae8"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd2c8dfaae8"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd2c8dfaae8"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_text_welcome": {
+      "filled": 1344,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "field_5dbd2ef2faaef"
+        },
+        {
+          "postId": 10608,
+          "preview": "field_5dbd2ef2faaef"
+        },
+        {
+          "postId": 10650,
+          "preview": "field_5dbd2ef2faaef"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 100
+    },
+    "_vcv-globalCssMigrated": {
+      "filled": 1267,
+      "empty": 0,
+      "maxLen": 1,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "1"
+        },
+        {
+          "postId": 10608,
+          "preview": "1"
+        },
+        {
+          "postId": 10650,
+          "preview": "1"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 94
+    },
+    "_vcv-sourceChecksum": {
+      "filled": 1267,
+      "empty": 0,
+      "maxLen": 32,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "f5b4dfbecc1c91986179be6a898fd27d"
+        },
+        {
+          "postId": 10608,
+          "preview": "f5b4dfbecc1c91986179be6a898fd27d"
+        },
+        {
+          "postId": 10650,
+          "preview": "f5b4dfbecc1c91986179be6a898fd27d"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 94
+    },
+    "_wp_old_date": {
+      "filled": 2,
+      "empty": 0,
+      "maxLen": 10,
+      "samples": [
+        {
+          "postId": 10811,
+          "preview": "2019-12-22"
+        },
+        {
+          "postId": 16091,
+          "preview": "2019-12-22"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 0
+    },
+    "_wp_old_slug": {
+      "filled": 99,
+      "empty": 0,
+      "maxLen": 199,
+      "samples": [
+        {
+          "postId": 10811,
+          "preview": "issledovanie_urovnya_gomocisteina_v_krovi-2"
+        },
+        {
+          "postId": 70247,
+          "preview": "70247__trashed"
+        },
+        {
+          "postId": 70248,
+          "preview": "70248__trashed"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 7
+    }
+  },
+  "metaDextra": {
+    "dextra_category_id": {
+      "filled": 927,
+      "empty": 417,
+      "maxLen": 4,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "3"
+        },
+        {
+          "postId": 10608,
+          "preview": "3"
+        },
+        {
+          "postId": 10650,
+          "preview": "4"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 69
+    },
+    "dextra_id": {
+      "filled": 927,
+      "empty": 417,
+      "maxLen": 4,
+      "samples": [
+        {
+          "postId": 10607,
+          "preview": "19"
+        },
+        {
+          "postId": 10608,
+          "preview": "20"
+        },
+        {
+          "postId": 10650,
+          "preview": "62"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 69
+    }
+  },
+  "taxonomies": {
+    "directions": {
+      "postLinks": 2017,
+      "uniqueTerms": 188
+    }
+  },
+  "taxonomyList": [
+    "directions"
+  ]
+}

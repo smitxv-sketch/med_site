@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_service_included_items",
+  "info": {
+    "displayName": "Included Service Item",
+    "description": "Позиция в составе комплекса (без отдельной цены на витрине)"
+  },
+  "options": {},
+  "attributes": {
+    "service": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service.service"
+    },
+    "label": {
+      "type": "string"
+    },
+    "legacyModxId": {
+      "type": "string"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { getSyncConfig, logSyncEvent } from '../services/syncWorker.js';
 import { runDoctorSync } from '../services/SyncOrchestrator.js';
 import { syncChelNewsContent } from '../services/syncChelContent.js';
 import { syncReferenceCatalogs } from '../services/syncCatalogs.js';
+import { syncChelServices } from '../services/syncChelServices.js';
 
 const router = Router();
 
@@ -68,6 +69,47 @@ router.post('/content', async (_req, res) => {
     const message = e instanceof Error ? e.message : String(e);
     await logSyncEvent('chelyabinsk', 'error', 'sync content failed', message);
     res.status(500).json({ ok: false, error: message });
+  }
+});
+
+/**
+ * Синк рубрики directions + услуг ЧЛБ → Strapi.
+ * Query: directionId=569 (Анестезиология), mergeQms=0
+ */
+router.post('/services', async (req, res) => {
+  try {
+    const client = await buildStrapiClient();
+    const conn = await client.checkConnection();
+    if (!conn.success) {
+      return res.status(502).json(conn);
+    }
+
+    const servicesProbe = await client.probeCollection('service-categories');
+    if (!servicesProbe.ok) {
+      return res.status(502).json({
+        success: false,
+        message:
+          servicesProbe.status === 404
+            ? 'Коллекция service-categories не найдена — задеплойте apps/cms (Service + ServiceCategory)'
+            : `Strapi service-categories: HTTP ${servicesProbe.status}`,
+      });
+    }
+
+    const directionId = Number.parseInt(String(req.query.directionId ?? '569'), 10);
+    if (!Number.isFinite(directionId) || directionId <= 0) {
+      return res.status(400).json({ ok: false, error: 'directionId должен быть положительным числом' });
+    }
+    const mergeQms = req.query.mergeQms !== '0' && req.query.mergeQms !== 'false';
+
+    await logSyncEvent('chelyabinsk', 'info', 'sync services started', { directionId });
+    const report = await syncChelServices(client, { directionId, mergeQms });
+    await logSyncEvent('chelyabinsk', 'success', 'sync services finished', report);
+    res.json({ ok: true, report });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    await logSyncEvent('chelyabinsk', 'error', 'sync services failed', message);
+    const status = message.includes('already running') ? 409 : 500;
+    res.status(status).json({ ok: false, error: message });
   }
 });
 

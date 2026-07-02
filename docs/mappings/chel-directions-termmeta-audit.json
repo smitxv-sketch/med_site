@@ -1,0 +1,1123 @@
+{
+  "generatedAt": "2026-07-02T10:07:56.853Z",
+  "taxonomy": "directions",
+  "totalTerms": 587,
+  "scannedTerms": 587,
+  "termWithMeta": {
+    "any": 540,
+    "doctor_id": 206,
+    "text": 141,
+    "seo": 107,
+    "about": 118
+  },
+  "metaContent": {
+    "about_header": {
+      "filled": 116,
+      "empty": 424,
+      "maxLen": 53,
+      "samples": [
+        {
+          "postId": 567,
+          "preview": "Давайте знакомиться"
+        },
+        {
+          "postId": 568,
+          "preview": "Давайте знакомиться"
+        },
+        {
+          "postId": 569,
+          "preview": "Давайте знакомиться"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 20
+    },
+    "about_text": {
+      "filled": 117,
+      "empty": 423,
+      "maxLen": 3083,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "Клиника «Источник» — это место, где многолетний опыт ведущих врачей города сочетается с прогрессивными современными техн…"
+        },
+        {
+          "postId": 567,
+          "preview": "Клиника «Источник» — это место, где многолетний опыт ведущих врачей города сочетается с прогрессивными современными техн…"
+        },
+        {
+          "postId": 568,
+          "preview": "Клиника «Источник» — это место, где многолетний опыт ведущих врачей города сочетается с прогрессивными современными техн…"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 26,
+      "pct": 20
+    },
+    "about_video": {
+      "filled": 117,
+      "empty": 423,
+      "maxLen": 74,
+      "samples": [
+        {
+          "postId": 567,
+          "preview": "https://ci74.ru/wp-content/uploads/2026/05/Клиника-которую-рекомендуют.mp4"
+        },
+        {
+          "postId": 568,
+          "preview": "https://ci74.ru/wp-content/uploads/2026/05/Клиника-которую-рекомендуют.mp4"
+        },
+        {
+          "postId": 569,
+          "preview": "https://ci74.ru/wp-content/uploads/2026/05/Клиника-которую-рекомендуют.mp4"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 20
+    },
+    "advantages": {
+      "filled": 9,
+      "empty": 139,
+      "maxLen": 102,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "a:5:{i:0;s:5:\"21664\";i:1;s:5:\"21676\";i:2;s:5:\"21704\";i:3;s:5:\"21680\";i:4;s:5:\"21702\";}"
+        },
+        {
+          "postId": 633,
+          "preview": "a:5:{i:0;s:5:\"21704\";i:1;s:5:\"21706\";i:2;s:5:\"21708\";i:3;s:5:\"21710\";i:4;s:5:\"21680\";}"
+        },
+        {
+          "postId": 665,
+          "preview": "a:5:{i:0;s:5:\"21690\";i:1;s:5:\"21692\";i:2;s:5:\"21694\";i:3;s:5:\"21696\";i:4;s:5:\"21698\";}"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 2
+    },
+    "anonce": {
+      "filled": 4,
+      "empty": 536,
+      "maxLen": 589,
+      "samples": [
+        {
+          "postId": 877,
+          "preview": "Анонс"
+        },
+        {
+          "postId": 883,
+          "preview": "Анонс Анонс Анонс Анонс Анонс Анонс Анонс Анонс Анонс Анонс Анонс Анонс Анонс Анонс Анонс Анонс Анонс Анонс Анонс Анонс …"
+        },
+        {
+          "postId": 891,
+          "preview": "Анонс"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 1
+    },
+    "anonces": {
+      "filled": 10,
+      "empty": 139,
+      "maxLen": 86,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "a:5:{i:0;s:5:\"21789\";i:1;s:5:\"21791\";i:2;s:5:\"21793\";i:3;s:5:\"21795\";i:4;s:5:\"21797\";}"
+        },
+        {
+          "postId": 574,
+          "preview": "a:5:{i:0;s:5:\"21800\";i:1;s:5:\"21802\";i:2;s:5:\"21804\";i:3;s:5:\"21806\";i:4;s:5:\"21808\";}"
+        },
+        {
+          "postId": 633,
+          "preview": "a:4:{i:0;s:5:\"21810\";i:1;s:5:\"21812\";i:2;s:5:\"21814\";i:3;s:5:\"21816\";}"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 2
+    },
+    "articles": {
+      "filled": 7,
+      "empty": 145,
+      "maxLen": 54,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "a:1:{i:0;s:5:\"21883\";}"
+        },
+        {
+          "postId": 864,
+          "preview": "a:2:{i:0;s:5:\"21883\";i:1;s:5:\"21885\";}"
+        },
+        {
+          "postId": 871,
+          "preview": "a:1:{i:0;s:5:\"21881\";}"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 1
+    },
+    "banner_header": {
+      "filled": 8,
+      "empty": 142,
+      "maxLen": 5,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "10577"
+        },
+        {
+          "postId": 574,
+          "preview": "10578"
+        },
+        {
+          "postId": 575,
+          "preview": "10579"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 1
+    },
+    "banner_list": {
+      "filled": 64,
+      "empty": 114,
+      "maxLen": 6,
+      "samples": [
+        {
+          "postId": 574,
+          "preview": "21960"
+        },
+        {
+          "postId": 575,
+          "preview": "21961"
+        },
+        {
+          "postId": 576,
+          "preview": "21962"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 11
+    },
+    "clinics": {
+      "filled": 92,
+      "empty": 56,
+      "maxLen": 48,
+      "samples": [
+        {
+          "postId": 568,
+          "preview": "a:3:{i:0;s:3:\"241\";i:1;s:3:\"242\";i:2;s:3:\"244\";}"
+        },
+        {
+          "postId": 570,
+          "preview": "a:3:{i:0;s:3:\"241\";i:1;s:3:\"242\";i:2;s:3:\"244\";}"
+        },
+        {
+          "postId": 573,
+          "preview": "a:1:{i:0;s:3:\"242\";}"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 16
+    },
+    "doctor_id": {
+      "filled": 206,
+      "empty": 334,
+      "maxLen": 3,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "509"
+        },
+        {
+          "postId": 567,
+          "preview": "609"
+        },
+        {
+          "postId": 568,
+          "preview": "524"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 35
+    },
+    "enabled": {
+      "filled": 163,
+      "empty": 377,
+      "maxLen": 1,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "1"
+        },
+        {
+          "postId": 567,
+          "preview": "1"
+        },
+        {
+          "postId": 568,
+          "preview": "1"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 28
+    },
+    "enabled_menu": {
+      "filled": 108,
+      "empty": 432,
+      "maxLen": 1,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "1"
+        },
+        {
+          "postId": 567,
+          "preview": "1"
+        },
+        {
+          "postId": 568,
+          "preview": "1"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 18
+    },
+    "faqs_view": {
+      "filled": 81,
+      "empty": 459,
+      "maxLen": 1,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "1"
+        },
+        {
+          "postId": 573,
+          "preview": "1"
+        },
+        {
+          "postId": 574,
+          "preview": "1"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 14
+    },
+    "full_width": {
+      "filled": 1,
+      "empty": 0,
+      "maxLen": 1,
+      "samples": [
+        {
+          "postId": 665,
+          "preview": "1"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 0
+    },
+    "interface_class": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 22,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "m--green"
+        },
+        {
+          "postId": 567,
+          "preview": "m--green"
+        },
+        {
+          "postId": 568,
+          "preview": "m--green"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "message_type": {
+      "filled": 211,
+      "empty": 329,
+      "maxLen": 9,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "callorder"
+        },
+        {
+          "postId": 567,
+          "preview": "callorder"
+        },
+        {
+          "postId": 568,
+          "preview": "callorder"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 36
+    },
+    "ord": {
+      "filled": 162,
+      "empty": 378,
+      "maxLen": 5,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "7"
+        },
+        {
+          "postId": 567,
+          "preview": "150"
+        },
+        {
+          "postId": 568,
+          "preview": "580"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 28
+    },
+    "phone": {
+      "filled": 31,
+      "empty": 509,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "+7 (351) 77-88-887"
+        },
+        {
+          "postId": 567,
+          "preview": "+ 7 (351) 77-88-911"
+        },
+        {
+          "postId": 571,
+          "preview": "+ 7 (351) 77-88-911"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 5
+    },
+    "reviews_view": {
+      "filled": 203,
+      "empty": 337,
+      "maxLen": 1,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "1"
+        },
+        {
+          "postId": 567,
+          "preview": "1"
+        },
+        {
+          "postId": 568,
+          "preview": "1"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 35
+    },
+    "seo_description": {
+      "filled": 101,
+      "empty": 439,
+      "maxLen": 199,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "В нашей поликлинике вы можете получить высококвалифицированную медицинскую помощь"
+        },
+        {
+          "postId": 567,
+          "preview": "Круглосуточная помощь при укусе клеща в Челябинске. Удаление клеща, осмотр врача и введение иммуноглобулина в клинике «И…"
+        },
+        {
+          "postId": 568,
+          "preview": "Записаться на прием к лучшему аллергологу в Челябинске вы можете на сайте нашей клиники"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 17
+    },
+    "seo_text": {
+      "filled": 13,
+      "empty": 527,
+      "maxLen": 10763,
+      "samples": [
+        {
+          "postId": 574,
+          "preview": "<strong>В отделении гинекологии и акушерства вы получите профессиональную помощь специалистов по направлениям:</strong>\r…"
+        },
+        {
+          "postId": 577,
+          "preview": "<p>Мы понимаем, что зачастую в Челябинске сложно найти &laquo;своего&raquo; врача, с которым будет эмоционально комфортн…"
+        },
+        {
+          "postId": 610,
+          "preview": "<strong>Мы уделяем особое внимание профессионализму наших врачей. Все без исключения врачи, работающие у нас, - ведущие …"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 11,
+      "pct": 2
+    },
+    "seo_title": {
+      "filled": 107,
+      "empty": 433,
+      "maxLen": 104,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "Частная взрослая поликлиника — запись онлайн | Клиника «Источник», Челябинск"
+        },
+        {
+          "postId": 567,
+          "preview": "Помощь при укусе клеща | Клиника «Источник», Челябинск"
+        },
+        {
+          "postId": 568,
+          "preview": "Прием аллерголога, иммунолога | Аллергология-иммунология | Клиника «Источник», Челябинск"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 18
+    },
+    "text": {
+      "filled": 141,
+      "empty": 399,
+      "maxLen": 5572,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "Клиника «Источник» — это современная многопрофильная клиника, обладающая уникальным набором всех необходимых ресурсов дл…"
+        },
+        {
+          "postId": 567,
+          "preview": "Клиника «Источник» оказывает всю помощь при укусе клеща КРУГЛОСУТОЧНО. В клинике правильно извлекут клеща и проведут его…"
+        },
+        {
+          "postId": 568,
+          "preview": "В нашей клинике имеется весь спектр диагностических методов необходимых для постановки диагноза аллергического заболеван…"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 79,
+      "pct": 24
+    },
+    "text_middle": {
+      "filled": 55,
+      "empty": 485,
+      "maxLen": 8219,
+      "samples": [
+        {
+          "postId": 583,
+          "preview": "<img src=\"https://ci74.ru/wp-content/uploads/2022/05/EQAS-2018-2019-scaled.jpg\" alt=\"1\" width=\"300\" height=\"210\" /><img …"
+        },
+        {
+          "postId": 608,
+          "preview": "<strong>Мы уделяем особое внимание профессионализму наших врачей. Все без исключения врачи, работающие у нас, - ведущие …"
+        },
+        {
+          "postId": 610,
+          "preview": "<p style=\"box-sizing: border-box; margin: 0px 0px 0.5em; padding: 0px 0px 0px 36px; border: 0px; font-style: inherit; fo…"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 50,
+      "pct": 9
+    }
+  },
+  "metaAcfRefs": {
+    "_about_header": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbb96af32b3d"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbb96af32b3d"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbb96af32b3d"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_about_text": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbb975232b3f"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbb975232b3f"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbb975232b3f"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_about_video": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbb971a32b3e"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbb971a32b3e"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbb971a32b3e"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_advantages": {
+      "filled": 148,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5e04bd3a36bc2"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5e04bd3a36bc2"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5e04bd3a36bc2"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 25
+    },
+    "_anonce": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbb954232b3a"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbb954232b3a"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbb954232b3a"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_anonces": {
+      "filled": 149,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5e0576ebbf63d"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5e0576ebbf63d"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5e0576ebbf63d"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 25
+    },
+    "_articles": {
+      "filled": 152,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5e057752cdc28"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5e057752cdc28"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5e057752cdc28"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 26
+    },
+    "_banner_header": {
+      "filled": 150,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbd096e5ec43"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbd096e5ec43"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbd096e5ec43"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 26
+    },
+    "_banner_list": {
+      "filled": 178,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5e06d6e6b65d1"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5e06d6e6b65d1"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5e06d6e6b65d1"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 30
+    },
+    "_clinics": {
+      "filled": 148,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5e202598c695c"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5e202598c695c"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5e202598c695c"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 25
+    },
+    "_dextra_id": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbc8b57cdebf"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbc8b57cdebf"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbc8b57cdebf"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_doctor_id": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbb9195154f3"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbb9195154f3"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbb9195154f3"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_enabled": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbb945f32b39"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbb945f32b39"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbb945f32b39"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_enabled_menu": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5df9afe1eb95a"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5df9afe1eb95a"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5df9afe1eb95a"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_faqs_view": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5df9a6d8c42fc"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5df9a6d8c42fc"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5df9a6d8c42fc"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_full_width": {
+      "filled": 1,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 665,
+          "preview": "field_5f8c3510d0bb9"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 0
+    },
+    "_interface_class": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5df9ad5ff89a4"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5df9ad5ff89a4"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5df9ad5ff89a4"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_message_type": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbca2eef75e3"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbca2eef75e3"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbca2eef75e3"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_ord": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbb988625b8c"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbb988625b8c"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbb988625b8c"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_phone": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5df9c9f138f76"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5df9c9f138f76"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5df9c9f138f76"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_reviews_view": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5df9a708c42fd"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5df9a708c42fd"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5df9a708c42fd"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_seo_description": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbca0f94c61d"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbca0f94c61d"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbca0f94c61d"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_seo_text": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbb979532b40"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbb979532b40"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbb979532b40"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_seo_title": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbc8b6c4c61c"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbc8b6c4c61c"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbc8b6c4c61c"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_text": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbb95da32b3b"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbb95da32b3b"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbb95da32b3b"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    },
+    "_text_middle": {
+      "filled": 540,
+      "empty": 0,
+      "maxLen": 19,
+      "samples": [
+        {
+          "postId": 566,
+          "preview": "field_5dbb963b32b3c"
+        },
+        {
+          "postId": 567,
+          "preview": "field_5dbb963b32b3c"
+        },
+        {
+          "postId": 568,
+          "preview": "field_5dbb963b32b3c"
+        }
+      ],
+      "looksJson": 0,
+      "looksHtml": 0,
+      "pct": 92
+    }
+  }
+}

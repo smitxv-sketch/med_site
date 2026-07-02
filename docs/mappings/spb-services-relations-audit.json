@@ -1,0 +1,833 @@
+{
+  "generatedAt": "2026-07-02T10:35:17.937Z",
+  "templateCounts": [
+    {
+      "template": 6,
+      "published": 0,
+      "deleted": 0,
+      "c": 3
+    },
+    {
+      "template": 6,
+      "published": 1,
+      "deleted": 0,
+      "c": 61
+    },
+    {
+      "template": 6,
+      "published": 0,
+      "deleted": 1,
+      "c": 15
+    },
+    {
+      "template": 6,
+      "published": 1,
+      "deleted": 1,
+      "c": 6
+    },
+    {
+      "template": 12,
+      "published": 0,
+      "deleted": 1,
+      "c": 3
+    },
+    {
+      "template": 12,
+      "published": 1,
+      "deleted": 1,
+      "c": 30
+    },
+    {
+      "template": 32,
+      "published": 0,
+      "deleted": 0,
+      "c": 1
+    },
+    {
+      "template": 32,
+      "published": 1,
+      "deleted": 0,
+      "c": 45
+    },
+    {
+      "template": 32,
+      "published": 0,
+      "deleted": 1,
+      "c": 2
+    },
+    {
+      "template": 32,
+      "published": 1,
+      "deleted": 1,
+      "c": 3
+    }
+  ],
+  "categoriesPerArticle": [
+    {
+      "cat_count": 1,
+      "articles": 287
+    },
+    {
+      "cat_count": 2,
+      "articles": 199
+    },
+    {
+      "cat_count": 3,
+      "articles": 202
+    },
+    {
+      "cat_count": 4,
+      "articles": 40
+    },
+    {
+      "cat_count": 5,
+      "articles": 10
+    },
+    {
+      "cat_count": 6,
+      "articles": 3
+    }
+  ],
+  "multiCategoryArticlesSample": [
+    {
+      "doc_id": "A11.31.065",
+      "categories": 6,
+      "tabs": 2,
+      "rows": 13
+    },
+    {
+      "doc_id": "B03.069.275",
+      "categories": 5,
+      "tabs": 2,
+      "rows": 10
+    },
+    {
+      "doc_id": "A11.20.017.49",
+      "categories": 4,
+      "tabs": 1,
+      "rows": 9
+    },
+    {
+      "doc_id": "A11.20.017.50",
+      "categories": 4,
+      "tabs": 1,
+      "rows": 9
+    },
+    {
+      "doc_id": "A03.30.017",
+      "categories": 3,
+      "tabs": 1,
+      "rows": 9
+    },
+    {
+      "doc_id": "B03.069.274",
+      "categories": 5,
+      "tabs": 2,
+      "rows": 6
+    },
+    {
+      "doc_id": "A11.31.061",
+      "categories": 6,
+      "tabs": 1,
+      "rows": 6
+    },
+    {
+      "doc_id": "A11.20.017.19",
+      "categories": 4,
+      "tabs": 1,
+      "rows": 6
+    },
+    {
+      "doc_id": "A11.31.062",
+      "categories": 6,
+      "tabs": 1,
+      "rows": 6
+    },
+    {
+      "doc_id": "B03.069.277",
+      "categories": 2,
+      "tabs": 2,
+      "rows": 6
+    },
+    {
+      "doc_id": "A11.20.017.47",
+      "categories": 5,
+      "tabs": 1,
+      "rows": 6
+    },
+    {
+      "doc_id": "A11.20.017.48",
+      "categories": 5,
+      "tabs": 1,
+      "rows": 6
+    },
+    {
+      "doc_id": "B03.069.273",
+      "categories": 5,
+      "tabs": 2,
+      "rows": 6
+    },
+    {
+      "doc_id": "B03.36",
+      "categories": 5,
+      "tabs": 1,
+      "rows": 6
+    },
+    {
+      "doc_id": "B03.069.331",
+      "categories": 3,
+      "tabs": 1,
+      "rows": 5
+    },
+    {
+      "doc_id": "B03.069.276",
+      "categories": 3,
+      "tabs": 2,
+      "rows": 5
+    },
+    {
+      "doc_id": "D04.07.007",
+      "categories": 5,
+      "tabs": 1,
+      "rows": 5
+    },
+    {
+      "doc_id": "D04.07.009",
+      "categories": 4,
+      "tabs": 1,
+      "rows": 5
+    },
+    {
+      "doc_id": "B03.001.49",
+      "categories": 4,
+      "tabs": 2,
+      "rows": 5
+    },
+    {
+      "doc_id": "B03.069.124",
+      "categories": 4,
+      "tabs": 1,
+      "rows": 5
+    },
+    {
+      "doc_id": "A04.31.001",
+      "categories": 4,
+      "tabs": 1,
+      "rows": 5
+    },
+    {
+      "doc_id": "A04.20.004",
+      "categories": 5,
+      "tabs": 1,
+      "rows": 5
+    },
+    {
+      "doc_id": "A04.20.005",
+      "categories": 5,
+      "tabs": 1,
+      "rows": 5
+    },
+    {
+      "doc_id": "A11.20.017.53",
+      "categories": 4,
+      "tabs": 1,
+      "rows": 5
+    },
+    {
+      "doc_id": "A02.01.009",
+      "categories": 5,
+      "tabs": 1,
+      "rows": 5
+    },
+    {
+      "doc_id": "A03.16.013",
+      "categories": 3,
+      "tabs": 1,
+      "rows": 5
+    },
+    {
+      "doc_id": "A04.21.001.001",
+      "categories": 4,
+      "tabs": 1,
+      "rows": 4
+    },
+    {
+      "doc_id": "A11.20.017.99",
+      "categories": 4,
+      "tabs": 1,
+      "rows": 4
+    },
+    {
+      "doc_id": "A11.20.017.999",
+      "categories": 3,
+      "tabs": 1,
+      "rows": 4
+    },
+    {
+      "doc_id": "B03.016.25",
+      "categories": 4,
+      "tabs": 1,
+      "rows": 4
+    }
+  ],
+  "pricelistResourceLink": {
+    "with_resource": "1690",
+    "without_resource": "81",
+    "total": 1771
+  },
+  "orphanResourceRows": [],
+  "serviceParentDistribution": [
+    {
+      "template": 6,
+      "parent": 22,
+      "parent_title": "Частная поликлиника",
+      "c": 24
+    },
+    {
+      "template": 6,
+      "parent": 23,
+      "parent_title": "Комплексные программы",
+      "c": 11
+    },
+    {
+      "template": 32,
+      "parent": 24,
+      "parent_title": "Отделение ВРТ",
+      "c": 10
+    },
+    {
+      "template": 32,
+      "parent": 66,
+      "parent_title": "Лечение методом ВРТ",
+      "c": 9
+    },
+    {
+      "template": 32,
+      "parent": 76,
+      "parent_title": "Программы ЭКО",
+      "c": 9
+    },
+    {
+      "template": 32,
+      "parent": 63,
+      "parent_title": "Диагностика и лечение мужского бесплодия",
+      "c": 8
+    },
+    {
+      "template": 32,
+      "parent": 22,
+      "parent_title": "Частная поликлиника",
+      "c": 7
+    },
+    {
+      "template": 6,
+      "parent": 27,
+      "parent_title": "Гинекология и акушерство в Санкт-Петербурге",
+      "c": 6
+    },
+    {
+      "template": 6,
+      "parent": 46,
+      "parent_title": "УЗИ (ультразвуковые исследования)",
+      "c": 4
+    },
+    {
+      "template": 6,
+      "parent": 226,
+      "parent_title": "Оториноларингология",
+      "c": 4
+    },
+    {
+      "template": 6,
+      "parent": 21,
+      "parent_title": "Специалисты",
+      "c": 3
+    },
+    {
+      "template": 32,
+      "parent": 669,
+      "parent_title": "Подготовка к ЭКО",
+      "c": 2
+    },
+    {
+      "template": 6,
+      "parent": 53,
+      "parent_title": "Эндоскопическая диагностика",
+      "c": 2
+    },
+    {
+      "template": 6,
+      "parent": 44,
+      "parent_title": "Травматолог-ортопед",
+      "c": 2
+    },
+    {
+      "template": 6,
+      "parent": 24,
+      "parent_title": "Отделение ВРТ",
+      "c": 2
+    },
+    {
+      "template": 6,
+      "parent": 36,
+      "parent_title": "Невролог в Санкт-Петербурге",
+      "c": 1
+    },
+    {
+      "template": 6,
+      "parent": 76,
+      "parent_title": "Программы ЭКО",
+      "c": 1
+    },
+    {
+      "template": 6,
+      "parent": 66,
+      "parent_title": "Лечение методом ВРТ",
+      "c": 1
+    },
+    {
+      "template": 6,
+      "parent": 0,
+      "parent_title": null,
+      "c": 1
+    },
+    {
+      "template": 32,
+      "parent": 21,
+      "parent_title": "Специалисты",
+      "c": 1
+    },
+    {
+      "template": 6,
+      "parent": 614,
+      "parent_title": "Флебология",
+      "c": 1
+    },
+    {
+      "template": 6,
+      "parent": 30,
+      "parent_title": "Ультразвуковая диагностика в гинекологии",
+      "c": 1
+    }
+  ],
+  "migxFieldSchemas": {
+    "faq_services": {
+      "fieldKeys": [
+        "MIGX_id",
+        "question",
+        "reply"
+      ],
+      "samples": [
+        {
+          "contentId": 24,
+          "firstItem": {
+            "MIGX_id": "1",
+            "question": "Какие показания ВРТ для мужчин?",
+            "reply": "<ul>\n<li>Азооспермия,</li>\n<li>аспермия,</li>\n<li>ярко выраженная олигоастеноспермия,</li>\n<li>импотенция различного происхождения,</li>\n<li>преждевременная эякуляция,</li>\n<li>гипоспадия,</li>\n<li>олигоастенозооспермия 1-2 степени</li>\n</ul>"
+          },
+          "itemCount": 3
+        },
+        {
+          "contentId": 29,
+          "firstItem": {
+            "MIGX_id": "5",
+            "question": "Сколько скринингов делают во время беременности?",
+            "reply": "<p><strong>Первый скрининг при беременности</strong></p>\n<ul>\n<li aria-level=\"1\">Процедуры\n<p>УЗИ для оценки размеров плода, установления срока и измерения толщины ворсинок плаценты, а также анализ крови матери на содержание белка PAPP-A и гормона ХГЧ (hCG).</p>\n</li>\n<li aria-level=\"1\">Цель\n<p>Оценка риска синдрома Дауна и других хромосомных нарушений, проверка на многоплодность и оценка общего здоровья будущего ребенка и матери.</p>\n</li>\n</ul>\n<p><strong>Второй скрининг при беременности</strong></p>\n<ul>\n<li aria-level=\"1\">Процедуры\n<p>УЗИ и анализ крови матери на содержание белка альфа-фетопротеина (AFP), эстриола и β-ХГЧ.</p>\n</li>\n<li aria-level=\"1\">Цель\n<p>Дополнительная оценка риска хромосомных и других нарушений в развитии, а также проверка общего здоровья.</p>\n</li>\n</ul>\n<p><strong>Третий скрининг при беременности</strong></p>\n<ul>\n<li aria-level=\"1\">Процедуры\n<p>Детальное УЗИ органов для поиска аномалий развития сосудов и сердца. Измеряются параметры плода.</p>\n</li>\n<li aria-level=\"1\">Цель\n<p>Проверка наличия любых нарушений развития органов.</p>\n</li>\n</ul>"
+          },
+          "itemCount": 5
+        }
+      ]
+    }
+  },
+  "programsTemplate12": {
+    "sampleResources": [
+      {
+        "id": 400,
+        "pagetitle": "Комплексная программа «Миссия выполнима»",
+        "published": 1,
+        "deleted": 1,
+        "parent": 58
+      },
+      {
+        "id": 401,
+        "pagetitle": "Комплексная программа «Почки – не место для камней»",
+        "published": 1,
+        "deleted": 1,
+        "parent": 58
+      },
+      {
+        "id": 402,
+        "pagetitle": "Комплексная программа «Всё включено»",
+        "published": 1,
+        "deleted": 1,
+        "parent": 54
+      },
+      {
+        "id": 403,
+        "pagetitle": "Комплексная программа «Жизнь без гипертонии»",
+        "published": 1,
+        "deleted": 1,
+        "parent": 379
+      },
+      {
+        "id": 404,
+        "pagetitle": "«Гастроэнтерологический Check-Up»",
+        "published": 1,
+        "deleted": 1,
+        "parent": 56
+      },
+      {
+        "id": 477,
+        "pagetitle": "Ведение беременности. Первый триместр",
+        "published": 1,
+        "deleted": 1,
+        "parent": 21
+      },
+      {
+        "id": 484,
+        "pagetitle": "Ультразвуковое исследование органов малого таза",
+        "published": 0,
+        "deleted": 1,
+        "parent": 21
+      },
+      {
+        "id": 485,
+        "pagetitle": "111",
+        "published": 0,
+        "deleted": 1,
+        "parent": 21
+      },
+      {
+        "id": 487,
+        "pagetitle": "Программа 1",
+        "published": 1,
+        "deleted": 1,
+        "parent": 0
+      },
+      {
+        "id": 488,
+        "pagetitle": "Комплексная программа обследования \"Паспорт здоровья женщины Premium\"",
+        "published": 1,
+        "deleted": 1,
+        "parent": 54
+      }
+    ],
+    "sampleTvs": [
+      {
+        "contentid": 400,
+        "name": "textContent",
+        "value_preview": "<p>- Спермограмма с оценкой морфологии по Крюгеру;</p>\r\n<p>- MAR-тест (определение АСАТ IgG);</p>\r\n<p>- Тестостерон общий (с забором крови);</p>\r\n<p>- УЗИ мошонки;</p>\r\n<p>- УЗИ предстательной железы "
+      },
+      {
+        "contentid": 400,
+        "name": "title",
+        "value_preview": "Комплексная программа «Миссия выполнима» | Клиника Источник"
+      },
+      {
+        "contentid": 400,
+        "name": "des",
+        "value_preview": "Спермограмма с оценкой морфологии по Крюгеру; MAR-тест (определение АСАТ IgG); Тестостерон общий (с забором крови); УЗИ мошонки; УЗИ предстательной железы и мочевого пузыря; Прием уролога (к.м.н.)."
+      },
+      {
+        "contentid": 400,
+        "name": "descriptionProgramm",
+        "value_preview": "<ul>\r\n<li>Спермограмма с оценкой морфологии по Крюгеру;</li>\r\n<li>MAR-тест (определение АСАТ IgG);</li>\r\n<li>Тестостерон общий (с забором крови);</li>\r\n<li>УЗИ мошонки;</li>\r\n<li>УЗИ предстательной же"
+      },
+      {
+        "contentid": 400,
+        "name": "priceProgramm",
+        "value_preview": "9700"
+      },
+      {
+        "contentid": 401,
+        "name": "textContent",
+        "value_preview": "<ul>\r\n<li>Ряд лабораторных анализов;</li>\r\n<li>УЗИ почек и надпочечников;</li>\r\n<li>прием уролога (к.м.н.)</li>\r\n</ul>"
+      },
+      {
+        "contentid": 401,
+        "name": "title",
+        "value_preview": "Комплексная программа «Почки – не место для камней» | Клиника Источник"
+      },
+      {
+        "contentid": 401,
+        "name": "des",
+        "value_preview": "Ряд лабораторных анализов;\r\nУЗИ почек и надпочечников;\r\nприем уролога (к.м.н.)"
+      },
+      {
+        "contentid": 401,
+        "name": "descriptionProgramm",
+        "value_preview": "<p><strong>Для кого программа?</strong></p>\r\n<ul>\r\n<li>Согласно медицинской статистике<strong> 40% взрослого населения имеют соли и микролиты, так называемый песок в почках</strong>. Они могут незамет"
+      },
+      {
+        "contentid": 401,
+        "name": "priceProgramm",
+        "value_preview": "7200"
+      },
+      {
+        "contentid": 401,
+        "name": "text-programm",
+        "value_preview": "<p><strong>Что такое комплексная программа и почему она может иметь более высокие и точные результаты по сравнению с обычным перечнем исследований</strong></p>\r\n<p>Комплекс подобран таким образом, что"
+      },
+      {
+        "contentid": 402,
+        "name": "textContent",
+        "value_preview": "<p>- осмотр гинеколога;</p>\r\n<p>- консультация гинеколога;</p>\r\n<p>- взятие мазка + обзорный мазок;</p>\r\n<p>- УЗИ органов малого таза</p>"
+      },
+      {
+        "contentid": 402,
+        "name": "title",
+        "value_preview": "Комплексная программа «Всё включено» | Клиника Источник"
+      },
+      {
+        "contentid": 402,
+        "name": "des",
+        "value_preview": "Консультация гинеколога, взятие мазка + обзорный мазок, УЗИ органов малого таза"
+      },
+      {
+        "contentid": 402,
+        "name": "descriptionProgramm",
+        "value_preview": "<p><span style=\"font-size: 1.5em;\">Для кого разработана комплексная программа по гинекологии «Все включено»?</span></p>\r\n<ul>\r\n<li>Пациентки, которые испытывают дискомфорт или болевые ощущения при нар"
+      },
+      {
+        "contentid": 402,
+        "name": "spoiler_services",
+        "value_preview": "[{\"MIGX_id\":\"2\",\"title_spoiler\":\"Осмотр гинеколога\",\"description_spoiler\":\"<p>Осмотр гинеколога - это физическое обследование женщины врачом-гинекологом, которое включает в себя визуальный осмотр нару"
+      },
+      {
+        "contentid": 402,
+        "name": "priceProgramm",
+        "value_preview": "4400"
+      },
+      {
+        "contentid": 402,
+        "name": "text-programm",
+        "value_preview": "<h2>В чем принципиальная разница между обычным визитом к гинекологу и посещением по данной программе?</h2>\r\n<p>В рамках программы пациентка получает следующие услуги:</p>\r\n<ul>\r\n<li>осмотр и консульта"
+      },
+      {
+        "contentid": 403,
+        "name": "textContent",
+        "value_preview": "<p>- анализ крови на ряд показателей (общий с лейкоформулой, липиды, глюкоза, креатинин, мочевая кислота, билирубин общий, АЛТ, АСТ, ТТГ, гликированный гемоглобин, калий, натрий, хлор);</p>\r\n<p>- анал"
+      },
+      {
+        "contentid": 403,
+        "name": "title",
+        "value_preview": "Комплексная программа «Жизнь без гипертонии» | Клиника Источник"
+      },
+      {
+        "contentid": 403,
+        "name": "des",
+        "value_preview": "Анализ крови на ряд показателей (общий с лейкоформулой, липиды, глюкоза, креатинин, мочевая кислота, билирубин общий, АЛТ, АСТ, ТТГ, гликированный гемоглобин, калий, натрий, хлор);"
+      },
+      {
+        "contentid": 403,
+        "name": "descriptionProgramm",
+        "value_preview": "<p>Комплексная программа рассчитана на человека в возрасте от 35 лет и старше даже если нет жалоб на повышенное давление.</p>\r\n<h2><strong>Цель обследования в рамках данной программы</strong></h2>\r\n<p"
+      },
+      {
+        "contentid": 403,
+        "name": "priceProgramm",
+        "value_preview": "20400"
+      },
+      {
+        "contentid": 403,
+        "name": "text-programm",
+        "value_preview": "<h2> </h2>"
+      },
+      {
+        "contentid": 403,
+        "name": "spoiler",
+        "value_preview": "[{\"MIGX_id\":\"1\",\"title_spoiler\":\"\\u0427\\u0442\\u043e \\u0432\\u0445\\u043e\\u0434\\u0438\\u0442 \\u0432 \\u043f\\u0440\\u043e\\u0433\\u0440\\u0430\\u043c\\u043c\\u0443\",\"description_spoiler\":\"<ul>\\n<li>\\u0410\\u043d\\u0"
+      },
+      {
+        "contentid": 404,
+        "name": "textContent",
+        "value_preview": "<p>- Осмотр терапевта;</p>\r\n<p>- Осмотр гастроэнтеролога;</p>\r\n<p>- Осмотр анестезиолога;</p>\r\n<p>- Ряд лабораторных исследований крови и мочи,</p>\r\n<p>- Гистологическое исследование биопатов желудка,"
+      },
+      {
+        "contentid": 404,
+        "name": "title",
+        "value_preview": "«Гастроэнтерологический Check-Up» | Клиника Источник"
+      },
+      {
+        "contentid": 404,
+        "name": "des",
+        "value_preview": "Видеогастродуоденоскопия на экспертной видеосистеме с забором биопсионного материала, (без учёта стоимости цитологического и гистологического исследования)."
+      },
+      {
+        "contentid": 404,
+        "name": "descriptionProgramm",
+        "value_preview": "<ul>\r\n<li>Осмотр терапевта;</li>\r\n<li>Осмотр гастроэнтеролога;</li>\r\n<li>Осмотр анестезиолога;</li>\r\n<li>Ряд лабораторных исследований крови и мочи;</li>\r\n<li>Гистологическое исследование биопатов жел"
+      },
+      {
+        "contentid": 404,
+        "name": "priceProgramm",
+        "value_preview": "38000"
+      },
+      {
+        "contentid": 477,
+        "name": "descriptionProgramm",
+        "value_preview": "<p>Разнообразный и богатый опыт сложившаяся структура организации обеспечивает широкому кругу (специалистов) участие в формировании соответствующий условий активизации. Не следует, однако забывать, чт"
+      },
+      {
+        "contentid": 477,
+        "name": "title",
+        "value_preview": "Ведение беременности. Первый триместр"
+      },
+      {
+        "contentid": 477,
+        "name": "priceProgramm",
+        "value_preview": "36 000 "
+      },
+      {
+        "contentid": 477,
+        "name": "spoiler",
+        "value_preview": "[{\"MIGX_id\":\"4\",\"title_spoiler\":\"\\u041f\\u0440\\u043e\\u0433\\u0440\\u0430\\u043c\\u043c\\u0430\",\"description_spoiler\":\"<ul>\\n<li>3 \\u043f\\u0440\\u0438\\u0435\\u043c\\u0430 \\u0430\\u043a\\u0443\\u0448\\u0435\\u0440\\u0"
+      },
+      {
+        "contentid": 477,
+        "name": "text-programm",
+        "value_preview": "<p>Повседневная практика показывает, что постоянный количественный рост и сфера нашей активности в значительной степени обуславливает создание систем массового участия. Не следует, однако забывать, чт"
+      },
+      {
+        "contentid": 477,
+        "name": "spoiler_services",
+        "value_preview": "[{\"MIGX_id\":\"4\",\"title_spoiler\":\"Программа\",\"description_spoiler\":\"<ul>\\n<li>3 приема акушера-гинеколога</li>\\n<li>Прием терапевта</li>\\n<li>Прием офтальмолога</li>\\n<li>Прием медицинского психолога</"
+      },
+      {
+        "contentid": 477,
+        "name": "faq_services",
+        "value_preview": "[{\"MIGX_id\":\"1\",\"question\":\"Вопрос 1\",\"reply\":\"<p>Ответ 1</p>\"},{\"MIGX_id\":\"2\",\"question\":\"Вопрос 2\",\"reply\":\"<p>Ответ 2</p>\"}]"
+      },
+      {
+        "contentid": 477,
+        "name": "json_data",
+        "value_preview": "[{\"id\":\"987\",\"name\":\"Комплексная программа \\\"Ведение беременности. Первый триместр\\\"\"}]"
+      },
+      {
+        "contentid": 484,
+        "name": "title",
+        "value_preview": "Ультразвуковое исследование органов малого таза | Клиника Источник"
+      },
+      {
+        "contentid": 484,
+        "name": "des",
+        "value_preview": "Ультразвуковое исследование органов малого таза"
+      },
+      {
+        "contentid": 484,
+        "name": "descriptionProgramm",
+        "value_preview": "<p>Описание</p>"
+      },
+      {
+        "contentid": 484,
+        "name": "priceProgramm",
+        "value_preview": "2 500"
+      },
+      {
+        "contentid": 485,
+        "name": "descriptionProgramm",
+        "value_preview": "<p>ddasd</p>"
+      },
+      {
+        "contentid": 487,
+        "name": "title",
+        "value_preview": "Программа 1"
+      },
+      {
+        "contentid": 487,
+        "name": "descriptionProgramm",
+        "value_preview": "<p>Описание программы</p>"
+      },
+      {
+        "contentid": 487,
+        "name": "priceProgramm",
+        "value_preview": "1 000"
+      },
+      {
+        "contentid": 487,
+        "name": "spoiler",
+        "value_preview": "[{\"MIGX_id\":\"1\",\"title_spoiler\":\"Спойлер\",\"description_spoiler\":\"<p>Спойлер</p>\",\"price\":\"\"}]"
+      },
+      {
+        "contentid": 488,
+        "name": "descriptionProgramm",
+        "value_preview": "<p><span>Вовремя выявить риски в физическом здоровье – всегда лучше, чем потом спешно бороться с болезнями и их последствиями. </span>Для женщин, которые предпочитают профилактику возможному лечению, "
+      },
+      {
+        "contentid": 488,
+        "name": "priceProgramm",
+        "value_preview": "66290"
+      },
+      {
+        "contentid": 488,
+        "name": "spoiler",
+        "value_preview": "[{\"MIGX_id\":\"1\",\"title_spoiler\":\"\\u0421\\u043e\\u0441\\u0442\\u0430\\u0432 \\u043f\\u0440\\u043e\\u0433\\u0440\\u0430\\u043c\\u043c\\u044b\",\"description_spoiler\":\"<ul>\\n<li>\\u0423\\u0417\\u0418 \\u0431\\u0440\\u044e\\u04"
+      },
+      {
+        "contentid": 488,
+        "name": "title",
+        "value_preview": "Комплексная программа обследования \"Паспорт здоровья женщины Premium\": цены и запись на консультацию в СПб | Клиника Источник"
+      },
+      {
+        "contentid": 488,
+        "name": "des",
+        "value_preview": "Записаться на Комплексная программа обследования \"Паспорт здоровья женщины Premium\" в  Санкт-Петербурге. Доступные и выгодные цены, заключение врача сразу! Опытные специалисты высокой квалификации | О"
+      }
+    ],
+    "tvRegistry": [
+      {
+        "name": "descriptionProgramm",
+        "resources": 33,
+        "values_count": 33
+      },
+      {
+        "name": "priceProgramm",
+        "resources": 32,
+        "values_count": 32
+      },
+      {
+        "name": "title",
+        "resources": 31,
+        "values_count": 31
+      },
+      {
+        "name": "des",
+        "resources": 28,
+        "values_count": 28
+      },
+      {
+        "name": "text-programm",
+        "resources": 9,
+        "values_count": 9
+      },
+      {
+        "name": "textContent",
+        "resources": 5,
+        "values_count": 5
+      },
+      {
+        "name": "spoiler",
+        "resources": 4,
+        "values_count": 4
+      },
+      {
+        "name": "json_data",
+        "resources": 2,
+        "values_count": 2
+      },
+      {
+        "name": "spoiler_services",
+        "resources": 2,
+        "values_count": 2
+      },
+      {
+        "name": "faq_services",
+        "resources": 1,
+        "values_count": 1
+      }
+    ]
+  },
+  "gaps": {
+    "note": "Прайс-строка и MODX-страница связаны через resource_id; состав комплекса — json_data MIGX"
+  }
+}
