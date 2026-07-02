@@ -7,6 +7,7 @@ import {
   isProgramPricelistRow,
   mergeProgramItems,
   parseJsonDataTv,
+  parseTextContentTv,
   parseUslugiPriceTv,
   type ParsedProgramItem,
 } from './spbProgramParser.js';
@@ -70,6 +71,16 @@ async function loadModxProgramTvs(resourceIds: number[]): Promise<Map<number, Mo
   return out;
 }
 
+/** Нормализация названия программы для поиска страницы MODX */
+function normalizeProgramTitle(name: string): string {
+  return String(name ?? '')
+    .replace(/[«»""]/g, '')
+    .replace(/комплексная программа/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+}
+
 /** Если resource_id из прайса — рубрика, ищем страницу программы по названию */
 async function resolveProgramResourceId(
   name: string,
@@ -77,15 +88,17 @@ async function resolveProgramResourceId(
 ): Promise<number | null> {
   const gw = LegacyMysqlGateway.get('spb');
   const prefix = gw.getPrefix();
-  const hint = String(name ?? '').trim().slice(0, 48);
-  if (hint.length >= 8) {
+  const core = normalizeProgramTitle(name);
+  if (core.length >= 8) {
+    const like = `%${core.slice(0, 48).replace(/[%_]/g, '')}%`;
+    // deleted=1 часто у старых программ — контент TV всё ещё нужен
     const [rows] = await gw.query(
       `SELECT id FROM ${prefix}site_content
-       WHERE template IN (6, 12, 32) AND deleted = 0
-         AND pagetitle LIKE ?
-       ORDER BY published DESC, id DESC
+       WHERE template IN (6, 12, 32)
+         AND LOWER(REPLACE(REPLACE(REPLACE(pagetitle, '«', ''), '»', ''), '"', '')) LIKE ?
+       ORDER BY published DESC, deleted ASC, id DESC
        LIMIT 1`,
-      [`%${hint.replace(/[%_]/g, '')}%`],
+      [like],
     );
     const hit = Number((rows as Array<{ id: number }>)[0]?.id);
     if (hit > 0) return hit;
@@ -217,6 +230,7 @@ export async function syncSpbPrograms(
     const items = mergeProgramItems(
       parseJsonDataTv(tvs?.json_data ?? ''),
       parseUslugiPriceTv(tvs?.uslugiPrice ?? ''),
+      parseTextContentTv(tvs?.textContent ?? ''),
     );
 
     if (!items.length) {
