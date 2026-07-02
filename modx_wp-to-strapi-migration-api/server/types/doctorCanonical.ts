@@ -48,6 +48,8 @@ export type SyncReport = {
 export const SAFE_DOCTOR_FIELDS = [
   'fullName',
   'misId',
+  /** Чинит записи с пустым slug после раннего синка */
+  'slug',
   'specialty',
   'photoUrl',
   'experienceYears',

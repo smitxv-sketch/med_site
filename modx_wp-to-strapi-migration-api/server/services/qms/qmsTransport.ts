@@ -6,8 +6,12 @@ export type QmsOrgFetchConfig = {
   apikey: string;
   qqc244: string;
   sourceKey: string;
-  /** Прокси на хостинге сайта (IP в whitelist QMS) */
+  /** Прокси getPr на хостинге (IP в whitelist QMS) */
   siteProxyUrl?: string;
+  /** robot-dev: spec_list / getslotsbyspec (отдельный URL и ключ записи) */
+  bookingApiUrl?: string;
+  bookingApikey?: string;
+  bookingSiteProxyUrl?: string;
 };
 
 type FetchResult = {
@@ -117,13 +121,21 @@ export function orgConfigsForCity(city: QmsCity): QmsOrgFetchConfig[] {
   const apikey = process.env.QMS_SPB_API_KEY ?? '';
   if (!apikey || !process.env.QMS_SPB_ORG) return [];
 
+  // Ключ записи (robot-dev) может отличаться от ключа прайса (getPr)
+  const bookingApikey = process.env.QMS_SPB_BOOKING_API_KEY || apikey;
+
   return [{
     label: 'Клиника Источник СПб',
     apiUrl: process.env.QMS_SPB_API_URL ?? 'https://back.cispb.ru/qms-api/getPr',
     bookingApiUrl: process.env.QMS_SPB_BOOKING_API_URL ?? 'https://back.cispb.ru/robot-dev',
     apikey,
+    bookingApikey,
     qqc244: process.env.QMS_SPB_ORG,
     sourceKey: 'spb',
     siteProxyUrl: process.env.QMS_SPB_SITE_PROXY_URL,
+    // Туннель записи: ci74 IP → back.cispb.ru/robot-dev (proxy-spb.php на хостинге)
+    bookingSiteProxyUrl:
+      process.env.QMS_SPB_BOOKING_SITE_PROXY_URL
+      ?? 'https://ci74.ru/booking/php/proxy-spb.php?endpoint=',
   }];
 }

@@ -19,9 +19,10 @@ function bookingBaseUrl(org: QmsBookingOrgConfig): string {
     .replace(/\/$/, '');
 }
 
+/** URL прокси записи (не getPr): bookingSiteProxyUrl приоритетнее siteProxyUrl */
 function resolveEndpointUrl(org: QmsBookingOrgConfig, endpoint: string): string {
-  if (org.siteProxyUrl) {
-    const proxy = org.siteProxyUrl;
+  const proxy = org.bookingSiteProxyUrl || org.siteProxyUrl;
+  if (proxy) {
     if (proxy.includes('endpoint=')) {
       return proxy.replace(/endpoint=[^&]+/, `endpoint=${endpoint}`);
     }
@@ -53,8 +54,9 @@ export async function postQmsBooking(
     throw new Error(`QMS не настроен для city=${city}`);
   }
   const org = orgs[0];
+  const apikey = org.bookingApikey || org.apikey;
   const bodyParams = {
-    apikey: org.apikey,
+    apikey,
     unauthorized: 1,
     qqc244: org.qqc244,
     ...params,
@@ -63,13 +65,14 @@ export async function postQmsBooking(
   const url = resolveEndpointUrl(org, endpoint);
   const headers: Record<string, string> = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    apikey: org.apikey,
-    token: org.apikey,
+    apikey,
+    token: apikey,
   };
 
   const errors: string[] = [];
+  const bookingProxy = org.bookingSiteProxyUrl || org.siteProxyUrl;
 
-  if (org.siteProxyUrl) {
+  if (bookingProxy) {
     try {
       const res = await fetch(url, {
         method: 'POST',
