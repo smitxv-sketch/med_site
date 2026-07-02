@@ -30,7 +30,13 @@ export async function loadSpbPricelistRows(categoryFilter?: string): Promise<Spb
      ORDER BY doc_id, published DESC, sorts ASC, id ASC`,
     params,
   );
-  return rows as SpbPricelistRow[];
+  return (rows as SpbPricelistRow[]).map((row) => ({
+    ...row,
+    doc_id: String(row.doc_id ?? '').trim(),
+    category: String(row.category ?? '').trim(),
+    tab: String(row.tab ?? '').trim(),
+    name: String(row.name ?? '').trim(),
+  }));
 }
 
 export type AggregatedSpbService = {

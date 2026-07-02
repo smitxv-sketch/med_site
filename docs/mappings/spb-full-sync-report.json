@@ -1,0 +1,153 @@
+{
+  "ok": true,
+  "generatedAt": "2026-07-02T15:08:36.317Z",
+  "totals": {
+    "categories": {
+      "created": 0,
+      "updated": 76,
+      "skipped": 3
+    },
+    "services": {
+      "created": 543,
+      "updated": 927,
+      "skipped": 23
+    },
+    "placements": {
+      "created": 1107,
+      "updated": 23,
+      "skipped": 29
+    },
+    "relations": {
+      "linked": 1470
+    },
+    "qmsMerged": 1071,
+    "errors": [
+      {
+        "legacyId": "spb-place:A03.08.011:Оториноларингология:Диагностика",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A03.08.013:Оториноларингология:Диагностика",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A03.25.008:Оториноларингология:Диагностика",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A11.08.004.006:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A11.08.004.007:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A11.08.023:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.08.007:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.08.008:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.08.010:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.08.011:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.08.012:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.25.003:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.25.004:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.25.005:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.25.006:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.25.007:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.25.008:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.25.009:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.25.010:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:A14.25.012:Оториноларингология:Лечение",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:B01.028.04:Оториноларингология:Прием врачей",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:B01.028.06:Оториноларингология:Прием врачей",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:B01.028.06:Оториноларингология:Прием врачей",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:B01.028.10:Оториноларингология:Прием врачей",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      },
+      {
+        "legacyId": "spb-place:B01.028.12:Оториноларингология:Прием врачей",
+        "message": "Нет Strapi category для placement: Оториноларингология",
+        "category": "Оториноларингология"
+      }
+    ]
+  },
+  "categoryCount": 79
+}
