@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { TabQms } from '../../types/serviceSync.js';
+import { toStrapiUidSlug } from '../../lib/strapiSlug.js';
 
 const TAB_VALUES: TabQms[] = ['priem', 'diagnostika', 'programmy', 'lechenie'];
 
@@ -42,18 +43,19 @@ export function mapQmsSectionVal(sectionVal: string): TabQms | null {
   return hit && TAB_VALUES.includes(hit) ? hit : null;
 }
 
-export function   categorySlug(name: string): string {
+/** ASCII-slug для Strapi (без кириллицы); известные рубрики — как на cispb.com */
+export function categorySlug(name: string): string {
   const map: Record<string, string> = {
     Кардиология: 'kardiologiya',
     Гастроэнтерология: 'gastroenterologiya',
+    'Частная поликлиника': 'poliklinika',
+    Эндокринология: 'endokrinologiya',
+    'Услуги по гинекологии': 'ginekologiya',
+    'Комплексные программы': 'kompleksnye-programmy',
   };
   const trimmed = name.trim();
   if (map[trimmed]) return map[trimmed];
-  return trimmed
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9а-яё-]/gi, '')
-    .slice(0, 80);
+  return toStrapiUidSlug(trimmed);
 }
 
 export function categoryLegacyId(name: string): string {
