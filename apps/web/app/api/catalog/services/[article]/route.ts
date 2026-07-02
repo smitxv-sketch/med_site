@@ -1,5 +1,5 @@
 import type { NextRequest } from 'next/server';
-import { proxyBookingBff } from '../../../../lib/bookingBffProxy';
+import { proxyBookingBff } from '../../../../../lib/bookingBffProxy';
 
 /** Карточка услуги/программы из Strapi */
 export async function GET(

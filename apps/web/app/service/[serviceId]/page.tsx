@@ -1,6 +1,6 @@
 import { ServicePageClient } from './ServicePageClient';
-import { fetchPageShell } from '../../lib/pageShell';
-import { getWebTenantId } from '../../lib/tenant';
+import { fetchPageShell } from '../../../lib/pageShell';
+import { getWebTenantId } from '../../../lib/tenant';
 
 export const dynamic = 'force-dynamic';
 
