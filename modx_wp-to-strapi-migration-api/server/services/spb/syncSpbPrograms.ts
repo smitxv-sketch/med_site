@@ -231,6 +231,7 @@ export async function syncSpbPrograms(
       parseJsonDataTv(tvs?.json_data ?? ''),
       parseUslugiPriceTv(tvs?.uslugiPrice ?? ''),
       parseTextContentTv(tvs?.textContent ?? ''),
+      meta.name,
     );
 
     if (!items.length) {

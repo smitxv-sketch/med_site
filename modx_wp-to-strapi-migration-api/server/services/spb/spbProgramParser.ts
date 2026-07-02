@@ -90,13 +90,33 @@ export function parseTextContentTv(raw: string): ParsedProgramItem[] {
   return out;
 }
 
+/** Нормализация для сравнения названия программы с пунктами состава */
+function normalizeForMatch(text: string): string {
+  return String(text ?? '')
+    .replace(/[«»""]/g, '')
+    .replace(/комплексная программа/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+}
+
+/** json_data с другой страницы MODX — отбрасываем, если пункты не связаны с названием */
+function itemsMatchProgram(items: ParsedProgramItem[], programName: string): boolean {
+  const core = normalizeForMatch(programName);
+  const tokens = core.split(/\s+/).filter((t) => t.length >= 5);
+  if (!tokens.length) return true;
+  const blob = items.map((i) => i.label.toLowerCase()).join(' ');
+  return tokens.some((t) => blob.includes(t));
+}
+
 /** Объединить источники: json_data → uslugiPrice → textContent */
 export function mergeProgramItems(
   jsonData: ParsedProgramItem[],
   uslugiPrice: ParsedProgramItem[],
   textContent: ParsedProgramItem[] = [],
+  programName = '',
 ): ParsedProgramItem[] {
-  if (jsonData.length) return jsonData;
+  if (jsonData.length && itemsMatchProgram(jsonData, programName)) return jsonData;
   if (uslugiPrice.length) return uslugiPrice;
   return textContent;
 }
