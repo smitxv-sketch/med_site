@@ -124,6 +124,12 @@
       "relation": "manyToMany",
       "target": "api::service.service",
       "mappedBy": "categories"
+    },
+    "placements": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service-placement.service-placement",
+      "mappedBy": "category"
     }
   }
 }

@@ -265,6 +265,7 @@ export async function syncChelServices(
       pilotCategory: `direction:${directionId}`,
       categories: { created: 0, updated: 0, skipped: 0 },
       services: { created: 0, updated: 0, skipped: 0 },
+      placements: { created: 0, updated: 0, skipped: 0 },
       relations: { linked: 0 },
       errors: [],
       qmsMerged: 0,

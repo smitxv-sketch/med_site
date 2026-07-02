@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "service_placements",
+  "info": {
+    "singularName": "service-placement",
+    "pluralName": "service-placements",
+    "displayName": "Service Placement",
+    "description": "Размещение услуги в рубрике и вкладке прайса (без дублирования Service)"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "legacyId": {
+      "type": "string",
+      "required": true
+    },
+    "service": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service.service",
+      "inversedBy": "placements",
+      "required": true
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service-category.service-category",
+      "inversedBy": "placements",
+      "required": true
+    },
+    "tabQms": {
+      "type": "enumeration",
+      "enum": ["priem", "diagnostika", "programmy", "lechenie"]
+    },
+    "tabLegacy": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

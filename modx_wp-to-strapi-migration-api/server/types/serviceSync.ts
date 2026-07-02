@@ -7,6 +7,7 @@ export type ServiceSyncReport = {
   pilotCategory?: string;
   categories: { created: number; updated: number; skipped: number };
   services: { created: number; updated: number; skipped: number };
+  placements: { created: number; updated: number; skipped: number };
   relations: { linked: number };
   errors: Array<{ legacyId: string; message: string }>;
   qmsMerged?: number;
@@ -36,6 +37,13 @@ export const SAFE_SERVICE_FIELDS = [
   'qmsSectionVal',
   'qmsOrgId',
   'misSyncAt',
+] as const;
+
+export const SAFE_PLACEMENT_FIELDS = [
+  'tabQms',
+  'tabLegacy',
+  'sortOrder',
+  'enabled',
 ] as const;
 
 export const SPB_LOCALE = 'ru-spb';

@@ -72,6 +72,12 @@
       "target": "api::service-category.service-category",
       "inversedBy": "services"
     },
+    "placements": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service-placement.service-placement",
+      "mappedBy": "service"
+    },
     "legacyOnly": {
       "type": "boolean",
       "default": false

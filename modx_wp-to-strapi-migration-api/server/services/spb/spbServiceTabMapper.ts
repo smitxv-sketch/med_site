@@ -42,9 +42,10 @@ export function mapQmsSectionVal(sectionVal: string): TabQms | null {
   return hit && TAB_VALUES.includes(hit) ? hit : null;
 }
 
-export function categorySlug(name: string): string {
+export function   categorySlug(name: string): string {
   const map: Record<string, string> = {
     Кардиология: 'kardiologiya',
+    Гастроэнтерология: 'gastroenterologiya',
   };
   const trimmed = name.trim();
   if (map[trimmed]) return map[trimmed];
@@ -61,4 +62,12 @@ export function categoryLegacyId(name: string): string {
 
 export function serviceLegacyId(article: string): string {
   return `spb-art:${article.trim()}`;
+}
+
+/** Одна строка pricelist_items2 → один placement */
+export function placementLegacyId(article: string, category: string, tabLegacy: string): string {
+  const a = article.trim();
+  const c = category.trim();
+  const t = tabLegacy.trim();
+  return `spb-place:${a}:${c}:${t}`;
 }

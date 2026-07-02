@@ -24,6 +24,7 @@ const PUBLIC_UIDS = [
   'api::doctor.doctor',
   'api::service.service',
   'api::service-category.service-category',
+  'api::service-placement.service-placement',
 ] as const;
 
 async function ensureLocales(strapi: Core.Strapi) {

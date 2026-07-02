@@ -13,6 +13,7 @@ import {
   mapSpbLegacyTab,
   serviceLegacyId,
 } from './spb/spbServiceTabMapper.js';
+import { syncSpbPlacements } from './spb/syncSpbPlacements.js';
 import {
   SAFE_SERVICE_CATEGORY_FIELDS,
   SAFE_SERVICE_FIELDS,
@@ -218,6 +219,7 @@ export async function syncSpbServices(
       pilotCategory: categoryFilter,
       categories: { created: 0, updated: 0, skipped: 0 },
       services: { created: 0, updated: 0, skipped: 0 },
+      placements: { created: 0, updated: 0, skipped: 0 },
       relations: { linked: 0 },
       errors: [],
       qmsMerged: 0,
@@ -276,6 +278,9 @@ export async function syncSpbServices(
         });
       }
     }
+
+    // Размещения: 1 строка pricelist_items2 → 1 ServicePlacement (без дублирования Service)
+    await syncSpbPlacements(client, rows, categoryDocIdByName, report);
 
     return report;
   });
