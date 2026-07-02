@@ -2,8 +2,24 @@ import type { QmsOrgFetchConfig } from './qmsTransport.js';
 import { orgConfigsForCity } from './qmsTransport.js';
 import type { QmsCity } from '../qmsPricelistService.js';
 
-/** URL эндпоинта QMS booking API (getPr / spec_list / getslotsbyspec) */
-function resolveEndpointUrl(org: QmsOrgFetchConfig, endpoint: string): string {
+export type QmsBookingOrgConfig = QmsOrgFetchConfig & {
+  /** robot-dev для spec_list / getslotsbyspec (СПб: back.cispb.ru/robot-dev) */
+  bookingApiUrl?: string;
+};
+
+/** Базовый URL booking API (robot-dev), не getPr */
+function bookingBaseUrl(org: QmsBookingOrgConfig): string {
+  if (org.bookingApiUrl) {
+    return org.bookingApiUrl.replace(/\/$/, '');
+  }
+  // fallback: qms-api → robot-dev для СПб
+  return (org.apiUrl || 'https://back.cispb.ru/qms-api/getPr')
+    .replace(/\/getPr\/?$/i, '')
+    .replace(/qms-api$/i, 'robot-dev')
+    .replace(/\/$/, '');
+}
+
+function resolveEndpointUrl(org: QmsBookingOrgConfig, endpoint: string): string {
   if (org.siteProxyUrl) {
     const proxy = org.siteProxyUrl;
     if (proxy.includes('endpoint=')) {
@@ -11,42 +27,59 @@ function resolveEndpointUrl(org: QmsOrgFetchConfig, endpoint: string): string {
     }
     return `${proxy}${proxy.includes('?') ? '&' : '?'}endpoint=${endpoint}`;
   }
-  const base = (org.apiUrl || 'https://back.cispb.ru/qms-api/getPr').replace(/\/getPr\/?$/i, '');
-  return `${base.replace(/\/$/, '')}/${endpoint}/`;
+  return `${bookingBaseUrl(org)}/${endpoint}/`;
 }
 
 type QmsPostResult = { data: unknown; transport: string };
 
-/** POST в QMS booking API: proxy → direct */
+function toFormBody(params: Record<string, unknown>): string {
+  const form = new URLSearchParams();
+  for (const [key, val] of Object.entries(params)) {
+    if (val !== undefined && val !== null) {
+      form.append(key, String(val));
+    }
+  }
+  return form.toString();
+}
+
+/** POST в QMS booking API (form-urlencoded, как BFF/proxy.php) */
 export async function postQmsBooking(
   city: QmsCity,
   endpoint: string,
   params: Record<string, unknown> = {},
 ): Promise<QmsPostResult> {
-  const orgs = orgConfigsForCity(city);
+  const orgs = orgConfigsForCity(city) as QmsBookingOrgConfig[];
   if (!orgs.length) {
     throw new Error(`QMS не настроен для city=${city}`);
   }
   const org = orgs[0];
-  const body = {
+  const bodyParams = {
     apikey: org.apikey,
     unauthorized: 1,
     qqc244: org.qqc244,
     ...params,
+  };
+  const body = toFormBody(bodyParams);
+  const url = resolveEndpointUrl(org, endpoint);
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    apikey: org.apikey,
+    token: org.apikey,
   };
 
   const errors: string[] = [];
 
   if (org.siteProxyUrl) {
     try {
-      const res = await fetch(resolveEndpointUrl(org, endpoint), {
+      const res = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+        headers,
+        body,
         signal: AbortSignal.timeout(90_000),
       });
       if (!res.ok) {
-        throw new Error(`proxy HTTP ${res.status}`);
+        const t = await res.text().catch(() => '');
+        throw new Error(`proxy HTTP ${res.status}: ${t.slice(0, 120)}`);
       }
       return { data: await res.json(), transport: 'site_proxy' };
     } catch (e) {
@@ -55,14 +88,15 @@ export async function postQmsBooking(
   }
 
   try {
-    const res = await fetch(resolveEndpointUrl(org, endpoint), {
+    const res = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      headers,
+      body,
       signal: AbortSignal.timeout(90_000),
     });
     if (!res.ok) {
-      throw new Error(`direct HTTP ${res.status}`);
+      const t = await res.text().catch(() => '');
+      throw new Error(`direct HTTP ${res.status}: ${t.slice(0, 120)}`);
     }
     return { data: await res.json(), transport: 'direct' };
   } catch (e) {

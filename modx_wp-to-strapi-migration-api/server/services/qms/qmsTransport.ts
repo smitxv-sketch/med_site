@@ -120,6 +120,7 @@ export function orgConfigsForCity(city: QmsCity): QmsOrgFetchConfig[] {
   return [{
     label: 'Клиника Источник СПб',
     apiUrl: process.env.QMS_SPB_API_URL ?? 'https://back.cispb.ru/qms-api/getPr',
+    bookingApiUrl: process.env.QMS_SPB_BOOKING_API_URL ?? 'https://back.cispb.ru/robot-dev',
     apikey,
     qqc244: process.env.QMS_SPB_ORG,
     sourceKey: 'spb',
