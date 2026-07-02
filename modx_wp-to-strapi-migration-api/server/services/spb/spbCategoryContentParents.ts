@@ -80,30 +80,36 @@ export async function inheritSpbCategoryContent(
       continue;
     }
 
-    const toWrite: Record<string, unknown> = {};
+    const contentPatch: Record<string, unknown> = {};
     for (const key of CONTENT_FIELDS) {
       const cur = String(child.attrs[key] ?? '').trim();
       const fromParent = String(parent.attrs[key] ?? '').trim();
-      if (!cur && fromParent) toWrite[key] = fromParent;
+      if (!cur && fromParent) contentPatch[key] = fromParent;
     }
 
-    if (!child.attrs.parent) {
-      toWrite.parent = parent.documentId;
-      report.linked += 1;
-    }
-
-    if (!Object.keys(toWrite).length) {
-      report.skipped += 1;
-      continue;
-    }
-
+    let didWork = false;
     try {
-      await client.updateEntry('service-categories', child.documentId, {
-        ...toWrite,
-        locale: SPB_LOCALE,
-      });
-      report.inherited += 1;
-      await sleep(LEGACY_DB_GUARD.syncUpsertDelayMs);
+      if (Object.keys(contentPatch).length) {
+        await client.updateEntry('service-categories', child.documentId, {
+          ...contentPatch,
+          locale: SPB_LOCALE,
+        });
+        didWork = true;
+      }
+      if (!child.attrs.parent) {
+        await client.updateEntry('service-categories', child.documentId, {
+          parent: parent.documentId,
+          locale: SPB_LOCALE,
+        });
+        report.linked += 1;
+        didWork = true;
+      }
+      if (didWork) {
+        report.inherited += 1;
+        await sleep(LEGACY_DB_GUARD.syncUpsertDelayMs);
+      } else {
+        report.skipped += 1;
+      }
     } catch (e) {
       report.errors.push({
         category: childTitle,

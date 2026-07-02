@@ -103,6 +103,7 @@ export async function syncSpbCategoryContent(
 
   const inheritReport = await inheritSpbCategoryContent(client);
   report.updated += inheritReport.inherited;
+  report.errors.push(...inheritReport.errors);
 
   return report;
 }
