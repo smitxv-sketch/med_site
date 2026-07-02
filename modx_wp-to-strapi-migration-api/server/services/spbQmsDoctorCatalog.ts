@@ -17,7 +17,7 @@ export async function fetchSpbQmsDoctorCatalog(): Promise<{
   specsCount: number;
   transport: string;
 }> {
-  const specRes = await postQmsBooking('spb', 'spec_list', { chatid: '999' });
+  const specRes = await postQmsBooking('spb', 'spec_list', { chatid: '999', qqc244: '' });
   const specPayload = specRes.data as { spec?: string[] };
   const specs = specPayload.spec ?? [];
   const byMisId = new Map<string, QmsDoctorRow>();

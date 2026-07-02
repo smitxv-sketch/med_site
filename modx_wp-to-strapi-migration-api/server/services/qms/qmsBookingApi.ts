@@ -47,6 +47,14 @@ function toFormBody(params: Record<string, unknown>): string {
   return form.toString();
 }
 
+/** Тело запроса robot-dev: как BFF/виджет — только apikey + параметры вызова */
+function buildBookingBody(
+  apikey: string,
+  params: Record<string, unknown>,
+): Record<string, unknown> {
+  return { apikey, ...params };
+}
+
 /** POST в QMS booking API (form-urlencoded, как BFF/proxy.php) */
 export async function postQmsBooking(
   city: QmsCity,
@@ -59,12 +67,7 @@ export async function postQmsBooking(
   }
   const org = orgs[0];
   const apikey = org.bookingApikey || org.apikey;
-  const bodyParams = {
-    apikey,
-    unauthorized: 1,
-    qqc244: org.qqc244,
-    ...params,
-  };
+  const bodyParams = buildBookingBody(apikey, params);
   const body = toFormBody(bodyParams);
   const url = resolveEndpointUrl(org, endpoint);
   const headers: Record<string, string> = {
