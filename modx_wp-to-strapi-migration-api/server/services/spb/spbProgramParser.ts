@@ -109,16 +109,20 @@ function itemsMatchProgram(items: ParsedProgramItem[], programName: string): boo
   return tokens.some((t) => blob.includes(t));
 }
 
-/** Объединить источники: json_data → uslugiPrice → textContent */
+/** Объединить источники: json_data → uslugiPrice → textContent → json_data (если иначе пусто) */
 export function mergeProgramItems(
   jsonData: ParsedProgramItem[],
   uslugiPrice: ParsedProgramItem[],
   textContent: ParsedProgramItem[] = [],
   programName = '',
 ): ParsedProgramItem[] {
-  if (jsonData.length && itemsMatchProgram(jsonData, programName)) return jsonData;
+  const jsonOk = jsonData.length > 0 && itemsMatchProgram(jsonData, programName);
+  if (jsonOk) return jsonData;
   if (uslugiPrice.length) return uslugiPrice;
-  return textContent;
+  if (textContent.length) return textContent;
+  // Лучше сомнительный MIGX, чем пустая программа
+  if (jsonData.length) return jsonData;
+  return [];
 }
 
 /** Признак комплекса по строке прайса */
