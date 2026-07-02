@@ -28,8 +28,10 @@ import { LEGACY_DB_GUARD } from '../config/legacyDbGuard.js';
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
 export type SyncSpbServicesOptions = {
-  /** Пилот: только одна рубрика pricelist_items2.category */
+  /** Пилот: только одна рубрика pricelist_items2.category; undefined / all = весь прайс */
   categoryFilter?: string;
+  /** Подпись в отчёте (например `all` или имя рубрики) */
+  pilotLabel?: string;
   /** Подтянуть title/price/tab из QMS getPr */
   mergeQms?: boolean;
   /** Обогатить description/summary с MODX-страницы при создании */
@@ -209,14 +211,15 @@ export async function syncSpbServices(
   client: StrapiClient,
   options: SyncSpbServicesOptions = {},
 ): Promise<ServiceSyncReport> {
-  const categoryFilter = options.categoryFilter ?? 'Кардиология';
+  const categoryFilter = options.categoryFilter?.trim() || undefined;
+  const pilotLabel = options.pilotLabel ?? categoryFilter ?? 'all';
   const mergeQms = options.mergeQms !== false;
   const modxEnrich = options.modxEnrich !== false;
 
-  return withSyncMutex(`services:spb:${categoryFilter}`, async () => {
+  return withSyncMutex(`services:spb:${pilotLabel}`, async () => {
     const report: ServiceSyncReport = {
       entity: 'service',
-      pilotCategory: categoryFilter,
+      pilotCategory: pilotLabel,
       categories: { created: 0, updated: 0, skipped: 0 },
       services: { created: 0, updated: 0, skipped: 0 },
       placements: { created: 0, updated: 0, skipped: 0 },
@@ -227,7 +230,11 @@ export async function syncSpbServices(
 
     const rows = await loadSpbPricelistRows(categoryFilter);
     if (!rows.length) {
-      throw new Error(`Нет строк прайса для category=${categoryFilter}`);
+      throw new Error(
+        categoryFilter
+          ? `Нет строк прайса для category=${categoryFilter}`
+          : 'Нет строк прайса (полный синк)',
+      );
     }
 
     const aggregated = aggregateSpbServices(rows);

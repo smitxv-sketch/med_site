@@ -127,7 +127,12 @@ router.post('/services', async (req, res) => {
     const modxEnrich = req.query.modxEnrich !== '0' && req.query.modxEnrich !== 'false';
 
     await logSyncEvent('spb', 'info', 'sync services started', { categoryFilter });
-    const report = await syncSpbServices(client, { categoryFilter, mergeQms, modxEnrich });
+    const report = await syncSpbServices(client, {
+      categoryFilter: categoryFilter.toLowerCase() === 'all' ? undefined : categoryFilter,
+      mergeQms,
+      modxEnrich,
+      pilotLabel: categoryFilter.toLowerCase() === 'all' ? 'all' : categoryFilter,
+    });
     await logSyncEvent('spb', 'success', 'sync services finished', report);
     res.json({ ok: true, report });
   } catch (e) {

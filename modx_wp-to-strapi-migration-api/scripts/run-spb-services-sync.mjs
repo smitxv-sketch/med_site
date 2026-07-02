@@ -30,7 +30,11 @@ function loadEnv(rel) {
 loadEnv('infra/env/legacy-bridge-istochnik.env');
 
 const args = process.argv.slice(2);
-const categoryFilter = args.find((a) => !a.startsWith('--'))?.trim() || 'Кардиология';
+const categoryArg = args.find((a) => !a.startsWith('--'))?.trim();
+/** `all` — весь прайс; иначе одна рубрика (по умолчанию Кардиология) */
+const categoryFilter =
+  categoryArg?.toLowerCase() === 'all' ? undefined : (categoryArg || 'Кардиология');
+const pilotLabel = categoryFilter ?? 'all';
 const mergeQms = !args.includes('--no-qms');
 const modxEnrich = !args.includes('--no-modx');
 
@@ -65,6 +69,6 @@ if (probe.status === 404) {
   process.exit(1);
 }
 
-console.log('Синк СПб услуг…', { categoryFilter, mergeQms, modxEnrich });
-const report = await syncSpbServices(client, { categoryFilter, mergeQms, modxEnrich });
+console.log('Синк СПб услуг…', { pilotLabel, categoryFilter: categoryFilter ?? 'all', mergeQms, modxEnrich });
+const report = await syncSpbServices(client, { categoryFilter, pilotLabel, mergeQms, modxEnrich });
 console.log(JSON.stringify({ ok: true, report }, null, 2));
