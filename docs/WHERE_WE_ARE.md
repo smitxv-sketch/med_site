@@ -2,13 +2,13 @@
 
 **Для агента:** если пользователь пишет «где мы» / «продолжим» / «статус» — **сначала этот файл**, потом по таблице маршрутизации ниже.
 
-Обновлено: **2026-07-02** · прод-коммит: **`35ca5d1`** (`main`)
+Обновлено: **2026-07-02** · прод-коммит: **`70194ec`** (`main`)
 
 ---
 
 ## Одной строкой
 
-Новый сайт на **Strapi + Next (site-ci)**; контент и каталоги тянем через **legacy bridge**; виджет записи **не трогаем** (read-only). **Врачи ЧЛБ + СПб синкнуты в Strapi.** Следующий крупный блок — **услуги и прайс (QMS getPr + legacy текст)**.
+Новый сайт на **Strapi + Next (site-ci)**; контент и каталоги тянем через **legacy bridge**; виджет записи **не трогаем** (read-only). **Врачи ЧЛБ + СПб синкнуты.** **ServicePlacement** в Strapi + пилот синка услуг СПб (Гастро) — **сделано**. Следующий шаг — **полный каталог СПб** и BFF `/prices`.
 
 ---
 
@@ -16,9 +16,9 @@
 
 | Приложение | URL | Коммит (ориентир) | Статус |
 |------------|-----|-------------------|--------|
-| **site-ci** | https://istochnik.smitx.ru | `35ca5d1` | healthy |
-| **strapi-istochnik** | https://cms.istochnik.smitx.ru | `35ca5d1` | healthy |
-| **bridge-istochnik** | https://bridge.istochnik.smitx.ru | `35ca5d1` | healthy |
+| **site-ci** | https://istochnik.smitx.ru | `70194ec` | healthy |
+| **strapi-istochnik** | https://cms.istochnik.smitx.ru | `70194ec` | healthy |
+| **bridge-istochnik** | https://bridge.istochnik.smitx.ru | `70194ec` | healthy |
 | **studio-istochnik** | https://studio.istochnik.smitx.ru | — | healthy |
 
 Проверка: `npm run smoke:prod` → **8/8** (BFF internal skip на проде — норма).
@@ -32,7 +32,7 @@
 | Город | В Strapi / API | Источник | misId / запись |
 |-------|----------------|----------|----------------|
 | **Челябинск** | 68 | WP REST `get_doctors` | `qms_id` в REST → `misId` |
-| **Санкт-Петербург** | 53 | MODX MySQL template 7 | JSON-мап MODX↔QMS **ещё нет**; сейчас `spb-legacy-{id}`, `allowBooking: false` |
+| **Санкт-Петербург** | 53 | MODX MySQL template 7 | `spb-doctor-qms-map.json`: **38/53** с QMS, `allowBooking: true` |
 
 Проверка: `GET https://istochnik.smitx.ru/api/catalog/doctors?tenant=chel` (68), `?tenant=spb` (53).
 
@@ -54,28 +54,28 @@
 
 | # | Блокер | Влияние | Действие |
 |---|--------|---------|----------|
-| 1 | **Нет `proxy-spb.php` на ci74.ru** (`/booking/php/` → 404) | Нельзя собрать `spb-doctor-qms-map.json`, booking API `spec_list` с bridge | Залить `php_backend/php/{proxy-spb.php,qms-proxy.inc.php,config.spb.php}` |
-| 2 | **Ждём API-ключ QMS записи СПб** | `QMS_SPB_BOOKING_API_KEY` в Coolify | Пользователь |
-| 3 | **cispb.com proxy** — getPr частично, `spec_list` → 403 | Только прайс, не каталог врачей QMS | Не использовать для booking; ci74-туннель |
+| 1 | **15 врачей СПб без QMS** | `allowBooking: false` | Ручной мап / исключить |
+| 2 | **17 врачей fuzzy match** | `needsReview` в map | Проверить в Studio |
+| 3 | **ЧЛБ ЭКО org** | прайс merge частично падает | Не блокирует основной каталог |
 
-После разблокировки: `node scripts/build-spb-doctor-qms-map.mjs` → коммит `docs/mappings/spb-doctor-qms-map.json` → редеплой bridge → `POST /api/sync/spb/doctors`.
+Прокси ci74 (ЧЛБ + СПб booking/pricelist) — **работают** (2026-07-02).
 
 ---
 
-## Услуги и прайс — СЛЕДУЮЩИЙ БЛОК
+## Услуги и прайс — В РАБОТЕ
 
-**Не начат синк в Strapi.** Есть задел:
+**ServicePlacement** задеплоен. Пилот **Гастроэнтерология**: 20 services, 14 placements, 11 QMS merged.
 
 | Артефакт | Путь |
 |----------|------|
+| **Главный план (ServicePlacement)** | [`docs/SYNC_SERVICES_PLACEMENT_PLAN.md`](./SYNC_SERVICES_PLACEMENT_PLAN.md) |
+| Аудит дублей СПб | [`docs/mappings/spb-duplicate-analysis.json`](./mappings/spb-duplicate-analysis.json) |
+| Спека услуг | [`docs/SYNC_SERVICES_SPEC.md`](./SYNC_SERVICES_SPEC.md) |
 | Общий план онтологии | [`docs/SYNC_ONTOLOGY_PLAN.md`](./SYNC_ONTOLOGY_PLAN.md) |
-| Handoff + промпт для нового чата | [`docs/HANDOFF_SERVICES_PRICES.md`](./HANDOFF_SERVICES_PRICES.md) |
-| Инвентарь разделов QMS getPr | [`docs/mappings/qms-sections-inventory.md`](./mappings/qms-sections-inventory.md) |
-| Bridge QMS API | `GET /api/qms/pricelist?city=`, `POST /api/qms/sync/prices` |
-| Скрипт снимка прайса | `scripts/qms-fetch-pricelist.mjs` |
-| Env прайса | `infra/env/qms-price.env` |
+| Bridge sync | `POST /api/sync/spb/services?category=…` |
+| Strapi schema | `apps/cms/src/api/service-placement/` |
 
-ЧЛБ getPr с bridge: **~2249 позиций** (2 org: основная + ЭКО). СПб: **~1764** (dump) / **~2249** через proxy (актуально сверять на bridge).
+**Следующий шаг:** полный синк СПб (2249 QMS + все placements), парсер `json_data` → `includedItems` для программ.
 
 ---
 
@@ -94,7 +94,8 @@
 | Handoff / статус | `docs/WHERE_WE_ARE.md` (этот файл) |
 | Онтология синка | `docs/SYNC_ONTOLOGY_PLAN.md` |
 | Врачи (сделано) | `docs/SYNC_DOCTORS_SPEC.md` |
-| **Услуги + цены (старт)** | `docs/HANDOFF_SERVICES_PRICES.md` |
+| **Услуги + placements** | `docs/SYNC_SERVICES_PLACEMENT_PLAN.md` |
+| Услуги (спека) | `docs/SYNC_SERVICES_SPEC.md` |
 | Прайс QMS разделы | `docs/mappings/qms-sections-inventory.md` |
 | Bridge / Beget | `docs/DEV_LEGACY_BRIDGE.md` |
 | Деплой | `.cursorrules`, `docs/DEPLOY_FAILURE_CLASSES.md` |
@@ -107,7 +108,8 @@
 | Задача | Путь |
 |--------|------|
 | Синк врачей | `modx_wp-to-strapi-migration-api/server/services/SyncOrchestrator.ts`, `DoctorHydrator.ts` |
-| Синк СПб | `server/routes/syncSpb.ts`, `spbDoctorSource.ts`, `spbDoctorQmsMapper.ts` |
+| Синк услуг СПб | `modx_wp-to-strapi-migration-api/server/services/syncSpbServices.ts`, `spb/syncSpbPlacements.ts` |
+| ServicePlacement | `apps/cms/src/api/service-placement/` |
 | QMS прайс | `server/services/qms/syncQmsPrices.ts`, `server/routes/qms.ts` |
 | Strapi Doctor | `apps/cms/src/api/doctor/` |
 | Каталог на сайте | BFF `apps/bff/src/routes/catalog.ts` |

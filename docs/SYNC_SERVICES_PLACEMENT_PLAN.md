@@ -151,19 +151,19 @@ GET /api/catalog/prices?tenant=spb&tab=priem&category=kardiologiya
 - [x] QMS bridge: прайс СПб/ЧЛБ, врачи СПб + `spb-doctor-qms-map.json`
 - [x] Пилоты: Кардиология СПб (26 услуг), Анестезиология ЧЛБ (10)
 
-### Фаза 1 — ServicePlacement в Strapi ← **СЕЙЧАС**
+### Фаза 1 — ServicePlacement в Strapi ✅ (2026-07-02)
 
 - [x] Content-type `service-placement` в `apps/cms`
 - [x] Relations на `Service` и `ServiceCategory`
 - [x] Public read permissions
 - [x] Bridge: `syncSpbPlacements.ts` + вызов из `syncSpbServices.ts`
-- [ ] Деплой `strapi-istochnik`
-- [ ] Деплой `bridge-istochnik`
+- [x] Деплой `strapi-istochnik` (`70194ec`, 2026-07-02)
+- [x] Деплой `bridge-istochnik` (`70194ec`, 2026-07-02)
 
-### Фаза 2 — пилот синка «Гастроэнтерология»
+### Фаза 2 — пилот синка «Гастроэнтерология» ✅ (2026-07-02)
 
-- [ ] `POST /api/sync/spb/services?category=Гастроэнтерология`
-- [ ] Проверка в Strapi: 1 Service на артикул, N placements на строки прайса
+- [x] `POST /api/sync/spb/services?category=Гастроэнтерология`
+- [x] Результат: **20** services, **14** placements, **11** QMS merged, **0** errors
 - [ ] Сверка с https://cispb.com/gastroenterologiya (визуально с заказчиком)
 
 ### Фаза 3 — полный каталог СПб
