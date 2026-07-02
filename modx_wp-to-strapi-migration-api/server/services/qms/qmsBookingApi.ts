@@ -24,7 +24,11 @@ function resolveEndpointUrl(org: QmsBookingOrgConfig, endpoint: string): string 
   const proxy = org.bookingSiteProxyUrl || org.siteProxyUrl;
   if (proxy) {
     if (proxy.includes('endpoint=')) {
-      return proxy.replace(/endpoint=[^&]+/, `endpoint=${endpoint}`);
+      // Coolify: .../proxy-spb.php?endpoint=  (пустой хвост)
+      if (/endpoint=$/.test(proxy)) {
+        return `${proxy}${endpoint}`;
+      }
+      return proxy.replace(/endpoint=[^&]*/, `endpoint=${endpoint}`);
     }
     return `${proxy}${proxy.includes('?') ? '&' : '?'}endpoint=${endpoint}`;
   }
