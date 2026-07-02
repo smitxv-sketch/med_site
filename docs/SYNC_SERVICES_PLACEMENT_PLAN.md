@@ -166,9 +166,11 @@ GET /api/catalog/prices?tenant=spb&tab=priem&category=kardiologiya
 - [x] Результат: **20** services, **14** placements, **11** QMS merged, **0** errors
 - [ ] Сверка с https://cispb.com/gastroenterologiya (визуально с заказчиком)
 
-### Фаза 3 — полный каталог СПб
+### Фаза 3 — полный каталог СПб ✅ (2026-07-02)
 
-- [ ] Синк всех `Service` из QMS (2249) + placements из legacy
+- [x] Синк 79 рубрик через `scripts/run-spb-full-sync-bridge.mjs`
+- [x] **741** services, **1121+** placements, **1071** QMS merged в Strapi `ru-spb`
+- [x] Дедуп проверен: `B03.069.313` → 1 service, **3** placements
 - [ ] Парсер `json_data` → `includedItems` для template 12 (программы)
 - [ ] `spb-category-aliases.json` — нормализация имён рубрик
 

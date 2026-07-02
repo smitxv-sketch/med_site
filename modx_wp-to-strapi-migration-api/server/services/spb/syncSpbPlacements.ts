@@ -3,6 +3,7 @@ import type { SpbPricelistRow } from './spbPricelistSource.js';
 import {
   mapQmsSectionVal,
   mapSpbLegacyTab,
+  categoryLegacyId,
   placementLegacyId,
   serviceLegacyId,
 } from './spbServiceTabMapper.js';
@@ -102,7 +103,16 @@ export async function syncSpbPlacements(
   for (const row of rowsForPlacements(rows)) {
     const article = String(row.doc_id).trim();
     const category = String(row.category).trim();
-    const categoryDocId = categoryDocIdByName.get(category);
+    let categoryDocId = categoryDocIdByName.get(category);
+    if (!categoryDocId) {
+      const cat = await client.findByLegacyId(
+        'service-categories',
+        categoryLegacyId(category),
+        SPB_LOCALE,
+      );
+      categoryDocId = cat?.documentId ?? undefined;
+      if (categoryDocId) categoryDocIdByName.set(category, categoryDocId);
+    }
     if (!categoryDocId) {
       report.errors.push({
         legacyId: placementLegacyId(article, category, String(row.tab ?? '')),
