@@ -1,0 +1,132 @@
+{
+  "startedAt": "2026-07-02T16:46:04.576Z",
+  "steps": [
+    {
+      "step": "categories/enrich",
+      "report": {
+        "categories": [
+          "Частная поликлиника",
+          "Отделение ВРТ",
+          "Услуги по гинекологии",
+          "Программы ЭКО",
+          "Урология",
+          "Хирургия",
+          "Травматолог-ортопед",
+          "Функциональная диагностика",
+          "УЗИ общее",
+          "Диагностика и лечение мужского бесплодия",
+          "Скрининг при беременности",
+          "Стимуляция суперовуляции (индукция) при ЭКО"
+        ],
+        "updated": 12,
+        "skipped": 0,
+        "missingModx": [],
+        "errors": []
+      }
+    },
+    {
+      "step": "programs",
+      "report": {
+        "scanned": 140,
+        "updated": 140,
+        "skipped": 0,
+        "noComposition": [],
+        "errors": []
+      }
+    },
+    {
+      "step": "services:Частная поликлиника",
+      "services": {
+        "created": 0,
+        "updated": 197,
+        "skipped": 1
+      },
+      "errors": 0
+    },
+    {
+      "step": "services:Отделение ВРТ",
+      "services": {
+        "created": 0,
+        "updated": 122,
+        "skipped": 0
+      },
+      "errors": 0
+    },
+    {
+      "step": "services:Программы ЭКО",
+      "services": {
+        "created": 0,
+        "updated": 65,
+        "skipped": 0
+      },
+      "errors": 0
+    },
+    {
+      "step": "services:Гастроэнтерология",
+      "services": {
+        "created": 0,
+        "updated": 16,
+        "skipped": 4
+      },
+      "errors": 0
+    },
+    {
+      "step": "services:Кардиология",
+      "services": {
+        "created": 0,
+        "updated": 21,
+        "skipped": 5
+      },
+      "errors": 0
+    },
+    {
+      "step": "services:Услуги по гинекологии",
+      "services": {
+        "created": 0,
+        "updated": 69,
+        "skipped": 0
+      },
+      "errors": 0
+    },
+    {
+      "step": "services:Хирургия",
+      "services": {
+        "created": 0,
+        "updated": 40,
+        "skipped": 0
+      },
+      "errors": 0
+    },
+    {
+      "step": "services:Оториноларингология",
+      "services": {
+        "created": 0,
+        "updated": 24,
+        "skipped": 0
+      },
+      "errors": 0
+    },
+    {
+      "step": "services:Эндоскопическая диагностика",
+      "services": {
+        "created": 0,
+        "updated": 24,
+        "skipped": 0
+      },
+      "errors": 0
+    },
+    {
+      "step": "services:УЗИ при беременности",
+      "services": {
+        "created": 0,
+        "updated": 28,
+        "skipped": 0
+      },
+      "errors": 0
+    },
+    {
+      "step": "legacy-only-queue"
+    }
+  ],
+  "finishedAt": "2026-07-02T16:55:33.630Z"
+}

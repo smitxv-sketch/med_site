@@ -18,6 +18,7 @@ const BOOKING_API_PREFIXES = [
   '/api/book',
   '/api/doctors',
   '/api/catalog/doctors',
+  '/api/catalog/prices',
   '/api/diagnostics',
 ] as const;
 
@@ -113,6 +114,7 @@ export const config = {
     '/api/book',
     '/api/doctors',
     '/api/catalog/doctors',
+    '/api/catalog/prices',
     '/api/diagnostics',
     '/api/diagnostics/:path*',
     '/spb',
